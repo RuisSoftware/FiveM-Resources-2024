@@ -15,3 +15,23 @@ Installation
 start esx_inventoryhud
 start esx_inventoryhud_trunk
 start esx_inventoryhud_glovebox
+
+
+Features
+
+    Drag and drop
+    Using items
+    Dropping items
+    Giving items
+    Cash included
+    Accounts support (bank, black money, ...)
+    Weapons support
+    esx_property support
+    Another players inventory support
+    Fully configurable (check config.lua and html/js/config.js)
+    Locale files included (check locales/ and html/locales/ directories)
+
+
+Screens
+
+    https://i.imgur.com/eHD01Tl.png
