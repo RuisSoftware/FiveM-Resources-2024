@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESX INVENTORY HUD BY TRSAK</title>
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+</head>
+
+<body>
+    <script src="js/config.js"></script>
+    <script src="locales/en.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/inventory.js"></script>
+    <script>
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                clickOutside: true
+            });
+        });
+    </script>
+
+    <div class="ui">
+        <div class="inventory">
+            <div id="playerInventory">
+            </div>
+            <div id="controls">
+                <div class="info-div"></div>
+                <div class="controls-div">
+                    <input type="number" class="control" id="count" value="1">
+                    <div class="control" id="use"></div>
+                    <div class="control" id="give"></div>
+                    <div class="control" id="drop"></div>
+                </div>
+            </div>
+            <div id="otherInventory">
+                <div id="noSecondInventoryMessage">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dialog">
+        <div id="nearPlayers">
+        </div>
+    </div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $("#use").html(invLocale.useItem);
+        $("#give").html(invLocale.giveItem);
+        $("#drop").html(invLocale.dropItem);
+        $("#noSecondInventoryMessage").html(invLocale.secondInventoryNotAvailable);
+    });
+</script>
+
+</html>
