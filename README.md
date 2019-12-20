@@ -35,3 +35,9 @@ Features
 Screens
 
     https://i.imgur.com/eHD01Tl.png
+    
+    
+ Original threads: 
+https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
+https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
+https://forum.fivem.net/t/addon-esx-inventory-hud-vehicle-trunk/458152
