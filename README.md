@@ -1,4 +1,4 @@
-# Dutch Players Edit // esx-inventoryhud 
+# Dutch Players Edit // esx-inventoryhud // NOT SUPPORTED ESX 1.2
 All working inventory hud which are taken offline
 I did not make any of these scripts. I do not take any credits.
 
