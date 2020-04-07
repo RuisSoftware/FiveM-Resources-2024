@@ -1,4 +1,5 @@
 # Dutch Players Edit // esx-inventoryhud // SUPPORTED ESX 1.2 // IMPORTANT TO READ!
+------------
 All working inventory hud which are taken offline
 I did not make any of these scripts, i only edited a bit. I do not take any credits.
 
@@ -47,6 +48,10 @@ Screens
 
     https://i.imgur.com/eHD01Tl.png
     
+
+Language
+------------
+Currently i have translated the inventory to Dutch - Netherlands. Please change it yourself.
     
     
 Follow this also: https://github.com/nertigel/esx_inventoryhud
