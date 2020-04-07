@@ -26,7 +26,7 @@ start esx_inventoryhud_trunk
 start esx_inventoryhud_glovebox
 ```
 
-#Actualy, those steps are already done. 
+# Actualy, those steps are already done. 
 
 
 To add property support, do the following: 
