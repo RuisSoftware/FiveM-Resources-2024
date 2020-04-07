@@ -43,6 +43,9 @@ Screens
     https://i.imgur.com/eHD01Tl.png
     
     
+    
+Follow this also: https://github.com/nertigel/esx_inventoryhud
+
 Original threads and credits to the owners: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
