@@ -1,5 +1,4 @@
 # Dutch Players Edit // esx-inventoryhud // SUPPORTED ESX 1.2 // IMPORTANT TO READ!
-------------
 All working inventory hud which are taken offline
 I did not make any of these scripts, i only edited a bit. I do not take any credits.
 
@@ -17,14 +16,57 @@ Requirements
 
 Installation
 ------------
+You need to do a couple steps to get it working.
+First you start adding the resources to your server.cfg.
+server.cfg
+------------
 - Put all folders in your resources folder and start:
 ```
 start esx_inventoryhud
 start esx_inventoryhud_trunk
-start esx_inventoryhud_glovebox <-- READ README TO ADD WORKING GLOVEBOX
+start esx_inventoryhud_glovebox
 ```
 
+To add property support, do the following: 
+------------
+1a. `Open `esx_property/client/main.lua` and do the following:
+Find this code in OpenRoomMenu function:
+```
+			table.insert(elements, {label = _U('remove_object'),  value = 'room_inventory'})
+			table.insert(elements, {label = _U('deposit_object'), value = 'player_inventory'})
+```
 
+1b. And replace it with:
+```
+			table.insert(elements, {label = "Property inventory", value = "property_inventory"}
+```
+
+2a. Then find this code:
+```
+			elseif data.current.value == 'room_inventory' then
+				OpenRoomInventoryMenu(property, owner)
+			elseif data.current.value == 'player_inventory' then
+				OpenPlayerInventoryMenu(property, owner)
+```
+
+2b. And replace it with:
+```
+			elseif data.current.value == "property_inventory" then
+				menu.close()
+				OpenPropertyInventoryMenu(property, owner)
+```
+      
+3. And finally add this function:
+```
+function OpenPropertyInventoryMenu(property, owner)
+	ESX.TriggerServerCallback("esx_property:getPropertyInventory", function(inventory)
+		TriggerEvent("esx_inventoryhud:openPropertyInventory", inventory)
+	end, owner)
+end`
+```
+
+To add glovebox support, do the following: 
+------------
 
 
 Features
