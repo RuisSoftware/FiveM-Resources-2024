@@ -17,10 +17,11 @@ Requirements
 Installation
 ------------
 - Put all folders in your resources folder and start:
+```
 start esx_inventoryhud
 start esx_inventoryhud_trunk
 start esx_inventoryhud_glovebox <-- READ README TO ADD WORKING GLOVEBOX
-
+```
 
 
 
