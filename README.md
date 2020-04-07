@@ -10,10 +10,12 @@ Currently this is working (somehow) on our 64 players ESX 1.2 OneSync server, bu
 
 
 Requirements
+------------
 - es_extended
 - pNotify (or change the lines)
 
 Installation
+------------
 - Put all folders in your resources folder and start:
 start esx_inventoryhud
 start esx_inventoryhud_trunk
@@ -24,6 +26,7 @@ start esx_inventoryhud_glovebox <-- READ README TO ADD WORKING GLOVEBOX
 
 
 Features
+------------
 
     Drag and drop
     Using items
@@ -39,12 +42,14 @@ Features
 
 
 Screens
+------------
 
     https://i.imgur.com/eHD01Tl.png
     
     
     
 Follow this also: https://github.com/nertigel/esx_inventoryhud
+------------
 
 Original threads and credits to the owners: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
