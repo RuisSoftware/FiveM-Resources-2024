@@ -18,8 +18,7 @@ Installation
 ------------
 You need to do a couple steps to get it working.
 First you start adding the resources to your server.cfg.
-server.cfg
-------------
+
 - Put all folders in your resources folder and start:
 ```
 start esx_inventoryhud
