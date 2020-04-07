@@ -1,12 +1,13 @@
 var type = "normal";
 var disabled = false;
+var disabledFunction = null;
 
 window.addEventListener("message", function (event) {
     if (event.data.action == "display") {
         type = event.data.type
         disabled = false;
 
-  if (type === "normal") {
+		if (type === "normal") {
             $(".info-div").hide();
         } else if (type === "trunk") {
             $(".info-div").show();
@@ -40,13 +41,14 @@ window.addEventListener("message", function (event) {
 
                 $(this).css('background-image', 'none');
                 itemData = $(this).data("item");
+                itemInventory = $(this).data("inventory");
 
-                if (!itemData.canRemove) {
+                if (itemInventory == "second" || !itemData.canRemove) {
                     $("#drop").addClass("disabled");
                     $("#give").addClass("disabled");
                 }
 
-                if (!itemData.usable) {
+                if (itemInventory == "second" || !itemData.usable) {
                     $("#use").addClass("disabled");
                 }
             },
@@ -114,12 +116,40 @@ function secondInventorySetup(items) {
     });
 }
 
+function Interval(time) {
+    var timer = false;
+    this.start = function () {
+        if (this.isRunning()) {
+            clearInterval(timer);
+            timer = false;
+        }
+
+        timer = setInterval(function () {
+            disabled = false;
+        }, time);
+    };
+    this.stop = function () {
+        clearInterval(timer);
+        timer = false;
+    };
+    this.isRunning = function () {
+        return timer !== false;
+    };
+}
+
 function disableInventory(ms) {
     disabled = true;
 
-    setInterval(function () {
-        disabled = false;
-    }, ms);
+    if (disabledFunction === null) {
+        disabledFunction = new Interval(ms);
+        disabledFunction.start();
+    } else {
+        if (disabledFunction.isRunning()) {
+            disabledFunction.stop();
+        }
+
+        disabledFunction.start();
+    }
 }
 
 function setCount(item) {
@@ -174,7 +204,19 @@ $(document).ready(function () {
         hoverClass: 'hoverControl',
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
+
+            if (itemData == undefined || itemData.usable == undefined) {
+                return;
+            }
+
+            itemInventory = ui.draggable.data("inventory");
+
+            if (itemInventory == undefined || itemInventory == "second") {
+                return;
+            }
+
             if (itemData.usable) {
+                disableInventory(300);
                 $.post("http://esx_inventoryhud/UseItem", JSON.stringify({
                     item: itemData
                 }));
@@ -186,7 +228,19 @@ $(document).ready(function () {
         hoverClass: 'hoverControl',
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
+
+            if (itemData == undefined || itemData.canRemove == undefined) {
+                return;
+            }
+
+            itemInventory = ui.draggable.data("inventory");
+
+            if (itemInventory == undefined || itemInventory == "second") {
+                return;
+            }
+
             if (itemData.canRemove) {
+                disableInventory(300);
                 $.post("http://esx_inventoryhud/GetNearPlayers", JSON.stringify({
                     item: itemData
                 }));
@@ -198,7 +252,19 @@ $(document).ready(function () {
         hoverClass: 'hoverControl',
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
+
+            if (itemData == undefined || itemData.canRemove == undefined) {
+                return;
+            }
+
+            itemInventory = ui.draggable.data("inventory");
+
+            if (itemInventory == undefined || itemInventory == "second") {
+                return;
+            }
+
             if (itemData.canRemove) {
+                disableInventory(300);
                 $.post("http://esx_inventoryhud/DropItem", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
@@ -206,7 +272,7 @@ $(document).ready(function () {
             }
         }
     });
-
+	
 $('#playerInventory').droppable({
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
@@ -240,37 +306,38 @@ $('#playerInventory').droppable({
         }
     });
 
-    $('#otherInventory').droppable({
+$('#otherInventory').droppable({
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
- if (type === "trunk" && itemInventory === "main") {
-            disableInventory(500);
-            $.post("http://esx_inventoryhud/PutIntoTrunk", JSON.stringify({
-                item: itemData,
-                number: parseInt($("#count").val())
-            }));
-        } else if (type === "property" && itemInventory === "main") {
-            disableInventory(500);
-            $.post("http://esx_inventoryhud/PutIntoProperty", JSON.stringify({
-                item: itemData,
-                number: parseInt($("#count").val())
-            }));
-        } else if (type === "glovebox" && itemInventory === "main") {
-            disableInventory(500);
-            $.post("http://esx_inventoryhud/PutIntoGlovebox", JSON.stringify({
-                item: itemData,
-                number: parseInt($("#count").val())
-            }));
-        } else if (type === "player" && itemInventory === "main") {
-            disableInventory(500);
-            $.post("http://esx_inventoryhud/PutIntoPlayer", JSON.stringify({
-                item: itemData,
-                number: parseInt($("#count").val())
-            }));
+
+            if (type === "trunk" && itemInventory === "main") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/PutIntoTrunk", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "property" && itemInventory === "main") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/PutIntoProperty", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "glovebox" && itemInventory === "main") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/PutIntoGlovebox", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "player" && itemInventory === "main") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/PutIntoPlayer", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            }
         }
-    }
-});
+    });
 
     $("#count").on("keypress keyup blur", function (event) {
         $(this).val($(this).val().replace(/[^\d].+/, ""));

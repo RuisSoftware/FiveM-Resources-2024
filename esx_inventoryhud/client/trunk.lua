@@ -118,7 +118,7 @@ RegisterNUICallback(
             TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
         end
 
-        Wait(500)
+        Wait(250)
         loadPlayerInventory()
 
         cb("ok")
@@ -136,7 +136,7 @@ RegisterNUICallback(
             TriggerServerEvent("esx_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
         end
 
-        Wait(500)
+        Wait(250)
         loadPlayerInventory()
 
         cb("ok")

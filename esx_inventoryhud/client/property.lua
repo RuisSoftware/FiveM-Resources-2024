@@ -111,9 +111,9 @@ RegisterNUICallback(
             TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
         end
 
-        Wait(250)
+        Wait(150)
         refreshPropertyInventory()
-        Wait(250)
+        Wait(150)
         loadPlayerInventory()
 
         cb("ok")
@@ -131,9 +131,9 @@ RegisterNUICallback(
             TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
         end
 
-        Wait(250)
+        Wait(150)
         refreshPropertyInventory()
-        Wait(250)
+        Wait(150)
         loadPlayerInventory()
 
         cb("ok")

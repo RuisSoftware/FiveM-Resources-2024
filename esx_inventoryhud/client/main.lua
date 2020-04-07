@@ -116,6 +116,15 @@ function openInventory()
     SetNuiFocus(true, true)
 end
 
+RegisterNetEvent("esx_inventoryhud:doClose")
+AddEventHandler("esx_inventoryhud:doClose", function()
+    closeInventory()
+end)
+
+RegisterCommand('closeinv', function(source, args, raw)
+    closeInventory()
+end)
+
 function closeInventory()
     isInInventory = false
     SendNUIMessage(
@@ -188,7 +197,7 @@ RegisterNUICallback(
         if shouldCloseInventory(data.item.name) then
             closeInventory()
         else
-            Citizen.Wait(500)
+            Citizen.Wait(250)
             loadPlayerInventory()
         end
 
@@ -207,7 +216,7 @@ RegisterNUICallback(
             TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
         end
 
-        Wait(500)
+        Wait(250)
         loadPlayerInventory()
 
         cb("ok")
@@ -236,7 +245,7 @@ RegisterNUICallback(
             end
 
             TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
-            Wait(500)
+            Wait(250)
             loadPlayerInventory()
         else
             exports.pNotify:SendNotification(
@@ -284,20 +293,18 @@ function loadPlayerInventory()
             weapons = data.weapons
 
             if Config.IncludeCash and money ~= nil and money > 0 then
-                for key, value in pairs(accounts) do
-                    moneyData = {
-                        label = _U("cash"),
-                        name = "cash",
-                        type = "item_money",
-                        count = money,
-                        usable = false,
-                        rare = false,
-                        limit = -1,
-                        canRemove = true
-                    }
+                moneyData = {
+                    label = _U("cash"),
+                    name = "cash",
+                    type = "item_money",
+                    count = money,
+                    usable = false,
+                    rare = false,
+                    limit = -1,
+                    canRemove = true
+                }
 
-                    table.insert(items, moneyData)
-                end
+                table.insert(items, moneyData)
             end
 
             if Config.IncludeAccounts and accounts ~= nil then
@@ -337,7 +344,7 @@ function loadPlayerInventory()
                 for key, value in pairs(weapons) do
                     local weaponHash = GetHashKey(weapons[key].name)
                     local playerPed = PlayerPedId()
-                    if HasPedGotWeapon(playerPed, weaponHash, false) and weapons[key].name ~= "WEAPON_UNARMED" then
+                    if weapons[key].name ~= "WEAPON_UNARMED" then
                         local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
                         table.insert(
                             items,
@@ -394,10 +401,6 @@ Citizen.CreateThread(
                 DisableControlAction(0, Keys["F2"], true) -- Inventory
                 DisableControlAction(0, Keys["F3"], true) -- Animations
                 DisableControlAction(0, Keys["F6"], true) -- Job
-                DisableControlAction(0, Keys["F5"], true) -- Job
-                DisableControlAction(0, Keys["F7"], true) -- Job
-                DisableControlAction(0, Keys["F9"], true) -- Job
-                DisableControlAction(0, Keys["F10"], true) -- Job
 
                 DisableControlAction(0, Keys["V"], true) -- Disable changing view
                 DisableControlAction(0, Keys["C"], true) -- Disable looking behind

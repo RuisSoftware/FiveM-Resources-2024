@@ -135,7 +135,7 @@ AddEventHandler(
 
     if type == "item_standard" then
       local targetItem = xPlayer.getInventoryItem(item)
-      if targetItem.limit == -1 or ((targetItem.count + count) <= targetItem.limit) then
+      if targetItem.weight == -1 or ((targetItem.count + count) <= targetItem.weight) then
         TriggerEvent(
           "esx_trunk:getSharedDataStore",
           plate,
