@@ -110,28 +110,6 @@ Replace `label = Items[name]` to `label = items[name]`
     
 > You need to edit your esx_policejob and esx_propery yourself!
 
-
-## Features
-- Drag and drop
-- Using items
-- Dropping items
-- Giving items
-- Cash included
-- Accounts support (bank, black money, ...)
-- Weapons support
-- esx_property support
-- Another players inventory support
-- Fully configurable (check config.lua and html/js/config.js)
-- Locale files included (check locales/ and html/locales/ directories)
-
-### Known bugs
-- Enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
-
-## Language support
-Currently, only Dutch is supported. If you want to translate it then feel free to pull a request!
-
-## Screens
-![1](https://i.imgur.com/eHD01Tl.png)
  
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
