@@ -1,8 +1,5 @@
-<<<<<<< HEAD
+
 # Dutch Players Edit // esx-inventoryhud // UPDATING TO ESX 1.2
-=======
-# Dutch Players Edit // esx-inventoryhud // NOT SUPPORTED ESX 1.2
->>>>>>> 1db512f2af9344cc7fbfc8b3f6607f213d88366d
 Esx_inventoryhud 2.3 was taken offline a while ago and would not be updated anymore. ESX has now also been updated (version 1.2), but now esx_inventoryhud 2.3 has become unusable.
 
 We, Dutch Players, are still very much in favor of updating FiveM Artifacts and ESX. Both DISC inventoryhud and other UI oriented inventory systems have become unusable. Nevertheless, we would like a working UI for the inventory.
@@ -14,13 +11,10 @@ We did not make any of these scripts. We do not take any credits.
 
 ## Requirements
 - [es_extended] (https://github.com/ESX-Org/es_extended)
-<<<<<<< HEAD
 - [cron](https://github.com/ESX-Org/cron)
 - [esx_addonaccount](https://github.com/ESX-Org/esx_addonaccount)
 - [esx_addoninventory](https://github.com/ESX-Org/esx_addoninventory)
 - [esx_datastore](https://github.com/ESX-Org/esx_datastore)
-=======
->>>>>>> 1db512f2af9344cc7fbfc8b3f6607f213d88366d
 - [B1G Notify] (https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
 
 ## Installation
@@ -34,12 +28,10 @@ start esx_inventoryhud_trunk
 start esx_inventoryhud_glovebox
 ```
 
-<<<<<<< HEAD
 ## Usage
 Press F2 for your personal inventory.
 Press F3 inside a car for the glovebox inventory.
 Press F3 behind a car for the trunk inventory.
-
 
 ### Disable default esx inventory:
 
@@ -88,9 +80,9 @@ Replace `label = Items[name]` to `label = items[name]`
 Currently, only Dutch is supported. If you want to translate it then feel free to pull a request!
 
 ## Screens
-    https://i.imgur.com/eHD01Tl.png
+![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
     
-=======
+
 ### Disable default esx inventory:
 
 Open `es_extended`, then find and remove this code in `client/main.lua`:
@@ -140,7 +132,6 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 ## Screens
 ![1](https://i.imgur.com/eHD01Tl.png)
  
->>>>>>> 1db512f2af9344cc7fbfc8b3f6607f213d88366d
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
