@@ -84,33 +84,6 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
     
 
-### Disable default esx inventory:
-
-Open `es_extended`, then find and remove this code in `client/main.lua`:
-```
--- Menu interactions
-Citizen.CreateThread(function()
-	while true do
-
-		Citizen.Wait(0)
-
-		if IsControlJustReleased(0, Keys['F2']) and IsInputDisabled(0) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
-			ESX.ShowInventory()
-		end
-
-	end
-end)
-```
-
-### Fix for `esx_addoninventory`:
-
-Go to `esx_addoninventory\server\classes\addoninventory.lua` line 39
-
-Replace `label = Items[name]` to `label = items[name]`
-    
-> You need to edit your esx_policejob and esx_propery yourself!
-
- 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
