@@ -10,12 +10,12 @@ Your help is much appreciated in a pull request!
 We did not make any of these scripts. We do not take any credits.
 
 ## Requirements
-- [es_extended] (https://github.com/ESX-Org/es_extended)
+- [es_extended](https://github.com/ESX-Org/es_extended)
 - [cron](https://github.com/ESX-Org/cron)
 - [esx_addonaccount](https://github.com/ESX-Org/esx_addonaccount)
 - [esx_addoninventory](https://github.com/ESX-Org/esx_addoninventory)
 - [esx_datastore](https://github.com/ESX-Org/esx_datastore)
-- [B1G Notify] (https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
+- [B1G Notify](https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
 
 ## Installation
 You need to do a couple steps to get it working.
