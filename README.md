@@ -8,11 +8,11 @@ Your help is much appreciated in a pull request!
 
 We did not make any of these scripts. We do not take any credits.
 
-##Requirements
+## Requirements
 - [es_extended] (https://github.com/ESX-Org/es_extended)
 - [B1G Notify] (https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
 
-##Installation
+## Installation
 You need to do a couple steps to get it working.
 First you start adding the resources to your server.cfg.
 
@@ -50,7 +50,7 @@ Replace `label = Items[name]` to `label = items[name]`
 > You need to edit your esx_policejob and esx_propery yourself!
 
 
-##Features
+## Features
 - Drag and drop
 - Using items
 - Dropping items
@@ -63,16 +63,16 @@ Replace `label = Items[name]` to `label = items[name]`
 - Fully configurable (check config.lua and html/js/config.js)
 - Locale files included (check locales/ and html/locales/ directories)
 
-###Known bugs
+### Known bugs
 - Enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
 
-##Language support
+## Language support
 Currently, only Dutch is supported. If you want to translate it then feel free to pull a request!
 
-##Screens
+## Screens
     https://i.imgur.com/eHD01Tl.png
     
-#Original threads: 
+# Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
 https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
