@@ -81,57 +81,9 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 
 ## Screens
 ![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
+![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
     
 
-### Disable default esx inventory:
-
-Open `es_extended`, then find and remove this code in `client/main.lua`:
-```
--- Menu interactions
-Citizen.CreateThread(function()
-	while true do
-
-		Citizen.Wait(0)
-
-		if IsControlJustReleased(0, Keys['F2']) and IsInputDisabled(0) and not isDead and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
-			ESX.ShowInventory()
-		end
-
-	end
-end)
-```
-
-### Fix for `esx_addoninventory`:
-
-Go to `esx_addoninventory\server\classes\addoninventory.lua` line 39
-
-Replace `label = Items[name]` to `label = items[name]`
-    
-> You need to edit your esx_policejob and esx_propery yourself!
-
-
-## Features
-- Drag and drop
-- Using items
-- Dropping items
-- Giving items
-- Cash included
-- Accounts support (bank, black money, ...)
-- Weapons support
-- esx_property support
-- Another players inventory support
-- Fully configurable (check config.lua and html/js/config.js)
-- Locale files included (check locales/ and html/locales/ directories)
-
-### Known bugs
-- Enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
-
-## Language support
-Currently, only Dutch is supported. If you want to translate it then feel free to pull a request!
-
-## Screens
-![1](https://i.imgur.com/eHD01Tl.png)
- 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
