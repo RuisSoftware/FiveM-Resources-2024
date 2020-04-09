@@ -11,19 +11,21 @@ local entityWorld = nil
 local globalplate = nil
 local lastChecked = 0
 
-Citizen.CreateThread(
-  function()
-    while ESX == nil do
-      TriggerEvent(
-        "esx:getSharedObject",
-        function(obj)
-          ESX = obj
-        end
-      )
-      Citizen.Wait(0)
-    end
-  end
-)
+
+Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	PlayerData = ESX.GetPlayerData()
+end)
+
+
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler(
@@ -45,12 +47,15 @@ AddEventHandler(
 )
 
 RegisterNetEvent("esx:setJob")
-AddEventHandler(
-  "esx:setJob",
-  function(job)
-    PlayerData.job = job
-  end
-)
+AddEventHandler("esx:setJob", function(job)
+	local PlayerData = ESX.GetPlayerData()
+	if PlayerData == nil then
+		print ('Handschoenenkastje kan beroep niet synchroniseren. Dit is niet erg.') -- Cannot sync job, not bad
+	else
+		print ('Handschoenenkastje heeft je beroep gesynchroniseerd.') -- Can sync job
+		PlayerData.job = job
+	end
+end)
 
 RegisterNetEvent("esx_glovebox_inventory:setOwnedVehicle")
 AddEventHandler(
@@ -61,8 +66,8 @@ AddEventHandler(
 )
 
 function getItemyWeight(item)
+  local itemWeight = 1
   local weight = 0
-  local itemWeight = 0
   if item ~= nil then
     itemWeight = Config.DefaultWeight
     if arrayWeight[item] ~= nil then
@@ -124,33 +129,19 @@ function openmenuvehicle()
           ESX.UI.Menu.CloseAll()
             if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
               CloseToVehicle = true
-              OpenCoffresInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleLimit[class], myVeh)
+              OpenCoffresInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleWeight[class], myVeh)
             end
         else
-          exports.pNotify:SendNotification(
-            {
-              text = _U("no_veh_nearby"),
-              type = "error",
-              timeout = 3000,
-              layout = "bottomCenter",
-              queue = "glovebox"
-            }
-          )
+       
+            exports['b1g_notify']:Notify('false', _U("no_veh_nearby"))
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
       -- Not their vehicle
-      exports.pNotify:SendNotification(
-        {
-          text = _U("nacho_veh"),
-          type = "error",
-          timeout = 3000,
-          layout = "bottomCenter",
-          queue = "glovebox"
-        }
-      )
+ 
+            exports['b1g_notify']:Notify('false', _U("nacho_veh"))
     end
   end
 end
@@ -203,7 +194,7 @@ function OpenCoffresInventoryMenu(plate, max, myVeh)
   ESX.TriggerServerCallback(
     "esx_glovebox:getInventoryV",
     function(inventory)
-      text = _U("glovebox_info", plate, (inventory.weight / 1000), (max / 1000))
+      text = _U("glovebox_info", plate, (inventory.weight / 100), (max / 100))
       data = {plate = plate, max = max, myVeh = myVeh, text = text}
       TriggerEvent("esx_inventoryhud:openGloveboxInventory", data, inventory.blackMoney, inventory.items, inventory.weapons)
     end,

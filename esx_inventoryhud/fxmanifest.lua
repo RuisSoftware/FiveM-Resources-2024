@@ -9,9 +9,7 @@ version '1.2.1'
 server_scripts {
   "@es_extended/locale.lua",
   "server/main.lua",
-  "locales/cs.lua",
-  "locales/en.lua",
-  "locales/fr.lua",
+  "locales/nl.lua",
   "config.lua"
 }
 
@@ -22,9 +20,7 @@ client_scripts {
   "client/glovebox.lua",
   "client/property.lua",
   "client/player.lua",
-  "locales/cs.lua",
-  "locales/en.lua",
-  "locales/fr.lua",
+  "locales/nl.lua",
   "config.lua"
 }
 
@@ -39,14 +35,11 @@ files {
   "html/js/inventory.js",
   "html/js/config.js",
   -- JS LOCALES
-  "html/locales/cs.js",
-  "html/locales/en.js",
-  "html/locales/fr.js",
+  "html/locales/nl.js",
   -- IMAGES
   "html/img/*.png",
   "html/img/items/*.png",
 }
-
 
 dependencies {
 	'es_extended'

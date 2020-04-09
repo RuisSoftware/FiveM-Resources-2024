@@ -1,37 +1,9 @@
-# esx_inventoryhud_trunk 1.0
-This is an vehicle trunk addon for [esx_inventoryhud](https://github.com/Trsak/esx_inventoryhud/).
-Original code was taken from [esx_trunk](https://github.com/schwim0341/esx_trunk) modified by schwim0341.
+# Dutch Players Edit // esx-inventoryhud // Trunk Support
+Esx_inventoryhud 2.3 was taken offline a while ago and would not be updated anymore. ESX has now also been updated (version 1.2), but now esx_inventoryhud 2.3 has become unusable.
 
-## Requirements
-* [es_extended](https://github.com/ESX-Org/es_extended)
-* [pNotify](https://forum.fivem.net/t/release-pnotify-in-game-js-notifications-using-noty/20659)
-* [esx_inventoryhud](https://github.com/Trsak/esx_inventoryhud/)
+We, Dutch Players, are still very much in favor of updating FiveM Artifacts and ESX. Both DISC inventoryhud and other UI oriented inventory systems have become unusable. Nevertheless, we would like a working UI for the inventory.
 
-## Features
-- Drag and drop
-- Black Money support
-- Weapons support
-- Fully configurable 
-- Locale files included
+We are going to try to update esx_inventoryhud without bugs.
+Your help is much appreciated in a pull request!
 
-## Screens
-* [https://i.imgur.com/5jPPBe9.png](https://i.imgur.com/5jPPBe9.png)
-
-## Download & Installation
-
-### Using Git
-```
-cd resources
-git clone https://github.com/Trsak/esx_inventoryhud_trunk [esx]/esx_inventoryhud_trunk
-```
-
-### Manually
-- Download https://github.com/Trsak/esx_inventoryhud_trunk/archive/master.zip
-- Put it in the `[esx]` directory
-
-## Installation
-- Add this to your `server.cfg`:
-
-```
-start esx_inventoryhud_trunk
-```
+We did not make any of these scripts. We do not take any credits.

@@ -135,7 +135,7 @@ AddEventHandler(
 
     if type == "item_standard" then
       local targetItem = xPlayer.getInventoryItem(item)
-      if targetItem.weight == -1 or ((targetItem.count + count) <= targetItem.weight) then
+      if targetItem.weight == -1 or ((targetItem.count + count) <= 50) then
         TriggerEvent(
           "esx_trunk:getSharedDataStore",
           plate,
@@ -153,17 +153,8 @@ AddEventHandler(
 
                   break
                 else
-                  TriggerClientEvent(
-                    "pNotify:SendNotification",
-                    _source,
-                    {
-                      text = _U("invalid_quantity"),
-                      type = "error",
-                      queue = "trunk",
-                      timeout = 3000,
-                      layout = "bottomCenter"
-                    }
-                  )
+                
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_quantity") })
                 end
               end
             end
@@ -187,23 +178,14 @@ AddEventHandler(
 
             local weight = getTotalInventoryWeight(plate)
 
-            text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+            text = _U("trunk_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, items, weapons)
           end
         )
       else
-        TriggerClientEvent(
-          "pNotify:SendNotification",
-          _source,
-          {
-            text = _U("player_inv_no_space"),
-            type = "error",
-            queue = "trunk",
-            timeout = 3000,
-            layout = "bottomCenter"
-          }
-        )
+      
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'false', text = _U("player_inv_no_space") })
       end
     end
 
@@ -235,21 +217,12 @@ AddEventHandler(
 
             local weight = getTotalInventoryWeight(plate)
 
-            text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+            text = _U("trunk_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, items, weapons)
           else
-            TriggerClientEvent(
-              "pNotify:SendNotification",
-              _source,
-              {
-                text = _U("invalid_amount"),
-                type = "error",
-                queue = "trunk",
-                timeout = 3000,
-                layout = "bottomCenter"
-              }
-            )
+   
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
           end
         end
       )
@@ -301,7 +274,7 @@ AddEventHandler(
 
           local weight = getTotalInventoryWeight(plate)
 
-          text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+          text = _U("trunk_info", plate, (weight / 100), (max / 100))
           data = {plate = plate, max = max, myVeh = owned, text = text}
           TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, items, weapons)
         end
@@ -345,17 +318,8 @@ AddEventHandler(
               )
             end
             if (getTotalInventoryWeight(plate) + (getItemWeight(item) * count)) > max then
-              TriggerClientEvent(
-                "pNotify:SendNotification",
-                _source,
-                {
-                  text = _U("insufficient_space"),
-                  type = "error",
-                  queue = "trunk",
-                  timeout = 3000,
-                  layout = "bottomCenter"
-                }
-              )
+      
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
             else
               -- Checks passed, storing the item.
               store.set("coffre", coffre)
@@ -372,17 +336,8 @@ AddEventHandler(
           end
         )
       else
-        TriggerClientEvent(
-          "pNotify:SendNotification",
-          _source,
-          {
-            text = _U("invalid_quantity"),
-            type = "error",
-            queue = "trunk",
-            timeout = 3000,
-            layout = "bottomCenter"
-          }
-        )
+    
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_quantity") })
       end
     end
 
@@ -403,17 +358,8 @@ AddEventHandler(
             end
 
             if (getTotalInventoryWeight(plate) + blackMoney[1].amount / 10) > max then
-              TriggerClientEvent(
-                "pNotify:SendNotification",
-                _source,
-                {
-                  text = _U("insufficient_space"),
-                  type = "error",
-                  queue = "trunk",
-                  timeout = 3000,
-                  layout = "bottomCenter"
-                }
-              )
+         
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
             else
               -- Checks passed. Storing the item.
               xPlayer.removeAccountMoney(item, count)
@@ -430,17 +376,8 @@ AddEventHandler(
           end
         )
       else
-        TriggerClientEvent(
-          "pNotify:SendNotification",
-          _source,
-          {
-            text = _U("invalid_amount"),
-            type = "error",
-            queue = "trunk",
-            timeout = 3000,
-            layout = "bottomCenter"
-          }
-        )
+  
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
       end
     end
 
@@ -464,17 +401,8 @@ AddEventHandler(
             }
           )
           if (getTotalInventoryWeight(plate) + (getItemWeight(item))) > max then
-            TriggerClientEvent(
-              "pNotify:SendNotification",
-              _source,
-              {
-                text = _U("invalid_amount"),
-                type = "error",
-                queue = "trunk",
-                timeout = 3000,
-                layout = "bottomCenter"
-              }
-            )
+         
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
           else
             store.set("weapons", storeWeapons)
             xPlayer.removeWeapon(item)
@@ -512,7 +440,7 @@ AddEventHandler(
 
         local weight = getTotalInventoryWeight(plate)
 
-        text = _U("trunk_info", plate, (weight / 1000), (max / 1000))
+        text = _U("trunk_info", plate, (weight / 100), (max / 100))
         data = {plate = plate, max = max, myVeh = owned, text = text}
         TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, items, weapons)
       end

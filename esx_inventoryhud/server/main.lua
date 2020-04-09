@@ -37,23 +37,31 @@ AddEventHandler(
 				if targetItem.limit ~= -1 and (targetItem.count + itemCount) > targetItem.limit then
 				else
 					sourceXPlayer.removeInventoryItem(itemName, itemCount)
+					TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'true', text = _U('item_removed') .. itemName})
 					targetXPlayer.addInventoryItem(itemName, itemCount)
+					TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'true', text = _U('item_added') .. itemName})
 				end
 			end
 		elseif type == "item_money" then
 			if itemCount > 0 and sourceXPlayer.getMoney() >= itemCount then
 				sourceXPlayer.removeMoney(itemCount)
+				TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'true', text = _U('money_removed') .. itemCount})
 				targetXPlayer.addMoney(itemCount)
+				TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'true', text = _U('money_added') .. itemCount})
 			end
 		elseif type == "item_account" then
 			if itemCount > 0 and sourceXPlayer.getAccount(itemName).money >= itemCount then
 				sourceXPlayer.removeAccountMoney(itemName, itemCount)
+				TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'true', text = _U('money_removed') .. itemCount .. itemName})
 				targetXPlayer.addAccountMoney(itemName, itemCount)
+				TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'true', text = _U('money_added') .. itemCount .. itemName})
 			end
 		elseif type == "item_weapon" then
 			if not targetXPlayer.hasWeapon(itemName) then
 				sourceXPlayer.removeWeapon(itemName)
+				TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'true', text = _U('weapon_removed') .. itemName})
 				targetXPlayer.addWeapon(itemName, itemCount)
+				TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'true', text = _U('waepon_added') .. itemName})
 			end
 		end
 	end
@@ -69,10 +77,10 @@ RegisterCommand(
 			if targetXPlayer ~= nil then
 				TriggerClientEvent("esx_inventoryhud:openPlayerInventory", source, target, targetXPlayer.name)
 			else
-				TriggerClientEvent("chatMessage", source, "^1" .. _U("no_player"))
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_player')})
 			end
 		else
-			TriggerClientEvent("chatMessage", source, "^1" .. _U("no_permissions"))
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_permissions')})
 		end
 	end
 )

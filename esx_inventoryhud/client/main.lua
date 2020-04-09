@@ -165,15 +165,8 @@ RegisterNUICallback(
         end
 
         if not foundPlayers then
-            exports.pNotify:SendNotification(
-                {
-                    text = _U("players_nearby"),
-                    type = "error",
-                    timeout = 3000,
-                    layout = "bottomCenter",
-                    queue = "inventoryhud"
-                }
-            )
+        
+            exports['b1g_notify']:Notify('false', _U("players_nearby"))
         else
             SendNUIMessage(
                 {
@@ -248,15 +241,8 @@ RegisterNUICallback(
             Wait(250)
             loadPlayerInventory()
         else
-            exports.pNotify:SendNotification(
-                {
-                    text = _U("player_nearby"),
-                    type = "error",
-                    timeout = 3000,
-                    layout = "bottomCenter",
-                    queue = "inventoryhud"
-                }
-            )
+        
+            exports['b1g_notify']:Notify('false', _U("player_nearby"))
         end
         cb("ok")
     end

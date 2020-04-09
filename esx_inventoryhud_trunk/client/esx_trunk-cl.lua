@@ -11,19 +11,19 @@ local entityWorld = nil
 local globalplate = nil
 local lastChecked = 0
 
-Citizen.CreateThread(
-  function()
-    while ESX == nil do
-      TriggerEvent(
-        "esx:getSharedObject",
-        function(obj)
-          ESX = obj
-        end
-      )
-      Citizen.Wait(0)
-    end
-  end
-)
+Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	PlayerData = ESX.GetPlayerData()
+end)
+
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler(
@@ -45,12 +45,16 @@ AddEventHandler(
 )
 
 RegisterNetEvent("esx:setJob")
-AddEventHandler(
-  "esx:setJob",
-  function(job)
-    PlayerData.job = job
-  end
-)
+AddEventHandler("esx:setJob", function(job)
+	local PlayerData = ESX.GetPlayerData()
+	
+	if PlayerData == nil then
+		print ('Kofferbak kan beroep niet synchroniseren. Dit is niet erg.')  -- Cannot sync job, not bad
+	else
+		print ('Kofferbak heeft je beroep gesynchroniseerd.') -- Can sync job
+		PlayerData.job = job
+	end
+end)
 
 RegisterNetEvent("esx_trunk_inventory:setOwnedVehicule")
 AddEventHandler(
@@ -137,45 +141,24 @@ function openmenuvehicle()
 
               if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
                 CloseToVehicle = true
-                OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleLimit[class], myVeh)
+                OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleWeight[class], myVeh)
               end
             else
-              exports.pNotify:SendNotification(
-                {
-                  text = _U("trunk_closed"),
-                  type = "error",
-                  timeout = 3000,
-                  layout = "bottomCenter",
-                  queue = "trunk"
-                }
-              )
+           
+            exports['b1g_notify']:Notify('true', _U("trunk_closed"))
             end
           end
         else
-          exports.pNotify:SendNotification(
-            {
-              text = _U("no_veh_nearby"),
-              type = "error",
-              timeout = 3000,
-              layout = "bottomCenter",
-              queue = "trunk"
-            }
-          )
+         
+            exports['b1g_notify']:Notify('false', _U("no_veh_nearby"))
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
       -- Not their vehicle
-      exports.pNotify:SendNotification(
-        {
-          text = _U("nacho_veh"),
-          type = "error",
-          timeout = 3000,
-          layout = "bottomCenter",
-          queue = "trunk"
-        }
-      )
+    
+            exports['b1g_notify']:Notify('false', _U("nacho_veh"))
     end
   end
 end
@@ -228,7 +211,7 @@ function OpenCoffreInventoryMenu(plate, max, myVeh)
   ESX.TriggerServerCallback(
     "esx_trunk:getInventoryV",
     function(inventory)
-      text = _U("trunk_info", plate, (inventory.weight / 1000), (max / 1000))
+      text = _U("trunk_info", plate, (inventory.weight / 100), (max / 100))
       data = {plate = plate, max = max, myVeh = myVeh, text = text}
       TriggerEvent("esx_inventoryhud:openTrunkInventory", data, inventory.blackMoney, inventory.items, inventory.weapons)
     end,
