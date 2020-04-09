@@ -70,8 +70,8 @@ Replace `label = Items[name]` to `label = items[name]`
 Currently, only Dutch is supported. If you want to translate it then feel free to pull a request!
 
 ## Screens
-    https://i.imgur.com/eHD01Tl.png
-    
+https://i.imgur.com/eHD01Tl.png
+ 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
