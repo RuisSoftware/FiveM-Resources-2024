@@ -81,6 +81,7 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 
 ## Screens
 ![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
+![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
     
 
 ### Disable default esx inventory:
