@@ -54,9 +54,9 @@ end)
 ### Fix for esx_addoninventory:
 
 Go to `esx_addoninventory\server\classes\addoninventory.lua` line 39
+
 Replace `label = Items[name]` to `label = items[name]`
     
-
 > Read other support files to make esx_inventoryhud work with esx_policejob and esx_propery!
 
 
@@ -104,9 +104,9 @@ end)
 ### Fix for `esx_addoninventory`:
 
 Go to `esx_addoninventory\server\classes\addoninventory.lua` line 39
+
 Replace `label = Items[name]` to `label = items[name]`
     
-
 > You need to edit your esx_policejob and esx_propery yourself!
 
 
