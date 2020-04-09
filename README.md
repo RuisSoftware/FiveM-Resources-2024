@@ -35,7 +35,7 @@ Press F3 behind a car for the trunk inventory.
 
 ### Disable default esx inventory:
 
-Open `es_extended`, then find and remove this code in `client/main.lua`:
+Open es_extended, then find and remove this code in `client/main.lua`:
 ```
 -- Menu interactions
 Citizen.CreateThread(function()
