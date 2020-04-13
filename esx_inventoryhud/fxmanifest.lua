@@ -23,6 +23,7 @@ client_scripts {
   "client/property.lua",
   "client/player.lua",
   "locales/nl.lua",
+  "locales/shop.lua",
   "config.lua"
 }
 
