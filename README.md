@@ -28,6 +28,13 @@ start esx_inventoryhud_trunk
 start esx_inventoryhud_glovebox
 ```
 
+- Add this at the top of your server.cfg:
+```
+set mysql_debug 1
+set mysql_debug_output "console"
+set mysql_slow_query_warning 200
+```
+
 ## Usage
 Press F2 for your personal inventory.
 Press F3 inside a car for the glovebox inventory.
