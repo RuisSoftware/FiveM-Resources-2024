@@ -84,6 +84,9 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
     
 
+# Support
+We can give you support in our [Dutch Discord Server](https://www.dutch-players.nl/go/discord/)
+
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
