@@ -1,5 +1,6 @@
 ESX = nil
-
+ServerItems = {}
+itemShopList = {}
 TriggerEvent(
 	"esx:getSharedObject",
 	function(obj)
