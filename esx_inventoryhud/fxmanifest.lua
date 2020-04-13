@@ -18,6 +18,8 @@ client_scripts {
   "client/main.lua",
   "client/trunk.lua",
   "client/glovebox.lua",
+  "client/beds.lua",
+  "client/motels.lua",
   "client/property.lua",
   "client/player.lua",
   "locales/nl.lua",
