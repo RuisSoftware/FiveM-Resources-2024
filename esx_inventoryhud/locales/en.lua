@@ -1,0 +1,21 @@
+Locales["en"] = {
+	["cash"] = "Cash",
+	["black_money"] = "Dirty Money",
+	["player_nearby"] = "Player is no longer nearby!",
+	["players_nearby"] = "There are no other players around!",
+	["openinv_help"] = "Open other player's inventory.",
+	["openinv_id"] = "Player ID",
+	["no_permissions"] = "You don't have permissions to do that!",
+	["no_player"] = "Cannot find player!",
+	["player_inventory"] = "Player inventory",
+	["nacho_veh"] = "This is not your vehicle.",
+	["player_inv_no_space"] = "No inventory space.",
+	["insufficient_space"] = "No inventory space.",
+	["invalid_quantity"] = "Invalid quantity.",
+	["item_added"] = "Added:",
+	["item_removed"] = "Removed:",
+	["money_added"] = "Added:",
+	["money_removed"] = "Removed:",
+	["weapon_added"] = "Added:",
+	["weapon_removed"] = "Removed:"
+}
