@@ -22,7 +22,7 @@ server_scripts {
 client_scripts {
   "@es_extended/locale.lua",
   "locales/nl.lua",
-  "locales/en.lua"
+  "locales/en.lua",
   "config.lua",
   "client/esx_trunk-cl.lua"
 }
