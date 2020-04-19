@@ -3,8 +3,8 @@ local trunkData = nil
 RegisterNetEvent("esx_inventoryhud:openTrunkInventory")
 AddEventHandler(
     "esx_inventoryhud:openTrunkInventory",
-    function(data, blackMoney, inventory, weapons)
-        setTrunkInventoryData(data, blackMoney, inventory, weapons)
+    function(data, blackMoney, cashMoney, inventory, weapons)
+        setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
         openTrunkInventory()
     end
 )
@@ -12,12 +12,12 @@ AddEventHandler(
 RegisterNetEvent("esx_inventoryhud:refreshTrunkInventory")
 AddEventHandler(
     "esx_inventoryhud:refreshTrunkInventory",
-    function(data, blackMoney, inventory, weapons)
-        setTrunkInventoryData(data, blackMoney, inventory, weapons)
+    function(data, blackMoney, cashMoney, inventory, weapons)
+        setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     end
 )
 
-function setTrunkInventoryData(data, blackMoney, inventory, weapons)
+function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     trunkData = data
 
     SendNUIMessage(
@@ -38,6 +38,20 @@ function setTrunkInventoryData(data, blackMoney, inventory, weapons)
             usable = false,
             rare = false,
             limit = -1,
+            canRemove = false
+        }
+        table.insert(items, accountData)
+    end
+	
+	if cashMoney > 0 then
+        accountData = {
+            label = _U("cash"),
+            count = cashMoney,
+            type = "item_money",
+            name = "cash",
+            usable = false,
+            rare = false,
+            weight = -1,
             canRemove = false
         }
         table.insert(items, accountData)
