@@ -2,9 +2,9 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'Inventory HUD Trunk'
+description 'Inventory HUD Trunk for ESX 1.2'
 
-version '1.2.1'
+version '2.3.1'
 
 
 server_scripts {
