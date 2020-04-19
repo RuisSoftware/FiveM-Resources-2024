@@ -3,8 +3,8 @@ local gloveboxData = nil
 RegisterNetEvent("esx_inventoryhud:openGloveboxInventory")
 AddEventHandler(
     "esx_inventoryhud:openGloveboxInventory",
-    function(data, blackMoney, inventory, weapons)
-        setGloveboxInventoryData(data, blackMoney, inventory, weapons)
+    function(data, blackMoney, cashMoney, inventory, weapons)
+        setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
         openGloveboxInventory()
     end
 )
@@ -12,12 +12,12 @@ AddEventHandler(
 RegisterNetEvent("esx_inventoryhud:refreshGloveboxInventory")
 AddEventHandler(
     "esx_inventoryhud:refreshGloveboxInventory",
-    function(data, blackMoney, inventory, weapons)
-        setGloveboxInventoryData(data, blackMoney, inventory, weapons)
+    function(data, blackMoney, cashMoney, inventory, weapons)
+        setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     end
 )
 
-function setGloveboxInventoryData(data, blackMoney, inventory, weapons)
+function setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     gloveboxData = data
 
     SendNUIMessage(
@@ -35,6 +35,20 @@ function setGloveboxInventoryData(data, blackMoney, inventory, weapons)
             count = blackMoney,
             type = "item_account",
             name = "black_money",
+            usable = false,
+            rare = false,
+            weight = -1,
+            canRemove = false
+        }
+        table.insert(items, accountData)
+    end
+	
+	if cashMoney > 0 then
+        accountData = {
+            label = _U("cash"),
+            count = cashMoney,
+            type = "item_money",
+            name = "cash",
             usable = false,
             rare = false,
             weight = -1,

@@ -84,7 +84,13 @@ function getTotalInventoryWeight(plate)
       if blackAccount ~= 0 then
         W_blackMoney = blackAccount[1].amount / 10
       end
-      total = W_weapons + W_coffres + W_blackMoney
+	  
+	  local W_cashMoney = 0
+      local cashAccount = (store.get("money")) or 0
+      if cashAccount ~= 0 then
+        W_cashMoney = cashAccount[1].amount / 10
+      end
+      total = W_weapons + W_coffres + W_blackMoney + W_cashMoney
     end
   )
   return total
@@ -98,6 +104,7 @@ ESX.RegisterServerCallback(
       plate,
       function(store)
         local blackMoney = 0
+		local cashMoney = 0
         local items = {}
         local weapons = {}
         weapons = (store.get("weapons") or {})
@@ -105,6 +112,11 @@ ESX.RegisterServerCallback(
         local blackAccount = (store.get("black_money")) or 0
         if blackAccount ~= 0 then
           blackMoney = blackAccount[1].amount
+        end
+		
+		local cashAccount = (store.get("money")) or 0
+        if cashAccount ~= 0 then
+          cashMoney = cashAccount[1].amount
         end
 
         local coffres = (store.get("coffres") or {})
@@ -116,6 +128,7 @@ ESX.RegisterServerCallback(
         cb(
           {
             blackMoney = blackMoney,
+			cashMoney = cashMoney,
             items = items,
             weapons = weapons,
             weight = weight
@@ -161,6 +174,7 @@ AddEventHandler(
             store.set("coffres", coffres)
 
             local blackMoney = 0
+			local cashMoney = 0
             local items = {}
             local weapons = {}
             weapons = (store.get("weapons") or {})
@@ -169,6 +183,11 @@ AddEventHandler(
             if blackAccount ~= 0 then
               blackMoney = blackAccount[1].amount
             end
+			
+			local cashAccount = (store.get("money")) or 0
+			if cashAccount ~= 0 then
+			  cashMoney = cashAccount[1].amount
+			end
 
             local coffres = (store.get("coffres") or {})
             for i = 1, #coffres, 1 do
@@ -179,7 +198,7 @@ AddEventHandler(
 
             text = _U("glovebox_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
-            TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
+            TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
           end
         )
       else
@@ -235,6 +254,60 @@ AddEventHandler(
         end
       )
     end
+	
+	if type == "item_money" then
+      TriggerEvent(
+        "esx_glovebox:getSharedDataStore",
+        plate,
+        function(store)
+          local cashMoney = store.get("money")
+          if (cashMoney[1].amount >= count and count > 0) then
+            cashMoney[1].amount = cashMoney[1].amount - count
+            store.set("money", cashMoney)
+            xPlayer.addMoney(count)
+
+            local blackMoney = 0
+			local cashMoney = 0
+            local items = {}
+            local weapons = {}
+            weapons = (store.get("weapons") or {})
+
+            local blackAccount = (store.get("black_money")) or 0
+            if blackAccount ~= 0 then
+              blackMoney = blackAccount[1].amount
+            end
+			
+			local cashAccount = (store.get("money")) or 0
+			if cashAccount ~= 0 then
+			  cashMoney = cashAccount[1].amount
+			end
+
+            local coffres = (store.get("coffres") or {})
+            for i = 1, #coffres, 1 do
+              table.insert(items, {name = coffres[i].name, count = coffres[i].count, label = ESX.GetItemLabel(coffres[i].name)})
+            end
+
+            local weight = getTotalInventoryWeight(plate)
+
+            text = _U("glovebox_info", plate, (weight / 100), (max / 100))
+            data = {plate = plate, max = max, myVeh = owned, text = text}
+            TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
+          else
+            TriggerClientEvent(
+              "pNotify:SendNotification",
+              _source,
+              {
+                text = _U("invalid_amount"),
+                type = "error",
+                queue = "glovebox",
+                timeout = 3000,
+                layout = "bottomCenter"
+              }
+            )
+          end
+        end
+      )
+    end
 
     if type == "item_weapon" then
       TriggerEvent(
@@ -266,6 +339,7 @@ AddEventHandler(
           xPlayer.addWeapon(weaponName, ammo)
 
           local blackMoney = 0
+		  local cashMoney = 0
           local items = {}
           local weapons = {}
           weapons = (store.get("weapons") or {})
@@ -274,6 +348,11 @@ AddEventHandler(
           if blackAccount ~= 0 then
             blackMoney = blackAccount[1].amount
           end
+
+		  local cashAccount = (store.get("money")) or 0
+		  if cashAccount ~= 0 then
+		    cashMoney = cashAccount[1].amount
+		  end
 
           local coffres = (store.get("coffres") or {})
           for i = 1, #coffres, 1 do
@@ -284,7 +363,7 @@ AddEventHandler(
 
           text = _U("glovebox_info", plate, (weight / 100), (max / 100))
           data = {plate = plate, max = max, myVeh = owned, text = text}
-          TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
+          TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
         end
       )
     end
@@ -388,6 +467,45 @@ AddEventHandler(
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
       end
     end
+	
+	if type == "item_money" then
+      local playerAccountMoney = xPlayer.getMoney()
+
+      if (playerAccountMoney >= count and count > 0) then
+        TriggerEvent(
+          "esx_glovebox:getSharedDataStore",
+          plate,
+          function(store)
+            local cashMoney = (store.get("money") or nil)
+            if cashMoney ~= nil then
+              cashMoney[1].amount = cashMoney[1].amount + count
+            else
+              cashMoney = {}
+              table.insert(cashMoney, {amount = count})
+            end
+
+            if (getTotalInventoryWeight(plate) + cashMoney[1].amount / 10) > max then
+            
+				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
+            else
+              -- Checks passed. Storing the item.
+              xPlayer.removeMoney(count)
+              store.set("money", cashMoney)
+
+              MySQL.Async.execute(
+                "UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate",
+                {
+                  ["@plate"] = plate,
+                  ["@owned"] = owned
+                }
+              )
+            end
+          end
+        )
+      else
+		TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
+      end
+    end
 
     if type == "item_weapon" then
       TriggerEvent(
@@ -432,6 +550,7 @@ AddEventHandler(
       plate,
       function(store)
         local blackMoney = 0
+		local cashMoney = 0
         local items = {}
         local weapons = {}
         weapons = (store.get("weapons") or {})
@@ -439,6 +558,11 @@ AddEventHandler(
         local blackAccount = (store.get("black_money")) or 0
         if blackAccount ~= 0 then
           blackMoney = blackAccount[1].amount
+        end
+		
+		local cashAccount = (store.get("money")) or 0
+        if cashAccount ~= 0 then
+          cashMoney = cashAccount[1].amount
         end
 
         local coffres = (store.get("coffres") or {})
@@ -450,7 +574,7 @@ AddEventHandler(
 
         text = _U("glovebox_info", plate, (weight / 100), (max / 100))
         data = {plate = plate, max = max, myVeh = owned, text = text}
-        TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
+        TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
       end
     )
   end
@@ -461,11 +585,13 @@ ESX.RegisterServerCallback(
   function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
     local blackMoney = xPlayer.getAccount("black_money").money
+	local cashMoney = xPlayer.getMoney()
     local items = xPlayer.inventory
 
     cb(
       {
         blackMoney = blackMoney,
+		cashMoney = cashMoney,
         items = items
       }
     )

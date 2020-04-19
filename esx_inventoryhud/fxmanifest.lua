@@ -7,9 +7,11 @@ description 'Inventory HUD'
 version '1.2.1'
 
 server_scripts {
+  '@mysql-async/lib/MySQL.lua',
   "@es_extended/locale.lua",
   "server/main.lua",
   "locales/nl.lua",
+  "locales/en.lua",
   "config.lua"
 }
 
@@ -24,6 +26,7 @@ client_scripts {
   "client/property.lua",
   "client/player.lua",
   "locales/nl.lua",
+  "locales/en.lua",
   "config.lua"
 }
 
@@ -38,6 +41,7 @@ files {
   "html/js/inventory.js",
   "html/js/config.js",
   -- JS LOCALES
+  "html/locales/en.js",
   "html/locales/nl.js",
   -- IMAGES
   "html/img/*.png",

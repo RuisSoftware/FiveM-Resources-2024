@@ -11,6 +11,7 @@ server_scripts {
   "@mysql-async/lib/MySQL.lua",
   "@es_extended/locale.lua",
   "locales/nl.lua",
+  "locales/en.lua",
   "config.lua",
   "server/classes/c_glovebox.lua",
   "server/glovebox.lua",
@@ -20,11 +21,7 @@ server_scripts {
 client_scripts {
   "@es_extended/locale.lua",
   "locales/nl.lua",
+  "locales/en.lua",
   "config.lua",
   "client/esx_glovebox-cl.lua"
 }
-
-ui_page {
-	'html/ui.html'
-}
-

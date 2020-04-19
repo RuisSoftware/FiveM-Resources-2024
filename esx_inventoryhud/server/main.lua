@@ -104,7 +104,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 
 		itemInformation[itemResult[i].name].name = itemResult[i].name
 		itemInformation[itemResult[i].name].label = itemResult[i].label
-		itemInformation[itemResult[i].name].limit = itemResult[i].limit
+		--itemInformation[itemResult[i].name].limit = itemResult[i].limit
 		itemInformation[itemResult[i].name].rare = itemResult[i].rare
 		itemInformation[itemResult[i].name].can_remove = itemResult[i].can_remove
 		itemInformation[itemResult[i].name].price = itemResult[i].price
@@ -116,7 +116,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						--limit = itemInformation[itemResult[i].name].limit,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -132,7 +132,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						--limit = itemInformation[itemResult[i].name].limit,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -148,7 +148,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						--limit = itemInformation[itemResult[i].name].limit,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -164,7 +164,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						--limit = itemInformation[itemResult[i].name].limit,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -181,7 +181,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_weapon",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = 1,
+						--limit = 1,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
@@ -198,7 +198,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_ammo",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = 1,
+						--limit = 1,
 						weaponhash = v.weaponhash,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
@@ -215,7 +215,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						--limit = itemInformation[itemResult[i].name].limit,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -241,7 +241,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 
 		itemInformation[itemResult[i].name].name = itemResult[i].name
 		itemInformation[itemResult[i].name].label = itemResult[i].label
-		itemInformation[itemResult[i].name].limit = itemResult[i].limit
+		----itemInformation[itemResult[i].name].limit = itemResult[i].limit
 		itemInformation[itemResult[i].name].rare = itemResult[i].rare
 		itemInformation[itemResult[i].name].can_remove = itemResult[i].can_remove
 		itemInformation[itemResult[i].name].price = itemResult[i].price
@@ -271,7 +271,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_weapon",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = 1,
+						--limit = 1,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
@@ -288,7 +288,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_ammo",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = 1,
+						--limit = 1,
 						weaponhash = v.weaponhash,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
@@ -305,7 +305,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						--limit = itemInformation[itemResult[i].name].limit,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -325,7 +325,7 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
 
     if type == "item_standard" then
 		local targetItem = xPlayer.getInventoryItem(item)
-		if targetItem.limit == -1 or xPlayer.canCarryItem(item, count) then
+		if xPlayer.canCarryItem(item, count) then
         --if targetItem.limit == -1 or ((targetItem.count + count) <= targetItem.limit) then
             local list = itemShopList
             for i = 1, #list, 1 do
