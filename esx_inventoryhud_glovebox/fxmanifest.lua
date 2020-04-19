@@ -25,8 +25,3 @@ client_scripts {
   "config.lua",
   "client/esx_glovebox-cl.lua"
 }
-
-ui_page {
-	'html/ui.html'
-}
-
