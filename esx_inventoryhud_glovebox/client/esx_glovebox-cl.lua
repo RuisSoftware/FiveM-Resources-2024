@@ -196,7 +196,7 @@ function OpenCoffresInventoryMenu(plate, max, myVeh)
     function(inventory)
       text = _U("glovebox_info", plate, (inventory.weight / 100), (max / 100))
       data = {plate = plate, max = max, myVeh = myVeh, text = text}
-      TriggerEvent("esx_inventoryhud:openGloveboxInventory", data, inventory.blackMoney, inventory.items, inventory.weapons)
+      TriggerEvent("esx_inventoryhud:openGloveboxInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
     end,
     plate
   )
