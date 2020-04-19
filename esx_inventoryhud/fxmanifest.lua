@@ -40,6 +40,7 @@ files {
   "html/js/inventory.js",
   "html/js/config.js",
   -- JS LOCALES
+  "html/locales/en.js",
   "html/locales/nl.js",
   -- IMAGES
   "html/img/*.png",
