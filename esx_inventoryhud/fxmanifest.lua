@@ -10,6 +10,7 @@ server_scripts {
   "@es_extended/locale.lua",
   "server/main.lua",
   "locales/nl.lua",
+  "locales/en.lua",
   "config.lua"
 }
 
@@ -24,6 +25,7 @@ client_scripts {
   "client/property.lua",
   "client/player.lua",
   "locales/nl.lua",
+  "locales/en.lua",
   "config.lua"
 }
 
