@@ -95,6 +95,9 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 - We can give you support in our [Dutch Discord Server](https://www.dutch-players.nl/go/discord/)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
+# THANK YOU
+https://github.com/ClicheUsername
+
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
