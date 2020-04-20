@@ -26,7 +26,7 @@ Config.MarkerColor = {r = 0, g = 128, b = 255}
 Config.Color = 2
 Config.WeaponColor = 1
 
-Config.WeaponLiscence = {x = 12.47, y = -1105.5, z = 29.8}
+Config.WeaponLicence = {x = 12.47, y = -1105.5, z = 29.8}
 Config.LicensePrice = 5000
 
 Config.Shops = {
@@ -154,7 +154,7 @@ Config.Shops = {
 
         }
     },
-    LiscenceShop = {
+    LicenseShop = {
         Locations = {
             { x = 12.47, y = -1105.5, z = 29.8}
         }
