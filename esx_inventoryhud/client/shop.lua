@@ -66,7 +66,7 @@ Citizen.CreateThread(function()
 								OpenShopInv("weaponshop")
 								Citizen.Wait(2000)
 							else
-								exports['mythic_notify']:DoHudText('error', 'You need a license to carry weapons!')
+								exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
 							end
 						end, GetPlayerServerId(PlayerId()), 'weapon')
 					end
@@ -226,13 +226,12 @@ Citizen.CreateThread(function()
 
         if GetDistanceBetweenCoords(coords, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z, true) < 5.0 then
 			if currentAction then
-			ESX.ShowHelpNotification('press ~INPUT_CONTEXT~ to register license')
-				--ESX.Game.Utils.DrawText3D(vector3(Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z), "Press [E] to register your license", 0.6)
-
+			ESX.ShowHelpNotification(_U('license_shop_help'))
+                DrawMarker(25, Config.Shops.WeaponLiscence.Locations[k].x, Config.Shops.WeaponLiscence.Locations[k].y, Config.Shops.WeaponLiscence.Locations[k].z + 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
 				if IsControlJustReleased(0, Keys["E"]) then
 					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 						if hasWeaponLicense then
-							exports['mythic_notify']:DoHudText('error', 'You already have a license to carry weapons!')
+							exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
 						else
 							OpenBuyLicenseMenu()
 							Citizen.Wait(2000)
@@ -247,7 +246,7 @@ end)
 function OpenBuyLicenseMenu()
     ESX.UI.Menu.CloseAll()
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license',{
-        title = 'Register License?', --Register a License
+        title = _U('license_shop_title'), --Register a License
         elements = {
           { label = 'yes' ..' ($' .. Config.LicensePrice ..')', value = 'yes' }, --yes
           { label = 'no', value = 'no' },
@@ -272,23 +271,23 @@ Citizen.CreateThread(function()
     player = GetPlayerPed(-1)
     coords = GetEntityCoords(player)
     for k, v in pairs(Config.Shops.RegularShop.Locations) do
-        CreateBlip(vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z ), "MiniMarket", 3.0, Config.Color, Config.ShopBlipID)
+        CreateBlip(vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z ), _U('regular_shop_name'), 3.0, Config.Color, Config.ShopBlipID)
     end
 
     for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
-        CreateBlip(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z ), "Botilleria", 3.0, Config.Color, Config.LiquorBlipID)
+        CreateBlip(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z ), _U('robs_liquor_name'), 3.0, Config.Color, Config.LiquorBlipID)
     end
 
     for k, v in pairs(Config.Shops.YouTool.Locations) do
-        CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), "Hardware store", 3.0, Config.Color, Config.YouToolBlipID)
+        CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), _U('you_tool_name'), 3.0, Config.Color, Config.YouToolBlipID)
     end
 
     for k, v in pairs(Config.Shops.YouTool.Locations) do
-        CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), "Comisaria de la Prision", 3.0, Config.Color, Config.PrisonShopBlipID)
+        CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), _U('prison_shop_name'), 3.0, Config.Color, Config.PrisonShopBlipID)
     end
 
     for k, v in pairs(Config.Shops.WeaponShop.Locations) do
-        CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), "Ammunation", 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+        CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), _U('weapon_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
     end
 
     CreateBlip(vector3(-755.79, 5596.07, 41.67), "Cablecart", 3.0, 4, 36)
@@ -330,7 +329,7 @@ end)
 
 AddEventHandler('suku:hasEnteredMarker', function(zone)
 	currentAction     = 'shop_menu'
-	currentActionMsg  = _U('press_menu')
+	currentActionMsg  = _U('shop_press_menu')
 	currentActionData = {zone = zone}
 end)
 
