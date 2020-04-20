@@ -1,4 +1,5 @@
 local shopData = nil
+local currentAction, currentActionMsg, currentActionData = nil, nil, {}
 
 Keys = {
 	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
@@ -21,38 +22,55 @@ Citizen.CreateThread(function()
         coords = GetEntityCoords(player)
         if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
             if IsInRegularShopZone(coords) then
-                if IsControlJustReleased(0, Keys["E"]) then
-                    OpenShopInv("regular")
-                    Citizen.Wait(2000)
-                end
+				if currentAction then
+					ESX.ShowHelpNotification(currentActionMsg)
+					if IsControlJustReleased(0, Keys["E"]) then
+						OpenShopInv("regular")
+						Citizen.Wait(2000)
+					end
+				end
             end
             if IsInRobsLiquorZone(coords) then
-                if IsControlJustReleased(0, Keys["E"]) then
-                    OpenShopInv("robsliquor")
-                    Citizen.Wait(2000)
-                end
+				if currentAction then
+					ESX.ShowHelpNotification(currentActionMsg)
+					if IsControlJustReleased(0, Keys["E"]) then
+						OpenShopInv("robsliquor")
+						Citizen.Wait(2000)
+					end
+				end
             end
             if IsInYouToolZone(coords) then
-                if IsControlJustReleased(0, Keys["E"]) then
-                    OpenShopInv("youtool")
-                    Citizen.Wait(2000)
-                end
+				if currentAction then
+					ESX.ShowHelpNotification(currentActionMsg)
+					if IsControlJustReleased(0, Keys["E"]) then
+						OpenShopInv("youtool")
+						Citizen.Wait(2000)
+					end
+				end
             end
             if IsInPrisonShopZone(coords) then
-                if IsControlJustReleased(0, Keys["E"]) then
-                    OpenShopInv("prison")
-                    Citizen.Wait(2000)
-                end
+				if currentAction then
+					ESX.ShowHelpNotification(currentActionMsg)
+					if IsControlJustReleased(0, Keys["E"]) then
+						OpenShopInv("prison")
+						Citizen.Wait(2000)
+					end
+				end
             end
             if IsInWeaponShopZone(coords) then
-                if IsControlJustReleased(0, Keys["E"]) then
-                    if Licenses['weapon'] ~= nil then
-                        OpenShopInv("weaponshop")
-                        Citizen.Wait(2000)
-                    else
-                        exports['mythic_notify']:SendAlert('error', '¡Necesitas una licencia de porte de armas!')
-                    end
-                end
+				if currentAction then
+					ESX.ShowHelpNotification(currentActionMsg)
+					if IsControlJustReleased(0, Keys["E"]) then
+						ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+							if hasWeaponLicense then
+								OpenShopInv("weaponshop")
+								Citizen.Wait(2000)
+							else
+								exports['mythic_notify']:DoHudText('error', 'You need a license to carry weapons!')
+							end
+						end, GetPlayerServerId(PlayerId()), 'weapon')
+					end
+				end
             end
         end
     end
@@ -200,50 +218,49 @@ function IsInWeaponShopZone(coords)
     return false
 end
 
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
 
-        if GetDistanceBetweenCoords(coords, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z, true) < 12.0 then
-            ESX.Game.Utils.DrawText3D(vector3(Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z), "Presiona [E] para registrar tu licencia", 0.6)
+        if GetDistanceBetweenCoords(coords, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z, true) < 5.0 then
+			if currentAction then
+			ESX.ShowHelpNotification('press ~INPUT_CONTEXT~ to register license')
+				--ESX.Game.Utils.DrawText3D(vector3(Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z), "Press [E] to register your license", 0.6)
 
-            if IsControlJustReleased(0, Keys["E"]) then
-                if Licenses['weapon'] == nil then
-                    OpenBuyLicenseMenu()
-                else
-                    exports['mythic_notify']:SendAlert('error', 'Ya tienes una licencia de porte de armas!')
-                end
-                Citizen.Wait(2000)
-            end
+				if IsControlJustReleased(0, Keys["E"]) then
+					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+						if hasWeaponLicense then
+							exports['mythic_notify']:DoHudText('error', 'You already have a license to carry weapons!')
+						else
+							OpenBuyLicenseMenu()
+							Citizen.Wait(2000)
+						end
+					end, GetPlayerServerId(PlayerId()), 'weapon')
+				end
+			end
         end
-    end
-end)
-
-
-RegisterNetEvent('suku:GetLicenses')
-AddEventHandler('suku:GetLicenses', function (licenses)
-    for i = 1, #licenses, 1 do
-        Licenses[licenses[i].type] = true
     end
 end)
 
 function OpenBuyLicenseMenu()
     ESX.UI.Menu.CloseAll()
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license',{
-        title = '¿Registrar Licencia?', --Register a License
+        title = 'Register License?', --Register a License
         elements = {
-          { label = 'si' ..' ($' .. Config.LicensePrice ..')', value = 'yes' }, --yes
+          { label = 'yes' ..' ($' .. Config.LicensePrice ..')', value = 'yes' }, --yes
           { label = 'no', value = 'no' },
         }
       },
-      function (data, menu)
-        if data.current.value == 'yes' then
-            TriggerServerEvent('suku:buyLicense')
+      function (data, menu)		
+		if data.current.value == 'yes' then
+            ESX.TriggerServerCallback('suku:buyLicense', function(bought)
+                if bought then
+                    menu.close()
+                end
+            end)
         end
-        menu.close()
     end,
     function (data, menu)
         menu.close()
@@ -263,7 +280,7 @@ Citizen.CreateThread(function()
     end
 
     for k, v in pairs(Config.Shops.YouTool.Locations) do
-        CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), "Ferreteria", 3.0, Config.Color, Config.YouToolBlipID)
+        CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), "Hardware store", 3.0, Config.Color, Config.YouToolBlipID)
     end
 
     for k, v in pairs(Config.Shops.YouTool.Locations) do
@@ -277,6 +294,56 @@ Citizen.CreateThread(function()
     CreateBlip(vector3(-755.79, 5596.07, 41.67), "Cablecart", 3.0, 4, 36)
 end)
 
+Citizen.CreateThread(function()
+	while true do
+		Player = nil
+		Citizen.Wait(0)
+		local playerCoords = GetEntityCoords(PlayerPedId())
+		local isInMarker, letSleep, currentZone = false, false
+		for k,v in pairs(Config.Shops) do
+			for i = 1, #v.Locations, 1 do
+				local distance = GetDistanceBetweenCoords(playerCoords, v.Locations[i].x, v.Locations[i].y, v.Locations[i].z, true)
+				if distance <  1.5 then
+					letSleep = false
+
+					if distance < Config.Size.x then
+						isInMarker  = true
+						currentZone = k
+						lastZone    = k
+					end
+				end
+			end
+		end
+		if isInMarker and not hasAlreadyEnteredMarker then
+			hasAlreadyEnteredMarker = true
+			TriggerEvent('suku:hasEnteredMarker', currentZone)
+		end
+		if not isInMarker and hasAlreadyEnteredMarker then
+			hasAlreadyEnteredMarker = false
+			TriggerEvent('suku:hasExitedMarker', lastZone)
+		end
+		if letSleep then
+			Citizen.Wait(500)
+		end
+	end
+end)
+
+AddEventHandler('suku:hasEnteredMarker', function(zone)
+	currentAction     = 'shop_menu'
+	currentActionMsg  = _U('press_menu')
+	currentActionData = {zone = zone}
+end)
+
+AddEventHandler('suku:hasExitedMarker', function(zone)
+	SendNUIMessage({
+		display = false,
+		clear = true
+	})
+
+	currentAction = false
+
+	SetNuiFocus(false, false)
+end)
 
 Citizen.CreateThread(function()
     while true do
@@ -286,31 +353,31 @@ Citizen.CreateThread(function()
 
         for k, v in pairs(Config.Shops.RegularShop.Locations) do
             if GetDistanceBetweenCoords(coords, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, true) < 12.0 then
-                ESX.Game.Utils.DrawText3D(vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z + 1.0), "Presiona [E] para comprar", 0.6)
+                DrawMarker(25, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z + 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
 
         for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
-            if GetDistanceBetweenCoords(coords, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, true) < 12.0 then
-                ESX.Game.Utils.DrawText3D(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z + 1.0), "Presiona [E] para comprar", 0.6)
+            if GetDistanceBetweenCoords(coords, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
 
         for k, v in pairs(Config.Shops.YouTool.Locations) do
-            if GetDistanceBetweenCoords(coords, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, true) < 12.0 then
-                ESX.Game.Utils.DrawText3D(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z + 1.0), "Presiona [E] para comprar", 0.6)
+            if GetDistanceBetweenCoords(coords, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
 
         for k, v in pairs(Config.Shops.PrisonShop.Locations) do
-            if GetDistanceBetweenCoords(coords, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, true) < 12.0 then
-                ESX.Game.Utils.DrawText3D(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), "Presiona [E] para comprar", 0.6)
+            if GetDistanceBetweenCoords(coords, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
 
         for k, v in pairs(Config.Shops.WeaponShop.Locations) do
-            if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, true) < 12.0 then
-                ESX.Game.Utils.DrawText3D(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z + 1.0), "Presiona [E] para comprar", 0.6)
+            if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
     end
