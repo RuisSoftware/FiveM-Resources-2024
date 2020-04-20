@@ -22,55 +22,55 @@ Citizen.CreateThread(function()
         coords = GetEntityCoords(player)
         if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
             if IsInRegularShopZone(coords) then
-				if currentAction then
-					ESX.ShowHelpNotification(currentActionMsg)
-					if IsControlJustReleased(0, Keys["E"]) then
-						OpenShopInv("regular")
-						Citizen.Wait(2000)
-					end
-				end
+		        if currentAction then
+			        ESX.ShowHelpNotification(currentActionMsg)
+			        if IsControlJustReleased(0, Keys["E"]) then
+				        OpenShopInv("regular")
+				        Citizen.Wait(2000)
+			        end
+		        end
             end
             if IsInRobsLiquorZone(coords) then
-				if currentAction then
-					ESX.ShowHelpNotification(currentActionMsg)
-					if IsControlJustReleased(0, Keys["E"]) then
-						OpenShopInv("robsliquor")
-						Citizen.Wait(2000)
-					end
-				end
+		        if currentAction then
+			        ESX.ShowHelpNotification(currentActionMsg)
+			        if IsControlJustReleased(0, Keys["E"]) then
+				        OpenShopInv("robsliquor")
+				        Citizen.Wait(2000)
+			        end
+		        end
             end
             if IsInYouToolZone(coords) then
-				if currentAction then
-					ESX.ShowHelpNotification(currentActionMsg)
-					if IsControlJustReleased(0, Keys["E"]) then
-						OpenShopInv("youtool")
-						Citizen.Wait(2000)
-					end
-				end
+		        if currentAction then
+			        ESX.ShowHelpNotification(currentActionMsg)
+			        if IsControlJustReleased(0, Keys["E"]) then
+				        OpenShopInv("youtool")
+				        Citizen.Wait(2000)
+			        end
+		        end
             end
             if IsInPrisonShopZone(coords) then
-				if currentAction then
-					ESX.ShowHelpNotification(currentActionMsg)
-					if IsControlJustReleased(0, Keys["E"]) then
-						OpenShopInv("prison")
-						Citizen.Wait(2000)
-					end
-				end
+		        if currentAction then
+			        ESX.ShowHelpNotification(currentActionMsg)
+			        if IsControlJustReleased(0, Keys["E"]) then
+				        OpenShopInv("prison")
+				        Citizen.Wait(2000)
+			        end
+		        end
             end
             if IsInWeaponShopZone(coords) then
-				if currentAction then
-					ESX.ShowHelpNotification(currentActionMsg)
-					if IsControlJustReleased(0, Keys["E"]) then
-						ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
-							if hasWeaponLicense then
-								OpenShopInv("weaponshop")
-								Citizen.Wait(2000)
-							else
-								exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
-							end
-						end, GetPlayerServerId(PlayerId()), 'weapon')
-					end
-				end
+		        if currentAction then
+			        ESX.ShowHelpNotification(currentActionMsg)
+			        if IsControlJustReleased(0, Keys["E"]) then
+				        ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+					        if hasWeaponLicense then
+						        OpenShopInv("weaponshop")
+						        Citizen.Wait(2000)
+					        else
+						        exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+					        end
+				        end, GetPlayerServerId(PlayerId()), 'weapon')
+			        end
+		        end
             end
         end
     end
@@ -148,20 +148,19 @@ function openShopInventory()
 end
 
 RegisterNUICallback("TakeFromShop", function(data, cb)
-        if IsPedSittingInAnyVehicle(playerPed) then
-            return
-        end
-
-        if type(data.number) == "number" and math.floor(data.number) == data.number then
-            TriggerServerEvent("suku:SellItemToPlayer", GetPlayerServerId(PlayerId()), data.item.type, data.item.name, tonumber(data.number))
-        end
-
-        Wait(150)
-        loadPlayerInventory()
-
-        cb("ok")
+    if IsPedSittingInAnyVehicle(playerPed) then
+        return
     end
-)
+
+    if type(data.number) == "number" and math.floor(data.number) == data.number then
+        TriggerServerEvent("suku:SellItemToPlayer", GetPlayerServerId(PlayerId()), data.item.type, data.item.name, tonumber(data.number))
+    end
+
+    Wait(150)
+    loadPlayerInventory()
+
+    cb("ok")
+end)
 
 RegisterNetEvent("suku:AddAmmoToWeapon")
 AddEventHandler("suku:AddAmmoToWeapon", function(hash, amount)
@@ -227,7 +226,7 @@ Citizen.CreateThread(function()
         if GetDistanceBetweenCoords(coords, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z, true) < 5.0 then
 			if currentAction then
 			ESX.ShowHelpNotification(_U('license_shop_help'))
-                DrawMarker(25, Config.Shops.WeaponLiscence.Locations[k].x, Config.Shops.WeaponLiscence.Locations[k].y, Config.Shops.WeaponLiscence.Locations[k].z + 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+				DrawMarker(25, Config.Shops.WeaponLiscence.Locations[k].x, Config.Shops.WeaponLiscence.Locations[k].y, Config.Shops.WeaponLiscence.Locations[k].z + 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
 				if IsControlJustReleased(0, Keys["E"]) then
 					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 						if hasWeaponLicense then
