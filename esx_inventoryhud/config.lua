@@ -1,6 +1,6 @@
 Config = {}
 Config.Locale = 'nl'
-Config.IncludeCash = false -- DONT TOUCH!
+Config.IncludeCash = true -- DONT TOUCH!
 Config.IncludeWeapons = true -- TRUE or FALSE
 Config.IncludeAccounts = true -- TRUE or FALSE
 Config.ExcludeAccountsList = {"bank", "money"} --  DONT TOUCH!
