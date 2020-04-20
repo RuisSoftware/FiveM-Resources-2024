@@ -221,8 +221,8 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)	
-        if GetDistanceBetweenCoords(coords, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z, true) < 8.0 then
-            DrawMarker(25, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+        if GetDistanceBetweenCoords(coords, Config.WeaponLicense.x, Config.WeaponLicense.y, Config.WeaponLicense.z, true) < 8.0 then
+            DrawMarker(25, Config.WeaponLicense.x, Config.WeaponLicense.y, Config.WeaponLicense.z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
                 if currentAction then
                     ESX.ShowHelpNotification(_U('license_shop_help'))
                     if IsControlJustReleased(0, Keys["E"]) then
