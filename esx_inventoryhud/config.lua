@@ -21,6 +21,8 @@ Config.LiquorLength = 10
 Config.YouToolLength = 2
 Config.PrisonShopLength = 2
 
+Config.MarkerSize = {x = 1.5, y = 1.5, z = 1.5}
+Config.MarkerColor = {r = 0, g = 128, b = 255}
 Config.Color = 2
 Config.WeaponColor = 1
 
@@ -152,4 +154,9 @@ Config.Shops = {
 
         }
     },
+    LiscenceShop = {
+        Locations = {
+            { x = 12.47, y = -1105.5, z = 29.8}
+        }
+    }
 }

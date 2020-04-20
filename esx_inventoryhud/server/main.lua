@@ -318,6 +318,22 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 	cb(itemShopList)
 end)
 
+ESX.RegisterServerCallback('suku:buyLicense', function(source, cb)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(source)
+
+	if xPlayer.getMoney() >= Config.LicensePrice then
+		xPlayer.removeMoney(Config.LicensePrice)
+
+		TriggerEvent('esx_license:addLicense', source, 'weapon', function()
+			cb(true)
+		end)
+	else
+		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'You dont have enough money.', length = 2500, style = { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' } })
+		cb(false)
+	end
+end)
+
 RegisterNetEvent("suku:SellItemToPlayer")
 AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
     local _source = source
