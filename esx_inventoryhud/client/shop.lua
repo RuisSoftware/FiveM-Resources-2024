@@ -22,56 +22,56 @@ Citizen.CreateThread(function()
         coords = GetEntityCoords(player)
         if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
             if IsInRegularShopZone(coords) then
-		        if currentAction then
-			        ESX.ShowHelpNotification(currentActionMsg)
-			        if IsControlJustReleased(0, Keys["E"]) then
-				        OpenShopInv("regular")
-				        Citizen.Wait(2000)
-			        end
-		        end
+                if currentAction then
+                     ESX.ShowHelpNotification(currentActionMsg)
+                     if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("regular")
+                        Citizen.Wait(2000)
+                     end
+                end
             end
             if IsInRobsLiquorZone(coords) then
-		        if currentAction then
-			        ESX.ShowHelpNotification(currentActionMsg)
-			        if IsControlJustReleased(0, Keys["E"]) then
-				        OpenShopInv("robsliquor")
-				        Citizen.Wait(2000)
-			        end
-		        end
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("robsliquor")
+                        Citizen.Wait(2000)
+                    end
+                end
             end
             if IsInYouToolZone(coords) then
-		        if currentAction then
-			        ESX.ShowHelpNotification(currentActionMsg)
-			        if IsControlJustReleased(0, Keys["E"]) then
-				        OpenShopInv("youtool")
-				        Citizen.Wait(2000)
-			        end
-		        end
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("youtool")
+                        Citizen.Wait(2000)
+                    end
+                end
             end
             if IsInPrisonShopZone(coords) then
-		        if currentAction then
-			        ESX.ShowHelpNotification(currentActionMsg)
-			        if IsControlJustReleased(0, Keys["E"]) then
-				        OpenShopInv("prison")
-				        Citizen.Wait(2000)
-			        end
-		        end
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("prison")
+                        Citizen.Wait(2000)
+                    end
+                end
             end
             if IsInWeaponShopZone(coords) then
-		        if currentAction then
-			        ESX.ShowHelpNotification(currentActionMsg)
-			        if IsControlJustReleased(0, Keys["E"]) then
-				        ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
-					        if hasWeaponLicense then
-						        OpenShopInv("weaponshop")
-						        Citizen.Wait(2000)
-					        else
-						        exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
-					        end
-				        end, GetPlayerServerId(PlayerId()), 'weapon')
-			        end
-		        end
-            end
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+                        if hasWeaponLicense then
+                            OpenShopInv("weaponshop")
+                            Citizen.Wait(2000)
+                        else
+                            exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+                        end
+                    end, GetPlayerServerId(PlayerId()), 'weapon')
+                 end
+              end
+           end
         end
     end
 end)
@@ -109,8 +109,8 @@ end)
 
 RegisterNetEvent("esx_inventoryhud:openShopInventory")
 AddEventHandler("esx_inventoryhud:openShopInventory", function(data, inventory)
-        setShopInventoryData(data, inventory, weapons)
-        openShopInventory()
+    setShopInventoryData(data, inventory, weapons)
+    openShopInventory()
 end)
 
 function setShopInventoryData(data, inventory)
@@ -143,7 +143,6 @@ function openShopInventory()
             type = "shop"
         }
     )
-
     SetNuiFocus(true, true)
 end
 
@@ -222,22 +221,21 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
-
         if GetDistanceBetweenCoords(coords, Config.WeaponLiscence.x, Config.WeaponLiscence.y, Config.WeaponLiscence.z, true) < 5.0 then
-			if currentAction then
-			ESX.ShowHelpNotification(_U('license_shop_help'))
-				DrawMarker(25, Config.Shops.WeaponLiscence.Locations[k].x, Config.Shops.WeaponLiscence.Locations[k].y, Config.Shops.WeaponLiscence.Locations[k].z + 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
-				if IsControlJustReleased(0, Keys["E"]) then
-					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
-						if hasWeaponLicense then
-							exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
-						else
-							OpenBuyLicenseMenu()
-							Citizen.Wait(2000)
-						end
-					end, GetPlayerServerId(PlayerId()), 'weapon')
-				end
-			end
+            if currentAction then
+            ESX.ShowHelpNotification(_U('license_shop_help'))
+                DrawMarker(25, Config.Shops.WeaponLiscence.Locations[k].x, Config.Shops.WeaponLiscence.Locations[k].y, Config.Shops.WeaponLiscence.Locations[k].z + 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+                        if hasWeaponLicense then
+                            exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
+                        else
+                            OpenBuyLicenseMenu()
+                            Citizen.Wait(2000)
+                        end
+                    end, GetPlayerServerId(PlayerId()), 'weapon')
+                end
+            end
         end
     end
 end)
@@ -293,54 +291,51 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-	while true do
-		Player = nil
-		Citizen.Wait(0)
-		local playerCoords = GetEntityCoords(PlayerPedId())
-		local isInMarker, letSleep, currentZone = false, false
-		for k,v in pairs(Config.Shops) do
-			for i = 1, #v.Locations, 1 do
-				local distance = GetDistanceBetweenCoords(playerCoords, v.Locations[i].x, v.Locations[i].y, v.Locations[i].z, true)
-				if distance <  1.5 then
-					letSleep = false
-
-					if distance < Config.Size.x then
-						isInMarker  = true
-						currentZone = k
-						lastZone    = k
-					end
-				end
-			end
-		end
-		if isInMarker and not hasAlreadyEnteredMarker then
-			hasAlreadyEnteredMarker = true
-			TriggerEvent('suku:hasEnteredMarker', currentZone)
-		end
-		if not isInMarker and hasAlreadyEnteredMarker then
-			hasAlreadyEnteredMarker = false
-			TriggerEvent('suku:hasExitedMarker', lastZone)
-		end
-		if letSleep then
-			Citizen.Wait(500)
-		end
-	end
+    while true do
+        Player = nil
+        Citizen.Wait(0)
+        local playerCoords = GetEntityCoords(PlayerPedId())
+        local isInMarker, letSleep, currentZone = false, false
+        for k,v in pairs(Config.Shops) do
+            for i = 1, #v.Locations, 1 do
+                local distance = GetDistanceBetweenCoords(playerCoords, v.Locations[i].x, v.Locations[i].y, v.Locations[i].z, true)
+                if distance <  1.5 then
+                    letSleep = false
+                    if distance < Config.Size.x then
+                        isInMarker  = true
+                        currentZone = k
+                        lastZone    = k
+                    end
+                end
+            end
+        end
+        if isInMarker and not hasAlreadyEnteredMarker then
+            hasAlreadyEnteredMarker = true
+            riggerEvent('suku:hasEnteredMarker', currentZone)
+        end
+        if not isInMarker and hasAlreadyEnteredMarker then
+            hasAlreadyEnteredMarker = false
+            TriggerEvent('suku:hasExitedMarker', lastZone)
+        end
+        if letSleep then
+            Citizen.Wait(500)
+        end
+    end
 end)
 
 AddEventHandler('suku:hasEnteredMarker', function(zone)
-	currentAction     = 'shop_menu'
-	currentActionMsg  = _U('shop_press_menu')
-	currentActionData = {zone = zone}
+    currentAction     = 'shop_menu'
+    currentActionMsg  = _U('shop_press_menu')
+    currentActionData = {zone = zone}
 end)
 
 AddEventHandler('suku:hasExitedMarker', function(zone)
-	SendNUIMessage({
-		display = false,
-		clear = true
-	})
-
-	currentAction = false
-
-	SetNuiFocus(false, false)
+    SendNUIMessage({
+        display = false,
+        clear = true
+    })
+    currentAction = false
+    SetNuiFocus(false, false)
 end)
 
 Citizen.CreateThread(function()
@@ -382,12 +377,12 @@ Citizen.CreateThread(function()
 end)
 
 function CreateBlip(coords, text, radius, color, sprite)
-	local blip = AddBlipForCoord(coords)
-	SetBlipSprite(blip, sprite)
-	SetBlipColour(blip, color)
-	SetBlipScale(blip, 0.8)
-	SetBlipAsShortRange(blip, true)
-	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString(text)
-	EndTextCommandSetBlipName(blip)
+    local blip = AddBlipForCoord(coords)
+    SetBlipSprite(blip, sprite)
+    SetBlipColour(blip, color)
+    SetBlipScale(blip, 0.8)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString(text)
+    EndTextCommandSetBlipName(blip)
 end
