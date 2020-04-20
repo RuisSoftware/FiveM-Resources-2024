@@ -17,5 +17,16 @@ Locales["nl"] = {
 	["money_added"] = "Toegevoegd:",
 	["money_removed"] = "Verwijderd:",
 	["weapon_added"] = "Toegevoegd:",
-	["weapon_removed"] = "Verwijderd:"
+	["weapon_removed"] = "Verwijderd:",
+	-- SHOP
+        ['shop_press_menu'] = 'dringen ~INPUT_CONTEXT~ om toegang te krijgen tot de ~y~winkel~s~.',
+        ['regular_shop_name'] = 'Mini markt',
+        ['robs_liquor_name'] = 'Slijterije',
+        ['you_tool_name'] = 'IJzerwinkel',
+        ['prison_shop_name'] = 'Gevangenis commissaris',
+        ['weapon_shop_name'] = 'AmmuNation',
+        ['license_shop_title'] = 'Registreer licentie?',
+        ['license_shop_help'] = 'dringen ~INPUT_CONTEXT~ om licentie te registreren',
+        ['license_shop_check'] = 'Je hebt al een licentie om wapens te dragen!',
+        ['license_check_fail'] = 'Je hebt een vergunning nodig om wapens te dragen!'
 }
