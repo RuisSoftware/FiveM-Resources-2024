@@ -130,7 +130,11 @@ RegisterNUICallback(
         end
 
         if type(data.number) == "number" and math.floor(data.number) == data.number then
-            TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+			if data.item.type == "item_money" then
+				TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
+			else
+				TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+			end
         end
 
         Wait(250)
