@@ -305,7 +305,7 @@ Citizen.CreateThread(function()
                 local distance = GetDistanceBetweenCoords(playerCoords, v.Locations[i].x, v.Locations[i].y, v.Locations[i].z, true)
                 if distance <  1.5 then
                     letSleep = false
-                    if distance < Config.Size.x then
+                    if distance < Config.MarkerSize.x then
                         isInMarker  = true
                         currentZone = k
                         lastZone    = k
@@ -315,7 +315,7 @@ Citizen.CreateThread(function()
         end
         if isInMarker and not hasAlreadyEnteredMarker then
             hasAlreadyEnteredMarker = true
-            riggerEvent('suku:hasEnteredMarker', currentZone)
+            TriggerEvent('suku:hasEnteredMarker', currentZone)
         end
         if not isInMarker and hasAlreadyEnteredMarker then
             hasAlreadyEnteredMarker = false
