@@ -97,7 +97,8 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 # THANK YOU
-https://github.com/ClicheUsername
+- https://github.com/ClicheUsername
+- https://github.com/FiveEYZ
 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
