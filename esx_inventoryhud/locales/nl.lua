@@ -17,5 +17,16 @@ Locales["nl"] = {
 	["money_added"] = "Toegevoegd:",
 	["money_removed"] = "Verwijderd:",
 	["weapon_added"] = "Toegevoegd:",
-	["weapon_removed"] = "Verwijderd:"
+	["weapon_removed"] = "Verwijderd:",
+	-- SHOP
+        ['shop_press_menu'] = 'Druk op ~INPUT_CONTEXT~ om toegang te krijgen tot de ~y~winkel~s~.',
+        ['regular_shop_name'] = 'Supermarkt',
+        ['robs_liquor_name'] = 'Slijterij',
+        ['you_tool_name'] = 'Bouwmarkt',
+        ['prison_shop_name'] = 'Gevangenis winkel',
+        ['weapon_shop_name'] = 'Wapenwinkel',
+        ['license_shop_title'] = 'Licentie winkel',
+        ['license_shop_help'] = 'Druk op ~INPUT_CONTEXT~ om de licentie winkel te openen',
+        ['license_shop_check'] = 'Je hebt al een licentie om wapens te dragen!',
+        ['license_check_fail'] = 'Je hebt een vergunning nodig om wapens te dragen!'
 }

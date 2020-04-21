@@ -15,6 +15,7 @@ We did not make any of these scripts. We do not take any credits.
 - [esx_addonaccount](https://github.com/ESX-Org/esx_addonaccount)
 - [esx_addoninventory](https://github.com/ESX-Org/esx_addoninventory)
 - [esx_datastore](https://github.com/ESX-Org/esx_datastore)
+- [esx_license](https://github.com/ESX-Org/esx_license/)
 - [B1G Notify](https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
 
 ## Installation

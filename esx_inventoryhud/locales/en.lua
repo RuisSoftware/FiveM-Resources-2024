@@ -17,5 +17,16 @@ Locales["en"] = {
 	["money_added"] = "Added:",
 	["money_removed"] = "Removed:",
 	["weapon_added"] = "Added:",
-	["weapon_removed"] = "Removed:"
+	["weapon_removed"] = "Removed:",
+	-- SHOP
+	['shop_press_menu'] = 'press ~INPUT_CONTEXT~ to access the ~y~store~s~.',
+    	['regular_shop_name'] = 'MiniMarket',
+    	['robs_liquor_name'] = 'Liquor store',
+    	['you_tool_name'] = 'Hardware store',
+   	['prison_shop_name'] = 'Prison Commissioner',
+	['weapon_shop_name'] = 'AmmuNation',
+	['license_shop_title'] = 'Register License?',
+	['license_shop_help'] = 'press ~INPUT_CONTEXT~ to register license',
+	['license_shop_check'] = 'You already have a license to carry weapons!',
+	['license_check_fail'] = 'You need a license to carry weapons!'
 }
