@@ -92,6 +92,10 @@ Currently, only Dutch is supported. If you want to translate it then feel free t
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
     
 
+## Screens
+Do you want another design? You can try the extra CSS file (ui(2).css) :)
+![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/ui(2).PNG)
+
 # Support
 - We can give you support in our [Dutch Discord Server](https://www.dutch-players.nl/go/discord/)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
