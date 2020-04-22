@@ -19,14 +19,14 @@ Locales["fr"] = {
 	["weapon_added"] = "Ajouté:",
 	["weapon_removed"] = "Retiré:",
 	-- Magasins
-	['shop_press_menu'] = 'Appuyez sur ~INPUT_CONTEXT~ pour accéder au ~y~Magasin~s~.',
-  ['regular_shop_name'] = 'Magasin',
-  ['robs_liquor_name'] = 'Magasin d\'Alcool',
-  ['you_tool_name'] = 'Quincaillerie',
-	['prison_shop_name'] = 'Magasin de Prison',
-	['weapon_shop_name'] = 'Ammunation',
-	['license_shop_title'] = 'Enregistrer une licence?',
-	['license_shop_help'] = 'appuyez sur ~INPUT_CONTEXT~ pour enregistrer une licence.',
-	['license_shop_check'] = 'Vous avez déjà une licence pour porter des armes!',
-	['license_check_fail'] = 'Vous avez besoin d\'une licence pour transporter des armes!'
+	["shop_press_menu"] = "Appuyez sur ~INPUT_CONTEXT~ pour accéder au ~y~Magasin~s~.",
+        ["regular_shop_name"] = "Magasin",
+        ["robs_liquor_name"] = "Magasin d'Alcool",
+        ["you_tool_name"] = "Quincaillerie",
+	["prison_shop_name"] = "Magasin de Prison",
+	["weapon_shop_name"] = "Ammunation",
+	["license_shop_title"] = "Enregistrer une licence?",
+	["license_shop_help"] = "appuyez sur ~INPUT_CONTEXT~ pour enregistrer une licence.",
+	["license_shop_check"] = "Vous avez déjà une licence pour porter des armes!",
+	["license_check_fail"] = "Vous avez besoin d\'une licence pour transporter des armes!"
 }
