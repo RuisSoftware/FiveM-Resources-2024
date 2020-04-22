@@ -20,9 +20,9 @@ Locales["fr"] = {
 	["weapon_removed"] = "Retiré:",
 	-- Magasins
 	["shop_press_menu"] = "Appuyez sur ~INPUT_CONTEXT~ pour accéder au ~y~Magasin~s~.",
-        ["regular_shop_name"] = "Magasin",
-        ["robs_liquor_name"] = "Magasin d'Alcool",
-        ["you_tool_name"] = "Quincaillerie",
+      ["regular_shop_name"] = "Magasin",
+      ["robs_liquor_name"] = "Magasin d'Alcool",
+      ["you_tool_name"] = "Quincaillerie",
 	["prison_shop_name"] = "Magasin de Prison",
 	["weapon_shop_name"] = "Ammunation",
 	["license_shop_title"] = "Enregistrer une licence?",
