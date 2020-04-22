@@ -85,7 +85,7 @@ Replace `label = Items[name]` to `label = items[name]`
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
 
 ## Language support
-Currently, only Dutch is supported. If you want to translate it then feel free to pull a request!
+Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
 
 ## Screens
 ![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
