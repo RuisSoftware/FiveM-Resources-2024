@@ -7,11 +7,13 @@ description 'Inventory HUD for ESX 1.2'
 version '2.3.1'
 
 server_scripts {
+  "@async/async.lua",
   '@mysql-async/lib/MySQL.lua',
   "@es_extended/locale.lua",
   "server/main.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/fr.lua",
   "config.lua"
 }
 
@@ -27,6 +29,7 @@ client_scripts {
   "client/player.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/fr.lua",
   "config.lua"
 }
 
@@ -43,11 +46,18 @@ files {
   -- JS LOCALES
   "html/locales/en.js",
   "html/locales/nl.js",
+  "html/locales/fr.js",
   -- IMAGES
   "html/img/*.png",
   "html/img/items/*.png",
 }
 
 dependencies {
-	'es_extended'
+  'es_extended',
+  'cron',
+  'esx_addonaccount',
+  'esx_addoninventory',
+  'esx_datastore',
+  'esx_license',
+  'B1G_NOTIFY'
 }
