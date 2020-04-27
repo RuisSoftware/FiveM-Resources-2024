@@ -1,5 +1,7 @@
 
 # Dutch Players Edit // esx-inventoryhud // UPDATING TO ESX 1.2
+This project is protected under the GNU GPL v3 license.
+
 Esx_inventoryhud 2.3 was taken offline a while ago and would not be updated anymore. ESX has now also been updated (version 1.2), but now esx_inventoryhud 2.3 has become unusable.
 
 We, Dutch Players, are still very much in favor of updating FiveM Artifacts and ESX. Both DISC inventoryhud and other UI oriented inventory systems have become unusable. Nevertheless, we would like a working UI for the inventory.
