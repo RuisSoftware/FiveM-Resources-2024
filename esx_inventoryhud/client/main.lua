@@ -130,7 +130,11 @@ RegisterNUICallback(
         end
 
         if type(data.number) == "number" and math.floor(data.number) == data.number then
-            TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+			if data.item.type == "item_money" then
+				TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
+			else
+				TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+			end
         end
 
         Wait(250)
@@ -161,7 +165,12 @@ RegisterNUICallback(
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
-            TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+			if data.item.type == "item_money" then
+				TriggerServerEvent("esx:giveInventoryItem", data.player, "item_account", "money", count)
+			else
+				TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+			end
+
             Wait(250)
             loadPlayerInventory()
         else
