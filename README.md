@@ -101,6 +101,7 @@ Do you want another design? You can try the extra CSS file (ui(2).css) :)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 # THANK YOU
+Original esx_inventoryhud resource made by Trsak
 - https://github.com/ClicheUsername
 - https://github.com/FiveEYZ
 
