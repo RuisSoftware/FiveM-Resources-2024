@@ -1,6 +1,5 @@
 
 # Dutch Players Edit // esx-inventoryhud // UPDATING TO ESX 1.2
-This project is protected under the GNU GPL v3 license.
 
 Esx_inventoryhud 2.3 was taken offline a while ago and would not be updated anymore. ESX has now also been updated (version 1.2), but now esx_inventoryhud 2.3 has become unusable.
 
