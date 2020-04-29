@@ -165,7 +165,12 @@ RegisterNUICallback(
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
-            TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+			if data.item.type == "item_money" then
+				TriggerServerEvent("esx:giveInventoryItem", data.player, "item_account", "money", count)
+			else
+				TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+			end
+
             Wait(250)
             loadPlayerInventory()
         else
