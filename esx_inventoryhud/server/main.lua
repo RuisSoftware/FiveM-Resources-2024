@@ -35,12 +35,14 @@ AddEventHandler(
 			local targetItem = targetXPlayer.getInventoryItem(itemName)
 
 			if itemCount > 0 and sourceItem.count >= itemCount then
-				if targetItem.limit ~= -1 and (targetItem.count + itemCount) > targetItem.limit then
-				else
+				if targetXPlayer.canCarryItem(itemName, itemCount) then
+
 					sourceXPlayer.removeInventoryItem(itemName, itemCount)
 					TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'true', text = _U('item_removed') .. itemName})
 					targetXPlayer.addInventoryItem(itemName, itemCount)
 					TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'true', text = _U('item_added') .. itemName})
+				else
+					
 				end
 			end
 		elseif type == "item_money" then
