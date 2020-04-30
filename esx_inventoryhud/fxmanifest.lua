@@ -25,6 +25,7 @@ client_scripts {
   "client/glovebox.lua",
   "client/beds.lua",
   "client/motels.lua",
+  "client/vault.lua",
   "client/property.lua",
   "client/player.lua",
   "locales/nl.lua",

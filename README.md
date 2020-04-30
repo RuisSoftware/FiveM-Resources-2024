@@ -18,6 +18,7 @@ We did not make any of these scripts. We do not take any credits.
 - [esx_datastore](https://github.com/ESX-Org/esx_datastore)
 - [esx_license](https://github.com/ESX-Org/esx_license/)
 - [B1G Notify](https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
+- [Monster Vault](https://github.com/MonsterTaerAttO/monster_vault)
 
 ## Installation
 You need to do a couple steps to get it working.
@@ -25,9 +26,10 @@ First you start adding the resources to your server.cfg.
 
 - Put all folders in your resources folder and start:
 ```
-start esx_inventoryhud
-start esx_inventoryhud_trunk
-start esx_inventoryhud_glovebox
+ensure monster_vault
+ensure esx_inventoryhud
+ensure esx_inventoryhud_trunk
+ensure esx_inventoryhud_glovebox
 ```
 
 - Add this at the top of your server.cfg:
@@ -41,6 +43,8 @@ set mysql_slow_query_warning 200
 Press F2 for your personal inventory.
 Press F3 inside a car for the glovebox inventory.
 Press F3 behind a car for the trunk inventory.
+Press E to open a shop (if in marker).
+Press E to open a vault (if in marker).
 
 ### Disable default esx inventory:
 
@@ -102,9 +106,10 @@ Do you want another design? You can try the extra CSS file (ui(2).css) :)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 # THANK YOU
-Original esx_inventoryhud resource made by Trsak
+- Original esx_inventoryhud resource made by Trsak
 - https://github.com/ClicheUsername
 - https://github.com/FiveEYZ
+- Vault Script By Monster TaerAttO
 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
