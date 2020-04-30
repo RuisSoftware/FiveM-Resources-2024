@@ -19,6 +19,8 @@ window.addEventListener("message", function (event) {
             $(".info-div").show();
         } else if (type === "vault") {
             $(".info-div").show();
+        } else if (type === "motel") {
+            $(".info-div").show();
         } else if (type === "shop") {
             $(".info-div").show();
         }
@@ -340,6 +342,12 @@ $('#playerInventory').droppable({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
+            } else if (type === "motel" && itemInventory === "second") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/TakeFromMotel", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
             } else if (type === "shop" && itemInventory === "second") {
                 disableInventory(500);
                 $.post("http://esx_inventoryhud/TakeFromShop", JSON.stringify({
@@ -376,6 +384,12 @@ $('#otherInventory').droppable({
 				} else if (type === "vault" && itemInventory === "main") {
                 disableInventory(500);
                 $.post("http://esx_inventoryhud/PutIntoVault", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+				} else if (type === "motel" && itemInventory === "main") {
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/PutIntoMotel", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
