@@ -148,7 +148,8 @@ AddEventHandler(
 
     if type == "item_standard" then
       local targetItem = xPlayer.getInventoryItem(item)
-      if targetItem.weight == -1 or ((targetItem.count + count) <= 50) then
+	if xPlayer.canCarryItem(item, count) then
+      --if targetItem.weight == -1 or ((targetItem.count + count) <= 50) then
         TriggerEvent(
           "esx_glovebox:getSharedDataStore",
           plate,
