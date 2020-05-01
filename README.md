@@ -16,10 +16,12 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Using items
 - Dropping items
 - Giving items
-- Cash included
 - Accounts support (bank, black money, ...)
 - Weapons support
-- esx_property support
+- Property support
+- Motels support
+- Trunk support
+- Glovebox support
 - Another players inventory support
 - Fully configurable (check config.lua and html/js/config.js)
 - Locale files included (check locales/ and html/locales/ directories)
