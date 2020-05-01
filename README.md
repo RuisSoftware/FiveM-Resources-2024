@@ -88,6 +88,7 @@ Replace `label = Items[name]` to `label = items[name]`
 
 ### Known bugs
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
+- Motels/Property inventory data is synchronizing between your owned properties.
 
 ## Language support
 Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
