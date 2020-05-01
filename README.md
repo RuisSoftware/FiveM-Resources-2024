@@ -10,15 +10,16 @@ Your help is much appreciated in a pull request!
 We did not make any of these scripts. We do not take any credits. Did we forget to mention you? Please let us know!
 
 ## Requirements
-- [es_extended](https://github.com/ESX-Org/es_extended)
-- [cron](https://github.com/ESX-Org/cron)
-- [esx_addonaccount](https://github.com/ESX-Org/esx_addonaccount)
-- [esx_addoninventory](https://github.com/ESX-Org/esx_addoninventory)
-- [esx_datastore](https://github.com/ESX-Org/esx_datastore)
-- [esx_license](https://github.com/ESX-Org/esx_license/)
-- [esx_property](https://github.com/ESX-Org/esx_property)
-- [B1G Notify](https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
-- [Monster Vault](https://github.com/MonsterTaerAttO/monster_vault)
+- [Essentialmode Extended](https://github.com/ESX-Org/es_extended)
+- [Cron](https://github.com/ESX-Org/cron)
+- [ESX Addon Account](https://github.com/ESX-Org/esx_addonaccount)
+- [ESX Addon Inventory](https://github.com/ESX-Org/esx_addoninventory)
+- [ESX Datastore](https://github.com/ESX-Org/esx_datastore)
+- [ESX Licenses](https://github.com/ESX-Org/esx_license/)
+- [B1G Notifications](https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
+- [ESX Properties](https://github.com/ESX-Org/esx_property)
+- [ESX Vaults](https://github.com/MonsterTaerAttO/monster_vault)
+- [ESX Motels](https://github.com/dutchplayers/lsrp-motels)
 
 ## Installation
 You need to do a couple steps to get it working.
