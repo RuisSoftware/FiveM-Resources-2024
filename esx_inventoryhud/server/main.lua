@@ -36,13 +36,14 @@ AddEventHandler(
 
 			if itemCount > 0 and sourceItem.count >= itemCount then
 				if targetXPlayer.canCarryItem(itemName, itemCount) then
-
+				--if targetItem.weight ~= -1 and (targetItem.count + itemCount) > targetItem.weight then
 					sourceXPlayer.removeInventoryItem(itemName, itemCount)
 					TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'true', text = _U('item_removed') .. itemName})
 					targetXPlayer.addInventoryItem(itemName, itemCount)
 					TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'true', text = _U('item_added') .. itemName})
 				else
-					
+					TriggerClientEvent('b1g_notify:client:Notify', targetXPlayer, { type = 'false', text = _U('player_inv_no_space') .. itemName})
+					TriggerClientEvent('b1g_notify:client:Notify', sourceXPlayer, { type = 'false', text = _U('player_inv_no_space') .. itemName})
 				end
 			end
 		elseif type == "item_money" then
@@ -106,7 +107,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 
 		itemInformation[itemResult[i].name].name = itemResult[i].name
 		itemInformation[itemResult[i].name].label = itemResult[i].label
-		--itemInformation[itemResult[i].name].limit = itemResult[i].limit
+		itemInformation[itemResult[i].name].weight = itemResult[i].weight
 		itemInformation[itemResult[i].name].rare = itemResult[i].rare
 		itemInformation[itemResult[i].name].can_remove = itemResult[i].can_remove
 		itemInformation[itemResult[i].name].price = itemResult[i].price
@@ -118,7 +119,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -134,7 +135,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -150,7 +151,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -166,7 +167,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -183,7 +184,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_weapon",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = 1,
+						weight = 1,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
@@ -200,7 +201,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_ammo",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = 1,
+						weight = 1,
 						weaponhash = v.weaponhash,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
@@ -217,7 +218,7 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -243,7 +244,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 
 		itemInformation[itemResult[i].name].name = itemResult[i].name
 		itemInformation[itemResult[i].name].label = itemResult[i].label
-		----itemInformation[itemResult[i].name].limit = itemResult[i].limit
+		itemInformation[itemResult[i].name].weight = itemResult[i].weight
 		itemInformation[itemResult[i].name].rare = itemResult[i].rare
 		itemInformation[itemResult[i].name].can_remove = itemResult[i].can_remove
 		itemInformation[itemResult[i].name].price = itemResult[i].price
@@ -255,7 +256,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -273,7 +274,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_weapon",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = 1,
+						weight = 1,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
@@ -290,7 +291,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_ammo",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = 1,
+						weight = 1,
 						weaponhash = v.weaponhash,
 						ammo = v.ammo,
 						rare = itemInformation[itemResult[i].name].rare,
@@ -307,7 +308,7 @@ ESX.RegisterServerCallback("suku:getCustomShopItems", function(source, cb, shopt
 						type = "item_standard",
 						name = itemInformation[itemResult[i].name].name,
 						label = itemInformation[itemResult[i].name].label,
-						--limit = itemInformation[itemResult[i].name].limit,
+						weight = itemInformation[itemResult[i].name].weight,
 						rare = itemInformation[itemResult[i].name].rare,
 						can_remove = itemInformation[itemResult[i].name].can_remove,
 						price = itemInformation[itemResult[i].name].price,
@@ -331,7 +332,7 @@ ESX.RegisterServerCallback('suku:buyLicense', function(source, cb)
 			cb(true)
 		end)
 	else
-		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'You dont have enough money.', length = 2500, style = { ['background-color'] = '#2f5c73', ['color'] = '#FFFFFF' } })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
 		cb(false)
 	end
 end)
@@ -344,7 +345,7 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
     if type == "item_standard" then
 		local targetItem = xPlayer.getInventoryItem(item)
 		if xPlayer.canCarryItem(item, count) then
-        --if targetItem.limit == -1 or ((targetItem.count + count) <= targetItem.limit) then
+        --if targetItem.weight == -1 or ((targetItem.count + count) <= targetItem.weight) then
             local list = itemShopList
             for i = 1, #list, 1 do
 				if list[i].name == item then
@@ -352,14 +353,14 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You purchased '..count.." "..list[i].label })
+					TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'true', text = 'You purchased '..count.." "..list[i].label})
 					else
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You do not have enough money!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
 					end
 				end
             end
         else
-            TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You do not have enough space in your inventory!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('insufficient_space')})
         end
 	end
 	
@@ -375,17 +376,17 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
 						if xPlayer.getMoney() >= totalPrice then
 							xPlayer.removeMoney(totalPrice)
 							xPlayer.addWeapon(list[i].name, list[i].ammo)
-							TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You purchased a '..list[i].label })
+					TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'true', text = 'You purchased '..count.." "..list[i].label})
 						else
-							TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You do not have enough money!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
 						end
 					else
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You already own this weapon!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('weapon_exist')})
 					end
 				end
             end
         else
-            TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You already own this weapon!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('weapon_exist')})
         end
 	end
 	
@@ -401,12 +402,12 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						TriggerClientEvent("suku:AddAmmoToWeapon", source, list[i].weaponhash, ammo)
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You purchased '..count.." "..list[i].label })
+					TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'true', text = 'You purchased '..count.." "..list[i].label})
 					else
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You do not have enough money!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
 					end
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You do not own the weapon for this ammo type!' })
+				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_weapon')})
 				end
             end
         end

@@ -40,7 +40,7 @@ function setPropertyMotelDataBed(data)
             name = "black_money",
             usable = false,
             rare = false,
-            limit = -1,
+            weight = -1,
             canRemove = false
         }
         table.insert(items, accountData)
@@ -53,7 +53,7 @@ function setPropertyMotelDataBed(data)
             item.type = "item_standard"
             item.usable = false
             item.rare = false
-            item.limit = -1
+            item.weight = -1
             item.canRemove = false
 
             table.insert(items, item)
@@ -69,7 +69,7 @@ function setPropertyMotelDataBed(data)
                 {
                     label = ESX.GetWeaponLabel(weapon.name),
                     count = weapon.ammo,
-                    limit = -1,
+                    weight = -1,
                     type = "item_weapon",
                     name = weapon.name,
                     usable = false,

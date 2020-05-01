@@ -37,7 +37,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
             name = "black_money",
             usable = false,
             rare = false,
-            limit = -1,
+            weight = -1,
             canRemove = false
         }
         table.insert(items, accountData)
@@ -65,7 +65,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
                 inventory[key].type = "item_standard"
                 inventory[key].usable = false
                 inventory[key].rare = false
-                inventory[key].limit = -1
+                inventory[key].weight = -1
                 inventory[key].canRemove = false
                 table.insert(items, inventory[key])
             end
@@ -81,7 +81,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
                     {
                         label = weapons[key].label,
                         count = weapons[key].ammo,
-                        limit = -1,
+                        weight = -1,
                         type = "item_weapon",
                         name = weapons[key].name,
                         usable = false,

@@ -7,7 +7,6 @@ description 'Inventory HUD for ESX 1.2'
 version '2.3.1'
 
 server_scripts {
-  "@async/async.lua",
   '@mysql-async/lib/MySQL.lua',
   "@es_extended/locale.lua",
   "server/main.lua",
@@ -54,11 +53,5 @@ files {
 }
 
 dependencies {
-  'es_extended',
-  'cron',
-  'esx_addonaccount',
-  'esx_addoninventory',
-  'esx_datastore',
-  'esx_license',
-  'B1G_NOTIFY'
+	'es_extended'
 }
