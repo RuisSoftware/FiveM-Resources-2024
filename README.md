@@ -16,6 +16,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - [esx_addoninventory](https://github.com/ESX-Org/esx_addoninventory)
 - [esx_datastore](https://github.com/ESX-Org/esx_datastore)
 - [esx_license](https://github.com/ESX-Org/esx_license/)
+- [esx_property](https://github.com/ESX-Org/esx_property)
 - [B1G Notify](https://forum.cfx.re/t/release-esx-b1g-notify-system-full-costumizable/)
 - [Monster Vault](https://github.com/MonsterTaerAttO/monster_vault)
 
