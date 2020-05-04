@@ -81,7 +81,7 @@ Config.Shops = {
             {name = 'vodka'},
             {name = 'tequila'},
             {name = 'whisky'},
-            {name = 'grand_cru'}
+            {name = 'energy'}
         }
 	},
 
@@ -90,21 +90,10 @@ Config.Shops = {
             {x = 2748.0, y = 3473.0, z = 55.68},
         },
         Items = {
-            {name = 'drill'},
-            {name = 'binocular'},
             {name = 'fixkit'},
-            {name = 'gps'},
-            {name = 'lockpick'},
-            {name = 'scubagear'},
-            {name = 'blowtorch'},
-            {name = '1gbag'},
-            {name = '5gbag'},
-            {name = '50gbag'},
-            {name = '100gbag'},
-            {name = 'lowgradefert'},
-            {name = 'highgradefert'},
-            {name = 'plantpot'},
-            {name = 'drugscales'}
+            {name = 'lokalizator'},
+            {name = 'licenseplate'},
+            {name = 'blowtorch'}
         }
     },
 
@@ -133,11 +122,29 @@ Config.Shops = {
             {name = "WEAPON_KNIFE", ammo = 1},
             {name = "WEAPON_BAT", ammo = 1},
             {name = "WEAPON_PISTOL", ammo = 45},
+            {name = "WEAPON_APPISTOL", ammo = 45},
+            {name = "WEAPON_SMG", ammo = 45},
+            {name = "WEAPON_ADVANCEDRIFLE", ammo = 45},
+            {name = "WEAPON_ASSAULTRIFLE", ammo = 45},
+            {name = "WEAPON_ASSAULTSHOTGUN", ammo = 25},
+            {name = "WEAPON_ASSAULTSMG", ammo = 45},
+            {name = "WEAPON_AUTOSHOTGUN", ammo = 45},
+            {name = "WEAPON_CARBINERIFLE", ammo = 25},
+            {name = "WEAPON_COMBATPISTOL", ammo = 45},
             {name = "WEAPON_PUMPSHOTGUN", ammo = 25}
         },
         Ammo = {
-            {name = "9mm_rounds", weaponhash = "WEAPON_PISTOL", ammo = 24},
-            {name = "shotgun_shells", weaponhash = "WEAPON_PUMPSHOTGUN", ammo = 12}
+            {name = "WEAPON_PISTOL_AMMO", weaponhash = "WEAPON_PISTOL", ammo = 24},
+            {name = "WEAPON_APPISTOL_AMMO", weaponhash = "WEAPON_APPISTOL", ammo = 24},
+            {name = "WEAPON_SMG_AMMO", weaponhash = "WEAPON_SMG", ammo = 24},
+            {name = "WEAPON_ADVANCEDRIFLE_AMMO", weaponhash = "WEAPON_ADVANCEDRIFLE", ammo = 24},
+            {name = "WEAPON_ASSAULTRIFLE_AMMO", weaponhash = "WEAPON_ASSAULTRIFLE", ammo = 24},
+            {name = "WEAPON_ASSAULTSHOTGUN_AMMO", weaponhash = "WEAPON_ASSAULTSHOTGUN", ammo = 12},
+            {name = "WEAPON_ASSAULTSMG_AMMO", weaponhash = "WEAPON_ASSAULTSMG", ammo = 24},
+            {name = "WEAPON_AUTOSHOTGUN_AMMO", weaponhash = "WEAPON_AUTOSHOTGUN", ammo = 12},
+            {name = "WEAPON_CARBINERIFLE_AMMO", weaponhash = "WEAPON_CARBINERIFLE", ammo = 24},
+            {name = "WEAPON_COMBATPISTOL_AMMO", weaponhash = "WEAPON_COMBATPISTOL", ammo = 24},
+            {name = "WEAPON_PUMPSHOTGUN_AMMO", weaponhash = "WEAPON_PUMPSHOTGUN", ammo = 12}
         },
         Items = {
 
