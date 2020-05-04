@@ -49,6 +49,8 @@ AddEventHandler("esx:setJob", function(job)
 	local PlayerData = ESX.GetPlayerData()
 	
 	if PlayerData == nil then
+		PlayerData = ESX.GetPlayerData()
+    		PlayerData.job = job
 		print ('Kofferbak kan beroep niet synchroniseren. Dit is niet erg.')  -- Cannot sync job, not bad
 	else
 		print ('Kofferbak heeft je beroep gesynchroniseerd.') -- Can sync job

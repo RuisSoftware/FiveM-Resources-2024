@@ -2,9 +2,9 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'Inventory HUD Glovebox for ESX 1.2'
+description 'Inventory HUD Glovebox for ESX'
 
-version '2.3.1'
+version '2.3.2'
 
 server_scripts {
   "@async/async.lua",

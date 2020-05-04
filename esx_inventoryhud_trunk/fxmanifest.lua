@@ -2,9 +2,9 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'Inventory HUD Trunk for ESX 1.2'
+description 'Inventory HUD Trunk for ESX'
 
-version '2.3.1'
+version '2.3.2'
 
 
 server_scripts {
@@ -13,6 +13,7 @@ server_scripts {
   "@es_extended/locale.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/fr.lua",
   "config.lua",
   "server/classes/c_trunk.lua",
   "server/trunk.lua",
@@ -23,6 +24,7 @@ client_scripts {
   "@es_extended/locale.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/fr.lua",
   "config.lua",
   "client/esx_trunk-cl.lua"
 }
