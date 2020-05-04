@@ -66,7 +66,7 @@ function setPlayerInventoryData()
                         count = money,
                         usable = false,
                         rare = false,
-                        limit = -1,
+                        weight = -1,
                         canRemove = true
                     }
 
@@ -86,7 +86,7 @@ function setPlayerInventoryData()
                                 name = accounts[key].name,
                                 usable = false,
                                 rare = false,
-                                limit = -1,
+                                weight = -1,
                                 canRemove = canDrop
                             }
                             table.insert(items, accountData)
@@ -117,7 +117,7 @@ function setPlayerInventoryData()
                             {
                                 label = weapons[key].label,
                                 count = ammo,
-                                limit = -1,
+                                weight = -1,
                                 type = "item_weapon",
                                 name = weapons[key].name,
                                 usable = false,

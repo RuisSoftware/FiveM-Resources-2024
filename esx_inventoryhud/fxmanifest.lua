@@ -2,9 +2,9 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'Inventory HUD for ESX 1.2'
+description 'Inventory HUD for ESX'
 
-version '2.3.1'
+version '2.3.2'
 
 server_scripts {
   '@mysql-async/lib/MySQL.lua',
@@ -12,6 +12,7 @@ server_scripts {
   "server/main.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/fr.lua",
   "config.lua"
 }
 
@@ -23,10 +24,12 @@ client_scripts {
   "client/glovebox.lua",
   "client/beds.lua",
   "client/motels.lua",
+  "client/vault.lua",
   "client/property.lua",
   "client/player.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/fr.lua",
   "config.lua"
 }
 
@@ -43,6 +46,7 @@ files {
   -- JS LOCALES
   "html/locales/en.js",
   "html/locales/nl.js",
+  "html/locales/fr.js",
   -- IMAGES
   "html/img/*.png",
   "html/img/items/*.png",

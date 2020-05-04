@@ -1,5 +1,3 @@
-
-
 isInInventory = false
 ESX = nil
 
@@ -165,7 +163,11 @@ RegisterNUICallback(
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
-            TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+            if data.item.type == "item_money" then
+				TriggerServerEvent("esx:giveInventoryItem", data.player, "item_account", "money", count)
+			else
+				TriggerServerEvent("esx:giveInventoryItem", data.player, data.item.type, data.item.name, count)
+			end
             Wait(250)
             loadPlayerInventory()
         else
@@ -214,7 +216,7 @@ function loadPlayerInventory()
                     count = money,
                     usable = false,
                     rare = false,
-                    limit = -1,
+                    weight = -1,
                     canRemove = true
                 }
 
@@ -234,7 +236,7 @@ function loadPlayerInventory()
                                 name = accounts[key].name,
                                 usable = false,
                                 rare = false,
-                                limit = -1,
+                                weight = -1,
                                 canRemove = canDrop
                             }
                             table.insert(items, accountData)
@@ -265,7 +267,7 @@ function loadPlayerInventory()
                             {
                                 label = weapons[key].label,
                                 count = ammo,
-                                limit = -1,
+                                weight = -1,
                                 type = "item_weapon",
                                 name = weapons[key].name,
                                 usable = false,

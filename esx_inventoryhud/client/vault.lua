@@ -1,28 +1,39 @@
-RegisterNetEvent("esx_inventoryhud:openPropertyInventory")
+RegisterNetEvent("monster_inventoryhud:openVaultInventory")
 AddEventHandler(
-    "esx_inventoryhud:openPropertyInventory",
+    "monster_inventoryhud:openVaultInventory",
     function(data)
-        setPropertyInventoryData(data)
-        openPropertyInventory()
+        setVaultInventoryData(data)
+        openVaultInventory()
     end
 )
 
-function refreshPropertyInventory()
+function refreshVaultInventory()
+    data = exports['monster_vault']:getMonsterVaultLicense()
     ESX.TriggerServerCallback(
-        "esx_property:getPropertyInventory",
+        "monster_vault:getVaultInventory",
         function(inventory)
-            setPropertyInventoryData(inventory)
+            setVaultInventoryData(inventory)
         end,
-        ESX.GetPlayerData().identifier
+        data, true
     )
 end
 
-function setPropertyInventoryData(data)
+local vaultType
+
+function setVaultInventoryData(inventory)
     items = {}
 
-    local blackMoney = data.blackMoney
-    local propertyItems = data.items
-    local propertyWeapons = data.weapons
+    SendNUIMessage(
+        {
+            action = "setInfoText",
+            text = inventory.job
+        }
+    )
+
+    local blackMoney = inventory.blackMoney
+    local vaultItems = inventory.items
+    local vaultWeapons = inventory.weapons
+    vaultType = inventory.job
 
     if blackMoney > 0 then
         accountData = {
@@ -38,8 +49,8 @@ function setPropertyInventoryData(data)
         table.insert(items, accountData)
     end
 
-    for i = 1, #propertyItems, 1 do
-        local item = propertyItems[i]
+    for i = 1, #vaultItems, 1 do
+        local item = vaultItems[i]
 
         if item.count > 0 then
             item.type = "item_standard"
@@ -52,15 +63,15 @@ function setPropertyInventoryData(data)
         end
     end
 
-    for i = 1, #propertyWeapons, 1 do
-        local weapon = propertyWeapons[i]
+    for i = 1, #vaultWeapons, 1 do
+        local weapon = vaultWeapons[i]
 
-        if propertyWeapons[i].name ~= "WEAPON_UNARMED" then
+        if vaultWeapons[i].name ~= "WEAPON_UNARMED" then
             table.insert(
                 items,
                 {
                     label = ESX.GetWeaponLabel(weapon.name),
-                    count = weapon.ammo,
+                    count = weapon.ammo or weapon.count,
                     weight = -1,
                     type = "item_weapon",
                     name = weapon.name,
@@ -80,14 +91,14 @@ function setPropertyInventoryData(data)
     )
 end
 
-function openPropertyInventory()
+function openVaultInventory()
     loadPlayerInventory()
     isInInventory = true
 
     SendNUIMessage(
         {
             action = "display",
-            type = "property"
+            type = "vault"
         }
     )
 
@@ -95,25 +106,33 @@ function openPropertyInventory()
 end
 
 RegisterNUICallback(
-    "PutIntoProperty",
+    "PutIntoVault",
     function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
 
         if type(data.number) == "number" and math.floor(data.number) == data.number then
-            local count = tonumber(data.number)
+            local count = 0
 
             if data.item.type == "item_weapon" then
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+				TriggerServerEvent("monster_vault:putItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
+            else
+                if data.number > data.item.count or data.number == 0 then
+                    count = tonumber(data.item.count)
+                else
+                    count = tonumber(data.number)
+                end
+				TriggerServerEvent("monster_vault:putItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
             end
 
-            TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+            
         end
 
-        Wait(150)
-        refreshPropertyInventory()
-        Wait(150)
+        Wait(250)
+        refreshVaultInventory()
+        Wait(250)
         loadPlayerInventory()
 
         cb("ok")
@@ -121,19 +140,25 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
-    "TakeFromProperty",
+    "TakeFromVault",
     function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
 
         if type(data.number) == "number" and math.floor(data.number) == data.number then
-            TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+            local count = 0
+            if data.number > data.item.count or data.number == 0 then
+                count = tonumber(data.item.count)
+            else
+                count = tonumber(data.number)
+            end
+            TriggerServerEvent("monster_vault:getItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
         end
 
-        Wait(150)
-        refreshPropertyInventory()
-        Wait(150)
+        Wait(250)
+        refreshVaultInventory()
+        Wait(250)
         loadPlayerInventory()
 
         cb("ok")
