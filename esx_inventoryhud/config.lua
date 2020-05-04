@@ -26,7 +26,6 @@ Config.MarkerColor = {r = 0, g = 128, b = 255}
 Config.Color = 2
 Config.WeaponColor = 1
 
-Config.WeaponLicense = {x = 12.47, y = -1105.5, z = 29.8}
 Config.LicensePrice = 5000
 
 Config.Shops = {

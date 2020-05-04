@@ -13,8 +13,6 @@ Keys = {
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
-local Licenses = {}
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -23,11 +21,11 @@ Citizen.CreateThread(function()
         if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
             if IsInRegularShopZone(coords) then
                 if currentAction then
-                     ESX.ShowHelpNotification(currentActionMsg)
-                     if IsControlJustReleased(0, Keys["E"]) then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
                         OpenShopInv("regular")
                         Citizen.Wait(2000)
-                     end
+                    end
                 end
             end
             if IsInRobsLiquorZone(coords) then
@@ -62,16 +60,16 @@ Citizen.CreateThread(function()
                     ESX.ShowHelpNotification(currentActionMsg)
                     if IsControlJustReleased(0, Keys["E"]) then
                         ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
-                        if hasWeaponLicense then
-                            OpenShopInv("weaponshop")
-                            Citizen.Wait(2000)
-                        else
-                            exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
-                        end
-                    end, GetPlayerServerId(PlayerId()), 'weapon')
-                 end
-              end
-           end
+                            if hasWeaponLicense then
+                                OpenShopInv("weaponshop")
+                                Citizen.Wait(2000)
+                            else
+                                exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+                            end
+                        end, GetPlayerServerId(PlayerId()), 'weapon')
+                    end
+                end
+            end
         end
     end
 end)
@@ -218,14 +216,13 @@ end
 
 Citizen.CreateThread(function()
     while true do
-		
         Citizen.Wait(0)
-		WeaponShop = Config.Shops.WeaponShop.Locations
+        LicenseShop = Config.Shops.LicenseShop.Locations
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
-		for i = 1, #WeaponShop, 1 do
-			if GetDistanceBetweenCoords(coords, WeaponShop[i].x, WeaponShop[i].y, WeaponShop[i].z, true) < 8.0 then
-				DrawMarker(25, WeaponShop[i].x, WeaponShop[i].y, WeaponShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+		for i = 1, #LicenseShop, 1 do
+			if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 8.0 then
+				DrawMarker(25, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
 					if currentAction then
 						ESX.ShowHelpNotification(_U('license_shop_help'))
 						if IsControlJustReleased(0, Keys["E"]) then
@@ -266,7 +263,6 @@ function OpenBuyLicenseMenu()
         menu.close()
     end)
 end
-
 
 Citizen.CreateThread(function()
     player = GetPlayerPed(-1)
