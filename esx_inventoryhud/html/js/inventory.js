@@ -3,6 +3,9 @@ var disabled = false;
 var disabledFunction = null;
 
 window.addEventListener("message", function (event) {
+    if (event.data.action == "setWeight") {
+        $("#weight").html(event.data.text);
+    }
     if (event.data.action == "display") {
         type = event.data.type
         disabled = false;

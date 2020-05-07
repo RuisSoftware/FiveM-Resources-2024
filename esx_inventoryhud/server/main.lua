@@ -14,7 +14,7 @@ ESX.RegisterServerCallback(
 		local targetXPlayer = ESX.GetPlayerFromId(target)
 
 		if targetXPlayer ~= nil then
-			cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout})
+			cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout, weight = targetXPlayer.getWeight(), maxWeight = targetXPlayer.maxWeight})
 		else
 			cb(nil)
 		end
