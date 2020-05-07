@@ -8,6 +8,7 @@ Locales["nl"] = {
 	["no_permissions"] = "Je hebt geen permissies om dit te doen!",
 	["no_player"] = "Kan speler niet vinden!",
 	["player_inventory"] = "Bewoner inventaris",
+	["player_inventory_weight"] = "Voorraadgewicht",
 	["nacho_veh"] = "Dit is niet jouw voertuig",
 	["player_inv_no_space"] = "Geen inventaris ruimte",
 	["insufficient_space"] = "Geen inventaris ruimte",

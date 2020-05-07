@@ -8,6 +8,7 @@ Locales["en"] = {
 	["no_permissions"] = "You don't have permissions to do that!",
 	["no_player"] = "Cannot find player!",
 	["player_inventory"] = "Player inventory",
+	["player_inventory_weight"] = "Inventory weight",
 	["nacho_veh"] = "This is not your vehicle.",
 	["player_inv_no_space"] = "No inventory space.",
 	["insufficient_space"] = "No inventory space.",
