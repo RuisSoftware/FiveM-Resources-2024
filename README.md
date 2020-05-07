@@ -51,6 +51,7 @@ Do you want another design? You can try the extra CSS file (ui(2).css or ui(3).c
 - https://github.com/ClicheUsername
 - https://github.com/FiveEYZ
 - Vault Script By Monster TaerAttO
+- https://github.com/FiveEYZ
 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
