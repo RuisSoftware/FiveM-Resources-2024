@@ -14,6 +14,7 @@ server_scripts {
   "locales/nl.lua",
   "locales/en.lua",
   "locales/fr.lua",
+  "locales/tr.lua",
   "config.lua",
   "server/classes/c_trunk.lua",
   "server/trunk.lua",
@@ -25,6 +26,7 @@ client_scripts {
   "locales/nl.lua",
   "locales/en.lua",
   "locales/fr.lua",
+  "locales/tr.lua",
   "config.lua",
   "client/esx_trunk-cl.lua"
 }
