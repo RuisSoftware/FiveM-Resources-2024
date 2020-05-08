@@ -12,6 +12,7 @@ server_scripts {
   "@es_extended/locale.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/tr.lua",
   "config.lua",
   "server/classes/c_glovebox.lua",
   "server/glovebox.lua",
@@ -22,6 +23,7 @@ client_scripts {
   "@es_extended/locale.lua",
   "locales/nl.lua",
   "locales/en.lua",
+  "locales/tr.lua",
   "config.lua",
   "client/esx_glovebox-cl.lua"
 }
