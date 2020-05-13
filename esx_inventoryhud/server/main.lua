@@ -401,7 +401,7 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
 					local ammo = count * list[i].ammo
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
-						TriggerClientEvent("suku:AddAmmoToWeapon", source, list[i].weaponhash, ammo)
+						xPlayer.addWeaponAmmo(list[i].weaponhash, ammo)
 					TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'true', text = 'You purchased '..count.." "..list[i].label})
 					else
 				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
