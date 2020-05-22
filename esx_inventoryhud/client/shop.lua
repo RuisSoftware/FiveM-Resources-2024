@@ -159,11 +159,6 @@ RegisterNUICallback("TakeFromShop", function(data, cb)
     cb("ok")
 end)
 
-RegisterNetEvent("suku:AddAmmoToWeapon")
-AddEventHandler("suku:AddAmmoToWeapon", function(hash, amount)
-    AddAmmoToPed(GetPlayerPed(-1), hash, amount)
-end)
-
 function IsInRegularShopZone(coords)
     RegularShop = Config.Shops.RegularShop.Locations
     for i = 1, #RegularShop, 1 do
