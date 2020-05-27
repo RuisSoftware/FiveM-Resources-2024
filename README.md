@@ -9,7 +9,7 @@ Your help is much appreciated in a pull request!
 
 We did not make any of these scripts. We do not take any credits. Did we forget to mention you? Then let us know!
     
-> Read other support files to make esx_inventoryhud work with esx_policejob and esx_propery!
+> Read other support files to make esx_inventoryhud work with esx_policejob and esx_property!
 
 ## Features
 - Drag and drop
@@ -43,7 +43,7 @@ Do you want another design? You can try the extra CSS file (ui(2).css or ui(3).c
 ![3](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/ui(3).PNG)
 
 # Support
-- We can give you support in our [Dutch Discord Server](https://www.dutch-players.nl/go/discord/)
+- We can give you support in our [International Discord Server](https://www.dutch-players.nl/go/discord/)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 # THANK YOU
