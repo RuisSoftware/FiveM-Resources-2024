@@ -41,6 +41,7 @@ Currently, only Dutch, English and French is supported. If you want to translate
 Do you want another design? You can try the extra CSS file (ui(2).css or ui(3).css) :)
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/ui(2).PNG)
 ![3](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/ui(3).PNG)
+![5](https://imgshare.io/images/2020/05/28/20200527133815_1.jpg)
 
 # Support
 - We can give you support in our [International Discord Server](https://www.dutch-players.nl/go/discord/)
