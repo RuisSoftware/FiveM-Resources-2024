@@ -1,7 +1,7 @@
 
 # Dutch Players Edit // esx-inventoryhud // UPDATING TO ESX 1.2
 
-F*CK the haters! Do you know hackers? Report them! This is an hack example site: https://www.unknowncheats.me/forum/fivem/391116-esx_inventoryhud-dupe-glitch.html?s=3ac5ee43926853ddd96530c241809eb0
+Report hackers and hackwebsites please.
 
 We have edited the original esx_inventoryhud resource from Trsak.
 
