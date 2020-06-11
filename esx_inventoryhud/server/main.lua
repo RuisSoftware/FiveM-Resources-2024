@@ -413,3 +413,22 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
         end
     end
 end)
+
+--Event that disables target inventory opening while being searched
+RegisterServerEvent('esx_inventoryhud:disableTargetInv')
+AddEventHandler('esx_inventoryhud:disableTargetInv', function(target)
+	local _source = source
+	local _target = target
+	TriggerClientEvent("esx_inventoryhud:disableOpen", _target)
+	--TriggerClientEvent("esx_inventoryhud:disableOpenShop", _target)
+	TriggerClientEvent("esx_invnetoryhud:setOpenedPlayerId", _source, _target)
+end)
+
+--Event that enables target inventory after being searched
+RegisterServerEvent('esx_inventoryhud:enableTargetInv')
+AddEventHandler('esx_inventoryhud:enableTargetInv', function(target)
+	print('enabling open inv')
+	print(target)
+	TriggerClientEvent('esx_inventoryhud:enableOpen', target)
+	--TriggerClientEvent('esx_inventoryhud:enableOpenShop', target)
+end)
