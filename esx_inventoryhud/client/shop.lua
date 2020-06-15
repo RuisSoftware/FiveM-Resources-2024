@@ -1,5 +1,6 @@
 local shopData = nil
 local currentAction, currentActionMsg, currentActionData = nil, nil, {}
+local canOpenShopInventory = true
 
 Keys = {
 	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
@@ -89,6 +90,14 @@ function OpenShopInv(shoptype)
     TriggerEvent("esx_inventoryhud:openShopInventory", data, inventory)
 end
 
+AddEventHandler('esx_inventoryhud:disableOpen', function()
+    closeInventory()
+    canOpenShopInventory = false
+end)
+AddEventHandler("esx_inventoryhud:enableOpen", function()
+    canOpenShopInventory = true
+end)
+
 RegisterNetEvent("suku:OpenCustomShopInventory")
 AddEventHandler("suku:OpenCustomShopInventory", function(type, shopinventory)
     text = "shop"
@@ -132,16 +141,18 @@ function setShopInventoryData(data, inventory)
 end
 
 function openShopInventory()
-    loadPlayerInventory()
-    isInInventory = true
+    if canOpenShopInventory then
+        loadPlayerInventory()
+        isInInventory = true
 
-    SendNUIMessage(
-        {
-            action = "display",
-            type = "shop"
-        }
-    )
-    SetNuiFocus(true, true)
+        SendNUIMessage(
+            {
+                action = "display",
+                type = "shop"
+            }
+        )
+        SetNuiFocus(true, true)
+    end
 end
 
 RegisterNUICallback("TakeFromShop", function(data, cb)

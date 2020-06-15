@@ -1,4 +1,13 @@
 local trunkData = nil
+local canOpenTrunkInventory = true
+
+AddEventHandler('esx_inventoryhud:disableOpen', function()
+    closeInventory()
+    canOpenTrunkInventory = false
+end)
+AddEventHandler("esx_inventoryhud:enableOpen", function()
+    canOpenTrunkInventory = true
+end)
 
 RegisterNetEvent("esx_inventoryhud:openTrunkInventory")
 AddEventHandler(
@@ -102,17 +111,19 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 end
 
 function openTrunkInventory()
-    loadPlayerInventory()
-    isInInventory = true
+    if canOpenTrunkInventory then -- adds a check if trunk inventory can be opened
+        loadPlayerInventory()
+        isInInventory = true
 
-    SendNUIMessage(
-        {
-            action = "display",
-            type = "trunk"
-        }
-    )
+        SendNUIMessage(
+            {
+                action = "display",
+                type = "trunk"
+            }
+        )
 
-    SetNuiFocus(true, true)
+        SetNuiFocus(true, true)
+    end
 end
 
 RegisterNUICallback(

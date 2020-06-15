@@ -1,5 +1,7 @@
 isInInventory = false
 ESX = nil
+local canOpenInventory = true
+local targetInventory = nil
 
 Citizen.CreateThread(
     function()
@@ -27,16 +29,43 @@ Citizen.CreateThread(
 )
 
 function openInventory()
-    loadPlayerInventory()
-    isInInventory = true
-    SendNUIMessage(
-        {
-            action = "display",
-            type = "normal"
-        }
-    )
-    SetNuiFocus(true, true)
+    ESX.UI.Menu.CloseAll()-- this also closes any esx menus to prevent from society inventory duping
+    if canOpenInventory then -- checks if inventory is being searched (can be opened)
+        loadPlayerInventory()
+        isInInventory = true
+        SendNUIMessage(
+            {
+                action = "display",
+                type = "normal"
+            }
+        )
+        SetNuiFocus(true, true)
+    else
+        -- add any notification that lets person know that he can't open inventory
+        exports['b1g_notify']:Notify('false', 'Inventory is disabled')
+    end
 end
+
+-- sets the id of target
+RegisterNetEvent("esx_invnetoryhud:setOpenedPlayerId")
+AddEventHandler("esx_invnetoryhud:setOpenedPlayerId", function(target)
+    --print(target)
+    targetInventory = target
+end)
+
+-- disables inventory opening if someone is searching the source
+RegisterNetEvent("esx_inventoryhud:disableOpen")
+AddEventHandler('esx_inventoryhud:disableOpen', function()
+    ESX.UI.Menu.CloseAll() -- this also closes any esx menus to prevent duping using society inventory
+    closeInventory()
+    canOpenInventory = false
+end)
+
+-- enables opening after search is finished
+RegisterNetEvent("esx_inventoryhud:enableOpen")
+AddEventHandler("esx_inventoryhud:enableOpen", function()
+    canOpenInventory = true
+end)
 
 RegisterNetEvent("esx_inventoryhud:doClose")
 AddEventHandler("esx_inventoryhud:doClose", function()
@@ -48,6 +77,11 @@ RegisterCommand('closeinv', function(source, args, raw)
 end)
 
 function closeInventory()
+    if targetInventory ~= nil then -- checks if search inventory was open and target's inventory needs to be enabled
+        print(targetInventory)
+        TriggerServerEvent("esx_inventoryhud:enableTargetInv", targetInventory)
+        targetInventory = nil
+    end
     isInInventory = false
     SendNUIMessage(
         {
@@ -301,13 +335,20 @@ end
 Citizen.CreateThread(
     function()
         while true do
-            Citizen.Wait(1)
+            Citizen.Wait(1000)
             if isInInventory then
                 local playerPed = PlayerPedId()
-			DisableAllControlActions(0)
-			EnableControlAction(0, 47, true)
-			EnableControlAction(0, 245, true)
-			EnableControlAction(0, 38, true)
+                DisableAllControlActions(0)
+                EnableControlAction(0, 47, true)
+                EnableControlAction(0, 245, true)
+                EnableControlAction(0, 38, true)
+            end
+            
+            if not canOpenInventory then -- if inventory is being searched (can not be opened) - disable open control
+                local playerPed = PlayerPedId()
+                DisableControlAction(0, Config.OpenControl, true)
+            else
+                Citizen.Wait(2000)
             end
         end
     end
