@@ -3,6 +3,7 @@
 
 Report hackers and hackwebsites please.
 
+The latest MySQL plugin is breaking this resource! Only use: https://github.com/dutchplayers/fivem-mysql-async
 We have edited the original esx_inventoryhud resource from Trsak.
 
 This inventory only works with the latest version of ESX.
