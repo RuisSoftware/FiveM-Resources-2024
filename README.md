@@ -15,7 +15,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
     
 > Read other support files to make esx_inventoryhud work with esx_policejob and esx_property!
 
-## Features
+![features](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_features.png)
 - Drag and drop
 - Using items
 - Dropping items
@@ -30,7 +30,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Fully configurable (check config.lua and html/js/config.js)
 - Locale files included (check locales/ and html/locales/ directories)
 
-### Known bugs
+![bugs](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_bugs.png)
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
 - Motels/Property inventory data is synchronizing between your owned properties.
 
@@ -45,7 +45,7 @@ Currently, only Dutch, English and French is supported. If you want to translate
 ## Custom CSS
 Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
-# Support
+![support](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_support.png)
 - We can give you support in our [International Discord Server](https://www.dutch-players.nl/go/discord/)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
