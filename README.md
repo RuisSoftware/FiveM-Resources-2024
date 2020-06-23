@@ -34,28 +34,28 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
 - Motels/Property inventory data is synchronizing between your owned properties.
 
-## Language support
+![languages](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_languages.png)
 Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
 
-## Screens
+![screenshots](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_SCREENSHOTS.png)
 ![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
 [More designs](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
-## Custom CSS
+![css](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_custom.png)
 Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
 ![support](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_support.png)
 - We can give you support in our [International Discord Server](https://www.dutch-players.nl/go/discord/)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
-# THANK YOU
+![thanks](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_THANKS.png)
 - Original esx_inventoryhud resource made by Trsak
 - https://github.com/ClicheUsername
 - https://github.com/FiveEYZ
 - Vault Script By Monster TaerAttO
 
-# Original threads: 
+![original](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_original.png)
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
 
 https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
