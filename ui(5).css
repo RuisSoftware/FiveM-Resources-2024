@@ -1,22 +1,25 @@
 * {
     padding: 0;
-  margin: 0;
-  font-family: 'Signika', sans-serif;
-  text-transform: none;
-  color: white;
-  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+    margin: 0;
+    font-family: 'Signika', sans-serif;
+    text-transform: uppercase;
+    color: white;
+    text-shadow:
+        -0.5px -0.5px 0 #000,
+        0.5px -0.5px 0 #000,
+        -0.5px 0.5px 0 #000,
+        0.5px 0.5px 0 #000;
 }
 
 .ui {
-     position: relative;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.25);
-  z-index: 0;
-  overflow: hidden;
-  display: none;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.35);
+    display: none;
+    z-index: 0;
 }
 
 .inventory {
@@ -26,20 +29,15 @@
     transform: translate(-50%, -50%);
     width: 1550px;
     height: 600px;
-    box-shadow: 1px 1px 57px rgba(0, 0, 0, 0.4);
-  background-color: rgba(0, 0, 0, 0.10) !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  border: none;
-  outline: none;
-  font-size: 13px;
-
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
+    background-color: rgba(41, 163, 41, 0.1);
 }
 
 #playerInventory {
     width: 625px;
     height: 600px;
     float: left;
-    overflow-y: scroll;
+    overflow-y: scroll
 }
 
 #controls {
@@ -47,8 +45,7 @@
     height: 600px;
     float: left;
     position: relative;
-	opacity:0.9;
-    background-color: rgba(0, 0, 0, 0.50);
+    background-color: rgba(41, 163, 41, 0.1);
     left: 0;
     top: 0;
 }
@@ -77,18 +74,16 @@ input[type=number] {
 }
 
 .slot {
-float: left;
-    background-color: rgba(255, 255, 255, 0.20);
-  position: relative;
-  border: 1px solid #666666;
-  transition: filter ease-in 0.15s;
-  overflow: hidden;
-  color: #ffffff;
-
+    float: left;
+    width: 117px;
+    height: 117px;
+    background-color: rgba(41, 163, 41, 0.6);
+    margin: 2px;
+    position: relative;
 }
 
 .slot:hover {
-    filter: brightness(0.6);
+    opacity: 0.8;
 }
 
 .item,
@@ -98,23 +93,19 @@ float: left;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-	
 }
 
 .item-name {
     position: absolute;
     bottom: 0;
     text-align: center;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 117px;
     min-height: 20px;
     z-index: 500;
     font-size: 12px;
-	opacity: 0.9;
-	background-color: rgba(105, 10, 10, 0.83);
-	border-top: 1px solid #171616;
-	color: #ffffff;
+    background-color: rgba(41, 163, 41, 0.8);
 }
 
 .ui-draggable-dragging .item-name,
@@ -123,13 +114,12 @@ float: left;
 }
 
 .item-count {
-  position: absolute;
-  top: 0;
-  text-align: right;
-  right: 5px;
-  height: 20px;
-  z-index: 500;
-}
+    position: absolute;
+    top: 0;
+    text-align: right;
+    width: 114px;
+    height: 20px;
+    z-index: 500;
 }
 
 .ammoIcon {
@@ -140,7 +130,7 @@ float: left;
 .info-div {
     text-align: center;
     padding: 5px;
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(41, 163, 41, 0.6);
     width: 80%;
     position: absolute;
     left: 50%;
@@ -158,23 +148,19 @@ float: left;
 .control {
     width: 150px;
     height: 40px;
-    background-color: rgba(255, 0, 0, 0.5);
+    background-color: rgba(41, 163, 41, 0.6);
     margin: 10px;
     text-align: center;
     vertical-align: middle;
     line-height: 40px;
-	border-radius: 20px;
-	  max-width: 165px;
-  display: inline-block;
-  transition: background-color ease-in 0.15s;
 }
 
 .control.disabled {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(41, 163, 41, 0.1);
 }
 
 .hoverControl {
-    background-color: rgba(255, 0,0, 0.38);
+    background-color: rgb(10, 2, 10);
 }
 
 .item-name-bg {
@@ -194,13 +180,13 @@ float: left;
 #playerInventory::-webkit-scrollbar,
 #otherInventory::-webkit-scrollbar {
     width: 10px;
-    background-color: #a41b1b;
+    background-color: rgba(41, 163, 41, 0.2);
 }
 
 #playerInventory::-webkit-scrollbar-thumb,
 #otherInventory::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.38);
-  border: 2px solid rgba(255, 255, 255, 0.38);
+    background-color: rgba(41, 163, 41, 1);
+    border: 2px solid rgba(41, 163, 41, 1);
 }
 
 .nearbyPlayerButton {
@@ -209,8 +195,8 @@ float: left;
     display: block;
     text-decoration: none;
     padding: 2px;
-    color: rgba(204, 204, 255, 0.5);
-    background-color: rgba(255, 204, 204, 0.8);
+    color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(63, 57, 83, 0.226);
     text-shadow: none;
     font-size: 14px !important;
     outline: none;
@@ -221,7 +207,7 @@ float: left;
 }
 
 .nearbyPlayerButton:hover {
-    background-color: #FFCCFF;
+    background-color: rgba(34, 29, 46, 0.8);
 }
 
 #noSecondInventoryMessage {
@@ -229,7 +215,6 @@ float: left;
     height: 580px;
     line-height: 580px;
     text-align: center;
-	
 }
 
 @media (max-width: 1500px) {
