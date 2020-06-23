@@ -21,7 +21,7 @@ Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(0)
-            if IsControlJustReleased(0, 200) then
+            if IsControlJustReleased(0, Config.OpenControl) then
 			if isInInventory then
                 closeInventory()
 				end
