@@ -54,7 +54,6 @@ Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX
 - https://github.com/ClicheUsername
 - https://github.com/FiveEYZ
 - Vault Script By Monster TaerAttO
-- https://github.com/FiveEYZ
 
 # Original threads: 
 https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
