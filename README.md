@@ -56,8 +56,7 @@ Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX
 - Vault Script By Monster TaerAttO
 
 ![original](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_original.png)
-https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
-
-https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
-
-https://forum.fivem.net/t/addon-esx-inventory-hud-vehicle-trunk/458152
+We have used these resources.
+- https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
+- https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
+- https://forum.fivem.net/t/addon-esx-inventory-hud-vehicle-trunk/458152
