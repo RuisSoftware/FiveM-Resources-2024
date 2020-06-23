@@ -40,6 +40,7 @@ Currently, only Dutch, English and French is supported. If you want to translate
 ## Screens
 ![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
+[More designs](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
 ## Custom CSS
 Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
