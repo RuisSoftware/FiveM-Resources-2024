@@ -129,6 +129,7 @@ RegisterNUICallback(
 
         if type(data.number) == "number" and math.floor(data.number) == data.number then
             TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+            openPropertyInventory() --Apparently switches INSTANTLY to your own property inventory when you try to drop/take items from an other one's. You can't duplicate anymore.
         end
 
         Wait(150)
