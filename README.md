@@ -46,7 +46,7 @@ Currently, only Dutch, English and French is supported. If you want to translate
 Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
 ![support](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_support.png)
-- We can give you support in our [International Discord Server](https://www.dutch-players.nl/go/discord/)
+- We can give you support in our [International Discord Server](https://www.dutch-players.nl/joindiscord)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 ![thanks](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_THANKS.png)
