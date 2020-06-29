@@ -1,5 +1,5 @@
 
-# Dutch Players Edit // esx_inventoryhud // WORKING ON ESX 1.2
+# Dutch Players Edit // esx_inventoryhud // WORKING WITH ESX 1.2
 ![welcome](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_welcome-1024x64.png)
 Report hackers and hackwebsites please.
 
