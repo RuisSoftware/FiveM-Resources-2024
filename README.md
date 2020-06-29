@@ -11,7 +11,7 @@ This inventory only works with the latest version of ESX.
 
 Your help is much appreciated in a pull request!
 
-We did not make any of these scripts. We do not take any credits. Did we forget to mention you? Then let us know!
+We did not make any of these scripts. We do not take any credits. Did we forget to mention you in the credits? Then let us know in our Discord server or create an issue!
     
 > Read other support files to make esx_inventoryhud work with esx_policejob and esx_property!
 
