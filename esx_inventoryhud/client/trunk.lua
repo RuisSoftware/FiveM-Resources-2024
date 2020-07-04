@@ -126,13 +126,7 @@ function openTrunkInventory()
     end
 end
 
-RegisterNUICallback(
-    "PutIntoTrunk",
-    function(data, cb)
-        if IsPedSittingInAnyVehicle(playerPed) then
-            return
-        end
-
+RegisterNUICallback("PutIntoTrunk",function(data, cb)
         if type(data.number) == "number" and math.floor(data.number) == data.number then
             local count = tonumber(data.number)
 
@@ -143,27 +137,19 @@ RegisterNUICallback(
             TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
         end
 
-        Wait(250)
+        Wait(0)
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+    end)
 
-RegisterNUICallback(
-    "TakeFromTrunk",
-    function(data, cb)
-        if IsPedSittingInAnyVehicle(playerPed) then
-            return
-        end
-
+RegisterNUICallback("TakeFromTrunk",function(data, cb)
         if type(data.number) == "number" and math.floor(data.number) == data.number then
             TriggerServerEvent("esx_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
         end
 
-        Wait(250)
+        Wait(0)
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+    end)
