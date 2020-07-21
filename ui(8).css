@@ -1,0 +1,495 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    src: url('roboto.ttf');
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white;
+      text-shadow:
+        -0.5px -0.5px 0 #000,
+        0.5px -0.5px 0 #000,
+        -0.5px 0.5px 0 #000,
+        0.5px 0.5px 0 #000;
+}
+
+
+@font-face {
+  font-family: 'Roboto', sans-serif;
+	src: url('roboto.ttf');
+}
+
+@font-face {
+    font-family: 'Circular';
+    src: url("../fonts/Circular-Bold.woff2") format("woff2"), url("../fonts/Circular-Bold.woff") format("woff"), url("fonts/Circular-Book.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; 
+}
+
+
+.ui {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 0;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.3), rgba(48, 48, 48, 0.349));
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.inventory {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1450px;
+    height: 600px;
+    border-radius: 10px;
+}
+
+#playerInventory {
+    width: 550px;
+    height: 600px;
+    float: left;
+    overflow-y: scroll;
+}
+
+#controls {
+    width: 250px;
+    height: 600px;
+    float: left;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgba(73, 73, 73, 0.2);
+    border-radius: 10px;
+    left: 0;
+    top: 0;
+  }
+
+#controls svg,
+#controls svg rect
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    border-radius: 10px;
+}
+
+#controls svg rect{
+    border-radius: 10px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke: rgba(240, 130, 76,0.4);
+    stroke-width: 4;
+    transition: 1.5s;
+    stroke-dasharray: 1800;
+    stroke-dashoffset: 1800;
+}
+
+#controls:hover svg rect{
+    stroke-dashoffset: 0;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+#controls:hover{
+    background: rgba(240, 130, 76,0.4);
+    transition-delay: 0.9s;
+    border-radius: 10px;
+}
+ 
+
+#otherInventory {
+    width: 625px;
+    height: 600px;
+    float: left;
+    overflow-y: scroll
+}
+
+#count {
+    border: none;
+    outline: none;
+    font-size: 18px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.slot {
+    float: left;
+    width: 120px;
+    height: 100px;
+    background-color: rgba(167, 167, 167, 0.2);
+    margin-left: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    margin-bottom:45px;
+}
+
+.slot:hover {
+    background-color: rgba(240, 130, 76,0.4); 
+    opacity: 1.5;
+}
+
+.item,
+.item-other {
+    width: 117px;
+    height: 117px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.item-name {
+	width: 120px;
+	position: absolute;
+    bottom: -25px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 15px;
+    z-index: 500;
+    font-size: 9px;
+    font-family: 'Roboto', sans-serif;
+    src: url('roboto.ttf');
+    text-transform: uppercase;
+    font-weight: bold;
+	  background-color: rgba(240, 130, 76,0.4); 
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.ui-draggable-dragging .item-name,
+.ui-draggable-dragging .item-count {
+    display: none;
+}
+
+.item-count {
+    position: absolute;
+    top: 0;
+    text-align: right;
+    width: 114px;
+    height: 20px;
+    z-index: 500;
+    font-weight: normal;
+}
+
+.ammoIcon {
+    width: 10px;
+    height: 10px;
+}
+
+.info-div {
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    width: 80%;
+    position: absolute;
+    left: 10%;
+    top: 5%;
+	text-transform: none;
+}
+
+.controls-div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.control {
+    width: 150px;
+    height: 40px;
+    background-color: rgba(22, 22, 22, 0.6);
+    margin: 10px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius:10px;
+    line-height: 40px;
+}
+
+.control.disabled {
+    background-color: rgba(161, 161, 161, 0.1);
+}
+.controlhidden {
+    display: none;
+}
+
+.hoverControl {
+    background-color: rgba(240, 130, 76,0.4);
+}
+
+.item-name-bg {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+}
+
+#playerInventory::-webkit-scrollbar-track,
+#otherInventory::-webkit-scrollbar-track {
+    background-color: none;
+    border: none;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+    direction:ltr;
+}
+
+#playerInventory::-webkit-scrollbar,
+#otherInventory::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    direction:ltr;
+}
+
+#playerInventory::-webkit-scrollbar-thumb,
+#otherInventory::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 1);
+    border-radius: 25px;
+    direction:ltr;
+}
+
+::-webkit-resizer,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner { display: none; 
+    direction:ltr;
+}
+
+.nearbyPlayerButton {
+    width: 100%;
+    margin-top: 5px;
+    display: block;
+    text-decoration: none;
+    padding: 2px;
+    color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(63, 57, 83, 0.226);
+    text-shadow: none;
+    font-size: 14px !important;
+    outline: none;
+    text-transform: none;
+    text-align: center;
+    line-height: 30px;
+    border: none;
+}
+
+.nearbyPlayerButton:hover {
+    background-color: rgba(34, 29, 46, 0.8);
+}
+
+#noSecondInventoryMessage {
+    width: 615px;
+    height: 580px;
+    line-height: 580px;
+    text-align: center;
+}
+
+@media (max-width: 1500px) {
+    .inventory {
+        width: 1300px;
+    }
+
+    #playerInventory {
+        width: 550px;
+    }
+
+    #controls {
+        width: 200px;
+    }
+
+    #otherInventory {
+        width: 550px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 540px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .inventory {
+        width: 1000px;
+    }
+
+    #playerInventory {
+        width: 425px;
+    }
+
+    #controls {
+        width: 150px;
+    }
+
+    #otherInventory {
+        width: 425px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 420px;
+    }
+}
+
+.textomenu {
+  bottom: 430px;
+	left:42.2%;
+	text-align: left;
+	width:290px;
+  height: 100px;
+	text-transform: none;
+  position: absolute;
+	font-size: 12px;
+}
+
+mark.text{
+  font-family: 'Roboto', sans-serif;
+src: url('roboto.ttf');
+  font-weight: bold;
+  text-transform: lowercase;
+  color: rgba(240, 130, 76);
+  background: rgb(100, 100, 100, 0.4);
+  border-radius: 2px;
+}
+
+  .logo{
+    width: 100px;
+    height: 100px;
+    bottom:60px;
+    left:633px;
+    text-align: left;
+    font-size: 12px;
+    position: absolute;
+    animation: beat 1.5s ease-in-out infinite both;
+}
+
+.logo2{
+    width: 100px;
+    height: 100px;
+    animation-name: jello-horizontal;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-play-state: paused;
+    animation-iteration-count: infinite;
+}
+
+
+.logo2:hover{
+    animation-play-state: running;
+  }
+  
+  /*// Animatie //*/
+  
+   /*// Keyframes //*/
+  
+  
+  @keyframes jello-horizontal {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+      }
+      30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+      }
+      40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+      }
+      50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+                transform: scale3d(1.15, 0.85, 1);
+      }
+      65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+      }
+      75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+      }
+    }
+    
+    
+@keyframes beat{
+  0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+  10% {
+      -webkit-transform: scale(.91);
+      transform: scale(.91);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+  }
+  17% {
+      -webkit-transform: scale(.98);
+      transform: scale(.98);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+  33% {
+      -webkit-transform: scale(.87);
+      transform: scale(.87);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+  }
+  45% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+  }
+  }
+  
+    @keyframes jello-horizontal {
+      0% {
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+      }
+      30% {
+        -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+      }
+      40% {
+        -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+      }
+      50% {
+        -webkit-transform: scale3d(1.15, 0.85, 1);
+                transform: scale3d(1.15, 0.85, 1);
+      }
+      65% {
+        -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+      }
+      75% {
+        -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+      }
+      100% {
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+      }
+    }
+  
