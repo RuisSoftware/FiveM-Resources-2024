@@ -24,6 +24,20 @@ AddEventHandler(
 )
 
 AddEventHandler("esx_inventoryhud:openPlayerInventory", function(target, playerName)
+        	PlayerData = ESX.GetPlayerData()	
+       if Config.JobOnlyInventory then
+           if PlayerData.job and PlayerData.job.name == 'police' or PlayerData.job.name == 'ambulance' then
+        targetPlayer = target
+        targetPlayerName = playerName
+        setPlayerInventoryData()
+        openPlayerInventory()
+        -- triggers server event that disables target inventory opening
+        TriggerServerEvent('esx_inventoryhud:disableTargetInv', target) 
+    	else	
+		ESX.ShowNotification('Negeras berniukas')	
+		-- add discord log if you would like to fag	
+	end
+            else 
         targetPlayer = target
         targetPlayerName = playerName
         setPlayerInventoryData()
