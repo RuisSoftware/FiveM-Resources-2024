@@ -1,4 +1,4 @@
-- FIRST MOST IMPORTANT STEP SINCE PEOPLE DON'T READ: Check you es_extended fxmanifest version.  only 1.2.0 is supported. So: 1.1.0 will NOT work!
+- FIRST MOST IMPORTANT STEP SINCE PEOPLE DON'T READ: Check your es_extended fxmanifest version.  only 1.2+ is supported. So: 1.1.0 will NOT work!
 # Dutch Players Edit // esx_inventoryhud // WORKING WITH ESX 1.2
 ![welcome](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_welcome-1024x64.png)
 Report hackers and hackwebsites please.
