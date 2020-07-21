@@ -1,6 +1,6 @@
 
-# Dutch Players Edit // esx-inventoryhud // UPDATING TO ESX 1.2
-
+# Dutch Players Edit // esx_inventoryhud // WORKING WITH ESX 1.2
+![welcome](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_welcome-1024x64.png)
 Report hackers and hackwebsites please.
 
 The latest MySQL plugin is breaking this resource! Only use: https://github.com/dutchplayers/fivem-mysql-async
@@ -11,11 +11,11 @@ This inventory only works with the latest version of ESX.
 
 Your help is much appreciated in a pull request!
 
-We did not make any of these scripts. We do not take any credits. Did we forget to mention you? Then let us know!
+We did not make any of these scripts. We do not take any credits. Did we forget to mention you in the credits? Then let us know in our Discord server or create an issue!
     
 > Read other support files to make esx_inventoryhud work with esx_policejob and esx_property!
 
-## Features
+![features](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_features.png)
 - Drag and drop
 - Using items
 - Dropping items
@@ -30,37 +30,33 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Fully configurable (check config.lua and html/js/config.js)
 - Locale files included (check locales/ and html/locales/ directories)
 
-### Known bugs
+![bugs](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_bugs.png)
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
 - Motels/Property inventory data is synchronizing between your owned properties.
 
-## Language support
+![languages](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_languages.png)
 Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
 
-## Screens
+![screenshots](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_SCREENSHOTS.png)
 ![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
 ![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
+[More designs](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
-## Custom CSS
-Do you want another design? You can try the extra CSS file (ui(2).css or ui(3).css) :)
-![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/ui(2).PNG)
-![3](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/ui(3).PNG)
-![5](https://imgshare.io/images/2020/05/28/20200527133815_1.jpg)
+![css](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_custom.png)
+Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
 
-# Support
-- We can give you support in our [International Discord Server](https://www.dutch-players.nl/go/discord/)
+![support](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_support.png)
+- We can give you support in our [International Discord Server](https://www.dutch-players.nl/joindiscord)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
-# THANK YOU
+![thanks](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_THANKS.png)
 - Original esx_inventoryhud resource made by Trsak
 - https://github.com/ClicheUsername
 - https://github.com/FiveEYZ
 - Vault Script By Monster TaerAttO
-- https://github.com/FiveEYZ
 
-# Original threads: 
-https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
-
-https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
-
-https://forum.fivem.net/t/addon-esx-inventory-hud-vehicle-trunk/458152
+![original](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_original.png)
+We have used these resources.
+- https://forum.fivem.net/t/esx-inventoryhud-glovebox/687328
+- https://forum.fivem.net/t/release-esx-inventory-hud-2-0/388318
+- https://forum.fivem.net/t/addon-esx-inventory-hud-vehicle-trunk/458152

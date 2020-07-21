@@ -4,7 +4,7 @@ game 'gta5'
 
 description 'Inventory HUD Trunk for ESX'
 
-version '2.3.2'
+version '2.4.0'
 
 
 server_scripts {

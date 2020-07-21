@@ -285,7 +285,7 @@ Citizen.CreateThread(function()
         CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), _U('you_tool_name'), 3.0, Config.Color, Config.YouToolBlipID)
     end
 
-    for k, v in pairs(Config.Shops.YouTool.Locations) do
+    for k, v in pairs(Config.Shops.PrisonShop.Locations) do
         CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), _U('prison_shop_name'), 3.0, Config.Color, Config.PrisonShopBlipID)
     end
 

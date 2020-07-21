@@ -21,6 +21,19 @@ Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(0)
+            if IsControlJustReleased(0, Config.CloseControl) then
+			if isInInventory then
+                closeInventory()
+				end
+            end
+        end
+    end
+)
+
+Citizen.CreateThread(
+    function()
+        while true do
+            Citizen.Wait(0)
             if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
                 openInventory()
             end

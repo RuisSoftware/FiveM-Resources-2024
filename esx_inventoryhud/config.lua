@@ -5,9 +5,10 @@ Config.IncludeWeapons = true -- TRUE or FALSE
 Config.IncludeAccounts = true -- TRUE or FALSE
 Config.ExcludeAccountsList = {"bank", "money"} --  DONT TOUCH!
 Config.OpenControl = 289 -- Key for opening inventory. Edit html/js/config.js to change key for closing it.
+Config.CloseControl = 200
 
 -- List of item names that will close ui when used
-Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit"}
+Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit"} -- Add your own items here!
 
 Config.ShopBlipID = 52
 Config.LiquorBlipID = 93
@@ -31,56 +32,36 @@ Config.LicensePrice = 5000
 Config.Shops = {
     RegularShop = {
         Locations = {
-			{x = 373.875,   y = 325.896,  z = 102.566},
-			{x = 2557.458,  y = 382.282,  z = 107.622},
-			{x = -3038.939, y = 585.954,  z = 6.908},
-			{x = -3241.927, y = 1001.462, z = 11.830},
-			{x = 547.431,   y = 2671.710, z = 41.156},
-			{x = 1961.464,  y = 3740.672, z = 31.343},
-			{x = 2678.916,  y = 3280.671, z = 54.241},
-            {x = 1729.216,  y = 6414.131, z = 34.037},
-            {x = -48.519,   y = -1757.514, z = 28.421},
-			{x = 1163.373,  y = -323.801,  z = 68.205},
-			{x = -707.501,  y = -914.260,  z = 18.215},
-			{x = -1820.523, y = 792.518,   z = 137.118},
-            {x = 1698.388,  y = 4924.404,  z = 41.063},
-            {x = 25.723,   y = -1346.966, z = 28.497}, 
+		{x = 373.875,   y = 325.896,  z = 102.566},
+		{x = 2557.458,  y = 382.282,  z = 107.622},
+		{x = -3038.939, y = 585.954,  z = 6.908},
+		{x = -3241.927, y = 1001.462, z = 11.830},
+		{x = 547.431,   y = 2671.710, z = 41.156},
+		{x = 1961.464,  y = 3740.672, z = 31.343},
+		{x = 2678.916,  y = 3280.671, z = 54.241},
+		{x = 1729.216,  y = 6414.131, z = 34.037},
+		{x = -48.519,   y = -1757.514, z = 28.421},
+		{x = 1163.373,  y = -323.801,  z = 68.205},
+		{x = -707.501,  y = -914.260,  z = 18.215},
+		{x = -1820.523, y = 792.518,   z = 137.118},
+		{x = 1698.388,  y = 4924.404,  z = 41.063},
+		{x = 25.723,   y = -1346.966, z = 28.497}, 
 
         },
         Items = {
-            {name = 'bread'},
-            {name = 'water'},
-            {name = 'cigarette'},
-            {name = 'lighter'},
-            {name = 'rollingpaper'},
-            {name = 'phone'},
-            {name = 'sandwich'},
-            {name = 'hamburger'},
-            {name = 'cupcake'},
-            {name = 'chips'},
-            {name = 'pistachio'},
-            {name = 'chocolate'},
-            {name = 'cashew'},
-            {name = 'cocacola'},
-            {name = 'drpepper'},
-            {name = 'energy'},
-            {name = 'lemonade'},
-            {name = 'icetea'}
+            {name = 'bread'}, -- add more items here
+            {name = 'water'}
         }
     },
 
     RobsLiquor = {
-		Locations = {
-			{x = 1135.808,  y = -982.281,  z = 45.415},
+	Locations = {
+		{x = 1135.808,  y = -982.281,  z = 45.415},
 	
         },
         Items = {
-            {name = 'beer'},
-            {name = 'wine'},
-            {name = 'vodka'},
-            {name = 'tequila'},
-            {name = 'whisky'},
-            {name = 'energy'}
+            {name = 'beer'}, -- add more items here
+            {name = 'wine'}
         }
 	},
 
@@ -89,9 +70,7 @@ Config.Shops = {
             {x = 2748.0, y = 3473.0, z = 55.68},
         },
         Items = {
-            {name = 'fixkit'},
-            {name = 'lokalizator'},
-            {name = 'licenseplate'},
+            {name = 'fixkit'}, -- add more items here
             {name = 'blowtorch'}
         }
     },
@@ -101,12 +80,8 @@ Config.Shops = {
             {x = 1728.41, y = 2584.31, z = 45.84},
         },
         Items = {
-            {name = 'bread'},
-            {name = 'water'},
-            {name = 'cigarette'},
-            {name = 'lighter'},
-            {name = 'sandwich'},
-            {name = 'chips'}
+            {name = 'bread'}, -- add more items here
+            {name = 'water'}
         }
     },
 
