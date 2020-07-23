@@ -184,7 +184,7 @@ Citizen.CreateThread(
     while true do
       Wait(0)
       local pos = GetEntityCoords(GetPlayerPed(-1))
-      if CloseToVehicle then
+      if CloseToVehicle and IsPedInAnyVehicle(GetPlayerPed(-1), false) then
         local vehicle = GetClosestVehicle(pos["x"], pos["y"], pos["z"], 4.0, 0, 70)
         if DoesEntityExist(vehicle) then
           CloseToVehicle = true
