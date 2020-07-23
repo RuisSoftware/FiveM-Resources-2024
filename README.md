@@ -29,6 +29,8 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Another players inventory support
 - Fully configurable (check config.lua and html/js/config.js)
 - Locale files included (check locales/ and html/locales/ directories)
+- Set Ace permission groups to allow who can use the open inventory command (example bellow)
+add_ace group.admin inventory.openinventory allow
 
 ![bugs](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_bugs.png)
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
