@@ -1,9 +1,9 @@
 Config = {}
 Config.Locale = 'nl'
-Config.IncludeCash = true -- DONT TOUCH!
+Config.IncludeCash = false -- DONT TOUCH!
 Config.IncludeWeapons = true -- TRUE or FALSE
 Config.IncludeAccounts = true -- TRUE or FALSE
-Config.ExcludeAccountsList = {"bank", "money"} --  DONT TOUCH!
+Config.ExcludeAccountsList = {"bank"} --  DONT TOUCH!
 Config.OpenControl = 289 -- Key for opening inventory. Edit html/js/config.js to change key for closing it.
 Config.CloseControl = 200
 Config.JobOnlyInventory = true -- True means that if your police or ambulance you can search players, false means anyone can search players
@@ -128,6 +128,50 @@ Config.Shops = {
     LicenseShop = {
         Locations = {
             { x = 12.47, y = -1105.5, z = 29.8}
+        }
+    },
+
+    WeaponShopNachtclub = {
+        Locations = {
+            { x = -1518.48, y = 113.1, z = 49.05 }
+      
+        },
+        Weapons = {
+            {name = "WEAPON_FLASHLIGHT", ammo = 1},
+            {name = "WEAPON_STUNGUN", ammo = 1},
+            {name = "WEAPON_KNIFE", ammo = 1},
+            {name = "WEAPON_BAT", ammo = 1},
+            {name = "WEAPON_PISTOL", ammo = 45},
+            {name = "WEAPON_PUMPSHOTGUN", ammo = 25}
+        },
+        Ammo = {
+            {name = "WEAPON_PISTOL_AMMO", weaponhash = "WEAPON_PISTOL", ammo = 24},
+            {name = "WEAPON_PUMPSHOTGUN_AMMO", weaponhash = "WEAPON_PUMPSHOTGUN", ammo = 12}
+        },
+        Items = {
+
+        }
+    },
+
+    WeaponShopPolice = {
+        Locations = {
+           { x = 451.68, y = -980.02, z = 29.69 },
+      
+        },
+        Weapons = {
+            {name = "WEAPON_FLASHLIGHT", ammo = 1},
+            {name = "WEAPON_STUNGUN", ammo = 1},
+            {name = "WEAPON_KNIFE", ammo = 1},
+            {name = "WEAPON_BAT", ammo = 1},
+            {name = "WEAPON_PISTOL", ammo = 45},
+            {name = "WEAPON_PUMPSHOTGUN", ammo = 25}
+        },
+        Ammo = {
+            {name = "WEAPON_PISTOL_AMMO", weaponhash = "WEAPON_PISTOL", ammo = 24},
+            {name = "WEAPON_PUMPSHOTGUN_AMMO", weaponhash = "WEAPON_PUMPSHOTGUN", ammo = 12}
+        },
+        Items = {
+
         }
     }
 }

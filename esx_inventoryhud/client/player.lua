@@ -24,7 +24,7 @@ AddEventHandler(
 )
 
 AddEventHandler("esx_inventoryhud:openPlayerInventory", function(target, playerName)
-    PlayerData = ESX.GetPlayerData()	
+	    PlayerData = ESX.GetPlayerData()	
         if Config.JobOnlyInventory then
             if PlayerData.job and PlayerData.job.name == 'police' or PlayerData.job.name == 'ambulance' then
                 targetPlayer = target

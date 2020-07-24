@@ -1,6 +1,26 @@
 local shopData = nil
 local currentAction, currentActionMsg, currentActionData = nil, nil, {}
 local canOpenShopInventory = true
+ESX = nil
+
+Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+
+	while ESX.GetPlayerData().job == nil do
+		Citizen.Wait(10)
+	end
+
+	ESX.PlayerData = ESX.GetPlayerData()
+end)
+
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+    ESX.PlayerData.job = job
+
+end)
 
 Keys = {
 	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
@@ -19,7 +39,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
-        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) then
+        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInWeaponAmmoPoliceZone(coords) or IsInWeaponAmmoNachtclubZone(coords) then
             if IsInRegularShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -56,7 +76,9 @@ Citizen.CreateThread(function()
                     end
                 end
             end
-            if IsInWeaponShopZone(coords) then
+			
+			
+            if IsInWeaponShopZone(coords) then -- AMMUNITIE 
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
                     if IsControlJustReleased(0, Keys["E"]) then
@@ -71,6 +93,44 @@ Citizen.CreateThread(function()
                     end
                 end
             end
+			
+			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'police' or ESX.PlayerData.job.name == 'aivd' then
+				if IsInWeaponAmmoPoliceZone(coords) then
+					if currentAction then
+						ESX.ShowHelpNotification(currentActionMsg)
+						if IsControlJustReleased(0, Keys["E"]) then
+							--ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+								--if hasWeaponLicense then
+									OpenShopInv("weaponshopPolice")
+									Citizen.Wait(2000)
+								--else
+								--	exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+								--end
+							--end, GetPlayerServerId(PlayerId()), 'weapon')
+						end
+					end
+				end
+				
+            end -- EINDE VAN POLITIE SHOPS
+			
+			if ESX.PlayerData.job and ESX.PlayerData.job.name == 'nachtclub' and ESX.PlayerData.job.grade_name == 'boss' or ESX.PlayerData.job.name == 'bahamas' and ESX.PlayerData.job.grade_name == 'boss' then
+				if IsInWeaponAmmoNachtclubZone(coords) then
+					if currentAction then
+						ESX.ShowHelpNotification(currentActionMsg)
+						if IsControlJustReleased(0, Keys["E"]) then
+							--ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+								--if hasWeaponLicense then
+									OpenShopInv("weaponshopNachtclub")
+									Citizen.Wait(2000)
+								--else
+									--exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+								--end
+							--end, GetPlayerServerId(PlayerId()), 'weapon')
+						end
+					end
+				end
+				
+            end -- EINDE VAN NACHTCLUB SHOPS
         end
     end
 end)
@@ -220,6 +280,26 @@ function IsInWeaponShopZone(coords)
     return false
 end
 
+function IsInWeaponAmmoPoliceZone(coords)
+    WeaponShopPolice = Config.Shops.WeaponShopPolice.Locations
+    for i = 1, #WeaponShopPolice, 1 do
+        if GetDistanceBetweenCoords(coords, WeaponShopPolice[i].x, WeaponShopPolice[i].y, WeaponShopPolice[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
+function IsInWeaponAmmoNachtclubZone(coords)
+    WeaponShopNachtclub = Config.Shops.WeaponShopNachtclub.Locations
+    for i = 1, #WeaponShopNachtclub, 1 do
+        if GetDistanceBetweenCoords(coords, WeaponShopNachtclub[i].x, WeaponShopNachtclub[i].y, WeaponShopNachtclub[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -285,7 +365,7 @@ Citizen.CreateThread(function()
         CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), _U('you_tool_name'), 3.0, Config.Color, Config.YouToolBlipID)
     end
 
-    for k, v in pairs(Config.Shops.PrisonShop.Locations) do
+    for k, v in pairs(Config.Shops.YouTool.Locations) do
         CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), _U('prison_shop_name'), 3.0, Config.Color, Config.PrisonShopBlipID)
     end
 
@@ -377,6 +457,18 @@ Citizen.CreateThread(function()
         for k, v in pairs(Config.Shops.WeaponShop.Locations) do
             if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z + 0.01, true) < 12.0 then
                 DrawMarker(25, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+            end
+        end
+
+        for k, v in pairs(Config.Shops.WeaponShopNachtclub.Locations) do
+            if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShopNachtclub.Locations[k].x, Config.Shops.WeaponShopNachtclub.Locations[k].y, Config.Shops.WeaponShopNachtclub.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.WeaponShopNachtclub.Locations[k].x, Config.Shops.WeaponShopNachtclub.Locations[k].y, Config.Shops.WeaponShopNachtclub.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+            end
+        end
+
+        for k, v in pairs(Config.Shops.WeaponShopPolice.Locations) do
+            if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShopPolice.Locations[k].x, Config.Shops.WeaponShopPolice.Locations[k].y, Config.Shops.WeaponShopPolice.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.WeaponShopPolice.Locations[k].x, Config.Shops.WeaponShopPolice.Locations[k].y, Config.Shops.WeaponShopPolice.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
     end

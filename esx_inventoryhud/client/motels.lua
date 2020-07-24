@@ -28,6 +28,7 @@ function setPropertyMotelData(data)
             )
 
     local blackMoney = data.blackMoney
+	local money = data.money
     local propertyItems = data.items
     local propertyWeapons = data.weapons
 
@@ -45,6 +46,20 @@ function setPropertyMotelData(data)
         table.insert(items, accountData)
     end
 
+    if money > 0 then
+        accountData = {
+            label = _U("money"),
+            count = money,
+            type = "item_account",
+            name = "money",
+            usable = false,
+            rare = false,
+            weight = -1,
+            canRemove = false
+        }
+        table.insert(items, accountData)
+    end
+	
     for i = 1, #propertyItems, 1 do
         local item = propertyItems[i]
 

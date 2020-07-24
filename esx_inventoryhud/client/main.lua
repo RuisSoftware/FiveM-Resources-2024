@@ -21,10 +21,8 @@ Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(0)
-            if IsControlJustReleased(0, Config.CloseControl) then
-			if isInInventory then
-                closeInventory()
-				end
+            if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
+                openInventory()
             end
         end
     end
@@ -34,8 +32,10 @@ Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(0)
-            if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
-                openInventory()
+            if IsControlJustReleased(0, Config.CloseControl) then
+			if isInInventory then
+                closeInventory()
+				end
             end
         end
     end
@@ -80,16 +80,17 @@ AddEventHandler("esx_inventoryhud:enableOpen", function()
     canOpenInventory = true
 end)
 
-RegisterNetEvent("esx_inventoryhud:doClose")
+--[[RegisterNetEvent("esx_inventoryhud:doClose")
 AddEventHandler("esx_inventoryhud:doClose", function()
     closeInventory()
-end)
+end)--]]
 
 RegisterCommand('closeinv', function(source, args, raw)
     closeInventory()
 end)
 
 function closeInventory()
+
     if targetInventory ~= nil then -- checks if search inventory was open and target's inventory needs to be enabled
         print(targetInventory)
         TriggerServerEvent("esx_inventoryhud:enableTargetInv", targetInventory)
@@ -102,7 +103,13 @@ function closeInventory()
         }
     )
     SetNuiFocus(false, false)
+	TriggerEvent('esx_inventoryhud:closeInventory')
 end
+
+RegisterNetEvent('esx_inventoryhud:doClose')
+AddEventHandler('esx_inventoryhud:doClose', function(...) 
+	closeInventory(...); 
+ end)
 
 RegisterNUICallback(
     "NUIFocusOff",

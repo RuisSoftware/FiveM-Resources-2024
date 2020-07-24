@@ -31,6 +31,7 @@ function setVaultInventoryData(inventory)
     )
 
     local blackMoney = inventory.blackMoney
+    local money = inventory.money
     local vaultItems = inventory.items
     local vaultWeapons = inventory.weapons
     vaultType = inventory.job
@@ -41,6 +42,19 @@ function setVaultInventoryData(inventory)
             count = blackMoney,
             type = "item_account",
             name = "black_money",
+            usable = false,
+            rare = false,
+            weight = -1,
+            canRemove = false
+        }
+        table.insert(items, accountData)
+    end
+    if money > 0 then
+        accountData = {
+            label = _U("money"),
+            count = money,
+            type = "item_account",
+            name = "money",
             usable = false,
             rare = false,
             weight = -1,
