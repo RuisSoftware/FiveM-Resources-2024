@@ -22,7 +22,9 @@ window.addEventListener("message", function (event) {
             $(".info-div").show();
         } else if (type === "vault") {
             $(".info-div").show();
-        } else if (type === "motel") {
+        } else if (type === "motels") {
+            $(".info-div").show();
+        } else if (type === "motelsbed") {
             $(".info-div").show();
         } else if (type === "shop") {
             $(".info-div").show();
@@ -345,9 +347,15 @@ $('#playerInventory').droppable({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
-            } else if (type === "motel" && itemInventory === "second") {
+            } else if (type === "motels" && itemInventory === "second") {
                 disableInventory(500);
                 $.post("http://esx_inventoryhud/TakeFromMotel", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+           } else if (type === "motelsbed" && itemInventory === "second") {      // ADDED MOTELBED
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/TakeFromMotelBed", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
@@ -390,9 +398,15 @@ $('#otherInventory').droppable({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
-				} else if (type === "motel" && itemInventory === "main") {
+				} else if (type === "motels" && itemInventory === "main") {
                 disableInventory(500);
                 $.post("http://esx_inventoryhud/PutIntoMotel", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "motelsbed" && itemInventory === "main") { // ADDED PutIntoMotelBed
+                disableInventory(500);
+                $.post("http://esx_inventoryhud/PutIntoMotelBed", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
