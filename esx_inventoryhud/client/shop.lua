@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(0)
         player = GetPlayerPed(-1)
         coords = GetEntityCoords(player)
-        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInWeaponAmmoPoliceZone(coords) or IsInWeaponAmmoNachtclubZone(coords) then
+        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInWeaponAmmoPoliceZone(coords) or IsInWeaponAmmoNachtclubZone(coords) then
             if IsInRegularShopZone(coords) then
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -77,7 +77,6 @@ Citizen.CreateThread(function()
                 end
             end
 			
-			
             if IsInWeaponShopZone(coords) then -- AMMUNITIE 
                 if currentAction then
                     ESX.ShowHelpNotification(currentActionMsg)
@@ -90,6 +89,16 @@ Citizen.CreateThread(function()
                                 exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
                             end
                         end, GetPlayerServerId(PlayerId()), 'weapon')
+                    end
+                end
+            end
+			
+			if IsInBlackMarketZone(coords) then
+                if currentAction then
+                    ESX.ShowHelpNotification(currentActionMsg)
+                    if IsControlJustReleased(0, Keys["E"]) then
+                        OpenShopInv("blackmarket")
+                        Citizen.Wait(2000)
                     end
                 end
             end
@@ -280,6 +289,16 @@ function IsInWeaponShopZone(coords)
     return false
 end
 
+function IsInBlackMarketZone(coords)
+    BlackMarket = Config.Shops.BlackMarket.Locations
+    for i = 1, #BlackMarket, 1 do
+        if GetDistanceBetweenCoords(coords, BlackMarket[i].x, BlackMarket[i].y, BlackMarket[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
 function IsInWeaponAmmoPoliceZone(coords)
     WeaponShopPolice = Config.Shops.WeaponShopPolice.Locations
     for i = 1, #WeaponShopPolice, 1 do
@@ -372,6 +391,12 @@ Citizen.CreateThread(function()
     for k, v in pairs(Config.Shops.WeaponShop.Locations) do
         CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), _U('weapon_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
     end
+	
+	if Config.ShowBlackMarketBlip then
+		for k, v in pairs(Config.Shops.BlackMarket.Locations) do
+			CreateBlip(vector3(Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z), _U('blackmarket_shop_name'), 3.0, Config.BlackMarketColor, Config.BlackMarketBlipID)
+		end
+	end
 
     CreateBlip(vector3(-755.79, 5596.07, 41.67), "Cablecart", 3.0, 4, 36)
 end)
@@ -459,7 +484,13 @@ Citizen.CreateThread(function()
                 DrawMarker(25, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
             end
         end
-
+		
+		for k, v in pairs(Config.Shops.BlackMarket.Locations) do
+            if GetDistanceBetweenCoords(coords, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z + 0.01, true) < 12.0 then
+                DrawMarker(25, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
+            end
+        end
+		
         for k, v in pairs(Config.Shops.WeaponShopNachtclub.Locations) do
             if GetDistanceBetweenCoords(coords, Config.Shops.WeaponShopNachtclub.Locations[k].x, Config.Shops.WeaponShopNachtclub.Locations[k].y, Config.Shops.WeaponShopNachtclub.Locations[k].z + 0.01, true) < 12.0 then
                 DrawMarker(25, Config.Shops.WeaponShopNachtclub.Locations[k].x, Config.Shops.WeaponShopNachtclub.Locations[k].y, Config.Shops.WeaponShopNachtclub.Locations[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)

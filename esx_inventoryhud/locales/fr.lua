@@ -26,6 +26,7 @@ Locales["fr"] = {
 	["you_tool_name"] = "Quincaillerie",
 	["prison_shop_name"] = "Magasin de Prison",
 	["weapon_shop_name"] = "Ammunation",
+	['blackmarket_shop_name'] = 'BlackMarket',
 	["license_shop_title"] = "Enregistrer une licence?",
 	["license_shop_help"] = "appuyez sur ~INPUT_CONTEXT~ pour enregistrer une licence.",
 	["license_shop_check"] = "Vous avez déjà une licence pour porter des armes!",

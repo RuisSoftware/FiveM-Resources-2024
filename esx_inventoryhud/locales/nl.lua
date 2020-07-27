@@ -26,6 +26,7 @@ Locales["nl"] = {
         ['you_tool_name'] = 'Bouwmarkt',
         ['prison_shop_name'] = 'Gevangenis winkel',
         ['weapon_shop_name'] = 'Wapenwinkel',
+		['blackmarket_shop_name'] = 'BlackMarket',
         ['license_shop_title'] = 'Licentie winkel',
         ['license_shop_help'] = 'Druk op ~INPUT_CONTEXT~ om de licentie winkel te openen',
         ['license_shop_check'] = 'Je hebt al een licentie om wapens te dragen!',

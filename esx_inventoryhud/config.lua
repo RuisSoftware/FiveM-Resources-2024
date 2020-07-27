@@ -18,6 +18,10 @@ Config.PrisonShopBlipID = 52
 Config.WeedStoreBlipID = 140
 Config.WeaponShopBlipID = 110
 
+Config.ShowBlackMarketBlip = true -- True means the blackmarket will be marked on the map. False would hide it. 
+Config.BlackMarketBlipID = 110
+Config.BlackMarketColor = 1
+
 Config.ShopLength = 14
 Config.LiquorLength = 10
 Config.YouToolLength = 2
@@ -125,6 +129,26 @@ Config.Shops = {
 
         }
     },
+	
+	    BlackMarket = {
+        Locations = {
+            { x = -1297.96, y = -392.60, z = 35.47 },
+        
+        },
+        Weapons = {
+            {name = "WEAPON_ADVANCEDRIFLE", ammo = 45},
+            {name = "WEAPON_ASSAULTRIFLE", ammo = 45},
+        },
+        Ammo = {
+            {name = "WEAPON_ADVANCEDRIFLE_AMMO", weaponhash = "WEAPON_ADVANCEDRIFLE", ammo = 24},
+            {name = "WEAPON_ASSAULTRIFLE_AMMO", weaponhash = "WEAPON_ASSAULTRIFLE", ammo = 24},
+        },
+        Items = {
+		
+        }
+    },
+	
+
     LicenseShop = {
         Locations = {
             { x = 12.47, y = -1105.5, z = 29.8}
