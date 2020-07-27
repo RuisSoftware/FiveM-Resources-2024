@@ -22,6 +22,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Giving items
 - Accounts support (bank, black money, ...)
 - Weapons support
+- Cusotmizeable Blackmarket (you can disable the blip on the map in the esx_inventoryhud/config.lua)
 - Property support
 - Motels support
 - Trunk support
