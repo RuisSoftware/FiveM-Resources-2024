@@ -29,6 +29,7 @@ Locales["tr"] = {
     ['you_tool_name'] = 'Hırdavatçı',
    	['prison_shop_name'] = 'Hapishane Kantini',
 	['weapon_shop_name'] = 'Silahçı',
+	['blackmarket_shop_name'] = 'BlackMarket',
 	['license_shop_title'] = 'Silah Ruhsatı al?',
 	['license_shop_help'] = '~INPUT_CONTEXT~ ye basarak silah ruhsatı al',
 	['license_shop_check'] = 'Zaten silah taşıma ruhsatın var!',

@@ -227,6 +227,58 @@ ESX.RegisterServerCallback("suku:getShopItems", function(source, cb, shoptype)
 				end
 			end
 		end
+		
+		if shoptype == "blackmarket" then
+			local weapons = Config.Shops.BlackMarket.Weapons
+			for _, v in pairs(Config.Shops.BlackMarket.Weapons) do
+				if v.name == itemResult[i].name then
+					table.insert(itemShopList, {
+						type = "item_weapon",
+						name = itemInformation[itemResult[i].name].name,
+						label = itemInformation[itemResult[i].name].label,
+						weight = 1,
+						ammo = v.ammo,
+						rare = itemInformation[itemResult[i].name].rare,
+						can_remove = itemInformation[itemResult[i].name].can_remove,
+						price = itemInformation[itemResult[i].name].price,
+						count = 99999999
+					})
+				end
+			end
+
+			local ammo = Config.Shops.BlackMarket.Ammo
+			for _,v in pairs(Config.Shops.BlackMarket.Ammo) do
+				if v.name == itemResult[i].name then
+					table.insert(itemShopList, {
+						type = "item_ammo",
+						name = itemInformation[itemResult[i].name].name,
+						label = itemInformation[itemResult[i].name].label,
+						weight = 1,
+						weaponhash = v.weaponhash,
+						ammo = v.ammo,
+						rare = itemInformation[itemResult[i].name].rare,
+						can_remove = itemInformation[itemResult[i].name].can_remove,
+						price = itemInformation[itemResult[i].name].price,
+						count = 99999999
+					})
+				end
+			end
+
+			for _, v in pairs(Config.Shops.BlackMarket.Items) do
+				if v.name == itemResult[i].name then
+					table.insert(itemShopList, {
+						type = "item_standard",
+						name = itemInformation[itemResult[i].name].name,
+						label = itemInformation[itemResult[i].name].label,
+						weight = itemInformation[itemResult[i].name].weight,
+						rare = itemInformation[itemResult[i].name].rare,
+						can_remove = itemInformation[itemResult[i].name].can_remove,
+						price = itemInformation[itemResult[i].name].price,
+						count = 99999999
+					})
+				end
+			end
+		end
 	end
 	cb(itemShopList)
 end)

@@ -29,6 +29,7 @@ Locales["pt"] = {
     ['you_tool_name'] = 'IKEA',
    	['prison_shop_name'] = 'Loja da Prisão',
 	['weapon_shop_name'] = 'Loja de Armas',
+	['blackmarket_shop_name'] = 'BlackMarket',
 	['license_shop_title'] = 'Registar licença?',
 	['license_shop_help'] = 'pressiona ~INPUT_CONTEXT~ para registar a licença',
 	['license_shop_check'] = 'Já tens uma licença de porte de Armas!',
