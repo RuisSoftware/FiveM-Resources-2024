@@ -1,4 +1,4 @@
-- FIRST MOST IMPORTANT STEP SINCE PEOPLE DON'T READ: Check your es_extended fxmanifest version.  only 1.2+ is supported. So: 1.1.0 will NOT work!
+- For version ESX 1.1 you can try this old fork from Trsak Inventory HUD: https://github.com/dutchplayers/esx_inventoryhud-1
 - If you do not want to use LSRP-Motels then you can use this version too: https://github.com/dutchplayers/ESX-1.2-Inventory-HUD-older
 # Dutch Players Edit // esx_inventoryhud // WORKING WITH ESX 1.2
 ![welcome](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_welcome-1024x64.png)
