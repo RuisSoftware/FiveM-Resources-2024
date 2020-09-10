@@ -1,21 +1,14 @@
 RegisterNetEvent("monster_inventoryhud:openVaultInventory")
-AddEventHandler(
-    "monster_inventoryhud:openVaultInventory",
-    function(data)
-        setVaultInventoryData(data)
-        openVaultInventory()
-    end
-)
+AddEventHandler("monster_inventoryhud:openVaultInventory", function(data)
+	setVaultInventoryData(data)
+	openVaultInventory()
+end)
 
 function refreshVaultInventory()
     data = exports['monster_vault']:getMonsterVaultLicense()
-    ESX.TriggerServerCallback(
-        "monster_vault:getVaultInventory",
-        function(inventory)
-            setVaultInventoryData(inventory)
-        end,
-        data, true
-    )
+    ESX.TriggerServerCallback("monster_vault:getVaultInventory", function(inventory)
+        setVaultInventoryData(inventory)
+    end, data, true)
 end
 
 local vaultType
@@ -26,7 +19,7 @@ function setVaultInventoryData(inventory)
     SendNUIMessage(
         {
             action = "setInfoText",
-            text = inventory.job
+            text = inventory.job .. _U("vault")
         }
     )
 

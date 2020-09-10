@@ -50,22 +50,17 @@ RegisterNetEvent("esx:setJob")
 AddEventHandler("esx:setJob", function(job)
 	local PlayerData = ESX.GetPlayerData()
 	if PlayerData == nil then
-	    	PlayerData = ESX.GetPlayerData()
-    		PlayerData.job = job
-		print ('Handschoenenkastje kan beroep niet synchroniseren. Dit is niet erg.') -- Cannot sync job, not bad
+		--print ('Handschoenenkastje kan beroep niet synchroniseren. Dit is niet erg.') -- Cannot sync job, not bad
 	else
-		print ('Handschoenenkastje heeft je beroep gesynchroniseerd.') -- Can sync job
+		--print ('Handschoenenkastje heeft je beroep gesynchroniseerd.') -- Can sync job
 		PlayerData.job = job
 	end
 end)
 
 RegisterNetEvent("esx_glovebox_inventory:setOwnedVehicle")
-AddEventHandler(
-  "esx_glovebox_inventory:setOwnedVehicle",
-  function(vehicle)
-    vehiclePlate = vehicle
-  end
-)
+AddEventHandler("esx_glovebox_inventory:setOwnedVehicle", function(vehicle)
+	vehiclePlate = vehicle
+end)
 
 function getItemyWeight(item)
   local itemWeight = 1
@@ -135,19 +130,17 @@ function openmenuvehicle()
             end
         else
        
-            exports['b1g_notify']:Notify('false', _U("no_veh_nearby"))
+            exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby'))
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
       -- Not their vehicle
- 
-            exports['b1g_notify']:Notify('false', _U("nacho_veh"))
+        exports['mythic_notify']:SendAlert('success', _U('nacho_veh'))
     end
   end
 end
-local count = 0
 
 -- Key controls
 Citizen.CreateThread(
@@ -192,16 +185,12 @@ AddEventHandler(
   end
 )
 
-function OpenCoffresInventoryMenu(plate, max, myVeh)
-  ESX.TriggerServerCallback(
-    "esx_glovebox:getInventoryV",
-    function(inventory)
+function OpenCoffresInventoryMenu(plate, max, myVeh) 
+	ESX.TriggerServerCallback("esx_glovebox:getInventoryV", function(inventory)
       text = _U("glovebox_info", plate, (inventory.weight / 100), (max / 100))
       data = {plate = plate, max = max, myVeh = myVeh, text = text}
       TriggerEvent("esx_inventoryhud:openGloveboxInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
-    end,
-    plate
-  )
+    end, plate)
 end
 
 function all_trim(s)

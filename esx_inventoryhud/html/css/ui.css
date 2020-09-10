@@ -1,17 +1,63 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: 'Signika', sans-serif;
-    text-transform: uppercase;
-    color: white;
-    text-shadow:
+    font-family: 'Roboto', sans-serif;
+    src: url('roboto.ttf');
+      font-weight: bold;
+      text-transform: uppercase;
+      color: white;
+      text-shadow:
         -0.5px -0.5px 0 #000,
         0.5px -0.5px 0 #000,
         -0.5px 0.5px 0 #000,
         0.5px 0.5px 0 #000;
 }
+#statusHud {
+	width: 96%;
+	position: absolute;
+	bottom: 133%;
+    left: 0.9%;
+}
 
-.container {overflow:auto;}
+.bar {
+	width: calc(50.5% - 116.8px - 116.8px);
+	height: 25.5px;
+	float: left;
+	border: 1px solid rgba(255,255,255,0.1)!important; 
+	border-radius:10px;
+    /*background-color: rgba(235, 235, 235, 0.05);  0,02 */
+    background-color: rgba(0,0,0,0.35);
+	margin-right: 3px;
+    margin-left: 3px;
+    z-index: 130;
+}
+.bar:hover {
+    background-color: rgba(0,0,0,0.7);
+/*     transition: 0.4s; */
+    opacity: 1;
+}
+
+/*icon*/
+.barIcon {
+	width: calc(50.5% - 116.8px - 116.8px);
+	height: 15.5px;
+	padding-top: 5px;
+	position: absolute;
+	z-index: 131;
+    opacity: 0.8;
+}
+
+@font-face {
+  font-family: 'Roboto', sans-serif;
+	src: url('roboto.ttf');
+}
+
+@font-face {
+    font-family: 'Circular';
+    src: url("../fonts/Circular-Bold.woff2") format("woff2"), url("../fonts/Circular-Bold.woff") format("woff"), url("fonts/Circular-Book.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal; 
+}
 
 .ui {
     position: relative;
@@ -19,157 +65,234 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.55);
-	background-size: 200% 200%;
     display: none;
     z-index: 0;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.3), rgba(48, 48, 48, 0.349));
+    -webkit-backdrop-filter: blur(2px);
 }
 
 .inventory {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 20%;
+    top: 55%;
     transform: translate(-50%, -50%);
-    width: 1550px;
-    height: 500px;
-}
-#charName{
-	position:absolute;
-	top: 20%;
-	left: 37%;
-	text-align:center;
-}
-#playerInventory {
-    width: 625px;
-    height: 500px;
-    float: left;
-    overflow-y: auto;
-}
-#playerInventoryFastItems {
-    width: 370px;
-    height: 50px;
-	position : absolute;
-	bottom : -25%;
-	left:38%;
-	z-index: 100;
-	float:left;
-}
-#controls {
-    width: 300px;
-    height: 600px;
-    float: left;
-    position: relative;
-    left: 0;
-    top: 0;
+    width: 640px;
+    height: 400px;
 }
 
-#otherInventory {
-    width: 625px;
-    height: 500px;
+#playerInventory {
+    width: 640px;
+    height: 420px;
     float: left;
-    overflow-y: auto;
+    overflow-y: scroll;
+}
+#playerInventoryFastItems {
+    width: 640px;
+    height: 50px;
+    position : fixed;
+    bottom : 120%;
+    left: 0%;
+    z-index: 100;
+    float:left;
+}
+#playerInventoryHotbar {
+    width: 640px;
+    height: 50px;
+    position : fixed;
+    bottom : 8%;
+    left: 35%;
+    z-index: 100;
+    float:left;
+}
+#controls {
+    width: 250px;
+    height: 540px;
+    float: left;
+    position: absolute;
+    margin-left: 220px;
+    margin-right: 10px;
+    background-color: rgba(73, 73, 73, 0.2);
+    border-radius: 10px;
+    left: 80%;
+    bottom: -2%;
+}
+
+#varWeight {
+	width: calc(100.5% - 227.56px - 227.56px);
+}
+
+#varWeight > .barIcon {
+	width: 5%;
+}
+
+#varWeight > #boxSetWeight {
+	background-color: rgba(240, 130, 76,0.4); 
+	border-radius:10px;
+}
+
+#boxSetWeight {
+	width: 100%;
+    height: 25.5px;
+	position: relative;
+	bottom: 0;
+	z-index: 129;
+}
+
+#controls svg,
+#controls svg rect
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    border-radius: 10px;
+}
+
+#controls svg rect{
+    border-radius: 10px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke: rgba(240, 130, 76,0.4);
+    stroke-width: 4;
+    transition: 1.5s;
+    stroke-dasharray: 1800;
+    stroke-dashoffset: 1800;
+}
+
+#controls:hover svg rect{
+    stroke-dashoffset: 0;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+#controls:hover{
+    background: rgba(240, 130, 76,0.4);
+    transition-delay: 0.9s;
+    border-radius: 10px;
+}
+ 
+
+#otherInventory {
+    width: 640px;
+    height: 540px;
+    float: left;
+    overflow-y: scroll;
+    position: absolute;
+    top: 24%;
+    left:60%;
 }
 
 #count {
     border: none;
-	text-align: center;
-    font-size: 15px;
-	}
-.slotFast {
-    float: left;
-    width: 117px;
-    height: 117px;
-    background-color: rgba(50,50,50,0.2);
-    margin: 2px;
-    position: relative;
-	box-shadow: 0px -2.13vh 0px rgba(20,10,20,0.3) inset;
+    outline: none;
+    font-size: 18px;
 }
 
-.slotFast:hover {
-    background-color: rgba(170,170,170,0.6);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .slot {
-	position: relative;
-	float: left;
-	width: 117px;
-    height: 117px;
-	text-align: center;
-	border: 0.09vh solid rgba(80,80,80,0.5);
-	background-color: rgba(50,50,50,0.2);
-	transition: all 0.2s ease;
-	margin: 0.09vh;
-	box-shadow: 0px -2.13vh 0px rgba(20,10,20,0.3) inset;
+    float: left;
+    width: 120px;
+    height: 100px;
+    background-color: rgba(167, 167, 167, 0.2);
+    margin-left: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    margin-bottom:45px;
 }
-
 
 .slot:hover {
-    background-color: rgba(170,170,170,0.6);
+    background-color: rgba(240, 130, 76,0.4); 
+    opacity: 1.5;
 }
-
+.slotFast {
+    float: left;
+    width: 120px;
+    height: 100px;
+    background-color: rgba(167, 167, 167, 0.2);
+    margin-left: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: relative;
+    margin-bottom:45px;
+}
+.slotFast:hover {
+    background: rgba(18, 18, 18, 0.05);
+    border-color: rgba(255,255,255,0.5);
+ /*   -moz-box-shadow:    inset 0 0 15px rgba(18, 18, 18, 0.05);
+    -webkit-box-shadow: inset 0 0 15px rgba(18, 18, 18, 0.05);*/
+    box-shadow:         inset 0 0 15px rgba(18, 18, 18, 0.05);
+}
 .item,
 .item-other {
-    width: 80px;
-    height: 80px;
-    background-size: contain;
-    background-position:  center center;
-    margin-top: 20px;
-    margin-left: 15px;
-	background-repeat: no-repeat;
-}
-.item-name-bg {
-    width: 100%;
     width: 117px;
-    height: 20px;
-    position: absolute;
-    bottom: 0;
+    height: 117px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
+
 .item-name {
-	text-align: center;
-	width: 10.2vh;
-	font-size: 0.93vh;
+	width: 120px;
 	position: absolute;
-	margin-left: -13px;
-	bottom: 0.56vh;
-	color: white;
-	text-shadow: -0.09vh -0.09vh 0 #000, 0.09vh -0.09vh 0 #000, -0.09vh 0.09vh 0 #000, 0.09vh 0.09vh 0 #000;
+    bottom: -25px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 15px;
+    z-index: 500;
+    font-size: 9px;
+    font-family: 'Roboto', sans-serif;
+    src: url('roboto.ttf');
+    text-transform: uppercase;
+    font-weight: bold;
+	  background-color: rgba(240, 130, 76,0.4); 
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
+
+
 .ui-draggable-dragging .item-name,
 .ui-draggable-dragging .item-count {
     display: none;
 }
-.keybind {
+
+.item-count {
     position: absolute;
     top: 0;
-	left:0;
-    width: 20px;
+    text-align: right;
+    width: 114px;
     height: 20px;
     z-index: 500;
-	color:rgb(2, 2, 3);
-	background-color: rgba(255, 255, 255, 0.8);
-	text-align: center;
+    font-weight: normal;
 }
-.ui-draggable-dragging .keybind {
-    display: none;
-}
-.item-count {
-	position: absolute;
-	top: 0.28vh;
-	right: 0.46vh;
-	color: white;
-	font-size: 1.11vh;
-	text-align: center;
-	text-shadow: -0.09vh -0.09vh 0 #000, 0.09vh -0.09vh 0 #000, -0.09vh 0.09vh 0 #000, 0.09vh 0.09vh 0 #000;
+
+.ammoIcon {
+    width: 10px;
+    height: 10px;
+
 }
 
 .info-div {
-    text-align: left;
+    text-align: center;
     padding: 5px;
-    background-color: rgba(170,170,170,0.3);
+    background-color: rgba(0, 0, 0, 0);
     width: 80%;
     position: absolute;
-    left: 50%;
-    top: 15%;
-    transform: translate(-50%, -50%);
+    left: 10%;
+    top: 5%;
+	text-transform: none;
 }
 
 .controls-div {
@@ -180,56 +303,158 @@
 }
 
 .control {
-	flex-grow: 1;
-	align-items: center;
-	text-align: center;
-	margin-top: 0.6vh;
-	font-weight: 0;
-	width: 100%;
-	height: 10%;
-	opacity: 1;
-	line-height: 4.63vh;
-	font-size: 1.11vh;
-	text-decoration: none;
-	background-color: rgba(20,10,20,0.3);
-	color: rgba(220,220,220,1.0);
-	display: block;
-	float: none;
-	transition: all 0.2s ease;
+    width: 150px;
+    height: 40px;
+    background-color: rgba(22, 22, 22, 0.6);
+    margin: 10px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius:10px;
+    line-height: 40px;
 }
 
 .control.disabled {
-    background-color: rgba(17, 5, 17, 0.1);
+    background-color: rgba(161, 161, 161, 0.1);
+}
+.controlhidden {
+    display: none;
 }
 
 .hoverControl {
-    background-color: rgba(220, 122, 122, 0.6);
+    background-color: rgba(240, 130, 76,0.4);
 }
 
-.primaryInventoryName {
-	position: absolute;
-	left: 10.5%;
-	top: 20%;
-	font-size: 1.67vh;
-	color: white;
-	font-weight: bold;
-	text-shadow: -0.09vh -0.09vh 0 #000, 0.09vh -0.09vh 0 #000, -0.09vh 0.09vh 0 #000, 0.09vh 0.09vh 0 #000;
+.item-name-bg {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: 0;
+}
+
+#playerInventory::-webkit-scrollbar-track,
+#otherInventory::-webkit-scrollbar-track {
+    background-color: none;
+    border: none;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+    direction:ltr;
 }
 
 #playerInventory::-webkit-scrollbar,
 #otherInventory::-webkit-scrollbar {
-	margin-left: 500px;
-	width: 3.46px;
-	height: 2.16px;
-
+    width: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    direction:ltr;
 }
 
 #playerInventory::-webkit-scrollbar-thumb,
 #otherInventory::-webkit-scrollbar-thumb {
-		margin-left: 10px;
-	background: rgba(111,111,185,0.7) !important;
+    background-color: rgba(0, 0, 0, 1);
+    border-radius: 25px;
+    direction:ltr;
 }
 
+::-webkit-resizer,
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner { display: none; 
+    direction:ltr;
+}
+
+.nearbyPlayerButton {
+    width: 100%;
+    margin-top: 5px;
+    display: block;
+    text-decoration: none;
+    padding: 2px;
+    color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(63, 57, 83, 0.226);
+    text-shadow: none;
+    font-size: 14px !important;
+    outline: none;
+    text-transform: none;
+    text-align: center;
+    line-height: 30px;
+    border: none;
+}
+
+.nearbyPlayerButton:hover {
+    background-color: rgba(34, 29, 46, 0.8);
+}
+
+#noSecondInventoryMessage {
+    width: 615px;
+    height: 580px;
+    line-height: 580px;
+    text-align: center;
+}
+
+@media (max-width: 1500px) {
+    .inventory {
+        width: 1300px;
+    }
+
+    #playerInventory {
+        width: 550px;
+    }
+
+    #controls {
+        width: 200px;
+    }
+
+    #otherInventory {
+        width: 550px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 540px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .inventory {
+        width: 1000px;
+    }
+
+    #playerInventory {
+        width: 425px;
+    }
+
+    #controls {
+        width: 150px;
+    }
+
+    #otherInventory {
+        width: 425px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 420px;
+    }
+}
+
+.textomenu {
+  bottom: 430px;
+	left:42.2%;
+	text-align: left;
+	width:290px;
+  height: 100px;
+	text-transform: none;
+  position: absolute;
+	font-size: 12px;
+}
+
+mark.text{
+  font-family: 'Roboto', sans-serif;
+src: url('roboto.ttf');
+  font-weight: bold;
+  text-transform: lowercase;
+  color: rgba(240, 130, 76);
+  background: rgb(100, 100, 100, 0.4);
+  border-radius: 2px;
+}
+
+  
 @keyframes jello-horizontal {
   0% {
 	-webkit-transform: scale3d(1, 1, 1);
@@ -371,4 +596,36 @@
 		width: 420px;
 	}
 
+}
+
+.weight-div {
+    width: 120%;
+    height: 70%;
+    position: absolute;
+    left: 5px;
+    top: -5px;
+/*     transition: 0.2s; */
+    text-align: left;
+    vertical-align: left;
+    font-size: 16px;
+    line-height: 40px;
+    float: left;
+}
+
+.keybind {
+    position: absolute;
+    top: 0;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    z-index: 500;
+    background: rgba(18, 18, 18, 0.8);
+ /*   -moz-box-shadow:    inset 0 0 15px #000000;
+    -webkit-box-shadow: inset 0 0 15px #000000;*/
+    box-shadow:         inset 0 0 15px #000000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
 }

@@ -23,7 +23,7 @@ function setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapon
     SendNUIMessage(
         {
             action = "setInfoText",
-            text = data.text
+            text = _("glovebox")
         }
     )
 

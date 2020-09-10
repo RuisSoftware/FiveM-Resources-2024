@@ -26,7 +26,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     SendNUIMessage(
         {
             action = "setInfoText",
-            text = data.text
+            text = _("trunk")
         }
     )
 
@@ -48,10 +48,10 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 	
 	if cashMoney > 0 then
         accountData = {
-            label = _U("cash"),
+            label = _U("money"),
             count = cashMoney,
-            type = "item_money",
-            name = "cash",
+            type = "item_account",
+            name = "money",
             usable = false,
             rare = false,
             weight = -1,

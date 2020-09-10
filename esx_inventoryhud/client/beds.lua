@@ -22,7 +22,7 @@ function setPropertyMotelDataBed(data)
     SendNUIMessage(
                 {
                     action = "setInfoText",
-                    text = "Bed Stash"
+                    text = _("bed_stash")
                 }
             )
 

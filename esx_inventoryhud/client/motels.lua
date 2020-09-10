@@ -23,7 +23,7 @@ function setPropertyMotelData(data)
     SendNUIMessage(
                 {
                     action = "setInfoText",
-                    text = "Motel Inventory"
+                    text = _("motels")
                 }
             )
 

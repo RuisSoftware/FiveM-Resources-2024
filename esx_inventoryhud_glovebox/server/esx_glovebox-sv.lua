@@ -3,24 +3,16 @@ local arrayWeight = Config.localWeight
 local VehicleList = {}
 local VehicleInventory = {}
 
-TriggerEvent(
-  "esx:getSharedObject",
-  function(obj)
+TriggerEvent("esx:getSharedObject", function(obj)
     ESX = obj
-  end
-)
+end)
 
-AddEventHandler(
-  "onMySQLReady",
-  function()
+AddEventHandler("onMySQLReady", function()
     MySQL.Async.execute("DELETE FROM `glovebox_inventory` WHERE `owned` = 0", {})
-  end
-)
+end)
 
 RegisterServerEvent("esx_glovebox_inventory:getOwnedVehicle")
-AddEventHandler(
-  "esx_glovebox_inventory:getOwnedVehicle",
-  function()
+AddEventHandler("esx_glovebox_inventory:getOwnedVehicle", function()
     local vehicules = {}
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
@@ -39,8 +31,7 @@ AddEventHandler(
         TriggerClientEvent("esx_glovebox_inventory:setOwnedVehicle", _source, vehicules)
       end
     )
-  end
-)
+end)
 
 function getItemWeight(item)
   local weight = 0
@@ -73,10 +64,7 @@ end
 
 function getTotalInventoryWeight(plate)
   local total
-  TriggerEvent(
-    "esx_glovebox:getSharedDataStore",
-    plate,
-    function(store)
+  TriggerEvent("esx_glovebox:getSharedDataStore", plate, function(store)
       local W_weapons = getInventoryWeight(store.get("weapons") or {})
       local W_coffres = getInventoryWeight(store.get("coffres") or {})
       local W_blackMoney = 0
@@ -91,18 +79,12 @@ function getTotalInventoryWeight(plate)
         W_cashMoney = cashAccount[1].amount / 10
       end
       total = W_weapons + W_coffres + W_blackMoney + W_cashMoney
-    end
-  )
+    end)
   return total
 end
 
-ESX.RegisterServerCallback(
-  "esx_glovebox:getInventoryV",
-  function(source, cb, plate)
-    TriggerEvent(
-      "esx_glovebox:getSharedDataStore",
-      plate,
-      function(store)
+ESX.RegisterServerCallback("esx_glovebox:getInventoryV", function(source, cb, plate)
+    TriggerEvent("esx_glovebox:getSharedDataStore", plate, function(store)
         local blackMoney = 0
 		local cashMoney = 0
         local items = {}
@@ -134,15 +116,11 @@ ESX.RegisterServerCallback(
             weight = weight
           }
         )
-      end
-    )
-  end
-)
+    end)
+end)
 
 RegisterServerEvent("esx_glovebox:getItem")
-AddEventHandler(
-  "esx_glovebox:getItem",
-  function(plate, type, item, count, max, owned)
+AddEventHandler("esx_glovebox:getItem", function(plate, type, item, count, max, owned)
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
 
@@ -372,9 +350,7 @@ AddEventHandler(
 )
 
 RegisterServerEvent("esx_glovebox:putItem")
-AddEventHandler(
-  "esx_glovebox:putItem",
-  function(plate, type, item, count, max, owned, label)
+AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, owned, label)
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
     local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
@@ -576,14 +552,10 @@ AddEventHandler(
         text = _U("glovebox_info", plate, (weight / 100), (max / 100))
         data = {plate = plate, max = max, myVeh = owned, text = text}
         TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
-      end
-    )
-  end
-)
+    end)
+end)
 
-ESX.RegisterServerCallback(
-  "esx_glovebox:getPlayerInventory",
-  function(source, cb)
+ESX.RegisterServerCallback("esx_glovebox:getPlayerInventory", function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
     local blackMoney = xPlayer.getAccount("black_money").money
 	local cashMoney = xPlayer.getMoney()
@@ -596,8 +568,7 @@ ESX.RegisterServerCallback(
         items = items
       }
     )
-  end
-)
+end)
 
 function all_trim(s)
   if s then

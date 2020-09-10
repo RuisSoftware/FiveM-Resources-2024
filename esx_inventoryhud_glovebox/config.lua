@@ -1,5 +1,3 @@
-
-
 Config = {}
 
 Config.CheckOwnership = false -- If true, Only owner of vehicle can store items in glovebox.
@@ -10,18 +8,18 @@ Config.Locale = "nl"
 Config.OpenKey = 170
 
 -- Limit, unit can be whatever you want. Originally grams (as average people can hold 25kg)
-Config.Weight = 1000
+Config.Weight = 10
 
 -- Default weight for an item:
 -- weight == 0 : The item do not affect character inventory weight
 -- weight > 0 : The item cost place on inventory
 -- weight < 0 : The item add place on inventory. Smart people will love it.
-Config.DefaultWeight = 10
+Config.DefaultWeight = 1
 
 Config.localWeight = {
-    bread = 125,
-    water = 330,
-    WEAPON_SMG = 5000
+    bread = 1,
+    water = 1,
+    WEAPON_SMG = 5
 }
 
 Config.VehicleWeight = {
@@ -52,6 +50,12 @@ Config.VehicleWeight = {
 Config.VehiclePlate = {
     taxi = "TAXI",
     cop = "police",
+    police = "police",
     ambulance = "ambulance",
-    mecano = "mechano"
+    mecano = "mechano",
+    mechanic = "mechanic",
+    police = "police",
+    nightclub = "club",
+    bahamas = "bahamas",
+    cardealer = "dealer"
 }

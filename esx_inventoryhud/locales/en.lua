@@ -8,11 +8,18 @@ Locales["en"] = {
 	["no_permissions"] = "You don't have permissions to do that!",
 	["no_player"] = "Cannot find player!",
 	["player_inventory"] = "Player inventory",
+	["stealing"] = "You are robbing someone",
+	["yes"] = "Yes",
+	["no"] = "No",
+	
 	["player_inventory_weight"] = "Inventory weight",
 	["nacho_veh"] = "This is not your vehicle.",
 	["player_inv_no_space"] = "No inventory space.",
 	["insufficient_space"] = "No inventory space.",
 	["weapon_exist"] = "You already own this weapon.",
+	["weapon_exist_give"] = "The person already own this weapon.",
+	["reloaded"] = "Reloaded",
+	["max_ammo"] = "Max Ammo",
 	["no_weapon"] = "You do not own the weapon for this ammo type!",
 	["invalid_quantity"] = "Invalid quantity.",
 	["item_added"] = "Added:",
@@ -29,9 +36,25 @@ Locales["en"] = {
     ['you_tool_name'] = 'Hardware store',
    	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
-	['blackmarket_shop_name'] = 'BlackMarket',
 	['license_shop_title'] = 'Register License?',
 	['license_shop_help'] = 'press ~INPUT_CONTEXT~ to register license',
 	['license_shop_check'] = 'You already have a license to carry weapons!',
-	['license_check_fail'] = 'You need a license to carry weapons!'
+	['license_check_fail'] = 'You need a license to carry weapons!',
+	['blackmarket_shop_name'] = 'BlackMarket',
+	
+	["bed_stash"] = "Bed Stash",
+	["motels"] = "Motel Inventory",
+	["trunk"] = "Trunk Inventory",
+	["glovebox"] = "Glovebox Inventory",
+	["store"] = "Supermarket",
+	["vault"] = "Vault",
+	["weapon_pulled"] = "Weapon pulled",
+	
+	["error"] = "An error has occurred.",
+	["not_compatible"] = "This attachment is not compatible or is already equipped.",
+	["no_weapon_selected"] = "No weapon selected.",
+	["no_attachment"] = "This weapon does not have this attachment.",
+	["no_gun_in_hand"] = "You don't have a gun in your hand.",
+	
+	["open_shop"] = "Press [~g~E~w~] to open the shop"
 }

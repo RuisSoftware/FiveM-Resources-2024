@@ -30,30 +30,25 @@ AddEventHandler(
   "esx:playerLoaded",
   function(xPlayer)
     PlayerData = xPlayer
-    TriggerServerEvent("esx_trunk_inventory:getOwnedVehicule")
+    TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
   end
 )
 
-AddEventHandler(
-  "onResourceStart",
-  function()
+AddEventHandler("onResourceStart", function()
     PlayerData = xPlayer
-    TriggerServerEvent("esx_trunk_inventory:getOwnedVehicule")
+    TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
-  end
-)
+end)
 
 RegisterNetEvent("esx:setJob")
 AddEventHandler("esx:setJob", function(job)
 	local PlayerData = ESX.GetPlayerData()
 	
 	if PlayerData == nil then
-		PlayerData = ESX.GetPlayerData()
-    		PlayerData.job = job
-		print ('Kofferbak kan beroep niet synchroniseren. Dit is niet erg.')  -- Cannot sync job, not bad
+		--print ('Kofferbak kan beroep niet synchroniseren. Dit is niet erg.')  -- Cannot sync job, not bad
 	else
-		print ('Kofferbak heeft je beroep gesynchroniseerd.') -- Can sync job
+		--print ('Kofferbak heeft je beroep gesynchroniseerd.') -- Can sync job
 		PlayerData.job = job
 	end
 end)
@@ -107,7 +102,7 @@ function openmenuvehicle()
       if vPlate == vFront then
         myVeh = true
       elseif lastChecked < GetGameTimer() - 60000 then
-        TriggerServerEvent("esx_trunk_inventory:getOwnedVehicule")
+        TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
         lastChecked = GetGameTimer()
         Wait(2000)
         for i = 1, #vehiclePlate do
@@ -146,21 +141,17 @@ function openmenuvehicle()
                 OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.VehicleWeight[class], myVeh)
               end
             else
-           
-            exports['b1g_notify']:Notify('true', _U("trunk_closed"))
+				exports['mythic_notify']:SendAlert('error', _U('trunk_closed'))
             end
           end
         else
-         
-            exports['b1g_notify']:Notify('false', _U("no_veh_nearby"))
+			exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby'))
         end
         lastOpen = true
         GUI.Time = GetGameTimer()
       end
     else
-      -- Not their vehicle
-    
-            exports['b1g_notify']:Notify('false', _U("nacho_veh"))
+        exports['mythic_notify']:SendAlert('error', _U('nacho_veh'))
     end
   end
 end
@@ -184,8 +175,8 @@ Citizen.CreateThread(
     while true do
       Wait(0)
       local pos = GetEntityCoords(GetPlayerPed(-1))
-      if CloseToVehicle and IsPedInAnyVehicle(GetPlayerPed(-1), false) then
-        local vehicle = GetClosestVehicle(pos["x"], pos["y"], pos["z"], 4.0, 0, 70)
+      if CloseToVehicle then
+        local vehicle = GetClosestVehicle(pos["x"], pos["y"], pos["z"], 5.0, 0, 70)
         if DoesEntityExist(vehicle) then
           CloseToVehicle = true
         else
@@ -200,14 +191,11 @@ Citizen.CreateThread(
 )
 
 RegisterNetEvent("esx:playerLoaded")
-AddEventHandler(
-  "esx:playerLoaded",
-  function(xPlayer)
+AddEventHandler("esx:playerLoaded",function(xPlayer)
     PlayerData = xPlayer
-    TriggerServerEvent("esx_trunk_inventory:getOwnedVehicule")
+    TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
-  end
-)
+end)
 
 function OpenCoffreInventoryMenu(plate, max, myVeh)
   ESX.TriggerServerCallback(

@@ -17,9 +17,9 @@ AddEventHandler(
   end
 )
 
-RegisterServerEvent("esx_trunk_inventory:getOwnedVehicule")
+RegisterServerEvent("esx_trunk_inventory:getOwnedVehicle")
 AddEventHandler(
-  "esx_trunk_inventory:getOwnedVehicule",
+  "esx_trunk_inventory:getOwnedVehicle",
   function()
     local vehicules = {}
     local _source = source
@@ -105,6 +105,7 @@ ESX.RegisterServerCallback(
       function(store)
         local blackMoney = 0
 		local cashMoney = 0
+		local money = 0
         local items = {}
         local weapons = {}
         weapons = (store.get("weapons") or {})

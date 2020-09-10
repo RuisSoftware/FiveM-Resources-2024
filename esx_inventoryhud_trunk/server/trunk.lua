@@ -50,7 +50,7 @@ function loadInvent(plate)
   end
 end
 
-function getOwnedVehicule(plate)
+function getOwnedVehicle(plate)
   local found = false
   if listPlate then
     for k, v in pairs(listPlate) do
@@ -80,7 +80,7 @@ end
 
 function MakeDataStore(plate)
   local data = {}
-  local owned = getOwnedVehicule(plate)
+  local owned = getOwnedVehicle(plate)
   local dataStore = CreateDataStore(plate, owned, data)
   SharedDataStores[plate] = dataStore
   MySQL.Async.execute(

@@ -12,7 +12,8 @@ Locales["tr"] = {
 	["nacho_veh"] = "Bu senin aracın değil.",
 	["player_inv_no_space"] = "Yetersiz envanter alanı.",
 	["insufficient_space"] = "Yetersiz envanter alanı.",
-	["weapon_exist"] = "Zaten bu silaha sahipsin.",
+	["weapon_exist"] = "You already own this weapon.",
+	["weapon_exist_give"] = "The person already own this weapon.",
 	["no_weapon"] = "Bu silah için uygun mermin yok!",
 	["invalid_quantity"] = "Geçersiz miktar.",
 	["item_added"] = "Eklendi:",
@@ -22,6 +23,9 @@ Locales["tr"] = {
 	["weapon_added"] = "Eklendi:",
 	["weapon_removed"] = "Silindi:",
 	["no_money"] = "Yetersiz para",
+	["stealing"] = "You are robbing someone",
+	["yes"] = "Yes",
+	["no"] = "No",
 	-- SHOP
 	['shop_press_menu'] = '~INPUT_CONTEXT~ ye basarak ~y~mağazaya~s~ eriş.',
     ['regular_shop_name'] = 'Bakkal',
@@ -29,9 +33,23 @@ Locales["tr"] = {
     ['you_tool_name'] = 'Hırdavatçı',
    	['prison_shop_name'] = 'Hapishane Kantini',
 	['weapon_shop_name'] = 'Silahçı',
-	['blackmarket_shop_name'] = 'BlackMarket',
 	['license_shop_title'] = 'Silah Ruhsatı al?',
 	['license_shop_help'] = '~INPUT_CONTEXT~ ye basarak silah ruhsatı al',
 	['license_shop_check'] = 'Zaten silah taşıma ruhsatın var!',
-	['license_check_fail'] = 'Silah taşımak için ruhsata ihtiyacın var!'
+	['license_check_fail'] = 'Silah taşımak için ruhsata ihtiyacın var!',
+	
+	["bed_stash"] = "Bed Stash",
+	["motels"] = "Motel Inventory",
+	["trunk"] = "Trunk Inventory",
+	["glovebox"] = "Glovebox Inventory",
+	["store"] = "Supermarket",
+	["vault"] = "Vault",
+	["weapon_pulled"] = "Weapon pulled",
+	
+	["error"] = "An error has occurred.",
+	["not_compatible"] = "This attachment is not compatible or is already equipped.",
+	["no_weapon_selected"] = "No weapon selected.",
+	["no_attachment"] = "This weapon does not have this attachment.",
+	["no_gun_in_hand"] = "You don't have a gun in your hand.",
+	["open_shop"] = "Press [~g~E~w~] to open the shop"
 }
