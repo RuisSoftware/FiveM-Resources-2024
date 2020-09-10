@@ -33,9 +33,9 @@ Citizen.CreateThread(function()
         Citizen.Wait(7)
         if not IsPlayerDead(PlayerId()) then
             DisableControlAction(0, 37, true)
-            if IsDisabledControlJustPressed(1, Config.OpenControl) and GetLastInputMethod(0) then
+            if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
                     openInventory()
-            elseif IsDisabledControlJustPressed(1, Config.CloseControl) and GetLastInputMethod(0) then
+            elseif IsControlJustReleased(0, Config.CloseControl) and IsInputDisabled(0) then
                     closeInventory()
             elseif  IsDisabledControlJustReleased(1, 157) and canFire then
                 if fastWeapons[1] ~= nil then

@@ -653,24 +653,24 @@ $(document).ready(function () {
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
 
-            //       if (itemData == undefined || itemData.canRemove == undefined) {
-            //           return;
-            //       }
+                   if (itemData == undefined || itemData.canRemove == undefined) {
+                       return;
+                   }
 
             itemInventory = ui.draggable.data("inventory");
 
-            //       if (itemInventory == undefined || itemInventory == "second") {
-            //            return;
-            //      }
+                   if (itemInventory == undefined || itemInventory == "second") {
+                        return;
+                  }
             if (itemInventory === "fast") {
                 return;}
-            // if (itemData.canRemove) {
+             if (itemData.canRemove) {
             $.post("https://esx_inventoryhud/DropItem", JSON.stringify({
 
                 item: itemData,
                 number: parseInt($("#count").val())
             }));
-                //}
+                }
             }
 
     });

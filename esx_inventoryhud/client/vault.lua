@@ -146,28 +146,25 @@ RegisterNUICallback(
     end
 )
 
-RegisterNUICallback(
-    "TakeFromVault",
-    function(data, cb)
-        if IsPedSittingInAnyVehicle(playerPed) then
-            return
-        end
+RegisterNUICallback("TakeFromVault", function(data, cb)
+	if IsPedSittingInAnyVehicle(playerPed) then
+		return
+	end
 
-        if type(data.number) == "number" and math.floor(data.number) == data.number then
-            local count = 0
-            if data.number > data.item.count or data.number == 0 then
-                count = tonumber(data.item.count)
-            else
-                count = tonumber(data.number)
-            end
-            TriggerServerEvent("monster_vault:getItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
-        end
+	if type(data.number) == "number" and math.floor(data.number) == data.number then
+		local count = 0
+		if data.number > data.item.count or data.number == 0 then
+			count = tonumber(data.item.count)
+		else
+			count = tonumber(data.number)
+		end
+		TriggerServerEvent("monster_vault:getItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
+	end
 
-        Wait(250)
-        refreshVaultInventory()
-        Wait(250)
-        loadPlayerInventory()
+	Wait(250)
+	refreshVaultInventory()
+	Wait(250)
+	loadPlayerInventory()
 
-        cb("ok")
-    end
-)
+	cb("ok")
+end)

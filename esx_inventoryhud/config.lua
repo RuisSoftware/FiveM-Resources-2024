@@ -5,7 +5,7 @@ Config.IncludeWeapons = true -- Include weapons in inventory? true or nil.
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
 Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH! Inlcuding money or black_money this way will cause bugs.
 Config.OpenControl = 289
-Config.CloseControl = 200
+Config.CloseControl = 289
 Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/
 Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/
 Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NOT YET SUPPORTED
