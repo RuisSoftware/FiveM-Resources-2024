@@ -362,7 +362,7 @@ RegisterNUICallback("UseItem", function(data, cb)
 	if shouldCloseInventory(data.item.name) then
 		closeInventory()
 	else
-		Citizen.Wait(250)
+		Citizen.Wait(0)
 		loadPlayerInventory()
 	end
 
@@ -378,7 +378,7 @@ RegisterNUICallback("DropItem",function(data, cb)
 		TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 	end
 
-	Wait(250)
+	Wait(0)
 	loadPlayerInventory()
 
 	cb("ok")
@@ -417,7 +417,7 @@ RegisterNUICallback("GiveItem", function(data, cb)
         SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"), 1)
         canPlayAnim = true
         TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
-        Wait(250)
+        Wait(0)
         loadPlayerInventory()
     end
     cb("ok")

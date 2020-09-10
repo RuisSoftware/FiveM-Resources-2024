@@ -137,9 +137,9 @@ RegisterNUICallback(
             
         end
 
-        Wait(250)
+        Wait(0)
         refreshVaultInventory()
-        Wait(250)
+        Wait(0)
         loadPlayerInventory()
 
         cb("ok")
@@ -161,9 +161,9 @@ RegisterNUICallback("TakeFromVault", function(data, cb)
 		TriggerServerEvent("monster_vault:getItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
 	end
 
-	Wait(250)
+	Wait(0)
 	refreshVaultInventory()
-	Wait(250)
+	Wait(0)
 	loadPlayerInventory()
 
 	cb("ok")
