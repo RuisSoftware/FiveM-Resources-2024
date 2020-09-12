@@ -505,43 +505,54 @@ AddEventHandler(
       end
     end
 
-    if type == "item_weapon" then
-      TriggerEvent(
-        "esx_trunk:getSharedDataStore",
-        plate,
-        function(store)
-          local storeWeapons = store.get("weapons")
+if type == "item_weapon" then
+		if xPlayer.hasWeapon(item) then
+			xPlayer.removeWeapon(item)
+			store.set("weapons", storeWeapons)
 
-          if storeWeapons == nil then
-            storeWeapons = {}
-          end
+			MySQL.Async.execute(
+			  "UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate",
+			  {
+				["@plate"] = plate,
+				["@owned"] = owned
+			  }
+			)
+		
+		end
+	end
 
-          table.insert(
-            storeWeapons,
-            {
-              name = item,
-              label = label,
-              ammo = count
-            }
-          )
-          if (getTotalInventoryWeight(plate) + (getItemWeight(item))) > max then
-         
-				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
-          else
-            store.set("weapons", storeWeapons)
-            xPlayer.removeWeapon(item)
 
-            MySQL.Async.execute(
-              "UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate",
-              {
-                ["@plate"] = plate,
-                ["@owned"] = owned
-              }
-            )
-          end
-        end
-      )
-    end
+   --[[ if type == "item_weapon" then
+		TriggerEvent("esx_trunk:getSharedDataStore",plate,function(store)
+		local storeWeapons = store.get("weapons")
+
+			if storeWeapons == nil then
+				storeWeapons = {}
+			end
+
+			table.insert(storeWeapons,
+				{
+					name = item,
+					label = label,
+					ammo = count
+				}
+			)
+			if (getTotalInventoryWeight(plate) + (getItemWeight(item))) > max then		 
+					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
+			else
+				store.set("weapons", storeWeapons)
+				xPlayer.removeWeapon(item)
+
+				MySQL.Async.execute(
+				  "UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate",
+				  {
+					["@plate"] = plate,
+					["@owned"] = owned
+				  }
+				)
+			end
+		end)
+	end]]
 
     TriggerEvent(
       "esx_trunk:getSharedDataStore",
