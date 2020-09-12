@@ -486,25 +486,23 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 	
 	if type == "item_weapon" then
 		if xPlayer.hasWeapon(item) then
-			xPlayer.removeWeapon(item)
-			store.set("weapons", storeWeapons)
+			TriggerEvent("esx_glovebox:getSharedDataStore",plate, function(store)
+				xPlayer.removeWeapon(item)
+				store.set("weapons", storeWeapons)
 
-			MySQL.Async.execute(
-			  "UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate",
-			  {
-				["@plate"] = plate,
-				["@owned"] = owned
-			  }
-			)
-		
+				MySQL.Async.execute(
+				  "UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate",
+				  {
+					["@plate"] = plate,
+					["@owned"] = owned
+				  }
+				)
+			end)
 		end
 	end
 	
     --[[if type == "item_weapon" then
-      TriggerEvent(
-        "esx_glovebox:getSharedDataStore",
-        plate,
-        function(store)
+      TriggerEvent("esx_glovebox:getSharedDataStore",plate, function(store)
           local storeWeapons = store.get("weapons")
 
           if storeWeapons == nil then
