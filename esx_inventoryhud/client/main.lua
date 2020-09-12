@@ -26,6 +26,15 @@ Citizen.CreateThread( function()
 end)
 
 Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+		HudForceWeaponWheel(false)
+		HudWeaponWheelIgnoreSelection()
+        DisableControlAction(0, 37, true)
+	end
+end)
+
+Citizen.CreateThread(function()
     while ESX == nil do
         Citizen.Wait(10)
     end
@@ -57,7 +66,8 @@ Citizen.CreateThread(function()
                 if fastWeapons[5] ~= nil then
                     TriggerServerEvent("esx:useItem", fastWeapons[5])
                 end
-            elseif IsDisabledControlJustReleased(1, 19) then
+            elseif IsDisabledControlJustReleased(1, 37) then
+				HudForceWeaponWheel(false)
                 showHotbar()
             end
         else
