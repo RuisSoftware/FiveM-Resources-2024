@@ -11,7 +11,6 @@ Locales["en"] = {
 	["stealing"] = "You are robbing someone",
 	["yes"] = "Yes",
 	["no"] = "No",
-	
 	["player_inventory_weight"] = "Inventory weight",
 	["nacho_veh"] = "This is not your vehicle.",
 	["player_inv_no_space"] = "No inventory space.",
@@ -29,32 +28,31 @@ Locales["en"] = {
 	["weapon_added"] = "Added:",
 	["weapon_removed"] = "Removed:",
 	["no_money"] = "Not enough money",
-	-- SHOP
 	['shop_press_menu'] = 'press ~INPUT_CONTEXT~ to access the ~y~store~s~.',
     ['regular_shop_name'] = 'MiniMarket',
+	['blackmarket_shop_name'] = 'Black market',
     ['robs_liquor_name'] = 'Liquor store',
     ['you_tool_name'] = 'Hardware store',
    	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
+	['nightclub_shop_name'] = 'Nightclub',
+	['police_shop_name'] = 'Police Shop',
 	['license_shop_title'] = 'Register License?',
 	['license_shop_help'] = 'press ~INPUT_CONTEXT~ to register license',
 	['license_shop_check'] = 'You already have a license to carry weapons!',
 	['license_check_fail'] = 'You need a license to carry weapons!',
-	['blackmarket_shop_name'] = 'BlackMarket',
-	
+	['blackmarket_shop_name'] = 'BlackMarket',	
 	["bed_stash"] = "Bed Stash",
 	["motels"] = "Motel Inventory",
 	["trunk"] = "Trunk Inventory",
 	["glovebox"] = "Glovebox Inventory",
 	["store"] = "Supermarket",
 	["vault"] = "Vault",
-	["weapon_pulled"] = "Weapon pulled",
-	
+	["weapon_pulled"] = "Weapon pulled",	
 	["error"] = "An error has occurred.",
 	["not_compatible"] = "This attachment is not compatible or is already equipped.",
 	["no_weapon_selected"] = "No weapon selected.",
 	["no_attachment"] = "This weapon does not have this attachment.",
-	["no_gun_in_hand"] = "You don't have a gun in your hand.",
-	
+	["no_gun_in_hand"] = "You don't have a gun in your hand.",	
 	["open_shop"] = "Press [~g~E~w~] to open the shop"
 }

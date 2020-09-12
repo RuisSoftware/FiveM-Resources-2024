@@ -10,8 +10,7 @@ Locales["de"] = {
 	["player_inventory"] = "Spieler Inventar",
 	["stealing"] = "Du raubst jemanden aus",
 	["yes"] = "Ja",
-	["no"] = "Nein",
-	
+	["no"] = "Nein",	
 	["player_inventory_weight"] = "Inventar Gewicht",
 	["nacho_veh"] = "Dies ist nicht dein Fahrzeug.",
 	["player_inv_no_space"] = "Kein Platz im Inventar.",
@@ -29,19 +28,20 @@ Locales["de"] = {
 	["weapon_added"] = "Hinzugefügt:",
 	["weapon_removed"] = "Entfernt:",
 	["no_money"] = "Nicht genug Geld",
-	-- SHOP
 	['shop_press_menu'] = 'Drücke ~INPUT_CONTEXT~ um den ~y~Shop~s~ zu öffnen.',
-    ['regular_shop_name'] = 'MiniMarkt',
-    ['robs_liquor_name'] = 'Liquor Shop',
-    ['you_tool_name'] = 'Hardware Shop',
-   	['prison_shop_name'] = 'Gefängniskommissar',
+    ['regular_shop_name'] = 'MiniMarket',
+	['blackmarket_shop_name'] = 'Black market',
+    ['robs_liquor_name'] = 'Liquor store',
+    ['you_tool_name'] = 'Hardware store',
+   	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
+	['nightclub_shop_name'] = 'Nightclub',
+	['police_shop_name'] = 'Police Shop',
 	['license_shop_title'] = 'Lizenz registrieren?',
 	['license_shop_help'] = 'Drücke ~INPUT_CONTEXT~ um die Lizenz zu registrieren',
 	['license_shop_check'] = 'Du hast bereits eine Lizenz um Waffen zu tragen!',
 	['license_check_fail'] = 'Du brauchst eine Lizenz um eine Waffe zu tragen!',
 	['blackmarket_shop_name'] = 'Schwarzmarkt',
-	
 	["bed_stash"] = "Bett Versteck",
 	["motels"] = "Motel Inventar",
 	["trunk"] = "Kofferraum Inventar",
@@ -49,12 +49,10 @@ Locales["de"] = {
 	["store"] = "Supermarkt",
 	["vault"] = "Tresor",
 	["weapon_pulled"] = "Waffe gezogen",
-	
 	["error"] = "Es ist ein Fehler aufgetreten.",
 	["not_compatible"] = "Dieser Aufsatz ist nicht kompatibel oder bereits ausgestattet.",
 	["no_weapon_selected"] = "Keine Waffe markiert.",
 	["no_attachment"] = "Diese Waffe hat diesen Aufsatz nicht.",
 	["no_gun_in_hand"] = "Du hast keine Waffe in der Hand.",
-	
 	["open_shop"] = "Drücke [~g~E~w~] um den Shop zu öffnen"
 }
