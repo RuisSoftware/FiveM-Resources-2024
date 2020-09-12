@@ -268,43 +268,43 @@ Citizen.CreateThread(function()
     coords = GetEntityCoords(player)
 	if Config.ShowRegularShopBlip then
 		for k, v in pairs(Config.Shops.RegularShop.Locations) do
-			CreateBlip(vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z ), "Loja", 3.0, Config.Color, Config.ShopBlipID)
+			CreateBlip(vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z ), _U('regular_shop_name'), 3.0, Config.Color, Config.ShopBlipID)
 		end
 	end
 
 	if Config.ShowRobsLiquorBlip then
 		for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
-			CreateBlip(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z ), "Tabacaria", 3.0, Config.Color, Config.LiquorBlipID)
+			CreateBlip(vector3(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z ), _U('robs_liquor_name'), 3.0, Config.Color, Config.LiquorBlipID)
 		end
 	end
 
 	if Config.ShowYouToolBlip then
 		for k, v in pairs(Config.Shops.YouTool.Locations) do
-			CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), "U Ferramentas", 3.0, Config.Color, Config.YouToolBlipID)
+			CreateBlip(vector3(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z ), _U('you_tool_name'), 3.0, Config.Color, Config.YouToolBlipID)
 		end
 	end
 
 	if Config.ShowPrisonShopBlip then
 		for k, v in pairs(Config.Shops.PrisonShop.Locations) do
-			CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), "Prison Commissary", 3.0, Config.Color, Config.PrisonShopBlipID)
+			CreateBlip(vector3(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z), _U('prison_shop_name'), 3.0, Config.Color, Config.PrisonShopBlipID)
 		end
 	end
 
 	if Config.ShowWeaponShopBlip then
 		for k, v in pairs(Config.Shops.WeaponShop.Locations) do
-			CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), "Ammunation", 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+			CreateBlip(vector3(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z), _U('weapon_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
 		end
 	end
 
 	if Config.ShowPoliceShopBlip then
 		for k, v in pairs(Config.Shops.PoliceShop.Locations) do
-			CreateBlip(vector3(Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z), "Police Shop", 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+			CreateBlip(vector3(Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z), _U('police_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
 		end
 	end
 
 	if Config.ShowNightclubShopBlip then
 		for k, v in pairs(Config.Shops.ShopNightclub.Locations) do
-			CreateBlip(vector3(Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z), "Nightclub stock", 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+			CreateBlip(vector3(Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z), _U('nightclub_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
 		end
 	end
 
