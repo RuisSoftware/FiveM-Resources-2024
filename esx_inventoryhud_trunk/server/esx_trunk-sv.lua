@@ -505,7 +505,7 @@ AddEventHandler(
       end
     end
 
-if type == "item_weapon" then
+	if type == "item_weapon" then
 		if xPlayer.hasWeapon(item) then
 			xPlayer.removeWeapon(item)
 			store.set("weapons", storeWeapons)

@@ -483,8 +483,24 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 		TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
       end
     end
+	
+	if type == "item_weapon" then
+		if xPlayer.hasWeapon(item) then
+			xPlayer.removeWeapon(item)
+			store.set("weapons", storeWeapons)
 
-    if type == "item_weapon" then
+			MySQL.Async.execute(
+			  "UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate",
+			  {
+				["@plate"] = plate,
+				["@owned"] = owned
+			  }
+			)
+		
+		end
+	end
+	
+    --[[if type == "item_weapon" then
       TriggerEvent(
         "esx_glovebox:getSharedDataStore",
         plate,
@@ -520,7 +536,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
           end
         end
       )
-    end
+    end]]
 
     TriggerEvent(
       "esx_glovebox:getSharedDataStore",
