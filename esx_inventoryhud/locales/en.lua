@@ -35,6 +35,7 @@ Locales["en"] = {
     ['you_tool_name'] = 'Hardware store',
    	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
+	['drug_shop_name'] = 'Drug Shop',
 	['nightclub_shop_name'] = 'Nightclub',
 	['police_shop_name'] = 'Police Shop',
 	['license_shop_title'] = 'Register License?',
@@ -54,5 +55,6 @@ Locales["en"] = {
 	["no_weapon_selected"] = "No weapon selected.",
 	["no_attachment"] = "This weapon does not have this attachment.",
 	["no_gun_in_hand"] = "You don't have a gun in your hand.",	
-	["open_shop"] = "Press [~g~E~w~] to open the shop"
+	["open_shop"] = "Press [~g~E~w~] to open the shop",
+	["no_acces"] = "Geen toegang tot deze winkel.",
 }

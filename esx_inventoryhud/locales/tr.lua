@@ -35,6 +35,7 @@ Locales["tr"] = {
    	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
 	['nightclub_shop_name'] = 'Nightclub',
+	['drug_shop_name'] = 'Drug Shop',
 	['police_shop_name'] = 'Police Shop',
 	['license_shop_title'] = 'Silah Ruhsatı al?',
 	['license_shop_help'] = '~INPUT_CONTEXT~ ye basarak silah ruhsatı al',
@@ -54,5 +55,6 @@ Locales["tr"] = {
 	["no_weapon_selected"] = "No weapon selected.",
 	["no_attachment"] = "This weapon does not have this attachment.",
 	["no_gun_in_hand"] = "You don't have a gun in your hand.",
-	["open_shop"] = "Press [~g~E~w~] to open the shop"
+	["open_shop"] = "Press [~g~E~w~] to open the shop",
+	["no_acces"] = "Geen toegang tot deze winkel.",
 }

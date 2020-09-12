@@ -9,32 +9,36 @@ Config.CloseControl = 289
 Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/
 Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/
 Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NOT YET SUPPORTED
-Config.JobOnlyInventory = true 
-Config.InventoryJob = {One = "police", Two = "nightclub", Three = nil}
+Config.JobOnlyInventory = true -- true = only Config.InventoryJob can open someone else inventory. False = everybody can 'steal' items from someone else.
+Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Ilelgal can enter this shop.
+Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil}
 -- List of item names that will close ui when used.
 Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"}
-
-Config.ShopBlipID = 52
-Config.LiquorBlipID = 93
-Config.YouToolBlipID = 402
-Config.PrisonShopBlipID = 52
-Config.WeedStoreBlipID = 140
-Config.WeaponShopBlipID = 110
-Config.PoliceShopShopBlipID = 110
 
 Config.Color = 2
 Config.WeaponColor = 1
 
 -- BLIPS
-Config.ShowBlackMarketBlip = true
-Config.ShowPoliceShopBlip = true
-Config.ShowNightclubShopBlip = true
-Config.ShowWeaponShopBlip = true
-Config.ShowIllegalShopBlip = true
-Config.ShowPrisonShopBlip = true
-Config.ShowYouToolBlip = true
+Config.ShowDrugMarketBlip = true
+Config.DrugStoreBlipID = 140
 Config.ShowRegularShopBlip = true
+Config.ShopBlipID = 52
 Config.ShowRobsLiquorBlip = true
+Config.LiquorBlipID = 93
+Config.ShowYouToolBlip = true
+Config.YouToolBlipID = 402
+Config.ShowBlackMarketBlip = true
+Config.BlackMarketBlipID = 110
+Config.ShowPoliceShopBlip = true
+Config.PoliceShopBlipID = 110
+Config.ShowNightclubShopBlip = true
+Config.NightclubShopBlipID = 110
+Config.ShowWeaponShopBlip = true
+Config.WeaponShopBlipID = 110
+Config.ShowIllegalShopBlip = true
+Config.IllegalShopBlipID = 110
+Config.ShowPrisonShopBlip = true
+Config.PrisonShopBlipID = 52
 
 Config.LicensePrice = 25000
 Config.License = {Weapon = "weapon", Police = "weapon", Nightclub = "weapon"} -- What license is needed for this shop?
@@ -43,19 +47,19 @@ Config.Shops = {
     RegularShop = {
         Locations = {
 			{x = 373.875,   y = 325.896,  z = 102.566},
-			{x = 2557.458,  y = 382.282,  z = 107.622},
-			{x = -3038.939, y = 585.954,  z = 6.908},
-			{x = -3241.927, y = 1001.462, z = 11.830},
-			{x = 547.431,   y = 2671.710, z = 41.156},
-			{x = 1961.464,  y = 3740.672, z = 31.343},
-			{x = 2678.916,  y = 3280.671, z = 54.241},
-			{x = 1729.216,  y = 6414.131, z = 34.037},
-			{x = -48.519,   y = -1757.514, z = 28.421},
-			{x = 1163.373,  y = -323.801,  z = 68.205},
-			{x = -707.501,  y = -914.260,  z = 18.215},
-			{x = -1820.523, y = 792.518,   z = 137.118},
-			{x = 1698.388,  y = 4924.404,  z = 41.063},
-			{x = 25.723,   y = -1346.966, z = 28.497}, 
+			--{x = 2557.458,  y = 382.282,  z = 107.622},
+			--{x = -3038.939, y = 585.954,  z = 6.908},
+			--{x = -3241.927, y = 1001.462, z = 11.830},
+			--{x = 547.431,   y = 2671.710, z = 41.156},
+			--{x = 1961.464,  y = 3740.672, z = 31.343},
+			--{x = 2678.916,  y = 3280.671, z = 54.241},
+			--{x = 1729.216,  y = 6414.131, z = 34.037},
+			--{x = -48.519,   y = -1757.514, z = 28.421},
+			--{x = 1163.373,  y = -323.801,  z = 68.205},
+			--{x = -707.501,  y = -914.260,  z = 18.215},
+			--{x = -1820.523, y = 792.518,   z = 137.118},
+			--{x = 1698.388,  y = 4924.404,  z = 41.063},
+			--{x = 25.723,   y = -1346.966, z = 28.497}, 
         },
         Items = {
             {name = 'bread'},
@@ -79,7 +83,17 @@ Config.Shops = {
 
     IlegalShop = {
         Locations = {
-            { x = 468.58, y = -3205.64, z = 9.79 },
+           -- { x = 468.58, y = -3205.64, z = 9.79 },
+        },
+        Items = {
+            { name = 'bread' , price = 1},
+            { name = 'water',price = 1 }
+        }
+    },
+
+    DrugShop = {
+        Locations = {
+           -- { x = 468.58, y = -3205.64, z = 9.79 },
         },
         Items = {
             { name = 'bread' , price = 1},
@@ -89,7 +103,7 @@ Config.Shops = {
 
     RobsLiquor = {
         Locations = {
-            { x = 1135.808, y = -982.281, z = 45.415 },
+          --  { x = 1135.808, y = -982.281, z = 45.415 },
         },
         Items = {
             {name = 'beer', price = 1},
@@ -104,7 +118,7 @@ Config.Shops = {
 
     YouTool = {
         Locations = {
-            { x = 2748.0, y = 3473.0, z = 55.68 },
+           -- { x = 2748.0, y = 3473.0, z = 55.68 },
         },
         Items = {
             {name = 'drill', price = 1},
@@ -127,7 +141,7 @@ Config.Shops = {
 
     PrisonShop = {
         Locations = {
-            { x = -1103.05, y = -823.72, z = 14.48 },
+          --  { x = -1103.05, y = -823.72, z = 14.48 },
         },
         Items = {
             {name = 'bread', price = 1},
@@ -146,16 +160,6 @@ Config.Shops = {
         },
 
         Items = {
-            {name = "WEAPON_FLASHLIGHT", price = 1},
-            {name = "WEAPON_STUNGUN", price = 1},
-            {name = "WEAPON_KNIFE", price = 1},
-            {name = "WEAPON_BAT", price = 1},
-            {name = "WEAPON_PISTOL", price = 1},
-            {name = "WEAPON_PUMPSHOTGUN",price = 1},
-            {name = "WEAPON_SMOKEGRENADE",price = 1},
-            {name = "WEAPON_FIREEXTINGUISHER",price = 1},
-            {name = "WEAPON_CROWBAR",price = 1},
-            {name = "WEAPON_BZGAS",price = 1},
             {name = "disc_ammo_pistol",price = 1},
             {name = "disc_ammo_pistol_large",price = 1},
             {name = "disc_ammo_shotgun",price = 1},
@@ -175,7 +179,7 @@ Config.Shops = {
     },
 
 
-    PoliceShop = {
+    PoliceShop = { -- available for Config.InventoryJob.Police
        Locations = {
            { x = 451.68, y = -980.02, z = 29.69 },
 
@@ -204,9 +208,9 @@ Config.Shops = {
         }
 	},
 	
-	BlackMarket = {
+	BlackMarket = { -- available for Config.InventoryJob.Mafia
         Locations = {
-            { x = -1297.96, y = -392.60, z = 35.47 },
+          --  { x = -1297.96, y = -392.60, z = 35.47 },
         
         },
 
@@ -218,14 +222,14 @@ Config.Shops = {
     },
 	
     LicenseShop = {
-        Locations = {
-            { x = 12.47, y = -1105.5, z = 29.8}
+       Locations = {
+      --      { x = 12.47, y = -1105.5, z = 29.8}
         }
     },
 	
-    ShopNightclub = {
+    ShopNightclub = { -- available for Config.InventoryJob.Nightclub
         Locations = {
-            { x = -1518.48, y = 113.1, z = 49.05 }
+       --     { x = -1518.48, y = 113.1, z = 49.05 }
       
         },
         Items = {

@@ -5,7 +5,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(10)
         player = PlayerPedId()
         coords = GetEntityCoords(player)
-        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInIlegalShopZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInShopNightclubZone(coords) or IsInPoliceShopZone(coords) then
+        if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInDrugShopZone(coords) or IsInIlegalShopZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInShopNightclubZone(coords) or IsInPoliceShopZone(coords) then
             if IsInRegularShopZone(coords) then
                 if IsControlJustReleased(0, 38) then
                     OpenShopInv("regular")
@@ -14,8 +14,17 @@ Citizen.CreateThread(function()
             end
             if IsInIlegalShopZone(coords) then
                 if IsControlJustReleased(0, 38) then
-                    OpenShopInv("ilegal")
-                    Citizen.Wait(2000)
+					if Config.IllegalshopOpen == true then
+						OpenShopInv("ilegal")
+						Citizen.Wait(2000)
+					else
+						if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
+							OpenShopInv("ilegal")
+							Citizen.Wait(2000)
+						else
+							exports['mythic_notify']:DoHudText('error', _U('no_acces'))
+						end
+					end
                 end
             end
             if IsInRobsLiquorZone(coords) then
@@ -31,12 +40,18 @@ Citizen.CreateThread(function()
                 end
             end
             if IsInPrisonShopZone(coords) then
-                if ESX.GetPlayerData().job.name == 'police' then
+                if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
                     if IsControlJustReleased(0, 38) then
                         OpenShopInv("prison")
                        Citizen.Wait(2000)
                     end
                 end
+            end
+            if IsInDrugShopZone(coords) then
+				if IsControlJustReleased(0, 38) then
+					OpenShopInv("drugs")
+					Citizen.Wait(2000)
+				end
             end
             if IsInWeaponShopZone(coords) then
                 if IsControlJustReleased(0, 38) then
@@ -52,7 +67,7 @@ Citizen.CreateThread(function()
             end
             if IsInPoliceShopZone(coords) then
                 if IsControlJustReleased(0, 38) then
-                    if ESX.GetPlayerData().job.name == 'police' then
+                    if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 						ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 							if hasWeaponLicense then
 								OpenShopInv("policeshop")
@@ -66,7 +81,7 @@ Citizen.CreateThread(function()
             end
             if IsInShopNightclubZone(coords) then
                 if IsControlJustReleased(0, 38) then
-                    if ESX.GetPlayerData().job.name == "nachtclub" then
+                    if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub then
                         OpenShopInv("nightclubshop")
                         Citizen.Wait(2000)
                     end
@@ -74,8 +89,10 @@ Citizen.CreateThread(function()
             end
             if IsInBlackMarketZone(coords) then
                 if IsControlJustReleased(0, 38) then
-					OpenShopInv("blackmarket")
-					Citizen.Wait(2000)
+                    if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia then
+						OpenShopInv("blackmarket")
+						Citizen.Wait(2000)
+                    end
                 end
             end
         else
@@ -192,6 +209,16 @@ function IsInIlegalShopZone(coords)
     return false
 end
 
+function IsInDrugShopZone(coords)
+    DrugShop = Config.Shops.DrugShop.Locations
+    for i = 1, #DrugShop, 1 do
+        if GetDistanceBetweenCoords(coords, DrugShop[i].x, DrugShop[i].y, DrugShop[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
 function IsInRobsLiquorZone(coords)
     RobsLiquor = Config.Shops.RobsLiquor.Locations
     for i = 1, #RobsLiquor, 1 do
@@ -263,6 +290,16 @@ function IsInShopNightclubZone(coords)
     return false
 end
 
+function IsInShopNightclubZone(coords)
+    ShopNightclub = Config.Shops.ShopNightclub.Locations
+    for i = 1, #ShopNightclub, 1 do
+        if GetDistanceBetweenCoords(coords, ShopNightclub[i].x, ShopNightclub[i].y, ShopNightclub[i].z, true) < 1.5 then
+            return true
+        end
+    end
+    return false
+end
+
 Citizen.CreateThread(function()
     player = PlayerPedId()
     coords = GetEntityCoords(player)
@@ -298,19 +335,31 @@ Citizen.CreateThread(function()
 
 	if Config.ShowPoliceShopBlip then
 		for k, v in pairs(Config.Shops.PoliceShop.Locations) do
-			CreateBlip(vector3(Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z), _U('police_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+			CreateBlip(vector3(Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z), _U('police_shop_name'), 3.0, Config.WeaponColor, Config.PoliceShopBlipID)
 		end
 	end
 
 	if Config.ShowNightclubShopBlip then
 		for k, v in pairs(Config.Shops.ShopNightclub.Locations) do
-			CreateBlip(vector3(Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z), _U('nightclub_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+			CreateBlip(vector3(Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z), _U('nightclub_shop_name'), 3.0, Config.WeaponColor, Config.NightclubShopBlipID)
 		end
 	end
 
 	if Config.ShowBlackMarketBlip then
 		for k, v in pairs(Config.Shops.BlackMarket.Locations) do
-			CreateBlip(vector3(Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z), _U('blackmarket_shop_name'), 3.0, Config.WeaponColor, Config.WeaponShopBlipID)
+			CreateBlip(vector3(Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z), _U('blackmarket_shop_name'), 3.0, Config.WeaponColor, Config.BlackMarketBlipID)
+		end
+	end
+
+	if Config.ShowDrugMarketBlip then
+		for k, v in pairs(Config.Shops.DrugShop.Locations) do
+			CreateBlip(vector3(Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z), _U('drug_shop_name'), 3.0, Config.WeaponColor, Config.DrugShopBlipID)
+		end
+	end
+
+	if Config.ShowIllegalShopBlip then
+		for k, v in pairs(Config.Shops.IlegalShop.Locations) do
+			CreateBlip(vector3(Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z), _U('blackmarket_shop_name'), 3.0, Config.WeaponColor, Config.IllegalShopBlipID)
 		end
 	end
     CreateBlip(vector3(-755.79, 5596.07, 41.67), "www.theheadquarters.eu", 3.0, 4, 36) -- The original esx_inventoryhud is from Trsak. It is officially maintained by the Headquarters.
@@ -425,6 +474,18 @@ Citizen.CreateThread(function()
                     DrawMarker(27, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
                     if distance < 3.0 then 
                         DrawText3Ds(Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z + 1, _U("open_shop"))
+                        near = true
+                        break
+                    end
+                    near = true
+                end
+            end
+            for k, v in pairs(Config.Shops.DrugShop.Locations) do
+                local distance = GetDistanceBetweenCoords(coords, Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z, true)
+                if distance < 10 then
+                    DrawMarker(27, Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
+                    if distance < 3.0 then 
+                        DrawText3Ds(Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z + 1, _U("open_shop"))
                         near = true
                         break
                     end

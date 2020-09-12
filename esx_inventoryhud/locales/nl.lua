@@ -33,6 +33,7 @@ Locales["nl"] = {
     ['you_tool_name'] = 'Bouwmarkt',
    	['prison_shop_name'] = 'Gevangenis winkel',
 	['weapon_shop_name'] = 'Wapenwinkel',
+	['drug_shop_name'] = 'Drug Shop',
 	['nightclub_shop_name'] = 'Nightclub',
 	['police_shop_name'] = 'Politie winkel',
 	['license_shop_title'] = 'Licentie winkel',
@@ -52,5 +53,6 @@ Locales["nl"] = {
 	["no_weapon_selected"] = "Geen wapen geselecteerd.",
 	["no_attachment"] = "Dit wapen beschikt niet over deze attachment.",
 	["no_gun_in_hand"] = "Je hebt geen wapen in je hand.",
-	["open_shop"] = "Druk op [~g~E~w~] om de winkel te openen"
+	["open_shop"] = "Druk op [~g~E~w~] om de winkel te openen",
+	["no_acces"] = "Geen toegang tot deze winkel.",
 }

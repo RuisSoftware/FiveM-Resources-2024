@@ -24,13 +24,13 @@ Locales["fr"] = {
 	["weapon_removed"] = "Retiré:",
 	["yes"] = "Yes",
 	["no"] = "No",
-	-- Magasins
 	["shop_press_menu"] = "Appuyez sur ~INPUT_CONTEXT~ pour accéder au ~y~Magasin~s~.",
 	["regular_shop_name"] = "Magasin",
     ['regular_shop_name'] = 'MiniMarket',
 	['blackmarket_shop_name'] = 'Black market',
     ['robs_liquor_name'] = 'Liquor store',
     ['you_tool_name'] = 'Hardware store',
+	['drug_shop_name'] = 'Drug Shop',
    	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
 	['nightclub_shop_name'] = 'Nightclub',
@@ -39,7 +39,6 @@ Locales["fr"] = {
 	["license_shop_help"] = "appuyez sur ~INPUT_CONTEXT~ pour enregistrer une licence.",
 	["license_shop_check"] = "Vous avez déjà une licence pour porter des armes!",
 	["license_check_fail"] = "Vous avez besoin d\'une licence pour transporter des armes!",
-	
 	["bed_stash"] = "Bed Stash",
 	["motels"] = "Motel Inventory",
 	["trunk"] = "Trunk Inventory",
@@ -47,11 +46,11 @@ Locales["fr"] = {
 	["store"] = "Supermarket",
 	["vault"] = "Vault",
 	["weapon_pulled"] = "Weapon pulled",
-	
 	["error"] = "An error has occurred.",
 	["not_compatible"] = "This attachment is not compatible or is already equipped.",
 	["no_weapon_selected"] = "No weapon selected.",
 	["no_attachment"] = "This weapon does not have this attachment.",
 	["no_gun_in_hand"] = "You don't have a gun in your hand.",
-	["open_shop"] = "Press [~g~E~w~] to open the shop"
+	["open_shop"] = "Press [~g~E~w~] to open the shop",
+	["no_acces"] = "Geen toegang tot deze winkel.",
 }

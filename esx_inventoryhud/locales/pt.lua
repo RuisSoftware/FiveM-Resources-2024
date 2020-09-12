@@ -27,6 +27,7 @@ Locales["pt"] = {
     ['regular_shop_name'] = 'MiniMarket',
 	['blackmarket_shop_name'] = 'Black market',
     ['robs_liquor_name'] = 'Liquor store',
+	['drug_shop_name'] = 'Drug Shop',
     ['you_tool_name'] = 'Hardware store',
    	['prison_shop_name'] = 'Prison Commissioner',
 	['weapon_shop_name'] = 'AmmuNation',
@@ -35,5 +36,6 @@ Locales["pt"] = {
 	['license_shop_title'] = 'Registar licença?',
 	['license_shop_help'] = 'pressiona ~INPUT_CONTEXT~ para registar a licença',
 	['license_shop_check'] = 'Já tens uma licença de porte de Armas!',
-	['license_check_fail'] = 'Precisas de uma licença para carregares armas contigo!'
+	['license_check_fail'] = 'Precisas de uma licença para carregares armas contigo!',
+	["no_acces"] = "Geen toegang tot deze winkel.",
 }

@@ -14,7 +14,7 @@ RegisterNetEvent("esx_inventoryhud:openPlayerInventory")
 AddEventHandler("esx_inventoryhud:openPlayerInventory", function(target, playerName)
 	PlayerData = ESX.GetPlayerData()	
 	if Config.JobOnlyInventory then
-		if PlayerData.job and PlayerData.job.name == Config.InventoryJob.One or PlayerData.job.name == Config.InventoryJob.Two or PlayerData.job.name == Config.InventoryJob.Three then
+		if PlayerData.job and PlayerData.job.name == Config.InventoryJob.Police or PlayerData.job.name == Config.InventoryJob.Nightclub or PlayerData.job.name == Config.InventoryJob.Mafia then
 			targetPlayer = target
 			targetPlayerName = playerName
 			setPlayerInventoryData()
