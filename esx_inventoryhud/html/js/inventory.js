@@ -364,8 +364,9 @@ function setCount(item) {
     }
 
     if (item.type === "item_account" || item.type === "item_money") {
-        count = "€" + formatMoney(item.count);
-    }
+        //count = "€" + formatMoney(item.count);
+		count = formatMoney(item.count);
+	}
 
     return count;
 }
@@ -381,16 +382,24 @@ function setCost(item) {
     return cost;
 }
 
-function formatMoney(n, c, d, t) {
-    var c = isNaN(c = Math.abs(c)) ? 2 : c,
-        d = d == undefined ? "." : d,
-        t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
-        j = (j = i.length) > 3 ? j % 3 : 0;
+//function formatMoney(n, c, d, t) {
+//    var c = isNaN(c = Math.abs(c)) ? 2 : c,
+//        d = d == undefined ? "." : d,
+//        t = t == undefined ? "," : t,
+//        s = n < 0 ? "-" : "",
+//        i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+//        j = (j = i.length) > 3 ? j % 3 : 0;
+//
+//    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t);
+//};
 
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t);
-};
+function formatMoney(number) {
+	return number.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+}
+
+//function formatMoney(number) {
+//	return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+//}
 
 $(document).ready(function () {
     $("#count").focus(function () {
