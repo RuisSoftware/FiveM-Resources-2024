@@ -86,8 +86,8 @@ Config.Shops = {
            -- { x = 468.58, y = -3205.64, z = 9.79 },
         },
         Items = {
-            { name = 'bread' , price = 1},
-            { name = 'water',price = 1 }
+            { name = 'bread', price = 1},
+            { name = 'water', price = 1}
         }
     },
 
@@ -96,8 +96,8 @@ Config.Shops = {
            -- { x = 468.58, y = -3205.64, z = 9.79 },
         },
         Items = {
-            { name = 'bread' , price = 1},
-            { name = 'water',price = 1 }
+            { name = 'bread', price = 1},
+            { name = 'water', price = 1}
         }
     },
 
@@ -112,7 +112,6 @@ Config.Shops = {
             {name = 'tequila', price = 1},
             {name = 'whisky', price = 1},
             {name = 'grand_cru', price = 1}
-
         }
     },
 
@@ -160,16 +159,16 @@ Config.Shops = {
         },
 
         Items = {
-            {name = "disc_ammo_pistol",price = 1},
-            {name = "disc_ammo_pistol_large",price = 1},
-            {name = "disc_ammo_shotgun",price = 1},
-            {name = "disc_ammo_shotgun_large",price = 1},
-            {name = "disc_ammo_smg",price = 1},
-            {name = "disc_ammo_smg_large",price = 1},
-            {name = "disc_ammo_rifle",price = 1},
-            {name = "disc_ammo_rifle_large",price = 1},
-            {name = "disc_ammo_snp",price = 1},
-            {name = "disc_ammo_snp_large",price = 1},
+            {name = "disc_ammo_pistol", price = 1},
+            {name = "disc_ammo_pistol_large", price = 1},
+            {name = "disc_ammo_shotgun", price = 1},
+            {name = "disc_ammo_shotgun_large", price = 1},
+            {name = "disc_ammo_smg", price = 1},
+            {name = "disc_ammo_smg_large", price = 1},
+            {name = "disc_ammo_rifle", price = 1},
+            {name = "disc_ammo_rifle_large", price = 1},
+            {name = "disc_ammo_snp", price = 1},
+            {name = "disc_ammo_snp_large", price = 1},
             --{name = "flashlight",price = 1},
             --{name = "grip",price = 1},
             --{name = "scope",price = 1},
