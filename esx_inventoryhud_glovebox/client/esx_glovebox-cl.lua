@@ -28,23 +28,17 @@ end)
 
 
 RegisterNetEvent("esx:playerLoaded")
-AddEventHandler(
-  "esx:playerLoaded",
-  function(xPlayer)
+AddEventHandler("esx:playerLoaded", function(xPlayer)
     PlayerData = xPlayer
     TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
-  end
-)
+end)
 
-AddEventHandler(
-  "onResourceStart",
-  function()
+AddEventHandler("onResourceStart", function()
     PlayerData = xPlayer
     TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
-  end
-)
+end)
 
 RegisterNetEvent("esx:setJob")
 AddEventHandler("esx:setJob", function(job)
@@ -152,11 +146,9 @@ Citizen.CreateThread(
         GUI.Time = GetGameTimer()
       end
     end
-  end
-)
+end)
 
-Citizen.CreateThread(
-  function()
+Citizen.CreateThread(function()
     while true do
       Wait(0)
       local pos = GetEntityCoords(GetPlayerPed(-1))
@@ -172,8 +164,7 @@ Citizen.CreateThread(
         end
       end
     end
-  end
-)
+  end)
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler(
@@ -182,8 +173,7 @@ AddEventHandler(
     PlayerData = xPlayer
     TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
-  end
-)
+end)
 
 function OpenCoffresInventoryMenu(plate, max, myVeh) 
 	ESX.TriggerServerCallback("esx_glovebox:getInventoryV", function(inventory)
