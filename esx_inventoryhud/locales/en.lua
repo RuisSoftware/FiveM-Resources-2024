@@ -3,7 +3,7 @@ Locales["en"] = {
 	["black_money"] = "Dirty Money",
 	["player_nearby"] = "Player is no longer nearby!",
 	["players_nearby"] = "There are no other players around!",
-	["openinv_help"] = "Open other player's inventory.",
+	["openinv_help"] = "Open another player's inventory.",
 	["openinv_id"] = "Player ID",
 	["no_permissions"] = "You don't have permissions to do that!",
 	["no_player"] = "Cannot find player!",
@@ -56,5 +56,5 @@ Locales["en"] = {
 	["no_attachment"] = "This weapon does not have this attachment.",
 	["no_gun_in_hand"] = "You don't have a gun in your hand.",	
 	["open_shop"] = "Press [~g~E~w~] to open the shop",
-	["no_acces"] = "Geen toegang tot deze winkel.",
+	["no_acces"] = "You don't have access to this store.",
 }
