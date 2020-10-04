@@ -5,8 +5,7 @@ AddEventHandler("esx_inventoryhud:openPropertyInventory", function(data, playerS
     if playerSafe then isPlayerSafe = playerSafe; else isPlayerSafe = false; end
     setPropertyInventoryData(data)
     openPropertyInventory()
-    end
-)
+end)
 
 function refreshPropertyInventory()
     if isPlayerSafe then
@@ -24,7 +23,7 @@ function setPropertyInventoryData(data)
     items = {}
 
     local blackMoney = data.blackMoney
-	local money = data.money
+    local money = data.money
     local propertyItems = data.items
     local propertyWeapons = data.weapons
 
@@ -112,9 +111,7 @@ function openPropertyInventory()
     SetNuiFocus(true, true)
 end
 
-RegisterNUICallback(
-    "PutIntoProperty",
-    function(data, cb) 
+RegisterNUICallback("PutIntoProperty", function(data, cb) 
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
@@ -144,12 +141,9 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)
 
-RegisterNUICallback(
-    "TakeFromProperty",
-    function(data, cb)
+RegisterNUICallback("TakeFromProperty", function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
@@ -168,5 +162,4 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)
