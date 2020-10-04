@@ -26,14 +26,11 @@ end)
 
 
 RegisterNetEvent("esx:playerLoaded")
-AddEventHandler(
-  "esx:playerLoaded",
-  function(xPlayer)
+AddEventHandler("esx:playerLoaded", function(xPlayer)
     PlayerData = xPlayer
     TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
     lastChecked = GetGameTimer()
-  end
-)
+end)
 
 AddEventHandler("onResourceStart", function()
     PlayerData = xPlayer
@@ -54,13 +51,10 @@ AddEventHandler("esx:setJob", function(job)
 end)
 
 RegisterNetEvent("esx_trunk_inventory:setOwnedVehicule")
-AddEventHandler(
-  "esx_trunk_inventory:setOwnedVehicule",
-  function(vehicle)
+AddEventHandler("esx_trunk_inventory:setOwnedVehicule", function(vehicle)
     vehiclePlate = vehicle
     --print("vehiclePlate: ", ESX.DumpTable(vehiclePlate))
-  end
-)
+end)
 
 function getItemyWeight(item)
   local weight = 0
@@ -187,8 +181,7 @@ Citizen.CreateThread(
         end
       end
     end
-  end
-)
+end)
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded",function(xPlayer)
