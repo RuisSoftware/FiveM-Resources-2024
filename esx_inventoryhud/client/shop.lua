@@ -181,8 +181,7 @@ RegisterNUICallback("TakeFromShop", function(data, cb)
     loadPlayerInventory()
 
     cb("ok")
-end
-)
+end)
 
 RegisterNetEvent("suku:AddAmmoToWeapon")
 AddEventHandler("suku:AddAmmoToWeapon", function(hash, amount)
