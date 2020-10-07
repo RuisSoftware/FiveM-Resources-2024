@@ -63,10 +63,7 @@ end
 
 function getTotalInventoryWeight(plate)
   local total
-  TriggerEvent(
-    "esx_trunk:getSharedDataStore",
-    plate,
-    function(store)
+  TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
       local W_weapons = getInventoryWeight(store.get("weapons") or {})
       local W_coffre = getInventoryWeight(store.get("coffre") or {})
       local W_blackMoney = 0
@@ -81,20 +78,14 @@ function getTotalInventoryWeight(plate)
         W_cashMoney = cashAccount[1].amount / 10
       end
       total = W_weapons + W_coffre + W_blackMoney + W_cashMoney
-    end
-  )
+    end)
   return total
 end
 
-ESX.RegisterServerCallback(
-  "esx_trunk:getInventoryV",
-  function(source, cb, plate)
-    TriggerEvent(
-      "esx_trunk:getSharedDataStore",
-      plate,
-      function(store)
+ESX.RegisterServerCallback("esx_trunk:getInventoryV", function(source, cb, plate)
+    TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
         local blackMoney = 0
-		local cashMoney = 0
+	local cashMoney = 0
         local items = {}
         local weapons = {}
         weapons = (store.get("weapons") or {})
@@ -104,7 +95,7 @@ ESX.RegisterServerCallback(
           blackMoney = blackAccount[1].amount
         end
 
-		local cashAccount = (store.get("money")) or 0
+	local cashAccount = (store.get("money")) or 0
         if cashAccount ~= 0 then
           cashMoney = cashAccount[1].amount
         end
@@ -124,15 +115,11 @@ ESX.RegisterServerCallback(
             weight = weight
           }
         )
-      end
-    )
-  end
-)
+      end)
+end)
 
 RegisterServerEvent("esx_trunk:getItem")
-AddEventHandler(
-  "esx_trunk:getItem",
-  function(plate, type, item, count, max, owned)
+AddEventHandler("esx_trunk:getItem", function(plate, type, item, count, max, owned)
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
 
@@ -191,8 +178,7 @@ AddEventHandler(
             text = _U("trunk_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
-          end
-        )
+          end)
       else
       
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'false', text = _U("player_inv_no_space") })
@@ -200,10 +186,7 @@ AddEventHandler(
     end
 
     if type == "item_account" then
-      TriggerEvent(
-        "esx_trunk:getSharedDataStore",
-        plate,
-        function(store)
+      TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
           local blackMoney = store.get("black_money")
           if (blackMoney[1].amount >= count and count > 0) then
             blackMoney[1].amount = blackMoney[1].amount - count
@@ -211,7 +194,7 @@ AddEventHandler(
             xPlayer.addAccountMoney(item, count)
 
             local blackMoney = 0
-			local cashMoney = 0
+	    local cashMoney = 0
             local items = {}
             local weapons = {}
             weapons = (store.get("weapons") or {})
@@ -239,15 +222,11 @@ AddEventHandler(
           else
 			TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
           end
-        end
-      )
+        end)
     end
 	
 	if type == "item_money" then
-      TriggerEvent(
-        "esx_trunk:getSharedDataStore",
-        plate,
-        function(store)
+      TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
           local cashMoney = store.get("money")
           if (cashMoney[1].amount >= count and count > 0) then
             cashMoney[1].amount = cashMoney[1].amount - count
@@ -255,7 +234,7 @@ AddEventHandler(
             xPlayer.addMoney(count)
 
             local blackMoney = 0
-			local cashMoney = 0
+	    local cashMoney = 0
             local items = {}
             local weapons = {}
             weapons = (store.get("weapons") or {})
@@ -281,9 +260,7 @@ AddEventHandler(
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
           else
-            TriggerClientEvent(
-              "pNotify:SendNotification",
-              _source,
+            TriggerClientEvent("pNotify:SendNotification", _source,
               {
                 text = _U("invalid_amount"),
                 type = "error",
@@ -293,15 +270,11 @@ AddEventHandler(
               }
             )
           end
-        end
-      )
+        end)
     end
 
     if type == "item_weapon" then
-      TriggerEvent(
-        "esx_trunk:getSharedDataStore",
-        plate,
-        function(store)
+      TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
           local storeWeapons = store.get("weapons")
 
           if storeWeapons == nil then
@@ -327,7 +300,7 @@ AddEventHandler(
           xPlayer.addWeapon(weaponName, ammo)
 
           local blackMoney = 0
-		  local cashMoney = 0
+	  local cashMoney = 0
           local items = {}
           local weapons = {}
           weapons = (store.get("weapons") or {})
@@ -404,8 +377,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
                 }
               )
             end
-          end
-        )
+          end)
       else
     
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_quantity") })
@@ -416,10 +388,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
       local playerAccountMoney = xPlayer.getAccount(item).money
 
       if (playerAccountMoney >= count and count > 0) then
-        TriggerEvent(
-          "esx_trunk:getSharedDataStore",
-          plate,
-          function(store)
+        TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
             local blackMoney = (store.get("black_money") or nil)
             if blackMoney ~= nil then
               blackMoney[1].amount = blackMoney[1].amount + count
@@ -444,8 +413,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
                 }
               )
             end
-          end
-        )
+          end)
       else
 		TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
       end
@@ -455,10 +423,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
       local playerAccountMoney = xPlayer.getMoney()
 
       if (playerAccountMoney >= count and count > 0) then
-        TriggerEvent(
-          "esx_trunk:getSharedDataStore",
-          plate,
-          function(store)
+        TriggerEvent("esx_trunk:getSharedDataStore", plate, function(store)
             local cashMoney = (store.get("money") or nil)
             if cashMoney ~= nil then
               cashMoney[1].amount = cashMoney[1].amount + count
@@ -483,8 +448,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
                 }
               )
             end
-          end
-        )
+          end)
       else
 		TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
       end

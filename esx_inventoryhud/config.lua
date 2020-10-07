@@ -1,6 +1,6 @@
 Config = {}
 Config.Locale = "nl" -- Currently supported: nl, en, tr, fr. Your translation file is really appreciated. Send it to our Github repo.
-Config.IncludeCash = true -- Include cash in inventory? treu or false.
+Config.IncludeCash = true -- Include cash in inventory? true or false.
 Config.IncludeWeapons = true -- Include weapons in inventory? true or nil.
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
 Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH! Inlcuding money or black_money this way will cause bugs.
@@ -9,7 +9,7 @@ Config.CloseControl = 289
 Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/
 Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/
 Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NOT YET SUPPORTED
-Config.JobOnlyInventory = true -- true = only Config.InventoryJob can open someone else inventory. False = everybody can 'steal' items from someone else.
+Config.JobOnlyInventory = true -- true = only Config.InventoryJob can open someone elses inventory. False = everybody can 'steal' items from someone else.
 Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Ilelgal can enter this shop.
 Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil}
 -- List of item names that will close ui when used.
@@ -46,7 +46,7 @@ Config.License = {Weapon = "weapon", Police = "weapon", Nightclub = "weapon"} --
 Config.Shops = {
     RegularShop = {
         Locations = {
-			{x = 373.875,   y = 325.896,  z = 102.566},
+			{x = 373.875,   y = 325.896,  z = 102.566}
 			--{x = 2557.458,  y = 382.282,  z = 107.622},
 			--{x = -3038.939, y = 585.954,  z = 6.908},
 			--{x = -3241.927, y = 1001.462, z = 11.830},
@@ -59,7 +59,7 @@ Config.Shops = {
 			--{x = -707.501,  y = -914.260,  z = 18.215},
 			--{x = -1820.523, y = 792.518,   z = 137.118},
 			--{x = 1698.388,  y = 4924.404,  z = 41.063},
-			--{x = 25.723,   y = -1346.966, z = 28.497}, 
+			--{x = 25.723,   y = -1346.966, z = 28.497}
         },
         Items = {
             {name = 'bread', price = 1},
@@ -83,7 +83,7 @@ Config.Shops = {
 
     IlegalShop = {
         Locations = {
-           -- { x = 468.58, y = -3205.64, z = 9.79 },
+           -- { x = 468.58, y = -3205.64, z = 9.79 }
         },
         Items = {
             { name = 'bread', price = 1},
@@ -93,7 +93,7 @@ Config.Shops = {
 
     DrugShop = {
         Locations = {
-           -- { x = 468.58, y = -3205.64, z = 9.79 },
+           -- { x = 468.58, y = -3205.64, z = 9.79 }
         },
         Items = {
             { name = 'bread', price = 1},
@@ -103,7 +103,7 @@ Config.Shops = {
 
     RobsLiquor = {
         Locations = {
-          --  { x = 1135.808, y = -982.281, z = 45.415 },
+          --  { x = 1135.808, y = -982.281, z = 45.415 }
         },
         Items = {
             {name = 'beer', price = 1},
@@ -117,7 +117,7 @@ Config.Shops = {
 
     YouTool = {
         Locations = {
-           -- { x = 2748.0, y = 3473.0, z = 55.68 },
+           -- { x = 2748.0, y = 3473.0, z = 55.68 }
         },
         Items = {
             {name = 'drill', price = 1},
@@ -140,7 +140,7 @@ Config.Shops = {
 
     PrisonShop = {
         Locations = {
-          --  { x = -1103.05, y = -823.72, z = 14.48 },
+          --  { x = -1103.05, y = -823.72, z = 14.48 }
         },
         Items = {
             {name = 'bread', price = 1},
@@ -168,7 +168,7 @@ Config.Shops = {
             {name = "disc_ammo_rifle", price = 1},
             {name = "disc_ammo_rifle_large", price = 1},
             {name = "disc_ammo_snp", price = 1},
-            {name = "disc_ammo_snp_large", price = 1},
+            {name = "disc_ammo_snp_large", price = 1}--,
             --{name = "flashlight",price = 1},
             --{name = "grip",price = 1},
             --{name = "scope",price = 1},
@@ -180,7 +180,7 @@ Config.Shops = {
 
     PoliceShop = { -- available for Config.InventoryJob.Police
        Locations = {
-           { x = 451.68, y = -980.02, z = 29.69 },
+           { x = 451.68, y = -980.02, z = 29.69 }
 
         },
         Items = {
@@ -203,13 +203,13 @@ Config.Shops = {
             {name = "disc_ammo_rifle",price = 1},
             {name = "disc_ammo_rifle_large",price = 1},
             {name = "disc_ammo_snp",price = 1},
-            {name = "disc_ammo_snp_large",price = 1},
+            {name = "disc_ammo_snp_large",price = 1}
         }
 	},
 	
 	BlackMarket = { -- available for Config.InventoryJob.Mafia
         Locations = {
-          --  { x = -1297.96, y = -392.60, z = 35.47 },
+          --  { x = -1297.96, y = -392.60, z = 35.47 }
         
         },
 

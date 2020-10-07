@@ -1,16 +1,11 @@
 RegisterNetEvent("esx_inventoryhud:openMotelsInventoryBed")
-AddEventHandler(
-    "esx_inventoryhud:openMotelsInventoryBed",
-    function(data)
+AddEventHandler("esx_inventoryhud:openMotelsInventoryBed", function(data)
         setPropertyMotelDataBed(data)
         openMotelInventoryBed()
-    end
-)
+end)
 
 function refreshPropertyMotelBedInventory()
-    ESX.TriggerServerCallback(
-        "lsrp-motels:getPropertyInventoryBed",
-        function(inventory)
+    ESX.TriggerServerCallback("lsrp-motels:getPropertyInventoryBed", function(inventory)
             setPropertyMotelDataBed(inventory)
         end,
         ESX.GetPlayerData().identifier
@@ -116,9 +111,7 @@ function openMotelInventoryBed()
     SetNuiFocus(true, true)
 end
 
-RegisterNUICallback(
-    "PutIntoMotelBed",
-    function(data, cb)
+RegisterNUICallback("PutIntoMotelBed", function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
@@ -139,12 +132,9 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)
 
-RegisterNUICallback(
-    "TakeFromMotelBed",
-    function(data, cb)
+RegisterNUICallback("TakeFromMotelBed", function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
@@ -159,5 +149,4 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)

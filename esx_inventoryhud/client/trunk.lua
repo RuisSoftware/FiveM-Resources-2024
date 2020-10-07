@@ -5,18 +5,19 @@ AddEventHandler('esx_inventoryhud:disableOpen', function()
     closeInventory()
     canOpenTrunkInventory = false
 end)
+
 AddEventHandler("esx_inventoryhud:enableOpen", function()
     canOpenTrunkInventory = true
 end)
 
 RegisterNetEvent("esx_inventoryhud:openTrunkInventory")
-AddEventHandler("esx_inventoryhud:openTrunkInventory",function(data, blackMoney, cashMoney, inventory, weapons)
+AddEventHandler("esx_inventoryhud:openTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 	openTrunkInventory()
 end)
 
 RegisterNetEvent("esx_inventoryhud:refreshTrunkInventory")
-AddEventHandler("esx_inventoryhud:refreshTrunkInventory",function(data, blackMoney, cashMoney, inventory, weapons)
+AddEventHandler("esx_inventoryhud:refreshTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
         setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 end)
 

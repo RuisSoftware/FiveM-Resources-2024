@@ -6,16 +6,11 @@ local SharedDataStores = {}
 
 local listPlate = Config.VehiclePlate
 
-TriggerEvent(
-  "esx:getSharedObject",
-  function(obj)
+TriggerEvent("esx:getSharedObject", function(obj)
     ESX = obj
-  end
-)
+end)
 
-AddEventHandler(
-  "onMySQLReady",
-  function()
+AddEventHandler("onMySQLReady", function()
     local result = MySQL.Sync.fetchAll("SELECT * FROM trunk_inventory")
     local data = nil
     if #result ~= 0 then
@@ -27,8 +22,7 @@ AddEventHandler(
         SharedDataStores[plate] = dataStore
       end
     end
-  end
-)
+end)
 
 function loadInvent(plate)
   local result =
@@ -100,9 +94,6 @@ function GetSharedDataStore(plate)
   return SharedDataStores[plate]
 end
 
-AddEventHandler(
-  "esx_trunk:getSharedDataStore",
-  function(plate, cb)
+AddEventHandler("esx_trunk:getSharedDataStore", function(plate, cb)
     cb(GetSharedDataStore(plate))
-  end
-)
+end)

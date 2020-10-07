@@ -178,8 +178,7 @@ AddEventHandler("esx_glovebox:getItem", function(plate, type, item, count, max, 
             text = _U("glovebox_info", plate, (weight / 100), (max / 100))
             data = {plate = plate, max = max, myVeh = owned, text = text}
             TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
-          end
-        )
+          end)
       else
     
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'false', text = _U("player_inv_no_space") })
@@ -230,8 +229,7 @@ AddEventHandler("esx_glovebox:getItem", function(plate, type, item, count, max, 
               }
             )
           end
-        end
-      )
+        end)
     end
 	
 	if type == "item_money" then
@@ -343,11 +341,9 @@ AddEventHandler("esx_glovebox:getItem", function(plate, type, item, count, max, 
           text = _U("glovebox_info", plate, (weight / 100), (max / 100))
           data = {plate = plate, max = max, myVeh = owned, text = text}
           TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
-        end
-      )
+        end)
     end
-  end
-)
+end)
 
 RegisterServerEvent("esx_glovebox:putItem")
 AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, owned, label)
@@ -397,8 +393,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
                 }
               )
             end
-          end
-        )
+          end)
       else
    
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_quantity") })
@@ -437,8 +432,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
                 }
               )
             end
-          end
-        )
+          end)
       else
 
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
@@ -477,8 +471,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
                 }
               )
             end
-          end
-        )
+          end)
       else
 		TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
       end

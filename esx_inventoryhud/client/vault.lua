@@ -112,9 +112,7 @@ function openVaultInventory()
     SetNuiFocus(true, true)
 end
 
-RegisterNUICallback(
-    "PutIntoVault",
-    function(data, cb)
+RegisterNUICallback("PutIntoVault", function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
@@ -143,8 +141,7 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)
 
 RegisterNUICallback("TakeFromVault", function(data, cb)
 	if IsPedSittingInAnyVehicle(playerPed) then

@@ -1,21 +1,15 @@
 local gloveboxData = nil
 
 RegisterNetEvent("esx_inventoryhud:openGloveboxInventory")
-AddEventHandler(
-    "esx_inventoryhud:openGloveboxInventory",
-    function(data, blackMoney, cashMoney, inventory, weapons)
+AddEventHandler("esx_inventoryhud:openGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
         setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
         openGloveboxInventory()
-    end
-)
+end)
 
 RegisterNetEvent("esx_inventoryhud:refreshGloveboxInventory")
-AddEventHandler(
-    "esx_inventoryhud:refreshGloveboxInventory",
-    function(data, blackMoney, cashMoney, inventory, weapons)
+AddEventHandler("esx_inventoryhud:refreshGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
         setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
-    end
-)
+end)
 
 function setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     gloveboxData = data
@@ -115,9 +109,7 @@ function openGloveboxInventory()
     SetNuiFocus(true, true)
 end
 
-RegisterNUICallback(
-    "PutIntoGlovebox",
-    function(data, cb)
+RegisterNUICallback("PutIntoGlovebox", function(data, cb)
         if type(data.number) == "number" and math.floor(data.number) == data.number then
             local count = tonumber(data.number)
 
@@ -132,12 +124,9 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)
 
-RegisterNUICallback(
-    "TakeFromGlovebox",
-    function(data, cb)
+RegisterNUICallback("TakeFromGlovebox", function(data, cb)
         if type(data.number) == "number" and math.floor(data.number) == data.number then
             TriggerServerEvent("esx_glovebox:getItem", gloveboxData.plate, data.item.type, data.item.name, tonumber(data.number), gloveboxData.max, gloveboxData.myVeh)
         end
@@ -146,5 +135,4 @@ RegisterNUICallback(
         loadPlayerInventory()
 
         cb("ok")
-    end
-)
+end)

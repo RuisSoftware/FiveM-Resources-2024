@@ -34,7 +34,6 @@ AddEventHandler('esx_inventoryhud:useWeapon', function(weapon)
     currentWeapon = weapon
     GiveWeapon(currentWeapon)
     TriggerEvent('esx_inventoryhud:notification', weapon, _U("weapon_pulled"), 1, false)
-
 end)
 
 RegisterNetEvent('esx_inventoryhud:removeCurrentWeapon')

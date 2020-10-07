@@ -16,12 +16,13 @@ ESX.RegisterServerCallback("esx_inventoryhud:getPlayerInventory", function(sourc
 		cb(nil)
 	end
 end)
+
 ESX.RegisterServerCallback("esx_inventoryhud:getPlayerInventoryWeight", function(source,cb)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local playerweight = xPlayer.getWeight()
 	cb(playerweight)
- end)
+end)
 
 RegisterNetEvent("esx_inventoryhud:clearweapons")
 AddEventHandler("esx_inventoryhud:clearweapons", function(target)
