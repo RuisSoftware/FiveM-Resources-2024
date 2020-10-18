@@ -1,25 +1,21 @@
 local trunkData = nil
-local canOpenTrunkInventory = true
-
-AddEventHandler('esx_inventoryhud:disableOpen', function()
-    closeInventory()
-    canOpenTrunkInventory = false
-end)
-
-AddEventHandler("esx_inventoryhud:enableOpen", function()
-    canOpenTrunkInventory = true
-end)
 
 RegisterNetEvent("esx_inventoryhud:openTrunkInventory")
-AddEventHandler("esx_inventoryhud:openTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
-	setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
-	openTrunkInventory()
-end)
+AddEventHandler(
+    "esx_inventoryhud:openTrunkInventory",
+    function(data, blackMoney, cashMoney, inventory, weapons)
+        setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
+        openTrunkInventory()
+    end
+)
 
 RegisterNetEvent("esx_inventoryhud:refreshTrunkInventory")
-AddEventHandler("esx_inventoryhud:refreshTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
+AddEventHandler(
+    "esx_inventoryhud:refreshTrunkInventory",
+    function(data, blackMoney, cashMoney, inventory, weapons)
         setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
-end)
+    end
+)
 
 function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     trunkData = data
@@ -27,7 +23,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
     SendNUIMessage(
         {
             action = "setInfoText",
-            text = _("trunk")
+            text = data.text
         }
     )
 
@@ -49,10 +45,10 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 	
 	if cashMoney > 0 then
         accountData = {
-            label = _U("money"),
+            label = _U("cash"),
             count = cashMoney,
-            type = "item_account",
-            name = "money",
+            type = "item_money",
+            name = "cash",
             usable = false,
             rare = false,
             weight = -1,
@@ -106,53 +102,49 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 end
 
 function openTrunkInventory()
-    if canOpenTrunkInventory then -- adds a check if trunk inventory can be opened
-        loadPlayerInventory()
-        isInInventory = true
+    loadPlayerInventory()
+    isInInventory = true
 
-        SendNUIMessage(
-            {
-                action = "display",
-                type = "trunk"
-            }
-        )
+    SendNUIMessage(
+        {
+            action = "display",
+            type = "trunk"
+        }
+    )
 
-        SetNuiFocus(true, true)
-    end
+    SetNuiFocus(true, true)
 end
 
-RegisterNUICallback("PutIntoTrunk",function(data, cb)
-   --[[ if IsPedSittingInAnyVehicle(playerPed) then
-		return
-	end]]
+RegisterNUICallback(
+    "PutIntoTrunk",
+    function(data, cb)
+        if type(data.number) == "number" and math.floor(data.number) == data.number then
+            local count = tonumber(data.number)
 
-	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		local count = tonumber(data.number)
+            if data.item.type == "item_weapon" then
+                count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+            end
 
-		if data.item.type == "item_weapon" then
-			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
-		end
+            TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
+        end
 
-		TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
-	end
+        Wait(500)
+        loadPlayerInventory()
 
-	Wait(0)
-	loadPlayerInventory()
+        cb("ok")
+    end
+)
 
-	cb("ok")
-end)
+RegisterNUICallback(
+    "TakeFromTrunk",
+    function(data, cb)
+        if type(data.number) == "number" and math.floor(data.number) == data.number then
+            TriggerServerEvent("esx_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
+        end
 
-RegisterNUICallback("TakeFromTrunk",function(data, cb)
-	--[[if IsPedSittingInAnyVehicle(playerPed) then
-		return
-	end]]
+        Wait(500)
+        loadPlayerInventory()
 
-	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("esx_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
-	end
-
-	Wait(0)
-	loadPlayerInventory()
-
-	cb("ok")
-end)
+        cb("ok")
+    end
+)
