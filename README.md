@@ -55,8 +55,7 @@ Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX
 
 ![thanks](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/thanks.png)
 - Original esx_inventoryhud resource made by Trsak
-- https://github.com/ClicheUsername
-- https://github.com/FiveEYZ
+- To all [contributors](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/graphs/contributors)
 - Vault Script By Monster TaerAttO
 
 ![original](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/originalthreads.png)
