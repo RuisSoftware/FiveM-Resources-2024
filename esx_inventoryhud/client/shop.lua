@@ -530,6 +530,45 @@ Citizen.CreateThread(function()
     end
 end)
 
+Citizen.CreateThread(function()
+    while true do
+        Player = nil
+        Citizen.Wait(0)
+        local playerCoords = GetEntityCoords(PlayerPedId())
+        local isInMarker, letSleep, currentZone = false, false
+        for k,v in pairs(Config.Shops) do
+            for i = 1, #v.Locations, 1 do
+                local distance = GetDistanceBetweenCoords(playerCoords, v.Locations[i].x, v.Locations[i].y, v.Locations[i].z, true)
+                if distance <  1.5 then
+                    letSleep = false
+                    if distance < Config.MarkerSize.x then
+                        isInMarker  = true
+                        currentZone = k
+                        lastZone    = k
+                    end
+                end
+            end
+        end
+        if isInMarker and not hasAlreadyEnteredMarker then
+            hasAlreadyEnteredMarker = true
+            TriggerEvent('suku:hasEnteredMarker', currentZone)
+        end
+        if not isInMarker and hasAlreadyEnteredMarker then
+            hasAlreadyEnteredMarker = false
+            TriggerEvent('suku:hasExitedMarker', lastZone)
+        end
+        if letSleep then
+            Citizen.Wait(500)
+        end
+    end
+end)
+
+AddEventHandler('suku:hasEnteredMarker', function(zone)
+    currentAction     = 'shop_menu'
+    currentActionMsg  = _U('shop_press_menu')
+    currentActionData = {zone = zone}
+end)
+
 function OpenBuyLicenseMenu()
     ESX.UI.Menu.CloseAll()
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'shop_license',{
