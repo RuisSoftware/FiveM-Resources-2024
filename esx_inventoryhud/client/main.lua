@@ -380,18 +380,22 @@ RegisterNUICallback("UseItem", function(data, cb)
 end)
 
 RegisterNUICallback("DropItem",function(data, cb)
-	if IsPedSittingInAnyVehicle(playerPed) then
-		return
-	end
+    if IsPedSittingInAnyVehicle(playerPed) then
+        return
+    end
 
-	if data.item.type == "item_money" then
-		TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
-	end
+    if type(data.number) == "number" and math.floor(data.number) == data.number then
+        if data.item.type == "item_money" then
+            TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
+        else
+            TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+        end
+    end
 
-	Wait(0)
-	loadPlayerInventory()
+    Wait(0)
+    loadPlayerInventory()
 
-	cb("ok")
+    cb("ok")
 end)
 
 RegisterNUICallback("GiveItem", function(data, cb)
