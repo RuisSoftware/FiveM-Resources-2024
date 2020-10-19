@@ -11,6 +11,7 @@ AddEventHandler( "onResourceStop", function(resource)
 	end
 end)
 
+RegisterNetEvent("esx_inventoryhud:openPlayerInventory")
 AddEventHandler("esx_inventoryhud:openPlayerInventory", function(target, playerName)
 	    PlayerData = ESX.GetPlayerData()	
         if Config.JobOnlyInventory then
