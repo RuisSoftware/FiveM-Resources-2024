@@ -15,6 +15,8 @@ Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafi
 -- List of item names that will close ui when used.
 Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"}
 
+Config.MarkerSize = {x = 1.5, y = 1.5, z = 1.5}
+Config.MarkerColor = {r = 0, g = 128, b = 255}
 Config.Color = 2
 Config.WeaponColor = 1
 
