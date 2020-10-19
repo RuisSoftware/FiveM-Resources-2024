@@ -1,6 +1,5 @@
 - Original thread from Trsak: https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/
-- For version ESX 1.1 you can try this old fork from Trsak Inventory HUD: https://github.com/dutchplayers/esx_inventoryhud-1
-- If you do not want to use LSRP-Motels then you can use this version too: https://github.com/dutchplayers/ESX-1.2-Inventory-HUD-older
+
 # Dutch Players Edit // esx_inventoryhud // WORKING WITH ESX 1.2
 ![welcome](https://www.dutch-players.nl/wp-content/uploads/2020/06/dutchplayers_welcome-1024x64.png)
 Report hackers and hackwebsites please.
