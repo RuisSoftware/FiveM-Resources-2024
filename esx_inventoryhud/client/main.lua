@@ -48,64 +48,23 @@ Citizen.CreateThread(function()
                     closeInventory()
             elseif  IsDisabledControlJustReleased(1, 157) and canFire then
                 if fastWeapons[1] ~= nil then
-                    if string.find(fastWeapons[1],"WEAPON_") then
-                        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(fastWeapons[1]) then
-                            SetCurrentPedWeapon(GetPlayerPed(-1), "WEAPON_UNARMED",true)
-                        else
-                            SetCurrentPedWeapon(GetPlayerPed(-1), fastWeapons[1],true)
-                        end
-                    else
-                        TriggerServerEvent("esx:useItem", fastWeapons[1])
-                    end
+                    TriggerServerEvent("esx:useItem", fastWeapons[1])
                 end
             elseif IsDisabledControlJustReleased(1, 158) and canFire then
                 if fastWeapons[2] ~= nil then
-                    if string.find(fastWeapons[2],"WEAPON_") then
-                        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(fastWeapons[2]) then
-                            SetCurrentPedWeapon(GetPlayerPed(-1), "WEAPON_UNARMED",true)
-                        else
-                            SetCurrentPedWeapon(GetPlayerPed(-1), fastWeapons[2],true)
-                        end
-                    else
-                        TriggerServerEvent("esx:useItem", fastWeapons[2])
-                    end
+                    TriggerServerEvent("esx:useItem", fastWeapons[2])
                 end
             elseif IsDisabledControlJustReleased(1, 160) and canFire then
                 if fastWeapons[3] ~= nil then
-                    print(fastWeapons[3])
-                    if string.find(fastWeapons[3],"WEAPON_") then
-                        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(fastWeapons[3]) then
-                            SetCurrentPedWeapon(GetPlayerPed(-1), "WEAPON_UNARMED",true)
-                        else
-                            SetCurrentPedWeapon(GetPlayerPed(-1), fastWeapons[3],true)
-                        end
-                    else
-                        TriggerServerEvent("esx:useItem", fastWeapons[3])
-                    end
+                    TriggerServerEvent("esx:useItem", fastWeapons[3])
                 end
             elseif IsDisabledControlJustReleased(1, 164) and canFire then
                 if fastWeapons[4] ~= nil then
-                    if string.find(fastWeapons[4],"WEAPON_") then
-                        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(fastWeapons[4]) then
-                            SetCurrentPedWeapon(GetPlayerPed(-1), "WEAPON_UNARMED",true)
-                        else
-                            SetCurrentPedWeapon(GetPlayerPed(-1), fastWeapons[4],true)
-                        end
-                    else
-                        TriggerServerEvent("esx:useItem", fastWeapons[4])
-                    end
+                    TriggerServerEvent("esx:useItem", fastWeapons[4])
                 end
             elseif IsDisabledControlJustReleased(1, 165) and canFire then
                 if fastWeapons[5] ~= nil then
-                    if string.find(fastWeapons[5],"WEAPON_") then
-                        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(fastWeapons[5]) then
-                            SetCurrentPedWeapon(GetPlayerPed(-1), "WEAPON_UNARMED",true)
-                        else
-                            SetCurrentPedWeapon(GetPlayerPed(-1), fastWeapons[5],true)
-                        end
-                    else
-                        TriggerServerEvent("esx:useItem", fastWeapons[5])
-                    end
+                    TriggerServerEvent("esx:useItem", fastWeapons[5])
                 end
             elseif IsDisabledControlJustReleased(1, 37) then
 				HudForceWeaponWheel(false)
@@ -270,47 +229,23 @@ function loadItems()
                     local weaponHash = GetHashKey(weapons[key].name)
                     local playerPed = PlayerPedId()
                     if weapons[key].name ~= "WEAPON_UNARMED" then
-                        local found = false
-			for slot, weapon in pairs(fastWeapons) do
-                            if weapon == weapons[key].name then
-                                local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
-                                table.insert(
-                                    fastItems,
-                                    {
-                                        label = weapons[key].label,
-                                        count = ammo,
-                                        limit = -1,
-                                        type = "item_weapon",
-                                        name = weapons[key].name,
-                                        usable = false,
-                                        rare = false,
-                                        canRemove = true,
-                                        slot = slot
-                                    }
-                                )
-                                found = true
-                                break
-                            end
-                        end
-                        if found == false then
-				local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
-				table.insert(
-					items,
-					{
-						label = weapons[key].label,
-						count = ammo,
-						weight = 0,
-						type = "item_weapon",
-						name = weapons[key].name,
-						usable = false,
-						rare = false,
-						canRemove = true
-					}
-                                )
-                        end
-		    end
+								local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
+								table.insert(
+									items,
+									{
+										label = weapons[key].label,
+										count = ammo,
+										weight = 0,
+										type = "item_weapon",
+										name = weapons[key].name,
+										usable = false,
+										rare = false,
+										canRemove = true
+									}
+								)
+							end
+                    end
                 end
-            end
             fastItemsHotbar =  fastItems
 			SendNUIMessage({
 				action = "setItems",
@@ -449,8 +384,8 @@ RegisterNUICallback("DropItem",function(data, cb)
 		return
 	end
 
-	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
+	if data.item.type == "item_money" then
+		TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
 	end
 
 	Wait(0)
@@ -466,6 +401,10 @@ RegisterNUICallback("GiveItem", function(data, cb)
         if data.item.type == "item_weapon" then
             count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
         end
+		
+		if data.item.type == "item_money" then
+			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), "item_account", "money", data.number)
+		end
         canPlayAnim = false
         ClearPedSecondaryTask(PlayerPedId())
         RequestAnimDict("mp_common")
