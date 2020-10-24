@@ -38,8 +38,7 @@ add_ace group.admin inventory.openinventory allow
 - Multiple styles
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
-- If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
-- Motels/Property inventory data is synchronizing between your owned properties.
+Do you have an improvement or bugfix? Feel free to share it in a Pull Request!
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
 Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
