@@ -74,7 +74,7 @@ end
 
 function MakeDataStore(plate)
     local data = {}
-    local owned = getOwnedVehicule(plate)
+    local owned = getOwnedVehicle(plate)
     local dataStore = CreateDataStore(plate, owned, data)
     SharedDataStores[plate] = dataStore
     MySQL.Sync.fetchAll('SELECT * FROM trunk_inventory WHERE plate = @plate', {
