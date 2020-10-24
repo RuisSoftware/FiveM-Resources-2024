@@ -24,7 +24,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Item hotbar
 - Use item by 1-5 key
 - Accounts support (bank, black money, ...)
-- Weapons support
+- Weapons and ammunition clips as item
 - Configurableshops in config (police, nightclub, blackmarket, weapons)
 - Property support
 - Motels support
