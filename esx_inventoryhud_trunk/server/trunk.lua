@@ -81,7 +81,7 @@ function MakeDataStore(plate)
         ["@plate"] = plate
     }, function(result)
         if result[1] ~= nil then
-            MySQL.Async.execute('INSERT INTO trunk_inventory(plate,data,owned) VALUES (@plate,\'{}\',@owned)', {
+            MySQL.Async.execute('INSERT INTO trunk_inventory(plate,data,owned) VALUES (@plate, '{}', @owned)', {
                 ['@plate'] = plate,
                 ['@owned'] = owned,
             })
