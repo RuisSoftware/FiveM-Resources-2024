@@ -21,18 +21,21 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Using items
 - Dropping items
 - Giving items
+- Item hotbar
+- Use item by 1-5 key
 - Accounts support (bank, black money, ...)
 - Weapons support
-- Configurable Blackmarket (You can disable the blip on the map in the esx_inventoryhud/config.lua)
+- Configurableshops in config (police, nightclub, blackmarket, weapons)
 - Property support
 - Motels support
 - Trunk support
 - Glovebox support
-- Another players inventory support
+- Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
-- Locale files included (check locales/ and html/locales/ directories)
+- Multiple languages supported (check locales/ and html/locales/ directories)
 - Set Ace permission groups to allow who can use the open inventory command (example bellow)
 add_ace group.admin inventory.openinventory allow
+- Multiple styles
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
 - If you enable cash in inventory: players can turn money into black money from inventory to glovebox or trunk.
