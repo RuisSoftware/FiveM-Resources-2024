@@ -77,10 +77,10 @@ function MakeDataStore(plate)
     local owned = getOwnedVehicle(plate)
     local dataStore = CreateDataStore(plate, owned, data)
     SharedDataStores[plate] = dataStore
-    MySQL.Sync.fetchAll('SELECT * FROM trunk_inventory WHERE plate = @plate', {
+    MySQL.Async.fetchAll('SELECT * FROM trunk_inventory WHERE plate = @plate', {
         ["@plate"] = plate
     }, function(result)
-        if result[1] ~= nil then
+        if result[1] == nil then
             MySQL.Async.execute('INSERT INTO trunk_inventory(plate,data,owned) VALUES (@plate, '{}', @owned)', {
                 ['@plate'] = plate,
                 ['@owned'] = owned,
