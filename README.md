@@ -1,6 +1,6 @@
 - Original thread from Trsak: https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/
 
-# Dutch Players Edit // esx_inventoryhud // WORKING WITH ESX 1.2
+# Dutch Players Edit // esx_inventoryhud // ESX 1.2 ONLY
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Report hackers and hackwebsites please.
 
