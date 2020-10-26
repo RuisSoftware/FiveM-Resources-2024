@@ -3,8 +3,9 @@ game 'gta5'
 
 name 'esx_inventoryhud_glovebox'
 author 'Trsak'
+editor 'Dutch Players'
 description "Thé ESX Inventory HUD from Trsak and loved by many others!"
-version '3.0'
+version '3.3.6'
 url 'https://github.com/dutchplayers/ESX-1.2-Inventory-HUD'
 
 server_scripts {

@@ -5,7 +5,7 @@ name 'esx_inventoryhud'
 author 'Trsak'
 editor 'Dutch Players'
 description "Thé ESX Inventory HUD from Trsak and loved by many others!"
-version '3.3.5'
+version '3.3.6'
 url 'https://github.com/dutchplayers/ESX-1.2-Inventory-HUD'
 
 ui_page "html/ui.html"
