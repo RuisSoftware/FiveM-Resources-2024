@@ -29,10 +29,10 @@ function setPropertyInventoryData(data)
 
     if money > 0 then
         accountData = {
-            label = _U("money"),
+            label = _U("cash"),
             count = money,
-            type = "item_account",
-            name = "money",
+            type = "item_money",
+            name = "cash",
             usable = false,
             rare = false,
             weight = 0,
@@ -112,54 +112,62 @@ function openPropertyInventory()
 end
 
 RegisterNUICallback("PutIntoProperty", function(data, cb) 
-        if IsPedSittingInAnyVehicle(playerPed) then
-            return
-        end
+	if IsPedSittingInAnyVehicle(playerPed) then
+		return
+	end
 
-        print(data)
-        for k,v in pairs(data) do print(k,v); end
+	print(data)
+	for k,v in pairs(data) do print(k,v); end
 
-        if type(data.number) == "number" and math.floor(data.number) == data.number then
-            local count = tonumber(data.number)
-            local isWeapon = false
-            if data.item.type == "item_weapon" then
-                isWeapon = true
-                count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
-            end
+	if type(data.number) == "number" and math.floor(data.number) == data.number then
+		local count = tonumber(data.number)
+		local isWeapon = false
+		if data.item.type == "item_weapon" then
+			isWeapon = true
+			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
+		end
 
-            if isPlayerSafe then       
-                print("DOPUTSAFE")     
-                TriggerServerEvent("MF_PlayerSafes:PutItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count, isPlayerSafe.safeid, isWeapon)
-            else
-                TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
-            end
-        end
+		if isPlayerSafe then       
+			print("DOPUTSAFE")     
+			TriggerServerEvent("MF_PlayerSafes:PutItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count, isPlayerSafe.safeid, isWeapon)
+		else
+			if data.item.name == 'cash' then
+				TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
+			else
+				TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+			end
+		end
+	end
 
-        Wait(150)
-        refreshPropertyInventory()
-        Wait(150)
-        loadPlayerInventory()
+	Wait(150)
+	refreshPropertyInventory()
+	Wait(150)
+	loadPlayerInventory()
 
-        cb("ok")
+	cb("ok")
 end)
 
 RegisterNUICallback("TakeFromProperty", function(data, cb)
-        if IsPedSittingInAnyVehicle(playerPed) then
-            return
-        end
+	if IsPedSittingInAnyVehicle(playerPed) then
+		return
+	end
 
-        if type(data.number) == "number" and math.floor(data.number) == data.number then
-            if isPlayerSafe then
-                TriggerServerEvent("MF_PlayerSafes:GetItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number), isPlayerSafe.safeid)
-            else
-                TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
-            end
-        end
+	if type(data.number) == "number" and math.floor(data.number) == data.number then
+		if isPlayerSafe then
+			TriggerServerEvent("MF_PlayerSafes:GetItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number), isPlayerSafe.safeid)
+		else
+			if data.item.name == 'cash' then
+				TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, 'item_account', 'money', tonumber(data.number))
+			else
+				TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+			end
+		end
+	end
 
-        Wait(150)
-        refreshPropertyInventory()
-        Wait(150)
-        loadPlayerInventory()
+	Wait(150)
+	refreshPropertyInventory()
+	Wait(150)
+	loadPlayerInventory()
 
-        cb("ok")
+	cb("ok")
 end)
