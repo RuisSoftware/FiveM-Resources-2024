@@ -51,11 +51,7 @@ files {
 }
 
 dependencies {
-	'DP_Framework',
-	'DP_Framework_Geldzaken',
-	'DP_Framework_Inventaris',
-	'DP_Framework_Data',
-	'DP_Framework_Licenties',
+	'es_extended',
 	'disc-base',
 	'disc-ammo',
 	'mythic_notify',
