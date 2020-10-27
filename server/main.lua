@@ -1,7 +1,5 @@
 ESX = nil
-TriggerEvent("esx:getSharedObject", function(obj)
-	ESX = obj
-end)
+TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
 
 local Command_Steal = "steal" -- CHANGE TO YOUR COMMAND NAME
 local Command_Close_Inventory = "closeinventory" -- CHANGE TO YOUR COMMAND NAME
@@ -30,18 +28,18 @@ AddEventHandler("esx_inventoryhud:clearweapons", function(target)
 end)
 
 ESX.RegisterServerCallback('esx_inventoryhud:takePlayerItem', function(source, cb, item, count)
-    local player = ESX.GetPlayerFromId(source)
-    local invItem = player.getInventoryItem(item)
-    if invItem.count - count < 0 then
-        cb(false)
-    else
-        player.removeInventoryItem(item, count)
-        cb(true)
-    end
+	local player = ESX.GetPlayerFromId(source)
+	local invItem = player.getInventoryItem(item)
+	if invItem.count - count < 0 then
+		cb(false)
+	else
+		player.removeInventoryItem(item, count)
+		cb(true)
+	end
 end)
 
 ESX.RegisterServerCallback('esx_inventoryhud:addPlayerItem', function(source, cb, item, count)
-    local player = ESX.GetPlayerFromId(source)
+	local player = ESX.GetPlayerFromId(source)
 	if player.canCarryItem(item, count) then
 		player.addInventoryItem(item, count)
 		cb(true)
@@ -96,14 +94,13 @@ RegisterCommand("openinventory", function(source, args, rawCommand) -- ADMIN WAT
 	if IsPlayerAceAllowed(source, "inventory.openinventory") then
 		local target = tonumber(args[1])
 		local targetXPlayer = ESX.GetPlayerFromId(target)
-
 		if targetXPlayer ~= nil then
 			TriggerClientEvent("esx_inventoryhud:openPlayerInventory", source, target, targetXPlayer.name)
 		else
 			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_player') })
 		end
 	else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
+		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
 	end
 end)
 
@@ -401,7 +398,7 @@ AddEventHandler("suku:SellItemToPlayer",function(source, type, item, count)
 		else
 			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('insufficient_space') })
 		end
-end
+	end
 	if type == "item_weapon" then
 		if xPlayer.canCarryItem(item, count) then
 			local list = itemShopList
@@ -508,30 +505,25 @@ Citizen.CreateThread(function()
 end)
 
 ESX.RegisterServerCallback('GetCharacterNameServer', function(source, cb, target)
-    local xTarget = ESX.GetPlayerFromId(target)
-
-    local result = MySQL.Sync.fetchAll("SELECT firstname, lastname FROM users WHERE identifier = @identifier", {
-        ['@identifier'] = xTarget.identifier
-    })
-
-    local firstname = result[1].firstname
-    local lastname  = result[1].lastname
-
-    cb(''.. firstname .. ' ' .. lastname ..'')
+	local xTarget = ESX.GetPlayerFromId(target)
+	local result = MySQL.Sync.fetchAll("SELECT firstname, lastname FROM users WHERE identifier = @identifier", {
+		['@identifier'] = xTarget.identifier
+	})
+	local firstname = result[1].firstname
+	local lastname  = result[1].lastname
+	cb(''.. firstname .. ' ' .. lastname ..'')
 end)
 
 ESX.RegisterServerCallback('suku:buyLicense', function(source, cb)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(source)
-
 	if xPlayer.getMoney() >= Config.LicensePrice then
 		xPlayer.removeMoney(Config.LicensePrice)
-
 		TriggerEvent('esx_license:addLicense', source, 'weapon', function()
 			cb(true)
 		end)
 	else
-				TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
+		TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
 		cb(false)
 	end
 end)

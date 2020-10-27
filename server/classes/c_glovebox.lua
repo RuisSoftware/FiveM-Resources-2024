@@ -12,75 +12,61 @@ function stringsplit(inputstr, sep)
 end
 
 function CreateDataStore(plate, owned, data)
-  local self = {}
+	local self = {}
 
-  self.plate = plate
-  self.owned = owned
-  self.data = data
+	self.plate = plate
+	self.owned = owned
+	self.data = data
 
-  local timeoutCallbacks = {}
+	local timeoutCallbacks = {}
 
-  self.set = function(key, val)
-    data[key] = val
-    self.save()
-  end
+	self.set = function(key, val)
+		data[key] = val
+		self.save()
+	end
 
-  self.get = function(key, i)
-    local path = stringsplit(key, ".")
-    local obj = self.data
+	self.get = function(key, i)
+		local path = stringsplit(key, ".")
+		local obj = self.data
+		for i = 1, #path, 1 do
+			obj = obj[path[i]]
+		end
+		if i == nil then
+			return obj
+		else
+			return obj[i]
+		end
+	end
 
-    for i = 1, #path, 1 do
-      obj = obj[path[i]]
-    end
+	self.count = function(key, i)
+		local path = stringsplit(key, ".")
+		local obj = self.data
+		for i = 1, #path, 1 do
+			obj = obj[path[i]]
+		end
+		if i ~= nil then
+			obj = obj[i]
+		end
+		if obj == nil then
+			return 0
+		else
+			return #obj
+		end
+	end
 
-    if i == nil then
-      return obj
-    else
-      return obj[i]
-    end
-  end
-
-  self.count = function(key, i)
-    local path = stringsplit(key, ".")
-    local obj = self.data
-
-    for i = 1, #path, 1 do
-      obj = obj[path[i]]
-    end
-
-    if i ~= nil then
-      obj = obj[i]
-    end
-
-    if obj == nil then
-      return 0
-    else
-      return #obj
-    end
-  end
-
-  self.save = function()
-    for i = 1, #timeoutCallbacks, 1 do
-      ESX.ClearTimeout(timeoutCallbacks[i])
-      timeoutCallbacks[i] = nil
-    end
-
-    local timeoutCallback =
-      ESX.SetTimeout(
-      10000,
-      function()
-        MySQL.Async.execute(
-          "UPDATE glovebox_inventory SET data = @data WHERE plate = @plate",
-          {
-            ["@data"] = json.encode(self.data),
-            ["@plate"] = self.plate
-          }
-        )
-      end
-    )
-
-    table.insert(timeoutCallbacks, timeoutCallback)
-  end
-
-  return self
+	self.save = function()
+		for i = 1, #timeoutCallbacks, 1 do
+			ESX.ClearTimeout(timeoutCallbacks[i])
+			timeoutCallbacks[i] = nil
+		end
+		local timeoutCallback =
+		ESX.SetTimeout(10000, function()
+			MySQL.Async.execute("UPDATE glovebox_inventory SET data = @data WHERE plate = @plate", {
+				["@data"] = json.encode(self.data),
+				["@plate"] = self.plate
+			})
+		end)
+		table.insert(timeoutCallbacks, timeoutCallback)
+	end
+	return self
 end
