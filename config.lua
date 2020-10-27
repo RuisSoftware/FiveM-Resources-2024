@@ -54,77 +54,77 @@ Config.Weight = 80 -- Limit, unit can be whatever you want. Originally grams (as
 Config.DefaultWeight = 1 -- Default weight for an item
 
 Config.localWeight = {
-    bread = 1,
-    water = 1,
-    WEAPON_SMG = 5
+	bread = 1,
+	water = 1,
+	WEAPON_SMG = 5
 }
 
 Config.GloveboxSize = {
-    [0] = 300, --Compact
-    [1] = 400, --Sedan
-    [2] = 700, --SUV
-    [3] = 250, --Coupes
-    [4] = 300, --Muscle
-    [5] = 100, --Sports Classics
-    [6] = 50, --Sports
-    [7] = 50, --Super
-    [8] = 50, --Motorcycles
-    [9] = 1800, --Off-road
-    [10] = 3000, --Industrial
-    [11] = 700, --Utility
-    [12] = 1000, --Vans
-    [13] = 0, --Cycles
-    [14] = 50, --Boats
-    [15] = 200, --Helicopters
-    [16] = 0, --Planes
-    [17] = 400, --Service
-    [18] = 400, --Emergency
-    [19] = 0, --Military
-    [20] = 3000, --Commercial
-    [21] = 0 --Trains
+	[0] = 300, --Compact
+	[1] = 400, --Sedan
+	[2] = 700, --SUV
+	[3] = 250, --Coupes
+	[4] = 300, --Muscle
+	[5] = 100, --Sports Classics
+	[6] = 50, --Sports
+	[7] = 50, --Super
+	[8] = 50, --Motorcycles
+	[9] = 1800, --Off-road
+	[10] = 3000, --Industrial
+	[11] = 700, --Utility
+	[12] = 1000, --Vans
+	[13] = 0, --Cycles
+	[14] = 50, --Boats
+	[15] = 200, --Helicopters
+	[16] = 0, --Planes
+	[17] = 400, --Service
+	[18] = 400, --Emergency
+	[19] = 0, --Military
+	[20] = 3000, --Commercial
+	[21] = 0 --Trains
 }
 
 Config.TrunkSize = {
-    [0] = 3000, --Compact
-    [1] = 4000, --Sedan
-    [2] = 7000, --SUV
-    [3] = 2500, --Coupes
-    [4] = 3000, --Muscle
-    [5] = 1000, --Sports Classics
-    [6] = 500, --Sports
-    [7] = 500, --Super
-    [8] = 500, --Motorcycles
-    [9] = 18000, --Off-road
-    [10] = 30000, --Industrial
-    [11] = 7000, --Utility
-    [12] = 10000, --Vans
-    [13] = 0, --Cycles
-    [14] = 500, --Boats
-    [15] = 2000, --Helicopters
-    [16] = 0, --Planes
-    [17] = 4000, --Service
-    [18] = 4000, --Emergency
-    [19] = 0, --Military
-    [20] = 30000, --Commercial
-    [21] = 0 --Trains
+	[0] = 3000, --Compact
+	[1] = 4000, --Sedan
+	[2] = 7000, --SUV
+	[3] = 2500, --Coupes
+	[4] = 3000, --Muscle
+	[5] = 1000, --Sports Classics
+	[6] = 500, --Sports
+	[7] = 500, --Super
+	[8] = 500, --Motorcycles
+	[9] = 18000, --Off-road
+	[10] = 30000, --Industrial
+	[11] = 7000, --Utility
+	[12] = 10000, --Vans
+	[13] = 0, --Cycles
+	[14] = 500, --Boats
+	[15] = 2000, --Helicopters
+	[16] = 0, --Planes
+	[17] = 4000, --Service
+	[18] = 4000, --Emergency
+	[19] = 0, --Military
+	[20] = 30000, --Commercial
+	[21] = 0 --Trains
 }
 
 Config.VehiclePlate = {
-    taxi = "TAXI",
-    cop = "police",
-    police = "police",
-    ambulance = "ambulance",
-    mecano = "mechano",
-    mechanic = "mechanic",
-    police = "police",
-    nightclub = "club",
-    bahamas = "bahamas",
-    cardealer = "dealer"
+	taxi = "TAXI",
+	cop = "police",
+	police = "police",
+	ambulance = "ambulance",
+	mecano = "mechano",
+	mechanic = "mechanic",
+	police = "police",
+	nightclub = "club",
+	bahamas = "bahamas",
+	cardealer = "dealer"
 }
 
 Config.Shops = {
-    RegularShop = {
-        Locations = {
+	RegularShop = {
+		Locations = {
 			{x = 373.875,   y = 325.896,  z = 102.566}
 			--{x = 2557.458,  y = 382.282,  z = 107.622},
 			--{x = -3038.939, y = 585.954,  z = 6.908},
@@ -139,333 +139,327 @@ Config.Shops = {
 			--{x = -1820.523, y = 792.518,   z = 137.118},
 			--{x = 1698.388,  y = 4924.404,  z = 41.063},
 			--{x = 25.723,   y = -1346.966, z = 28.497}
-        },
-        Items = {
-            {name = 'bread', price = 1},
-            {name = 'water', price = 1},
-            {name = 'lemon', price = 1},
-            {name = 'phone', price = 1},
-            {name = 'hamburger', price = 1},
-            {name = 'icedcoffee', price = 1},
-            {name = 'juice', price = 1},
-            {name = 'coffeecup', price = 1},
-            {name = 'cucumbers', price = 1},
-            {name = 'garlic', price = 1},
-            {name = 'energy', price = 1},
-            {name = 'lemonade', price = 1},
-            {name = 'banana', price = 1},
-            {name = 'dildo', price = 1},
-            {name = 'icetea', price = 1},
-            {name = 'sim', price = 1}     
-        }
-    },
-
-    IlegalShop = {
-        Locations = {
-           -- { x = 468.58, y = -3205.64, z = 9.79 }
-        },
-        Items = {
-            { name = 'bread', price = 1},
-            { name = 'water', price = 1}
-        }
-    },
-
-    DrugShop = {
-        Locations = {
-           -- { x = 468.58, y = -3205.64, z = 9.79 }
-        },
-        Items = {
-            { name = 'bread', price = 1},
-            { name = 'water', price = 1}
-        }
-    },
-
-    RobsLiquor = {
-        Locations = {
-          --  { x = 1135.808, y = -982.281, z = 45.415 }
-        },
-        Items = {
-            {name = 'beer', price = 1},
-            {name = 'wine', price = 1},
-            {name = 'vodka', price = 1},
-            {name = 'tequila', price = 1},
-            {name = 'whisky', price = 1},
-            {name = 'grand_cru', price = 1}
-        }
-    },
-
-    YouTool = {
-        Locations = {
-           -- { x = 2748.0, y = 3473.0, z = 55.68 }
-        },
-        Items = {
-            {name = 'drill', price = 1},
-            {name = 'binocular', price = 1},
-            {name = 'fixkit', price = 1},
-            {name = 'gps', price = 1},
-            {name = 'lockpick', price = 1},
-            {name = 'scubagear', price = 1},
-            {name = 'blowtorch', price = 1},
-            {name = '1gbag', price = 1},
-            {name = '5gbag', price = 1},
-            {name = '50gbag', price = 1},
-            {name = '100gbag', price = 1},
-            {name = 'lowgradefert', price = 1},
-            {name = 'highgradefert', price = 1},
-            {name = 'plantpot', price = 1},
-            {name = 'drugscales', price = 1}
-        }
-    },
-
-    PrisonShop = {
-        Locations = {
-          --  { x = -1103.05, y = -823.72, z = 14.48 }
-        },
-        Items = {
-            {name = 'bread', price = 1},
-            {name = 'water', price = 1},
-            {name = 'cigarette', price = 1},
-            {name = 'lighter'}, price = 1,
-            {name = 'sandwich', price = 1},
-            {name = 'chips', price = 1}
-        }
-    },
-
-    WeaponShop = {
-        Locations = {
-            { x = 22.09, y = -1107.28, z = 28.80 }
-          
-        },
-
-        Items = {
-            {name = "ammunition_pistol", price = 1},
-            {name = "ammunition_pistol_large", price = 1},
-            {name = "ammunition_shotgun", price = 1},
-            {name = "ammunition_shotgun_large", price = 1},
-            {name = "ammunition_smg", price = 1},
-            {name = "ammunition_smg_large", price = 1},
-            {name = "ammunition_rifle", price = 1},
-            {name = "ammunition_rifle_large", price = 1},
-            {name = "ammunition_snp", price = 1},
-            {name = "ammunition_snp_large", price = 1}--,
-            --{name = "flashlight",price = 1},
-            --{name = "grip",price = 1},
-            --{name = "scope",price = 1},
-            --{name = "skin",price = 1},
-            --{name = "supressor",price = 1}
-        }
-    },
-
-
-    PoliceShop = { -- available for Config.InventoryJob.Police
-       Locations = {
-           { x = 451.68, y = -980.02, z = 29.69 }
-
-        },
-        Items = {
-            {name = "WEAPON_FLASHLIGHT", price = 1},
-            {name = "WEAPON_STUNGUN", price = 1},
-            {name = "WEAPON_KNIFE", price = 1},
-            {name = "WEAPON_BAT", price = 1},
-            {name = "WEAPON_PISTOL", price = 1},
-            {name = "WEAPON_PUMPSHOTGUN",price = 1},
-            {name = "WEAPON_SMOKEGRENADE",price = 1},
-            {name = "WEAPON_FIREEXTINGUISHER",price = 1},
-            {name = "WEAPON_CROWBAR",price = 1},
-            {name = "WEAPON_BZGAS",price = 1},
-            {name = "ammunition_pistol",price = 1},
-            {name = "ammunition_pistol_large",price = 1},
-            {name = "ammunition_shotgun",price = 1},
-            {name = "ammunition_shotgun_large",price = 1},
-            {name = "ammunition_smg",price = 1},
-            {name = "ammunition_smg_large",price = 1},
-            {name = "ammunition_rifle",price = 1},
-            {name = "ammunition_rifle_large",price = 1},
-            {name = "ammunition_snp",price = 1},
-            {name = "ammunition_snp_large",price = 1}
-        }
+		},
+		Items = {
+			{name = 'bread', price = 1},
+			{name = 'water', price = 1},
+			{name = 'lemon', price = 1},
+			{name = 'phone', price = 1},
+			{name = 'hamburger', price = 1},
+			{name = 'icedcoffee', price = 1},
+			{name = 'juice', price = 1},
+			{name = 'coffeecup', price = 1},
+			{name = 'cucumbers', price = 1},
+			{name = 'garlic', price = 1},
+			{name = 'energy', price = 1},
+			{name = 'lemonade', price = 1},
+			{name = 'banana', price = 1},
+			{name = 'dildo', price = 1},
+			{name = 'icetea', price = 1},
+			{name = 'sim', price = 1}
+		}
 	},
-	
-	BlackMarket = { -- available for Config.InventoryJob.Mafia
-        Locations = {
-          --  { x = -1297.96, y = -392.60, z = 35.47 }
-        
-        },
 
-        Items = {
-            {name = "WEAPON_PISTOL", price = 1},
-            {name = "ammunition_pistol",price = 1},
-            {name = "ammunition_pistol_large",price = 1}		
-        }
-    },
-	
-    LicenseShop = {
-       Locations = {
-      --      { x = 12.47, y = -1105.5, z = 29.8}
-        }
-    },
-	
-    ShopNightclub = { -- available for Config.InventoryJob.Nightclub
-        Locations = {
-       --     { x = -1518.48, y = 113.1, z = 49.05 }
-      
-        },
-        Items = {
-            {name = 'beer', price = 1},
-            {name = 'wine', price = 1},
-            {name = 'vodka', price = 1},
-            {name = 'tequila', price = 1},
-            {name = 'whisky', price = 1},
-            {name = 'grand_cru', price = 1}
-        }
-    },
+	IlegalShop = {
+		Locations = {
+			{ x = 468.58, y = -3205.64, z = 9.79 }
+		},
+		Items = {
+			{ name = 'bread', price = 1},
+			{ name = 'water', price = 1}
+		}
+	},
+
+	DrugShop = {
+		Locations = {
+			{ x = 468.58, y = -3205.64, z = 9.79 }
+		},
+		Items = {
+			{ name = 'bread', price = 1},
+			{ name = 'water', price = 1}
+		}
+	},
+
+	RobsLiquor = {
+		Locations = {
+		 	{ x = 1135.808, y = -982.281, z = 45.415 }
+		},
+		Items = {
+			{name = 'beer', price = 1},
+			{name = 'wine', price = 1},
+			{name = 'vodka', price = 1},
+			{name = 'tequila', price = 1},
+			{name = 'whisky', price = 1},
+			{name = 'grand_cru', price = 1}
+		}
+	},
+
+	YouTool = {
+		Locations = {
+			-- { x = 2748.0, y = 3473.0, z = 55.68 }
+		},
+		Items = {
+			{name = 'drill', price = 1},
+			{name = 'binocular', price = 1},
+			{name = 'fixkit', price = 1},
+			{name = 'gps', price = 1},
+			{name = 'lockpick', price = 1},
+			{name = 'scubagear', price = 1},
+			{name = 'blowtorch', price = 1},
+			{name = '1gbag', price = 1},
+			{name = '5gbag', price = 1},
+			{name = '50gbag', price = 1},
+			{name = '100gbag', price = 1},
+			{name = 'lowgradefert', price = 1},
+			{name = 'highgradefert', price = 1},
+			{name = 'plantpot', price = 1},
+			{name = 'drugscales', price = 1}
+		}
+	},
+
+	PrisonShop = {
+		Locations = {
+		 	-- { x = -1103.05, y = -823.72, z = 14.48 }
+		},
+		Items = {
+			{name = 'bread', price = 1},
+			{name = 'water', price = 1},
+			{name = 'cigarette', price = 1},
+			{name = 'lighter'}, price = 1,
+			{name = 'sandwich', price = 1},
+			{name = 'chips', price = 1}
+		}
+	},
+
+	WeaponShop = {
+		Locations = {
+			{ x = 22.09, y = -1107.28, z = 28.80 }
+		},
+		Items = {
+			{name = "ammunition_pistol", price = 1},
+			{name = "ammunition_pistol_large", price = 1},
+			{name = "ammunition_shotgun", price = 1},
+			{name = "ammunition_shotgun_large", price = 1},
+			{name = "ammunition_smg", price = 1},
+			{name = "ammunition_smg_large", price = 1},
+			{name = "ammunition_rifle", price = 1},
+			{name = "ammunition_rifle_large", price = 1},
+			{name = "ammunition_snp", price = 1},
+			{name = "ammunition_snp_large", price = 1}--,
+			--{name = "flashlight",price = 1},
+			--{name = "grip",price = 1},
+			--{name = "scope",price = 1},
+			--{name = "skin",price = 1},
+			--{name = "supressor",price = 1}
+		}
+	},
+
+
+	PoliceShop = { -- available for Config.InventoryJob.Police
+		Locations = {
+			{ x = 451.68, y = -980.02, z = 29.69 }
+		},
+		Items = {
+			{name = "WEAPON_FLASHLIGHT", price = 1},
+			{name = "WEAPON_STUNGUN", price = 1},
+			{name = "WEAPON_KNIFE", price = 1},
+			{name = "WEAPON_BAT", price = 1},
+			{name = "WEAPON_PISTOL", price = 1},
+			{name = "WEAPON_PUMPSHOTGUN",price = 1},
+			{name = "WEAPON_SMOKEGRENADE",price = 1},
+			{name = "WEAPON_FIREEXTINGUISHER",price = 1},
+			{name = "WEAPON_CROWBAR",price = 1},
+			{name = "WEAPON_BZGAS",price = 1},
+			{name = "ammunition_pistol",price = 1},
+			{name = "ammunition_pistol_large",price = 1},
+			{name = "ammunition_shotgun",price = 1},
+			{name = "ammunition_shotgun_large",price = 1},
+			{name = "ammunition_smg",price = 1},
+			{name = "ammunition_smg_large",price = 1},
+			{name = "ammunition_rifle",price = 1},
+			{name = "ammunition_rifle_large",price = 1},
+			{name = "ammunition_snp",price = 1},
+			{name = "ammunition_snp_large",price = 1}
+		}
+	},
+
+	BlackMarket = { -- available for Config.InventoryJob.Mafia
+		Locations = {
+			-- { x = -1297.96, y = -392.60, z = 35.47 }
+		},
+		Items = {
+			{name = "WEAPON_PISTOL", price = 1},
+			{name = "ammunition_pistol",price = 1},
+			{name = "ammunition_pistol_large",price = 1}
+		}
+	},
+
+	LicenseShop = {
+	Locations = {
+	    	-- { x = 12.47, y = -1105.5, z = 29.8}
+		}
+	},
+
+	ShopNightclub = { -- available for Config.InventoryJob.Nightclub
+		Locations = {
+	    	-- { x = -1518.48, y = 113.1, z = 49.05 }
+		},
+		Items = {
+			{name = 'beer', price = 1},
+			{name = 'wine', price = 1},
+			{name = 'vodka', price = 1},
+			{name = 'tequila', price = 1},
+			{name = 'whisky', price = 1},
+			{name = 'grand_cru', price = 1}
+		}
+	},
 }
 
 Config.Throwables = { -- WEAPON NAME & WEAPON HASH
-    WEAPON_MOLOTOV = 615608432,
-    WEAPON_GRENADE = -1813897027,
-    WEAPON_STICKYBOMB = 741814745,
-    WEAPON_PROXMINE = -1420407917,
-    WEAPON_SMOKEGRENADE = -37975472,
-    WEAPON_PIPEBOMB = -1169823560,
-    WEAPON_FLARE = 1233104067,
-    WEAPON_SNOWBALL = 126349499
+	WEAPON_MOLOTOV = 615608432,
+	WEAPON_GRENADE = -1813897027,
+	WEAPON_STICKYBOMB = 741814745,
+	WEAPON_PROXMINE = -1420407917,
+	WEAPON_SMOKEGRENADE = -37975472,
+	WEAPON_PIPEBOMB = -1169823560,
+	WEAPON_FLARE = 1233104067,
+	WEAPON_SNOWBALL = 126349499
 }
 
 Config.FuelCan = 883325847
 
 Config.PropList = { -- Here you can change the prop when using the item.
-    cash = {["model"] = 'prop_cash_pile_02', ["bone"] = 28422, ["x"] = 0.02, ["y"] = 0.02, ["z"] = -0.08, ["xR"] = 270.0, ["yR"] = 180.0, ["zR"] = 0.0}
+	cash = {["model"] = 'prop_cash_pile_02', ["bone"] = 28422, ["x"] = 0.02, ["y"] = 0.02, ["z"] = -0.08, ["xR"] = 270.0, ["yR"] = 180.0, ["zR"] = 0.0}
 }
 
 Config.EnableInventoryHUD = true
 
 Config.Ammo = {
-    {
-        name = 'ammunition_pistol',
-        weapons = {
-            `WEAPON_PISTOL`,
-            `WEAPON_APPISTOL`,
-            `WEAPON_SNSPISTOL`,
-            `WEAPON_COMBATPISTOL`,
-            `WEAPON_HEAVYPISTOL`,
-            `WEAPON_MACHINEPISTOL`,
-            `WEAPON_MARKSMANPISTOL`,
-            `WEAPON_PISTOL50`,
-            `WEAPON_VINTAGEPISTOL`
-        },
-        count = 30
-    },
-    {
-        name = 'ammunition_pistol_large',
-        weapons = {
-            `WEAPON_PISTOL`,
-            `WEAPON_APPISTOL`,
+	{
+		name = 'ammunition_pistol',
+		weapons = {
+			`WEAPON_PISTOL`,
+			`WEAPON_APPISTOL`,
 			`WEAPON_SNSPISTOL`,
-            `WEAPON_COMBATPISTOL`,
-            `WEAPON_HEAVYPISTOL`,
-            `WEAPON_MACHINEPISTOL`,
-            `WEAPON_MARKSMANPISTOL`,
-            `WEAPON_PISTOL50`,
-            `WEAPON_VINTAGEPISTOL`
-        },
-        count = 60
-    },
+			`WEAPON_COMBATPISTOL`,
+			`WEAPON_HEAVYPISTOL`,
+			`WEAPON_MACHINEPISTOL`,
+			`WEAPON_MARKSMANPISTOL`,
+			`WEAPON_PISTOL50`,
+			`WEAPON_VINTAGEPISTOL`
+		},
+		count = 30
+	},
 	{
-        name = 'ammunition_shotgun',
-        weapons = {
-            `WEAPON_ASSAULTSHOTGUN`,
+		name = 'ammunition_pistol_large',
+		weapons = {
+			`WEAPON_PISTOL`,
+			`WEAPON_APPISTOL`,
+			`WEAPON_SNSPISTOL`,
+			`WEAPON_COMBATPISTOL`,
+			`WEAPON_HEAVYPISTOL`,
+			`WEAPON_MACHINEPISTOL`,
+			`WEAPON_MARKSMANPISTOL`,
+			`WEAPON_PISTOL50`,
+			`WEAPON_VINTAGEPISTOL`
+		},
+		count = 60
+	},
+	{
+		name = 'ammunition_shotgun',
+		weapons = {
+			`WEAPON_ASSAULTSHOTGUN`,
 			`WEAPON_AUTOSHOTGUN`,
-            `WEAPON_BULLPUPSHOTGUN`,
+			`WEAPON_BULLPUPSHOTGUN`,
 			`WEAPON_DBSHOTGUN`,
-            `WEAPON_HEAVYSHOTGUN`,
-            `WEAPON_PUMPSHOTGUN`,
-            `WEAPON_SAWNOFFSHOTGUN`
-        },
-        count = 12
-    },
+			`WEAPON_HEAVYSHOTGUN`,
+			`WEAPON_PUMPSHOTGUN`,
+			`WEAPON_SAWNOFFSHOTGUN`
+		},
+		count = 12
+	},
 	{
-        name = 'ammunition_shotgun_large',
-        weapons = {
-            `WEAPON_ASSAULTSHOTGUN`,
+		name = 'ammunition_shotgun_large',
+		weapons = {
+			`WEAPON_ASSAULTSHOTGUN`,
 			`WEAPON_AUTOSHOTGUN`,
-            `WEAPON_BULLPUPSHOTGUN`,
+			`WEAPON_BULLPUPSHOTGUN`,
 			`WEAPON_DBSHOTGUN`,
-            `WEAPON_HEAVYSHOTGUN`,
-            `WEAPON_PUMPSHOTGUN`,
-            `WEAPON_SAWNOFFSHOTGUN`
-        },
-        count = 18
-    },
+			`WEAPON_HEAVYSHOTGUN`,
+			`WEAPON_PUMPSHOTGUN`,
+			`WEAPON_SAWNOFFSHOTGUN`
+		},
+		count = 18
+	},
 	{
-        name = 'ammunition_smg',
-        weapons = {
-            `WEAPON_ASSAULTSMG`,
+		name = 'ammunition_smg',
+		weapons = {
+			`WEAPON_ASSAULTSMG`,
 			`WEAPON_MICROSMG`,
-            `WEAPON_MINISMG`,
-            `WEAPON_SMG`
-        },
-        count = 45
-    },
+			`WEAPON_MINISMG`,
+			`WEAPON_SMG`
+		},
+		count = 45
+	},
 	{
-        name = 'ammunition_smg_large',
-        weapons = {
-            `WEAPON_ASSAULTSMG`,
+		name = 'ammunition_smg_large',
+		weapons = {
+			`WEAPON_ASSAULTSMG`,
 			`WEAPON_MICROSMG`,
-            `WEAPON_MINISMG`,
-            `WEAPON_SMG`
-        },
-        count = 65
-    },
+			`WEAPON_MINISMG`,
+			`WEAPON_SMG`
+		},
+		count = 65
+	},
 	{
-        name = 'ammunition_rifle',
-        weapons = {
-            `WEAPON_ADVANCEDRIFLE`,
+		name = 'ammunition_rifle',
+		weapons = {
+			`WEAPON_ADVANCEDRIFLE`,
 			`WEAPON_ASSAULTRIFLE`,
-            `WEAPON_BULLPUPRIFLE`,
-            `WEAPON_CARBINERIFLE`,
+			`WEAPON_BULLPUPRIFLE`,
+			`WEAPON_CARBINERIFLE`,
 			`WEAPON_SPECIALCARBINE`,
 			`WEAPON_COMPACTRIFLE`
-        },
-        count = 45
-    },
+		},
+		count = 45
+	},
 	{
-        name = 'ammunition_rifle_large',
-        weapons = {
-            `WEAPON_ADVANCEDRIFLE`,
+		name = 'ammunition_rifle_large',
+		weapons = {
+			`WEAPON_ADVANCEDRIFLE`,
 			`WEAPON_ASSAULTRIFLE`,
-            `WEAPON_BULLPUPRIFLE`,
-            `WEAPON_CARBINERIFLE`,
+			`WEAPON_BULLPUPRIFLE`,
+			`WEAPON_CARBINERIFLE`,
 			`WEAPON_SPECIALCARBINE`,
 			`WEAPON_COMPACTRIFLE`
-        },
-        count = 65
-    },
+		},
+		count = 65
+	},
 	{
-        name = 'ammunition_snp',
-        weapons = {
-            `WEAPON_SNIPERRIFLE`,
+		name = 'ammunition_snp',
+		weapons = {
+			`WEAPON_SNIPERRIFLE`,
 			`WEAPON_HEAVYSNIPER`,
-            `WEAPON_MARKSMANRIFLE`
-        },
-        count = 10
-    },
+			`WEAPON_MARKSMANRIFLE`
+		},
+		count = 10
+	},
 	{
-        name = 'ammunition_snp_large',
-        weapons = {
-            `WEAPON_SNIPERRIFLE`,
+		name = 'ammunition_snp_large',
+		weapons = {
+			`WEAPON_SNIPERRIFLE`,
 			`WEAPON_HEAVYSNIPER`,
-            `WEAPON_MARKSMANRIFLE`
-        },
-        count = 15
-    },
+			`WEAPON_MARKSMANRIFLE`
+		},
+		count = 15
+	},
 	{
-        name = 'ammunition_fireextinguisher',
-        weapons = {
-            `WEAPON_FIREEXTINGUISHER`
-        },
-        count = 15
-    }
+		name = 'ammunition_fireextinguisher',
+		weapons = {
+			`WEAPON_FIREEXTINGUISHER`
+		},
+		count = 15
+	}
 }
 
 Config.VaultBox = 'p_v_43_safe_s'
