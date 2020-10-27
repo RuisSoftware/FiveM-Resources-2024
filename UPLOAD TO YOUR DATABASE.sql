@@ -37,7 +37,26 @@ INSERT INTO `items` (`name`, `label`, `weight`) VALUES
 ('grip', 'Grip', 2),
 ('scope', 'Scope', 2),
 ('skin', 'Skin', 2),
-('supressor', 'Suppressor', 2);
+('supressor', 'Suppressor', 2),
+('ammunition_pistol', 'Pistol Ammo', 10),
+('ammunition_pistol_large', 'Pistol Ammo Large', 10),
+('ammunition_rifle', 'Rifle Ammo', 10),
+('ammunition_rifle_large', 'Rifle Ammo Large', 10),
+('ammunition_shotgun', 'Shotgun Shells', 10),
+('ammunition_shotgun_large', 'Shotgun Shells Large', 10),
+('ammunition_smg', 'SMG Ammo', 10),
+('ammunition_smg_large', 'SMG Ammo Large', 10),
+('ammunition_snp', 'Sniper Ammo', 10),
+('ammunition_snp_large', 'Sniper Ammo Large', 10),
+('ammunition_fireextinguisher', 'Fire Extinguisher Fuel', 10);
 
-
-ALTER TABLE `disc_ammo` ADD COLUMN `attach` TEXT NOT NULL DEFAULT '[]' AFTER `count`;
+create table ammunition
+(
+    id bigint unsigned auto_increment PRIMARY KEY,
+    owner text not null,
+    hash text not null,
+    count int default 0 not null,
+    attach` TEXT NOT NULL DEFAULT '[]',
+    constraint id
+        unique (id)
+);
