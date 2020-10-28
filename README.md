@@ -38,7 +38,7 @@ add_ace group.admin inventory.openinventory allow
 - Multiple styles
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
-Do you have an improvement or bugfix? Feel free to share it in a Pull Request!
+Do you have an improvement or bugfix? Feel free to share it in a Pull Request! 
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
 Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
@@ -55,6 +55,7 @@ Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 ![thanks](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/thanks.png)
+If you like our edits please write a review on [Disboard](https://disboard.org/nl/server/411618887227146251#reviews)
 - Original esx_inventoryhud resource made by Trsak
 - To all [contributors](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/graphs/contributors)
 - Vault Script By Monster TaerAttO
