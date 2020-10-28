@@ -26,10 +26,10 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Accounts support (bank, black money, ...)
 - Weapons and ammunition clips as item
 - Configurableshops in config (police, nightclub, blackmarket, weapons)
-- Property support
-- Motels support
-- Trunk support
-- Glovebox support
+- Property support (esx_property)
+- Motels support (lsrp-motels)
+- Trunk support (integrated)
+- Glovebox support (integrated)
 - Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
 - Multiple languages supported (check locales/ and html/locales/ directories)
