@@ -50,13 +50,11 @@ INSERT INTO `items` (`name`, `label`, `weight`) VALUES
 ('ammunition_snp_large', 'Sniper Ammo Large', 10),
 ('ammunition_fireextinguisher', 'Fire Extinguisher Fuel', 10);
 
-create table ammunition
-(
-    id bigint unsigned auto_increment PRIMARY KEY,
-    owner text not null,
-    hash text not null,
-    count int default 0 not null,
-    attach` TEXT NOT NULL DEFAULT '[]',
-    constraint id
-        unique (id)
+create table `ammunition` (
+    `id` bigint unsigned auto_increment PRIMARY KEY,
+    `owner` text not null,
+    `hash` text not null,
+    `count` int default 0 not null,
+    `attach` TEXT NOT NULL DEFAULT '[]',
+	UNIQUE KEY (`id`)
 );
