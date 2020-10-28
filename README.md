@@ -2,13 +2,11 @@
 
 # Dutch Players Edit // esx_inventoryhud // ESX 1.2 ONLY
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
-Report hackers and hackwebsites please.
-
 The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
 
 We have edited the original esx_inventoryhud resource from Trsak.
 
-This inventory only works with the latest version of ESX.
+This inventory only works with the latest version of ESX. You can download v1-final here: https://github.com/esx-framework/es_extended/tree/v1-final
 
 Your help is much appreciated in a pull request!
 
