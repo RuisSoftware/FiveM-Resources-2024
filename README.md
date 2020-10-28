@@ -4,7 +4,7 @@
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Report hackers and hackwebsites please.
 
-The latest MySQL plugin is breaking this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
+The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
 
 We have edited the original esx_inventoryhud resource from Trsak.
 
