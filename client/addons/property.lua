@@ -20,6 +20,10 @@ function refreshPropertyInventory()
 end
 
 function setPropertyInventoryData(data)
+	SendNUIMessage({
+		action = "setInfoText",
+		text = _("propertyinv")
+	})
 	items = {}
 
 	local blackMoney = data.blackMoney
@@ -84,7 +88,7 @@ function setPropertyInventoryData(data)
 	end
 	SendNUIMessage({
 		action = "setSecondInventoryItems",
-		itemList = items
+		itemList = items,
 	})
 end
 

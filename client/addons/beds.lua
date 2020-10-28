@@ -106,7 +106,11 @@ RegisterNUICallback("PutIntoMotelBed", function(data, cb)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
-		TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+		if data.item.name == 'cash' then
+			TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
+		else
+			TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+		end
 	end
 	Wait(150)
 	refreshPropertyMotelBedInventory()

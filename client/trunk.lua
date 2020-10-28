@@ -65,7 +65,7 @@ function openTrunk()
 			end
 		end
 
-		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == "police") or (Config.CheckOwnership and myVeh) then
+		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.CheckOwnership and myVeh) then
 			if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 				CloseToVehicle = true
 				local vehFront = VehicleInFront()
@@ -82,12 +82,25 @@ function openTrunk()
 						SetVehicleDoorShut(vehFront, 5, false)
 					else
 						if locked == 1 or class == 15 or class == 16 or class == 14 then
-						SetVehicleDoorOpen(vehFront, 5, false, false)
-						ESX.UI.Menu.CloseAll()
-						if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
-							CloseToVehicle = true
-							OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.TrunkSize[class], myVeh)
-						end
+							SetVehicleDoorOpen(vehFront, 5, false, false)
+							ESX.UI.Menu.CloseAll()
+							if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
+								CloseToVehicle = true
+								exports['mythic_progbar']:Progress({
+									name = "openTrunk",
+									duration = 2000,
+									label = _U('opentrunk'),
+									useWhileDead = false,
+									canCancel = true,
+									controlDisables = {},
+									animation = false,
+									prop = {},
+								}, function(status)
+									if not status then
+										OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.TrunkSize[class], myVeh)
+									end
+								end)
+							end
 						else
 							exports['mythic_notify']:SendAlert('error', _U('trunk_closed'))
 						end
@@ -142,10 +155,10 @@ AddEventHandler("esx:playerLoaded",function(xPlayer)
 end)
 
 function OpenCoffreInventoryMenu(plate, max, myVeh)
-ESX.TriggerServerCallback("esx_trunk:getInventoryV", function(inventory)
-	text = _U("trunk_info", plate, (inventory.weight / 100), (max / 100))
-	data = {plate = plate, max = max, myVeh = myVeh, text = text}
-	TriggerEvent("esx_inventoryhud:openTrunkInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
+	ESX.TriggerServerCallback("esx_trunk:getInventoryV", function(inventory)
+		text = _U("trunk_info", plate, (inventory.weight / 100), (max / 100))
+		data = {plate = plate, max = max, myVeh = myVeh, text = text}
+		TriggerEvent("esx_inventoryhud:openTrunkInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
 	end, plate)
 end
 

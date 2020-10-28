@@ -1,9 +1,9 @@
 Config = {}
-Config.Locale = "nl" -- Currently supported: nl, en, tr, fr. Your translation file is really appreciated. Send it to our Github repo.
+Config.Locale = "nl" -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
 Config.IncludeCash = true -- Include cash in inventory? true or false.
-Config.IncludeWeapons = true -- Include weapons in inventory? true or nil.
+Config.IncludeWeapons = true -- DEPRECATED
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
-Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH! Inlcuding money or black_money this way will cause bugs.
+Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH!
 Config.OpenControl = 289 -- player inventory
 Config.CloseControl = 289 -- player inventory
 Config.OpenKeyGlovebox = 170
@@ -15,7 +15,9 @@ Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NO
 Config.JobOnlyInventory = true -- true = only Config.InventoryJob can open someone elses inventory. False = everybody can 'steal' items from someone else.
 Config.CheckOwnership = false -- If true, Only owner of vehicle can store items in trunk and glovebox.
 Config.AllowPolice = true -- If true, police will be able to search players' trunks.
-Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Ilelgal can enter this shop.
+Config.AllowNightclub = true -- If true, nightclub will be able to search players' trunks.
+Config.AllowMafia = true -- If true, mafia will be able to search players' trunks.
+Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Illegal can enter this shop.
 Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil}
 -- List of item names that will close ui when used.
 Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"}

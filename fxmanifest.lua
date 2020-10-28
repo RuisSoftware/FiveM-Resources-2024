@@ -5,7 +5,7 @@ name 'esx_inventoryhud'
 author 'Trsak'
 editor 'Dutch Players'
 description "Thé ESX Inventory HUD from Trsak and loved by many others!"
-version '3.3.7'
+version '3.3.9'
 url 'https://github.com/dutchplayers/ESX-1.2-Inventory-HUD'
 
 ui_page "html/ui.html"
@@ -22,10 +22,10 @@ client_scripts {
 	"client/ammunition.lua",
 	"client/trunk.lua",
 	"client/vault.lua",
+	"client/weapons.lua",
 	
 	"client/addons/player.lua",
 	"client/addons/shop.lua",
-	"client/addons/weapons.lua",
 	"client/addons/trunk.lua",
 	"client/addons/glovebox.lua",
 	"client/addons/beds.lua",
@@ -65,8 +65,8 @@ files {
 
 dependencies {
 	'es_extended',
-	'mythic_notify', -- depricated
-	'b1g_notify', -- depricated
+	'mythic_notify', -- DEPRECATED
+	'b1g_notify', -- DEPRECATED
 	't-notify', -- new notify
 	'mythic_progbar'
 }

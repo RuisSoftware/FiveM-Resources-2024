@@ -65,7 +65,7 @@ function openGlovebox()
 			end
 		end
 
-		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == "police") or (Config.CheckOwnership and myVeh) then
+		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.CheckOwnership and myVeh) then
 			if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 				CloseToVehicle = true
 				local vehFront = GetVehiclePedIsIn(GetPlayerPed(-1), false)
@@ -79,7 +79,20 @@ function openGlovebox()
 					ESX.UI.Menu.CloseAll()
 					if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 						CloseToVehicle = true
-						OpenCoffresInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.GloveboxSize[class], myVeh)
+						exports['mythic_progbar']:Progress({
+							name = "openGlovebox",
+							duration = 2000,
+							label = _U('openglovebox'),
+							useWhileDead = false,
+							canCancel = true,
+							controlDisables = {},
+							animation = false,
+							prop = {},
+						}, function(status)
+							if not status then
+								OpenCoffresInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.GloveboxSize[class], myVeh)
+							end
+						end)
 					end
 				else
 					exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby'))
