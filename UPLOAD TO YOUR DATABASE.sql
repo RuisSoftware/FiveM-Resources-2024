@@ -16,22 +16,6 @@ CREATE TABLE IF NOT EXISTS `inventory_trunk` (
 	UNIQUE KEY `plate` (`plate`)
 );
 
-CREATE TABLE IF NOT EXISTS `inventory_bags`(
-	`identifier` VARCHAR(50) NULL DEFAULT NULL, 
-	`id` INT(11) NULL DEFAULT NULL, 
-	`x` DOUBLE NULL DEFAULT NULL, 
-	`y` DOUBLE NULL DEFAULT NULL, 
-	`z` DOUBLE NULL DEFAULT NULL,
-	`itemcount` int(11) NOT NULL DEFAULT '0'
-) COLLATE='latin1_swedish_ci' ENGINE=InnoDB ;
-
-CREATE TABLE IF NOT EXISTS `inventory_bags_items` (
-	`id` int(11) DEFAULT NULL,
-	`item` varchar(50) DEFAULT NULL,
-	`label` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-	`count` int(11) DEFAULT NULL
-);
-
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0)
