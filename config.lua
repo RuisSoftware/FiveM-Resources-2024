@@ -1,29 +1,47 @@
 Config = {}
-Config.Locale = "nl" -- Currently supported: nl, en, tr, fr. Your translation file is really appreciated. Send it to our Github repo.
+Config.Locale = "nl" -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
 Config.IncludeCash = true -- Include cash in inventory? true or false.
-Config.IncludeWeapons = true -- Include weapons in inventory? true or nil.
+Config.IncludeWeapons = true -- DEPRECATED.
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
-Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH! Inlcuding money or black_money this way will cause bugs.
-Config.OpenControl = 289 -- player inventory
-Config.CloseControl = 289 -- player inventory
-Config.OpenKeyGlovebox = 170
-Config.OpenKeyTrunk = 170
-Config.ReloadTime = 2000 --ms
-Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk
-Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/
-Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NOT YET SUPPORTED
-Config.JobOnlyInventory = true -- true = only Config.InventoryJob can open someone elses inventory. False = everybody can 'steal' items from someone else.
-Config.CheckOwnership = false -- If true, Only owner of vehicle can store items in trunk and glovebox.
+Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH!
+
+Config.OpenControl = 289 -- F2. player inventory, it is recommend to use the same as CloseControl.
+Config.CloseControl = 289 -- F2. player inventory, it is recommend to use the same as OpenControl.
+Config.BagControl = 288 -- F1. player bag inventory
+Config.SearchBag = 249 -- N. Search a bag on the ground
+Config.TakeBag = 38 -- E. Take bag on the ground
+Config.OpenKeyGlovebox = 170 -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
+Config.OpenKeyTrunk = 170 -- F3. trunk inventory (behind-car), it is recommend to use the same as OpenKeyGlovebox.
+Config.RobKeyOne = 38 -- E
+Config.RobKeyTwo = 60 -- CTRL
+
+Config.ReloadTime = 2000 -- in miliseconds for reloading your ammunition.
+Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk TO player inventory. DEPRECATED.
+Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
+Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NOT YET SUPPORTED.
+
+Config.MaxBagItemCount = 50 
+Config.MaxDifferentBagItems = 5
+
+Config.EverybodyCanRob = true -- Rob a dead or mugging or handcuffed person or allow jobs only?
+Config.JobOnlyInventory = true -- Can jobs use /openinventory ID from anywere? If False only admins can do this.
+Config.AllowModerators = false -- Can moderators use /openinventory ID from anywere?
+Config.CheckOwnership = false -- If true, Only owner of vehicle can store items in trunk and glovebox. Only if this is on TRUE Config.AllowJOBNAME will work.
 Config.AllowPolice = true -- If true, police will be able to search players' trunks.
-Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Ilelgal can enter this shop.
-Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil}
+Config.AllowNightclub = true -- If true, nightclub will be able to search players' trunks.
+Config.AllowMafia = true -- If true, mafia will be able to search players' trunks.
+
+Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Illegal can enter this shop.
+Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
+Config.ShopMinimumGradePolice = 0 -- minimum grade to open the police shop
+
 -- List of item names that will close ui when used.
 Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"}
 
 Config.MarkerSize = {x = 1.5, y = 1.5, z = 1.5}
 Config.MarkerColor = {r = 0, g = 128, b = 255}
 Config.Color = 2
-Config.WeaponColor = 1
+Config.WeaponColor = 1 -- currently used for most shop blip color.
 
 -- BLIPS
 Config.ShowDrugMarketBlip = true
@@ -47,19 +65,20 @@ Config.IllegalShopBlipID = 110
 Config.ShowPrisonShopBlip = true
 Config.PrisonShopBlipID = 52
 
+Config.UseLicense = false -- You must have esx_license working on your server. 
 Config.LicensePrice = 25000
 Config.License = {Weapon = "weapon", Police = "weapon", Nightclub = "weapon"} -- What license is needed for this shop?
 
-Config.Weight = 80 -- Limit, unit can be whatever you want. Originally grams (as average people can hold 25kg)
-Config.DefaultWeight = 1 -- Default weight for an item
+Config.Weight = 80 -- Limit, unit can be whatever you want. Originally grams (as average people can hold 25kg).
+Config.DefaultWeight = 1 -- Default weight for an item.
 
-Config.localWeight = {
+Config.localWeight = { -- Fill this with all your items. This is only for trunk and glovebox! Change your pocket inventory weights in your database! (items table)
 	bread = 1,
 	water = 1,
 	WEAPON_SMG = 5
 }
 
-Config.GloveboxSize = {
+Config.GloveboxSize = { -- Related to Config.localWeight.
 	[0] = 300, --Compact
 	[1] = 400, --Sedan
 	[2] = 700, --SUV
@@ -84,7 +103,7 @@ Config.GloveboxSize = {
 	[21] = 0 --Trains
 }
 
-Config.TrunkSize = {
+Config.TrunkSize = { -- Related to Config.localWeight.
 	[0] = 3000, --Compact
 	[1] = 4000, --Sedan
 	[2] = 7000, --SUV
@@ -295,8 +314,8 @@ Config.Shops = {
 	},
 
 	LicenseShop = {
-	Locations = {
-	    	-- { x = 12.47, y = -1105.5, z = 29.8}
+		Locations = {
+	    	{ x = 12.47, y = -1105.5, z = 29.8}
 		}
 	},
 

@@ -17,22 +17,21 @@ Citizen.CreateThread(function()
 	while ESX.GetPlayerData().job == nil do Citizen.Wait(10) end
 	PlayerData = ESX.GetPlayerData()
 	Citizen.Wait(3000)
-	toghud = true
 end)
 
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded", function(xPlayer)
 	PlayerData = xPlayer
-	TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
-	TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
+	TriggerServerEvent("esx_inventory_trunk:getOwnedVehicle")
+	TriggerServerEvent("esx_inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
 AddEventHandler("onResourceStart", function()
 	PlayerData = xPlayer
-	TriggerServerEvent("esx_trunk_inventory:getOwnedVehicle")
-	TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
+	TriggerServerEvent("esx_inventory_trunk:getOwnedVehicle")
+	TriggerServerEvent("esx_inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
@@ -470,32 +469,6 @@ end)
 RegisterNetEvent('esx_inventoryhud:disablenumbers')
 AddEventHandler('esx_inventoryhud:disablenumbers', function(disabled)
 	canFire = disabled
-end)
-
-RegisterNetEvent('esx_inventoryhud:steal')
-AddEventHandler('esx_inventoryhud:steal', function()
-	local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-	if closestPlayer ~= -1 and closestDistance <= 3.0 then
-		local searchPlayerPed = GetPlayerPed(closestPlayer)
-		if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
-			exports['mythic_progbar']:Progress({
-				name = "rob",
-				duration = 3000,
-				label = _U('stealing'),
-				useWhileDead = false,
-				canCancel = true,
-				controlDisables = {},
-				animation = {},
-				prop = {},
-			}, function(status)
-				if not status then
-					TriggerEvent("esx_inventoryhud:openPlayerInventory", GetPlayerServerId(closestPlayer))
-				end
-			end)
-		end
-	else
-		exports['mythic_notify']:SendAlert('error', _U('players_nearby'))
-	end
 end)
 
 RegisterNetEvent('esx_inventoryhud:notification')

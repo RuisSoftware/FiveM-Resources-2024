@@ -12,23 +12,23 @@ local listPlate = Config.VehiclePlate
 TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
 
 AddEventHandler("onMySQLReady", function()
-	local result = MySQL.Sync.fetchAll("SELECT * FROM glovebox_inventory")
+	local result = MySQL.Sync.fetchAll("SELECT * FROM inventory_glovebox")
 	local data = nil
 	if #result ~= 0 then
 		for i = 1, #result, 1 do
 			local plate = result[i].plate
 			local owned = result[i].owned
 			local data = (result[i].data == nil and {} or json.decode(result[i].data))
-			local dataStore = CreateDataStore(plate, owned, data)
+			local dataStore = CreateDataStoreGlovebox(plate, owned, data)
 			SharedDataStores[plate] = dataStore
 		end
 	end
-	MySQL.Async.execute("DELETE FROM `glovebox_inventory` WHERE `owned` = 0", {})
+	MySQL.Async.execute("DELETE FROM `inventory_glovebox` WHERE `owned` = 0", {})
 end)
 
 function loadInventGloveboxGlovebox(plate)
 	local result =
-	MySQL.Sync.fetchAll("SELECT * FROM glovebox_inventory WHERE plate = @plate", {
+	MySQL.Sync.fetchAll("SELECT * FROM inventory_glovebox WHERE plate = @plate", {
 		["@plate"] = plate
 	})
 	local data = nil
@@ -37,7 +37,7 @@ function loadInventGloveboxGlovebox(plate)
 			local plate = result[i].plate
 			local owned = result[i].owned
 			local data = (result[i].data == nil and {} or json.decode(result[i].data))
-			local dataStore = CreateDataStore(plate, owned, data)
+			local dataStore = CreateDataStoreGlovebox(plate, owned, data)
 			SharedDataStores[plate] = dataStore
 		end
 	end
@@ -74,9 +74,9 @@ end
 function MakeDataStoreGlovebox(plate)
 	local data = {}
 	local owned = getOwnedVehicle(plate)
-	local dataStore = CreateDataStore(plate, owned, data)
+	local dataStore = CreateDataStoreGlovebox(plate, owned, data)
 	SharedDataStores[plate] = dataStore
-	MySQL.Async.execute("INSERT INTO glovebox_inventory(plate,data,owned) VALUES (@plate,'{}',@owned)", {
+	MySQL.Async.execute("INSERT INTO inventory_glovebox(plate,data,owned) VALUES (@plate,'{}',@owned)", {
 		["@plate"] = plate,
 		["@owned"] = owned
 	})
@@ -94,8 +94,8 @@ AddEventHandler("esx_glovebox:GetSharedDataStoreGlovebox", function(plate, cb)
 	cb(GetSharedDataStoreGlovebox(plate))
 end)
 
-RegisterServerEvent("esx_glovebox_inventory:getOwnedVehicle")
-AddEventHandler("esx_glovebox_inventory:getOwnedVehicle", function()
+RegisterServerEvent("esx_inventory_glovebox:getOwnedVehicle")
+AddEventHandler("esx_inventory_glovebox:getOwnedVehicle", function()
 	local vehicules = {}
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
@@ -109,7 +109,7 @@ AddEventHandler("esx_glovebox_inventory:getOwnedVehicle", function()
 				table.insert(vehicules, {plate = vehicle.plate})
 			end
 		end
-		TriggerClientEvent("esx_glovebox_inventory:setOwnedVehicle", _source, vehicules)
+		TriggerClientEvent("esx_inventory_glovebox:setOwnedVehicle", _source, vehicules)
 	end)
 end)
 
@@ -426,7 +426,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 				else
 					store.set("coffres", coffres)
 					xPlayer.removeInventoryItem(item, count)
-					MySQL.Async.execute("UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate", {
+					MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
 						["@owned"] = owned
 					})
@@ -454,7 +454,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 				else
 					xPlayer.removeAccountMoney(item, count)
 					store.set("black_money", blackMoney)
-					MySQL.Async.execute("UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate", {
+					MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
 						["@owned"] = owned
 					})
@@ -481,7 +481,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 				else
 					xPlayer.removeMoney(count)
 					store.set("money", cashMoney)
-					MySQL.Async.execute("UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate", {
+					MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
 						["@owned"] = owned
 					})
@@ -497,7 +497,7 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 			TriggerEvent("esx_glovebox:GetSharedDataStoreGlovebox",plate, function(store)
 				xPlayer.removeWeapon(item)
 				store.set("weapons", storeWeapons)
-				MySQL.Async.execute("UPDATE glovebox_inventory SET owned = @owned WHERE plate = @plate", {
+				MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
 					["@plate"] = plate,
 					["@owned"] = owned
 				})

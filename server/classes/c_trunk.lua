@@ -11,7 +11,7 @@ function stringsplit(inputstr, sep)
 	return t
 end
 
-function CreateDataStore(plate, owned, data)
+function CreateDataStoreTrunk(plate, owned, data)
 	local self = {}
 
 	self.plate = plate
@@ -61,7 +61,7 @@ function CreateDataStore(plate, owned, data)
 		end
 		local timeoutCallback =
 		ESX.SetTimeout(10000, function()
-			MySQL.Async.execute("UPDATE trunk_inventory SET data = @data WHERE plate = @plate", {
+			MySQL.Async.execute("UPDATE inventory_trunk SET data = @data WHERE plate = @plate", {
 				["@data"] = json.encode(self.data),
 				["@plate"] = self.plate
 			})

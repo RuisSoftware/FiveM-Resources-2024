@@ -1,7 +1,6 @@
 ESX = nil
 TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
 
-local Command_Steal = "steal" -- CHANGE TO YOUR COMMAND NAME
 local Command_Close_Inventory = "closeinventory" -- CHANGE TO YOUR COMMAND NAME
 ServerItems = {}
 itemShopList = {}
@@ -85,13 +84,11 @@ AddEventHandler("esx_inventoryhud:tradePlayerItem", function(from, target, type,
 	end
 end)
 
-RegisterCommand(Command_Steal, function(source)
-	local _source = source
-	TriggerClientEvent('esx_inventoryhud:steal', _source)
-end)
-
 RegisterCommand("openinventory", function(source, args, rawCommand) -- ADMIN WATCH
-	if IsPlayerAceAllowed(source, "inventory.openinventory") then
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	local group = xPlayer.getGroup()
+	if group == 'admin' or (Config.AllowModerators and group == 'mod') then
 		local target = tonumber(args[1])
 		local targetXPlayer = ESX.GetPlayerFromId(target)
 		if targetXPlayer ~= nil then
@@ -100,7 +97,15 @@ RegisterCommand("openinventory", function(source, args, rawCommand) -- ADMIN WAT
 			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_player') })
 		end
 	else
-		TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
+		if Config.JobOnlyInventory then
+			if (Config.AllowPolice and xPlayer.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and xPlayer.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and xPlayer.job.name == Config.InventoryJob.Mafia) or (Config.AllowMafia and xPlayer.job.name == Config.InventoryJob.Ambulance) then
+				TriggerClientEvent("esx_inventoryhud:openPlayerInventory", source, target, targetXPlayer.name)
+			else
+				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
+			end
+		else
+			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
+		end
 	end
 end)
 

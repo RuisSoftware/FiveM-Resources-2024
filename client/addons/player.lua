@@ -13,24 +13,67 @@ end)
 
 RegisterNetEvent("esx_inventoryhud:openPlayerInventory")
 AddEventHandler("esx_inventoryhud:openPlayerInventory", function(target, playerName)
-	PlayerData = ESX.GetPlayerData()
-	if Config.JobOnlyInventory then
-		if PlayerData.job and PlayerData.job.name == 'police' or PlayerData.job.name == 'ambulance' then
-			targetPlayer = target
-			targetPlayerName = playerName
-			setPlayerInventoryData()
-			openPlayerInventory()
-			TriggerServerEvent('esx_inventoryhud:disableTargetInv', target)
-		else
-			ESX.ShowNotification('Negeras berniukas')
-		end
-	else
-		targetPlayer = target
-		targetPlayerName = playerName
-		setPlayerInventoryData()
-		openPlayerInventory()
-		TriggerServerEvent('esx_inventoryhud:disableTargetInv', target)
-	end
+	targetPlayer = target
+	targetPlayerName = playerName
+	setPlayerInventoryData()
+	openPlayerInventory()
+	TriggerServerEvent('esx_inventoryhud:disableTargetInv', target)
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        if IsControlJustReleased(0, Config.RobKeyOne) and IsControlPressed(1, Config.RobKeyTwo) then
+            local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+            if closestPlayer ~= -1 and closestDistance <= 3.0 then
+				if not Config.EverybodyCanRob then
+					if (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Ambulance) then
+						local searchPlayerPed = GetPlayerPed(closestPlayer)
+						if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
+							exports['mythic_progbar']:Progress({
+								name = "openGlovebox",
+								duration = 3500,
+								label = _U('robbing'),
+								useWhileDead = false,
+								canCancel = true,
+								controlDisables = {},
+								animation = {},
+								prop = {},
+							}, function(status)
+								if not status then
+									TriggerEvent("esx_inventoryhud:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
+								end
+							end)
+						else
+							exports['mythic_notify']:DoHudText('error', _U('player_not_dead'))
+						end
+					else
+						exports['mythic_notify']:DoHudText('error', _U('no_permissions'))
+					end
+				else
+					local searchPlayerPed = GetPlayerPed(closestPlayer)
+					if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
+						exports['mythic_progbar']:Progress({
+							name = "openGlovebox",
+							duration = 3500,
+							label = _U('robbing'),
+							useWhileDead = false,
+							canCancel = true,
+							controlDisables = {},
+							animation = {},
+							prop = {},
+						}, function(status)
+							if not status then
+								TriggerEvent("esx_inventoryhud:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
+							end
+						end)  
+					else
+						exports['mythic_notify']:DoHudText('error', _U('player_not_dead'))
+					end
+				end
+            end
+        end
+    end
 end)
 
 function refreshPlayerInventory()

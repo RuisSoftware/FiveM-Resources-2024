@@ -1,14 +1,10 @@
-- Original thread from Trsak: https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/
-
 # Dutch Players Edit // esx_inventoryhud // ESX 1.2 ONLY
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
-Report hackers and hackwebsites please.
+Your number 1 inventory for ESX 1.2!
 
-The latest MySQL plugin is breaking this resource! Only use: https://github.com/dutchplayers/fivem-mysql-async
+We have edited the original esx_inventoryhud resource from [Trsak](https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/).
 
-We have edited the original esx_inventoryhud resource from Trsak.
-
-This inventory only works with the latest version of ESX.
+This inventory only works with the latest version of ESX. You can download v1-final here: https://github.com/esx-framework/es_extended/tree/v1-final
 
 Your help is much appreciated in a pull request!
 
@@ -25,11 +21,13 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Use item by 1-5 key
 - Accounts support (bank, black money, ...)
 - Weapons and ammunition clips as item
-- Configurableshops in config (police, nightclub, blackmarket, weapons)
-- Property support
-- Motels support
-- Trunk support
-- Glovebox support
+- Configurable shops in config (police, nightclub, blackmarket, weapons)
+- Property support (esx_property)
+- Motels support (lsrp-motels)
+- Trunk support (integrated)
+- Glovebox support (integrated)
+- Bag support (integrated)
+- Pocket support (integrated)
 - Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
 - Multiple languages supported (check locales/ and html/locales/ directories)
@@ -38,15 +36,15 @@ add_ace group.admin inventory.openinventory allow
 - Multiple styles
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
-Do you have an improvement or bugfix? Feel free to share it in a Pull Request!
+The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
+Do you have an improvement or bugfix? Feel free to share it in a Pull Request! 
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
 Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
-![1](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud.PNG)
-![2](https://raw.githubusercontent.com/dutchplayers/esx-inventoryhud/master/esx_inventoryhud_trunk.PNG)
-[More designs](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
+![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_0.jpg)
+![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_01.jpg)
 
 ![css](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/customcss.png)
 Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
@@ -56,6 +54,7 @@ Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
 ![thanks](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/thanks.png)
+If you like our edits please write a review on [Disboard](https://disboard.org/nl/server/411618887227146251#reviews)
 - Original esx_inventoryhud resource made by Trsak
 - To all [contributors](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/graphs/contributors)
 - Vault Script By Monster TaerAttO

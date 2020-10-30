@@ -10,8 +10,8 @@ local entityWorld = nil
 local globalplate = nil
 local lastChecked = 0
 
-RegisterNetEvent("esx_glovebox_inventory:setOwnedVehicle")
-AddEventHandler("esx_glovebox_inventory:setOwnedVehicle", function(vehicle)
+RegisterNetEvent("esx_inventory_glovebox:setOwnedVehicle")
+AddEventHandler("esx_inventory_glovebox:setOwnedVehicle", function(vehicle)
 	vehiclePlate = vehicle
 end)
 
@@ -52,7 +52,7 @@ function openGlovebox()
 			if vPlate == vFront then
 				myVeh = true
 			elseif lastChecked < GetGameTimer() - 60000 then
-				TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
+				TriggerServerEvent("esx_inventory_glovebox:getOwnedVehicle")
 				lastChecked = GetGameTimer()
 				Wait(2000)
 				for i = 1, #vehiclePlate do
@@ -65,7 +65,7 @@ function openGlovebox()
 			end
 		end
 
-		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == "police") or (Config.CheckOwnership and myVeh) then
+		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.CheckOwnership and myVeh) then
 			if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 				CloseToVehicle = true
 				local vehFront = GetVehiclePedIsIn(GetPlayerPed(-1), false)
@@ -79,7 +79,20 @@ function openGlovebox()
 					ESX.UI.Menu.CloseAll()
 					if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 						CloseToVehicle = true
-						OpenCoffresInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.GloveboxSize[class], myVeh)
+						exports['mythic_progbar']:Progress({
+							name = "openGlovebox",
+							duration = 2000,
+							label = _U('openglovebox'),
+							useWhileDead = false,
+							canCancel = true,
+							controlDisables = {},
+							animation = false,
+							prop = {},
+						}, function(status)
+							if not status then
+								OpenCoffresInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.GloveboxSize[class], myVeh)
+							end
+						end)
 					end
 				else
 					exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby'))
@@ -126,7 +139,7 @@ end)
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded", function(xPlayer)
 	PlayerData = xPlayer
-	TriggerServerEvent("esx_glovebox_inventory:getOwnedVehicle")
+	TriggerServerEvent("esx_inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 

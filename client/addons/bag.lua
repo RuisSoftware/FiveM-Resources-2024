@@ -1,22 +1,22 @@
-RegisterNetEvent("esx_inventoryhud:openMotelsInventoryBed")
-AddEventHandler("esx_inventoryhud:openMotelsInventoryBed", function(data)
-	setPropertyMotelDataBed(data)
-	openMotelInventoryBed()
+RegisterNetEvent("esx_inventoryhud:openBagInventory")
+AddEventHandler("esx_inventoryhud:openBagInventory", function(data)
+	setPropertyBagData(data)
+	openBagInventory()
 end)
 
-function refreshPropertyMotelBedInventory()
-	ESX.TriggerServerCallback("lsrp-motels:getPropertyInventoryBed", function(inventory)
-		setPropertyMotelDataBed(inventory)
+function refreshPropertyBagInventory()
+	ESX.TriggerServerCallback("esx_bag:getPropertyInventory", function(inventory)
+		setPropertyBagData(inventory)
 	end, ESX.GetPlayerData().identifier )
 end
 
-function setPropertyMotelDataBed(data)
+function setPropertyBagData(data)
+	items = {}
+
 	SendNUIMessage({
 		action = "setInfoText",
-		text = _("bed_stash")
+		text = _("bagInventory")
 	})
-
-	items = {}
 
 	local blackMoney = data.blackMoney
 	local money = data.money
@@ -36,6 +36,7 @@ function setPropertyMotelDataBed(data)
 		}
 		table.insert(items, accountData)
 	end
+
 	if money > 0 then
 		accountData = {
 			label = _U("money"),
@@ -59,14 +60,12 @@ function setPropertyMotelDataBed(data)
 			item.rare = false
 			item.weight = -1
 			item.canRemove = false
-
 			table.insert(items, item)
 		end
 	end
 
 	for i = 1, #propertyWeapons, 1 do
 		local weapon = propertyWeapons[i]
-
 		if propertyWeapons[i].name ~= "WEAPON_UNARMED" then
 			table.insert(items, {
 				label = ESX.GetWeaponLabel(weapon.name),
@@ -87,47 +86,48 @@ function setPropertyMotelDataBed(data)
 	})
 end
 
-function openMotelInventoryBed()
+function openBagInventory()
 	loadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
-		type = "motelsbed"
+		type = "bag"
 	})
 	SetNuiFocus(true, true)
 end
 
-RegisterNUICallback("PutIntoMotelBed", function(data, cb)
+RegisterNUICallback("PutIntoBag", function(data, cb)
 	if IsPedSittingInAnyVehicle(playerPed) then
 		return
 	end
+		print('test')
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
 		local count = tonumber(data.number)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
 		if data.item.name == 'cash' then
-			TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
+			TriggerServerEvent("esx_bag:putItem", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
 		else
-			TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+			TriggerServerEvent("esx_bag:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
 		end
 	end
 	Wait(150)
-	refreshPropertyMotelBedInventory()
+	refreshPropertyBagInventory()
 	Wait(150)
 	loadPlayerInventory()
 	cb("ok")
 end)
 
-RegisterNUICallback("TakeFromMotelBed", function(data, cb)
+RegisterNUICallback("TakeFromBag", function(data, cb)
 	if IsPedSittingInAnyVehicle(playerPed) then
 		return
 	end
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("lsrp-motels:getItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+		TriggerServerEvent("esx_bag:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
 	end
 	Wait(150)
-	refreshPropertyMotelBedInventory()
+	refreshPropertyBagInventory()
 	Wait(150)
 	loadPlayerInventory()
 	cb("ok")

@@ -22,13 +22,13 @@ local update =
 local mismatch =
 [[
 
-^4=================================================
-^1ESX Inventory HUD for ESX 1.2: Version mismatch!
-^1 You're running ^6%s ^1and there's a ^6%s
-^1 Download the new version from Github!
+^4===================================================
+^1ESX Inventory HUD for ESX 1.2
+^1 You're running ^6%s ^1and the latest is ^6%s
+^1 
 ^3 Disable version check?
 ^3 Check the fxmanifest.lua
-^4=================================================
+^4===================================================
 ^7
 ]]
 
@@ -36,11 +36,10 @@ CreateThread(function()
 	local disableVersionCheck = GetResourceMetadata(GetCurrentResourceName(), 'disable_version_check') == 'yes'
 	local disableVersionMessage = GetResourceMetadata(GetCurrentResourceName(), 'disable_version_check_message') == 'yes'
 	if not disableVersionCheck then
-		Wait(20000)
-		PerformHttpRequest('https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/version.txt',
+		PerformHttpRequest('https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/version',
 		function(err,body)
 			if err == 200 then
-				local version = GetResourceMetadata(GetCurrentResourceName(), 'version')
+				local version = GetResourceMetadata('esx_inventoryhud', 'version')
 				if version == tostring(body) then
 					if not disableVersionMessage then
 						print(update)
@@ -52,6 +51,7 @@ CreateThread(function()
 				print(error)
 			end
 		end, 'GET', json.encode({}), {ContentType = 'html/text'})
+		Wait(50000)
 	end
 end)
 

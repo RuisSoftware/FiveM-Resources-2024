@@ -78,5 +78,13 @@ Locales["nl"] = {
 	['not_enough_in_vault'] = 'er is niet genoeg ruimte voor dit item in de kluis!',
 	['player_cannot_hold'] = 'je hebt niet genoeg ruimte in je inventaris!',
 	['amount_invalid'] = 'ongeldig aantal',
+	['openglovebox'] = 'Handschoenenkastje openen...',
+	['opentrunk'] = 'Kofferbak openen...',
+	['propertyinv'] = 'Woning',
+	['player_not_dead'] = 'Persoon is niet dood of vastgehouden!',
+	['never_allow_noobs'] = 'NEVER LET USERS OPEN SOMEONES INVENTORY FROM ANYWERE!!!',
+	['wtf_you_try'] = 'Nerd',
+	['robbing'] = 'Overvallen...',
+	['bagInventory'] = 'Rugzak'
 
 }

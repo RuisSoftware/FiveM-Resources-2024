@@ -12,22 +12,22 @@ local listPlate = Config.VehiclePlate
 TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
 
 AddEventHandler("onMySQLReady", function()
-	local result = MySQL.Sync.fetchAll("SELECT * FROM trunk_inventory")
+	local result = MySQL.Sync.fetchAll("SELECT * FROM inventory_trunk")
 	local data = nil
 	if #result ~= 0 then
 		for i = 1, #result, 1 do
 			local plate = result[i].plate
 			local owned = result[i].owned
 			local data = (result[i].data == nil and {} or json.decode(result[i].data))
-			local dataStore = CreateDataStore(plate, owned, data)
+			local dataStore = CreateDataStoreTrunk(plate, owned, data)
 			SharedDataStores[plate] = dataStore
 		end
 	end
-	MySQL.Async.execute("DELETE FROM `trunk_inventory` WHERE `owned` = 0", {})
+	MySQL.Async.execute("DELETE FROM `inventory_trunk` WHERE `owned` = 0", {})
 end)
 
 function loadInventTrunk(plate)
-	local result = MySQL.Sync.fetchAll("SELECT * FROM trunk_inventory WHERE plate = @plate", {
+	local result = MySQL.Sync.fetchAll("SELECT * FROM inventory_trunk WHERE plate = @plate", {
 		["@plate"] = plate
 	})
 	local data = nil
@@ -36,7 +36,7 @@ function loadInventTrunk(plate)
 			local plate = result[i].plate
 			local owned = result[i].owned
 			local data = (result[i].data == nil and {} or json.decode(result[i].data))
-			local dataStore = CreateDataStore(plate, owned, data)
+			local dataStore = CreateDataStoreTrunk(plate, owned, data)
 			SharedDataStores[plate] = dataStore
 		end
 	end
@@ -73,9 +73,9 @@ end
 function MakeDataStoreTrunk(plate)
 	local data = {}
 	local owned = getOwnedVehicle(plate)
-	local dataStore = CreateDataStore(plate, owned, data)
+	local dataStore = CreateDataStoreTrunk(plate, owned, data)
 	SharedDataStores[plate] = dataStore
-	MySQL.Async.execute("INSERT INTO trunk_inventory(plate,data,owned) VALUES (@plate,'{}',@owned)", {
+	MySQL.Async.execute("INSERT INTO inventory_trunk(plate,data,owned) VALUES (@plate,'{}',@owned)", {
 		["@plate"] = plate,
 		["@owned"] = owned
 	})
@@ -93,8 +93,8 @@ AddEventHandler("esx_trunk:GetSharedDataStoreTrunk", function(plate, cb)
 	cb(GetSharedDataStoreTrunk(plate))
 end)
 
-RegisterServerEvent("esx_trunk_inventory:getOwnedVehicle")
-AddEventHandler("esx_trunk_inventory:getOwnedVehicle", function()
+RegisterServerEvent("esx_inventory_trunk:getOwnedVehicle")
+AddEventHandler("esx_inventory_trunk:getOwnedVehicle", function()
 	local vehicules = {}
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
@@ -108,7 +108,7 @@ AddEventHandler("esx_trunk_inventory:getOwnedVehicle", function()
 				table.insert(vehicules, {plate = vehicle.plate})
 			end
 		end
-		TriggerClientEvent("esx_trunk_inventory:setOwnedVehicule", _source, vehicules)
+		TriggerClientEvent("esx_inventory_trunk:setOwnedVehicule", _source, vehicules)
 	end)
 end)
 
@@ -427,7 +427,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
 				else
 					store.set("coffre", coffre)
 					xPlayer.removeInventoryItem(item, count)
-					MySQL.Async.execute("UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate", {
+					MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
 						["@owned"] = owned
 					})
@@ -454,7 +454,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
 				else
 					xPlayer.removeAccountMoney(item, count)
 					store.set("black_money", blackMoney)
-					MySQL.Async.execute("UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate", {
+					MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
 						["@owned"] = owned
 					})
@@ -484,7 +484,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
 				else
 					xPlayer.removeMoney(count)
 					store.set("money", cashMoney)
-					MySQL.Async.execute("UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate", {
+					MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
 						["@owned"] = owned
 					})
@@ -500,7 +500,7 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
 			TriggerEvent("esx_trunk:GetSharedDataStoreTrunk",plate,function(store)
 				xPlayer.removeWeapon(item)
 				store.set("weapons", storeWeapons)
-				MySQL.Async.execute("UPDATE trunk_inventory SET owned = @owned WHERE plate = @plate", {
+				MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
 					["@plate"] = plate,
 					["@owned"] = owned
 				})

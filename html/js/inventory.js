@@ -53,6 +53,10 @@ window.addEventListener("message", function (event) {
             $(".info-div").show();
             $(".weight-div").show();
             $("#otherInventory").show();
+        } else if (type === "bag") {
+            $(".info-div").show();
+            $(".weight-div").show();
+            $("#otherInventory").show();
         } else if (type === "vault") {
             $(".info-div").show();
             $(".weight-div").show();
@@ -520,6 +524,11 @@ $(document).ready(function () {
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
+                } else if (type === "bag") {
+                    $.post("https://esx_inventoryhud/TakeFromBag", JSON.stringify({
+                        item: itemData,
+                        number: parseInt($("#count").val())
+                    }));
                 }
             } else if (itemInventory === "main") {
                 if (type === "trunk") {
@@ -555,6 +564,11 @@ $(document).ready(function () {
                     }));
                 } else if (type === "glovebox") {
                     $.post("https://esx_inventoryhud/PutIntoGlovebox", JSON.stringify({
+                        item: itemData,
+                        number: parseInt($("#count").val())
+                    }));
+                } else if (type === "bag") {
+                    $.post("https://esx_inventoryhud/PutIntoBag", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
@@ -703,6 +717,13 @@ $(document).ready(function () {
 					owner : ownerHouse
                 }));
 
+            } else if (type === "bag" && itemInventory === "second") {
+                $.post("https://esx_inventoryhud/TakeFromBag", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val()),
+					
+                }));
+
             } else if (type === "vault" && itemInventory === "second") {
                 $.post("https://esx_inventoryhud/TakeFromVault", JSON.stringify({
                     item: itemData,
@@ -768,6 +789,11 @@ $(document).ready(function () {
                 }));
             } else if (type === "player" && itemInventory === "main") {
                 $.post("https://esx_inventoryhud/PutIntoPlayer", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "bag" && itemInventory === "main") {
+                $.post("https://esx_inventoryhud/PutIntoBag", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
