@@ -38,7 +38,7 @@ The latest MySQL plugin could break this resource! Only use: https://github.com/
 Do you have an improvement or bugfix? Feel free to share it in a Pull Request! 
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
-Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
+Currently 9 supported languages! If you want to translate it then feel free to pull a request!
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
 ![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_0.jpg)
