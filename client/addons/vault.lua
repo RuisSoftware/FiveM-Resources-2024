@@ -5,7 +5,7 @@ AddEventHandler("esx_inventoryhud:openVaultInventory", function(data)
 end)
 
 function refreshVaultInventory()
-	data = exports['esx_inventoryhud']:getMonsterVaultLicense()
+	data = getMonsterVaultLicense()
 	ESX.TriggerServerCallback("esx_inventoryhud:getVaultInventory", function(inventory)
 		setVaultInventoryData(inventory)
 	end, data, true)

@@ -1,23 +1,5 @@
 local vaultType = {}
 
-function OpenVaultInventoryMenu(data)
-	if data.job == PlayerData.job.name or data.job == 'vault' then
-		print(data.needItemLicense)
-		vaultType = data
-		ESX.TriggerServerCallback("esx_inventoryhud:getVaultInventory", function(inventory)
-			if not inventory then
-				exports['mythic_notify']:SendAlert('error', 'Not have license card')
-			else
-				TriggerEvent("esx_inventoryhud:openVaultInventory", inventory)
-			end
-		end,
-		data)
-	else
-		exports['mythic_notify']:SendAlert('error', "Je hebt geen kluissleutel", 5500)
-		Citizen.Wait(8000)
-	end
-end
-
 Citizen.CreateThread(function()
 	while ESX == nil or PlayerData == nil or PlayerData.job == nil do
 		Citizen.Wait(1000)
@@ -30,6 +12,24 @@ Citizen.CreateThread(function()
 		end)
 	end
 end)
+
+function OpenVaultInventoryMenu(data)
+	if data.job == PlayerData.job.name or data.job == 'vault' then
+		print(data.needItemLicense)
+		vaultType = data
+		ESX.TriggerServerCallback("esx_inventoryhud:getVaultInventory", function(inventory)
+			if not inventory then
+				exports['mythic_notify']:SendAlert('error', 'Niets gevonden')
+			else
+				TriggerEvent("esx_inventoryhud:openVaultInventory", inventory)
+			end
+		end,
+		data)
+	else
+		exports['mythic_notify']:SendAlert('error', "Je hebt geen kluissleutel", 5500)
+		Citizen.Wait(8000)
+	end
+end
 
 -- Key controls
 Citizen.CreateThread(function()
