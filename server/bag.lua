@@ -40,7 +40,7 @@ AddEventHandler('esx_bag:getItem', function(owner, type, item, count)
 
 	elseif type == 'item_account' then
 
-		TriggerEvent('esx_addonaccount:getAccount', 'motels_' .. item, xPlayerOwner.identifier, function(account)
+		TriggerEvent('esx_addonaccount:getAccount', 'bag_' .. item, xPlayerOwner.identifier, function(account)
 			local roomAccountMoney = account.money
 
 			if roomAccountMoney >= count then
