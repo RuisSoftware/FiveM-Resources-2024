@@ -1,3 +1,6 @@
+local targetPlayer
+local targetPlayerName
+
 RegisterNetEvent("esx_inventoryhud:openBagInventory")
 AddEventHandler("esx_inventoryhud:openBagInventory", function(data)
 	setPropertyBagData(data)

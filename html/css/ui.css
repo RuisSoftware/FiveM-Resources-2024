@@ -399,50 +399,6 @@ input[type=number] {
     text-align: center;
 }
 
-@media (max-width: 1500px) {
-    .inventory {
-        width: 1300px;
-    }
-
-    #playerInventory {
-        width: 550px;
-    }
-
-    #controls {
-        width: 200px;
-    }
-
-    #otherInventory {
-        width: 550px;
-    }
-
-    #noSecondInventoryMessage {
-        width: 540px;
-    }
-}
-
-@media (max-width: 1300px) {
-    .inventory {
-        width: 1000px;
-    }
-
-    #playerInventory {
-        width: 425px;
-    }
-
-    #controls {
-        width: 150px;
-    }
-
-    #otherInventory {
-        width: 425px;
-    }
-
-    #noSecondInventoryMessage {
-        width: 420px;
-    }
-}
-
 .textomenu {
   bottom: 430px;
 	left:42.2%;
@@ -569,18 +525,42 @@ src: url('roboto.ttf');
 
 	#playerInventory {
 		width: 550px;
+		margin-left:400px;
 	}
-
+	
+	#playerInventoryFastItems{
+		width: 550px;
+		margin-left:400px;
+	}
+	
 	#controls {
 		width: 200px;
+		margin-left:-100px;
 	}
 
 	#otherInventory {
 		width: 550px;
+		margin-left:-20px;
+		margin-top:-20px;
 	}
 
 	#noSecondInventoryMessage {
 		width: 540px;
+	}
+
+	.item-name {
+		width: 100px;
+	}
+
+	.slot {
+		width: 100px;
+	}
+	.slotFast {
+		width: 100px;
+	}
+
+	.weight-div {
+		width: 120px;
 	}
 
 }
@@ -592,18 +572,42 @@ src: url('roboto.ttf');
 
 	#playerInventory {
 		width: 425px;
+		margin-left:400px;
+	}
+	
+	#playerInventoryFastItems{
+		width: 425px;
+		margin-left:400px;
 	}
 
 	#controls {
 		width: 150px;
+		margin-left:-100px;
 	}
 
 	#otherInventory {
 		width: 425px;
+		margin-left:-20px;
+		margin-top:-20px;
 	}
 
 	#noSecondInventoryMessage {
 		width: 420px;
+	}
+
+	.item-name {
+		width: 100px;
+	}
+
+	.slot {
+		width: 100px;
+	}
+	.slotFast {
+		width: 100px;
+	}
+
+	.weight-div {
+		width: 120px;
 	}
 
 }
