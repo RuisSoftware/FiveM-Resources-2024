@@ -37,7 +37,7 @@ end)
 
 RegisterNetEvent("esx:setJob")
 AddEventHandler("esx:setJob", function(job)
-	local PlayerData = ESX.GetPlayerData()
+	PlayerData = ESX.GetPlayerData()
 	if PlayerData == nil then
 	else
 		PlayerData.job = job
