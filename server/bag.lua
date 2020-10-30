@@ -1,4 +1,4 @@
--- ORIGINAL SCRIPT FROM KRILLE https://github.com/KRILLE123
+-- INSPIRED BY ORIGINAL SCRIPT FROM KRILLE https://github.com/KRILLE123
 
 ESX.RegisterUsableItem('bag', function(source)
 	local xPlayer = ESX.GetPlayerFromId(source)
