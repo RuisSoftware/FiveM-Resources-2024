@@ -541,7 +541,7 @@ src: url('roboto.ttf');
 	#otherInventory {
 		width: 550px;
 		margin-left:-20px;
-		margin-top:-20px;
+		margin-top:-95px;
 	}
 
 	#noSecondInventoryMessage {
@@ -588,7 +588,7 @@ src: url('roboto.ttf');
 	#otherInventory {
 		width: 425px;
 		margin-left:-20px;
-		margin-top:-20px;
+		margin-top:-95px;
 	}
 
 	#noSecondInventoryMessage {
