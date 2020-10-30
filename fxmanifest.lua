@@ -23,7 +23,7 @@ client_scripts {
 	"client/trunk.lua",
 	"client/vault.lua",
 	"client/weapons.lua",
-	
+
 	"client/addons/player.lua",
 	"client/addons/shop.lua",
 	"client/addons/trunk.lua",
@@ -32,6 +32,9 @@ client_scripts {
 	"client/addons/motels.lua",
 	"client/addons/vault.lua",
 	"client/addons/property.lua",
+}
+exports {
+	'getMonsterVaultLicense',
 }
 
 server_scripts {
@@ -44,10 +47,10 @@ server_scripts {
 	"server/glovebox.lua",
 	"server/ammunition.lua",
 	"server/vault.lua",
-	
+
 	"server/classes/c_trunk.lua",
 	"server/classes/c_glovebox.lua",
-	
+
 	"server/versioncheck.lua",
 }
 
