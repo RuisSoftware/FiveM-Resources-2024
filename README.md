@@ -31,8 +31,6 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
 - Multiple languages supported (check locales/ and html/locales/ directories)
-- Set Ace permission groups to allow who can use the open inventory command (example bellow)
-add_ace group.admin inventory.openinventory allow
 - Multiple styles
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
