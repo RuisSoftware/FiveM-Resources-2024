@@ -31,8 +31,6 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
 - Multiple languages supported (check locales/ and html/locales/ directories)
-- Set Ace permission groups to allow who can use the open inventory command (example bellow)
-add_ace group.admin inventory.openinventory allow
 - Multiple styles
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
@@ -40,7 +38,7 @@ The latest MySQL plugin could break this resource! Only use: https://github.com/
 Do you have an improvement or bugfix? Feel free to share it in a Pull Request! 
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
-Currently, only Dutch, English and French is supported. If you want to translate it then feel free to pull a request!
+Currently 9 supported languages! If you want to translate it then feel free to pull a request!
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
 ![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_0.jpg)
