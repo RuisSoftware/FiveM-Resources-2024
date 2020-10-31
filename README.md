@@ -14,6 +14,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 
 ![features](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/features.png)
 - Drag and drop
+- Double click to use an item
 - Using items
 - Dropping items
 - Giving items
