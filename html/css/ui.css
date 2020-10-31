@@ -13,6 +13,11 @@
         0.5px 0.5px 0 #000;
 }
 
+body {
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
 .noselect {
 	-webkit-touch-callout: none; 
 	-webkit-user-select: none; 
@@ -27,6 +32,7 @@
 	position: absolute;
 	bottom: 133%;
     left: 0.9%;
+    
 }
 
 .bar {
@@ -34,7 +40,6 @@
 	height: 25.5px;
 	float: left;
 	border: 1px solid rgba(255,255,255,0.1)!important; 
-	border-radius:10px;
     /*background-color: rgba(235, 235, 235, 0.05);  0,02 */
     background-color: rgba(0,0,0,0.35);
 	margin-right: 3px;
@@ -79,11 +84,12 @@
     z-index: 0;
     background-image: radial-gradient(rgba(0, 0, 0, 0.3), rgba(48, 48, 48, 0.349));
     -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .inventory {
     position: absolute;
-    left: 20%;
+    left: 21%;
     top: 55%;
     transform: translate(-50%, -50%);
     width: 640px;
@@ -95,6 +101,7 @@
     height: 420px;
     float: left;
     overflow-y: scroll;
+    
 }
 #playerInventoryFastItems {
     width: 640px;
@@ -122,13 +129,13 @@
     margin-left: 220px;
     margin-right: 10px;
     background-color: rgba(73, 73, 73, 0.2);
-    border-radius: 10px;
     left: 80%;
     bottom: -2%;
 }
 
 #varWeight {
-	width: calc(100.5% - 227.56px - 227.56px);
+    width: calc(100.5% - 227.56px - 227.56px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #varWeight > .barIcon {
@@ -136,8 +143,7 @@
 }
 
 #varWeight > #boxSetWeight {
-	background-color: rgba(240, 130, 76,0.4); 
-	border-radius:10px;
+	background-color: rgba(0, 0, 0, 0.4); 
 }
 
 #boxSetWeight {
@@ -145,7 +151,8 @@
     height: 25.5px;
 	position: relative;
 	bottom: 0;
-	z-index: 129;
+    z-index: 129;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #controls svg,
@@ -157,18 +164,18 @@
     width: 100%;
     height: 100%;
     fill: transparent;
-    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #controls svg rect{
-    border-radius: 10px;
     stroke-linejoin: round;
     stroke-linecap: round;
-    stroke: rgba(240, 130, 76,0.4);
+    stroke: rgba(0, 0, 0, 0.4);
     stroke-width: 4;
     transition: 1.5s;
     stroke-dasharray: 1800;
     stroke-dashoffset: 1800;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #controls:hover svg rect{
@@ -178,9 +185,8 @@
 }
 
 #controls:hover{
-    background: rgba(240, 130, 76,0.4);
+    
     transition-delay: 0.9s;
-    border-radius: 10px;
 }
  
 
@@ -198,6 +204,7 @@
     border: none;
     outline: none;
     font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 input::-webkit-outer-spin-button,
@@ -212,46 +219,43 @@ input[type=number] {
 
 .slot {
     float: left;
-    width: 120px;
+    width: 119px;
     height: 100px;
-    background-color: rgba(167, 167, 167, 0.2);
+    background-color: rgba(53, 53, 53, 0.2);
     margin-left: 5px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     position: relative;
     margin-bottom:45px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .slot:hover {
-    background-color: rgba(240, 130, 76,0.4); 
-    opacity: 1.5;
+    background: rgba(18, 18, 18, 0.5); 
+    box-shadow: inset 0 0 15px rgba(18, 18, 18, 0.05);
 }
 .slotFast {
     float: left;
-    width: 120px;
+    width: 119px;
     height: 100px;
-    background-color: rgba(167, 167, 167, 0.2);
+    background-color:rgba(53, 53, 53, 0.2);
     margin-left: 5px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     position: relative;
     margin-bottom:45px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .slotFast:hover {
     background: rgba(18, 18, 18, 0.05);
-    border-color: rgba(255,255,255,0.5);
- /*   -moz-box-shadow:    inset 0 0 15px rgba(18, 18, 18, 0.05);
-    -webkit-box-shadow: inset 0 0 15px rgba(18, 18, 18, 0.05);*/
-    box-shadow:         inset 0 0 15px rgba(18, 18, 18, 0.05);
+    box-shadow: inset 0 0 15px rgba(18, 18, 18, 0.05);
 }
+
 .item,
 .item-other {
-    width: 117px;
-    height: 117px;
+    width: 110px;
+    height: 122px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
 }
+
 
 .item-name {
 	width: 120px;
@@ -267,9 +271,7 @@ input[type=number] {
     src: url('roboto.ttf');
     text-transform: uppercase;
     font-weight: bold;
-	  background-color: rgba(240, 130, 76,0.4); 
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+	background-color: rgba(18, 18, 18, 0.5); 
 }
 
 
@@ -316,29 +318,33 @@ input[type=number] {
     width: 150px;
     height: 40px;
     background-color: rgba(22, 22, 22, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 10px;
     text-align: center;
     vertical-align: middle;
-    border-radius:10px;
     line-height: 40px;
 }
 
-.control.disabled {
-    background-color: rgba(161, 161, 161, 0.1);
-}
+
 .controlhidden {
     display: none;
 }
 
-.hoverControl {
-    background-color: rgba(240, 130, 76,0.4);
+.control:hover {
+    background: rgba(18, 18, 18, 0.05);
+    border-color: rgba(255,255,255,0.5);
+  /*  -moz-box-shadow:    inset 0 0 15px rgba(18, 18, 18, 0.05);
+    -webkit-box-shadow: inset 0 0 15px rgba(18, 18, 18, 0.05);*/
+    box-shadow:         inset 0 0 15px rgba(18, 18, 18, 0.05);
 }
+
 
 .item-name-bg {
     width: 100%;
     height: 20px;
     position: absolute;
     bottom: 0;
+    
 }
 
 #playerInventory::-webkit-scrollbar-track,
@@ -346,22 +352,20 @@ input[type=number] {
     background-color: none;
     border: none;
     box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
     direction:ltr;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #playerInventory::-webkit-scrollbar,
 #otherInventory::-webkit-scrollbar {
     width: 8px;
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
     direction:ltr;
 }
 
 #playerInventory::-webkit-scrollbar-thumb,
 #otherInventory::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 1);
-    border-radius: 25px;
     direction:ltr;
 }
 
@@ -417,7 +421,6 @@ src: url('roboto.ttf');
   text-transform: lowercase;
   color: rgba(240, 130, 76);
   background: rgb(100, 100, 100, 0.4);
-  border-radius: 2px;
 }
 
   
@@ -559,7 +562,12 @@ src: url('roboto.ttf');
 		width: 100px;
 	}
 
+    #varWeight{
+        width: 120px;
+    }
+
 	.weight-div {
+        margin-left: 380px;
 		width: 120px;
 	}
 
@@ -606,7 +614,12 @@ src: url('roboto.ttf');
 		width: 100px;
 	}
 
+    #varWeight{
+        width: 120px;
+    }
+
 	.weight-div {
+        margin-left: 380px;
 		width: 120px;
 	}
 
@@ -642,4 +655,165 @@ src: url('roboto.ttf');
     box-shadow:         inset 0 0 15px #000000;
     border: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
+}
+
+@media (max-width: 1280px) {
+    .inventory {
+        width: 1000px;
+        margin-left: 250px;
+        margin-top: 30px;
+    }
+
+    #playerInventory {
+        width: 550px;
+        margin-left: 10px;
+    }
+    
+    #playerInventoryFastItems{
+        width: 550px;
+        margin-left: 10px;
+    }
+
+    #controls {
+        width: 150px;
+        margin-left:-225px;
+    }
+
+    #otherInventory {
+        width: 550px;
+        margin-left:-25px;
+        margin-top:-80px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 420px;
+    }
+
+    .item-name {
+        width: 100px;
+    }
+
+    .slot {
+        width: 100px;
+    }
+    .slotFast {
+        width: 100px;
+    }
+
+    #varWeight{
+        margin-left: 157px;
+        width: 120px;
+    }
+
+    .weight-div {
+        width: 120px;
+    }
+}
+
+@media (min-width: 2560px) {
+    .inventory {
+        width: 1000px;
+        margin-left: 250px;
+        margin-top: 30px;
+    }
+
+    #playerInventory {
+        width: 640px;
+        margin-left: 162px;
+    }
+    
+    #playerInventoryFastItems{
+        width: 640px;
+        margin-left: 162px;
+    }
+
+    #controls {
+        width: 250px;
+        margin-left:105px;
+    }
+
+    #otherInventory {
+        width: 640px;
+        margin-left:-25px;
+        margin-top:142px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 420px;
+    }
+
+    .item-name {
+        width: 120px;
+    }
+
+    .slot {
+        width: 120px;
+    }
+    .slotFast {
+        width: 120px;
+    }
+
+    #varWeight{
+        margin-left: 157px;
+        width: 120px;
+    }
+
+    .weight-div {
+        width: 120px;
+        margin-left: 155px;
+    }
+}
+
+@media (min-width: 3840px) {
+    .inventory {
+        width: 1000px;
+        margin-left: 250px;
+        margin-top: 30px;
+    }
+
+    #playerInventory {
+        width: 640px;
+        margin-left: 415px;
+    }
+    
+    #playerInventoryFastItems{
+        width: 640px;
+        margin-left: 415px;
+    }
+
+    #controls {
+        width: 250px;
+        margin-left:480px;
+    }
+
+    #otherInventory {
+        width: 640px;
+        margin-left:-25px;
+        margin-top:365px;
+    }
+
+    #noSecondInventoryMessage {
+        width: 420px;
+    }
+
+    .item-name {
+        width: 120px;
+    }
+
+    .slot {
+        width: 120px;
+    }
+    .slotFast {
+        width: 120px;
+    }
+
+    #varWeight{
+        margin-left: 410px;
+        width: 120px;
+    }
+
+    .weight-div {
+        width: 120px;
+        margin-left: 413px;
+    }
 }
