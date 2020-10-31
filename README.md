@@ -42,8 +42,14 @@ Do you have an improvement or bugfix? Feel free to share it in a Pull Request!
 Currently 9 supported languages! If you want to translate it then feel free to pull a request!
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
-![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_0.jpg)
-![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_01.jpg)
+![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_01.jpg)
+![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_02.jpg)
+![3](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_03.jpg)
+![4](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_04.jpg)
+![5](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_05.jpg)
+![6](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_06.jpg)
+![7](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_07.jpg)
+![8](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_08.jpg)
 
 ![css](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/customcss.png)
 Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX-1.2-Inventory-HUD/wiki/11.-Custom-Design-(OPTIONAL))
