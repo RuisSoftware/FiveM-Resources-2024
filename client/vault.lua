@@ -2,7 +2,7 @@ local vaultType = {}
 
 Citizen.CreateThread(function()
 	while ESX == nil or PlayerData == nil or PlayerData.job == nil do
-		Citizen.Wait(1000)
+		Citizen.Wait(1)
 	end
 	for k,v in pairs(Config.Vault) do
 		ESX.Game.SpawnLocalObject(Config.VaultBox, v.coords, function(obj)
@@ -15,7 +15,7 @@ end)
 
 function OpenVaultInventoryMenu(data)
 	if data.job == PlayerData.job.name or data.job == 'vault' then
-		print(data.needItemLicense)
+		--print(data.needItemLicense)
 		vaultType = data
 		ESX.TriggerServerCallback("esx_inventoryhud:getVaultInventory", function(inventory)
 			if not inventory then

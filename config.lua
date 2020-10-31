@@ -71,11 +71,15 @@ Config.License = {Weapon = "weapon", Police = "weapon", Nightclub = "weapon"} --
 
 Config.Weight = 80 -- Limit, unit can be whatever you want. Originally grams (as average people can hold 25kg).
 Config.DefaultWeight = 1 -- Default weight for an item.
+Config.MaxBagWeight = 20
 
 Config.localWeight = { -- Fill this with all your items. This is only for trunk and glovebox! Change your pocket inventory weights in your database! (items table)
 	bread = 1,
 	water = 1,
-	WEAPON_SMG = 5
+	WEAPON_SMG = 5,
+	WEAPON_PISTOL = 5,
+	WEAPON_APPISTOL = 5,
+	WEAPON_PUMPSHOTGUN = 5
 }
 
 Config.GloveboxSize = { -- Related to Config.localWeight.
@@ -144,7 +148,7 @@ Config.VehiclePlate = {
 Config.Shops = {
 	RegularShop = {
 		Locations = {
-			{x = 373.875,   y = 325.896,  z = 102.566}
+			{x = 374.875,   y = 327.896,  z = 102.566}
 			--{x = 2557.458,  y = 382.282,  z = 107.622},
 			--{x = -3038.939, y = 585.954,  z = 6.908},
 			--{x = -3241.927, y = 1001.462, z = 11.830},

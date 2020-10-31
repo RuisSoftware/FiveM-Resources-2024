@@ -1,5 +1,7 @@
 ESX = nil
-TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
+TriggerEvent("esx:getSharedObject", function(obj) 
+	ESX = obj 
+end)
 
 local Command_Close_Inventory = "closeinventory" -- CHANGE TO YOUR COMMAND NAME
 ServerItems = {}

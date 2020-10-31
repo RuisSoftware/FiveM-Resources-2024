@@ -85,6 +85,8 @@ Locales["nl"] = {
 	['never_allow_noobs'] = 'NEVER LET USERS OPEN SOMEONES INVENTORY FROM ANYWERE!!!',
 	['wtf_you_try'] = 'Nerd',
 	['robbing'] = 'Overvallen...',
-	['bagInventory'] = 'Rugzak'
+	['bagInventory'] = 'Rugzak',
+	['not_enough_in_property'] = 'Zoveel van dit item heb je niet in je woning.',
+	['not_enough_in_bag'] = 'Zoveel van dit item heb je niet in je rugzak.'
 
 }

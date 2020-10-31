@@ -1,9 +1,18 @@
 -- INSPIRED BY ORIGINAL SCRIPT FROM KRILLE https://github.com/KRILLE123
+local arrayWeight = Config.localWeight
+alleItems = nil
+
+Citizen.CreateThread(function()
+	while alleItems == nil do
+		alleItems = MySQL.Sync.fetchAll("SELECT * FROM items")
+		Citizen.Wait(2000)
+	end
+end)
 
 ESX.RegisterUsableItem('bag', function(source)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-    --xPlayer.removeInventoryItem('bag', 1)
+    xPlayer.removeInventoryItem('bag', 1)
     
     TriggerClientEvent('esx_bag:toggleBag', source)
 end)
@@ -20,7 +29,7 @@ AddEventHandler('esx_bag:getItem', function(owner, type, item, count)
 
 		TriggerEvent('esx_addoninventory:getInventory', 'bag', xPlayerOwner.identifier, function(inventory)
 			local inventoryItem = inventory.getItem(item)
-
+			
 			-- is there enough in the property?
 			if count > 0 and inventoryItem.count >= count then
 			
@@ -34,7 +43,7 @@ AddEventHandler('esx_bag:getItem', function(owner, type, item, count)
 					TriggerClientEvent('esx:showNotification', _source, _U('player_cannot_hold'))
 				end
 			else
-				TriggerClientEvent('esx:showNotification', _source, _U('not_enough_in_property'))
+				TriggerClientEvent('esx:showNotification', _source, _U('not_enough_in_bag'))
 			end
 		end)
 
@@ -51,36 +60,41 @@ AddEventHandler('esx_bag:getItem', function(owner, type, item, count)
 			end
 		end)
 
-	elseif type == 'item_weapon' then
-
-		TriggerEvent('esx_datastore:getDataStore', 'bag', xPlayerOwner.identifier, function(store)
-			local storeWeapons = store.get('weapons') or {}
-			local weaponName   = nil
-			local ammo         = nil
-
-			for i=1, #storeWeapons, 1 do
-				if storeWeapons[i].name == item then
-					weaponName = storeWeapons[i].name
-					ammo       = storeWeapons[i].ammo
-
-					table.remove(storeWeapons, i)
-					break
-				end
-			end
-
-			store.set('weapons', storeWeapons)
-			xPlayer.addWeapon(weaponName, ammo)
-		end)
-
 	end
 
 end)
+
+function getItemWeight(item)
+	local weight = 0
+	local itemWeight = 0
+	if item ~= nil then
+		itemWeight = Config.DefaultWeight
+		if arrayWeight[item] ~= nil then
+			itemWeight = arrayWeight[item]
+		end
+	end
+	return itemWeight
+end
+
+function getBagWeight(identifier)
+	local bagWeight = 0
+	TriggerEvent('esx_addoninventory:getInventory', 'bag', identifier, function(inventory)
+		if #alleItems ~= 0 then
+			for i=1, #alleItems, 1 do
+				bagWeight = bagWeight + (getItemWeight(alleItems[i].name) * inventory.getItem(alleItems[i].name).count)
+			end
+			--print(bagWeight)
+		end
+	end)
+	return bagWeight
+end
 
 RegisterServerEvent('esx_bag:putItem')
 AddEventHandler('esx_bag:putItem', function(owner, type, item, count)
 	local _source      = source
 	local xPlayer      = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
+	local weight = 0
 
 	if type == 'item_standard' then
 
@@ -88,9 +102,20 @@ AddEventHandler('esx_bag:putItem', function(owner, type, item, count)
 
 		if playerItemCount >= count and count > 0 then
 			TriggerEvent('esx_addoninventory:getInventory', 'bag', xPlayerOwner.identifier, function(inventory)
-				xPlayer.removeInventoryItem(item, count)
-				inventory.addItem(item, count)
-				TriggerClientEvent('esx:showNotification', _source, _U('have_deposited', count, inventory.getItem(item).label))
+				Citizen.Wait(100)
+				if #alleItems ~= 0 then
+					for i=1, #alleItems, 1 do
+						weight = weight + (getItemWeight(alleItems[i].name) * inventory.getItem(alleItems[i].name).count)
+					end
+					--print(weight)
+				end
+				if weight < Config.MaxBagWeight then
+					xPlayer.removeInventoryItem(item, count)
+					inventory.addItem(item, count)
+					TriggerClientEvent('esx:showNotification', _source, _U('have_deposited', count, inventory.getItem(item).label))
+				else
+					TriggerClientEvent('esx:showNotification', _source, 'geen ruimte')
+				end
 			end)
 		else
 			TriggerClientEvent('esx:showNotification', _source, _U('invalid_quantity'))
@@ -102,7 +127,6 @@ AddEventHandler('esx_bag:putItem', function(owner, type, item, count)
 
 		if playerAccountMoney >= count and count > 0 then
 			xPlayer.removeAccountMoney(item, count)
-
 			TriggerEvent('esx_addonaccount:getAccount', 'bag_' .. item, xPlayerOwner.identifier, function(account)
 				account.addMoney(count)
 			end)
@@ -128,7 +152,7 @@ AddEventHandler('esx_bag:putItem', function(owner, type, item, count)
 
 end)
 
-ESX.RegisterServerCallback('esx_bag:getPropertyInventory', function(source, cb, owner)
+ESX.RegisterServerCallback('esx_bag:getInventory', function(source, cb, owner)
 	local xPlayer    = ESX.GetPlayerFromIdentifier(owner)
 	local blackMoney = 0
 	local money = 0
@@ -154,7 +178,8 @@ ESX.RegisterServerCallback('esx_bag:getPropertyInventory', function(source, cb, 
 		blackMoney = blackMoney,
 		money = money,
 		items      = items,
-		weapons    = weapons
+		weapons    = weapons,
+		weight = getBagWeight(xPlayer.identifier)
 	})
 end)
 

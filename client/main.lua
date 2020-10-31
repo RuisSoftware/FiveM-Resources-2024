@@ -38,10 +38,10 @@ end)
 RegisterNetEvent("esx:setJob")
 AddEventHandler("esx:setJob", function(job)
 	PlayerData = ESX.GetPlayerData()
-	if PlayerData == nil then
-	else
-		PlayerData.job = job
+	while PlayerData == nil do
+		Citizen.Wait(10)
 	end
+	PlayerData.job = job
 end)
 
 Citizen.CreateThread(function()

@@ -1,6 +1,3 @@
-local targetPlayer
-local targetPlayerName
-
 RegisterNetEvent("esx_inventoryhud:openBagInventory")
 AddEventHandler("esx_inventoryhud:openBagInventory", function(data)
 	setPropertyBagData(data)
@@ -8,7 +5,7 @@ AddEventHandler("esx_inventoryhud:openBagInventory", function(data)
 end)
 
 function refreshPropertyBagInventory()
-	ESX.TriggerServerCallback("esx_bag:getPropertyInventory", function(inventory)
+	ESX.TriggerServerCallback("esx_bag:getInventory", function(inventory)
 		setPropertyBagData(inventory)
 	end, ESX.GetPlayerData().identifier )
 end
@@ -18,7 +15,7 @@ function setPropertyBagData(data)
 
 	SendNUIMessage({
 		action = "setInfoText",
-		text = _("bagInventory")
+		text = "<strong>" .. _("bagInventory") .. "</strong><br>" .. data.weight  .. " / " .. Config.MaxBagWeight
 	})
 
 	local blackMoney = data.blackMoney
@@ -103,7 +100,7 @@ RegisterNUICallback("PutIntoBag", function(data, cb)
 	if IsPedSittingInAnyVehicle(playerPed) then
 		return
 	end
-		print('test')
+		--print('test')
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
 		local count = tonumber(data.number)
 		if data.item.type == "item_weapon" then
