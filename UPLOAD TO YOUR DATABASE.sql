@@ -16,6 +16,15 @@ CREATE TABLE IF NOT EXISTS `inventory_trunk` (
 	UNIQUE KEY `plate` (`plate`)
 );
 
+CREATE TABLE IF NOT EXISTS `ammunition` (
+    `id` bigint unsigned auto_increment PRIMARY KEY,
+    `owner` text not null,
+    `hash` text not null,
+    `count` int default 0 not null,
+    `attach` text not null default '[]',
+	UNIQUE KEY (`id`)
+);
+
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0)
@@ -64,12 +73,3 @@ INSERT INTO `items` (`name`, `label`, `weight`) VALUES
 	('ammunition_fireextinguisher', 'Fire Extinguisher Fuel', 10),
 	('bag', 'Bag', 1)
 ;
-
-CREATE TABLE IF NOT EXISTS `ammunition` (
-    `id` bigint unsigned auto_increment PRIMARY KEY,
-    `owner` text not null,
-    `hash` text not null,
-    `count` int default 0 not null,
-    `attach` TEXT NOT NULL DEFAULT '[]',
-	UNIQUE KEY (`id`)
-);
