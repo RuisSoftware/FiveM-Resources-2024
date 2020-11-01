@@ -69,22 +69,6 @@ function setVaultInventoryData(inventory)
 			table.insert(items, item)
 		end
 	end
-
-	for i = 1, #vaultWeapons, 1 do
-		local weapon = vaultWeapons[i]
-		if vaultWeapons[i].name ~= "WEAPON_UNARMED" then
-			table.insert(items, {
-				label = ESX.GetWeaponLabel(weapon.name),
-				count = weapon.ammo or weapon.count,
-				weight = -1,
-				type = "item_weapon",
-				name = weapon.name,
-				usable = false,
-				rare = false,
-				canRemove = false
-			})
-		end
-	end
 	SendNUIMessage({
 		action = "setSecondInventoryItems",
 		itemList = items

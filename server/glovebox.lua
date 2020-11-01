@@ -341,59 +341,6 @@ AddEventHandler("esx_glovebox:getItem", function(plate, type, item, count, max, 
 			end
 		end)
 	end
-
-	if type == "item_weapon" then
-		TriggerEvent("esx_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
-			local storeWeapons = store.get("weapons")
-
-			if storeWeapons == nil then
-				storeWeapons = {}
-			end
-
-			local weaponName = nil
-			local ammo = nil
-
-			for i = 1, #storeWeapons, 1 do
-				if storeWeapons[i].name == item then
-					weaponName = storeWeapons[i].name
-					ammo = storeWeapons[i].ammo
-					table.remove(storeWeapons, i)
-					break
-				end
-			end
-
-			store.set("weapons", storeWeapons)
-
-			xPlayer.addWeapon(weaponName, ammo)
-
-			local blackMoney = 0
-			local cashMoney = 0
-			local items = {}
-			local weapons = {}
-			weapons = (store.get("weapons") or {})
-
-			local blackAccount = (store.get("black_money")) or 0
-			if blackAccount ~= 0 then
-				blackMoney = blackAccount[1].amount
-			end
-
-			local cashAccount = (store.get("money")) or 0
-			if cashAccount ~= 0 then
-				cashMoney = cashAccount[1].amount
-			end
-
-			local coffres = (store.get("coffres") or {})
-			for i = 1, #coffres, 1 do
-				table.insert(items, {name = coffres[i].name, count = coffres[i].count, label = ESX.GetItemLabel(coffres[i].name)})
-			end
-
-			local weight = getTotalInventoryWeightGlovebox(plate)
-
-			text = _U("glovebox_info", plate, (weight / 100), (max / 100))
-			data = {plate = plate, max = max, myVeh = owned, text = text}
-			TriggerClientEvent("esx_inventoryhud:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
-		end)
-	end
 end)
 
 RegisterServerEvent("esx_glovebox:putItem")
@@ -489,19 +436,6 @@ AddEventHandler("esx_glovebox:putItem", function(plate, type, item, count, max, 
 			end)
 		else
 			TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
-		end
-	end
-
-	if type == "item_weapon" then
-		if xPlayer.hasWeapon(item) then
-			TriggerEvent("esx_glovebox:GetSharedDataStoreGlovebox",plate, function(store)
-				xPlayer.removeWeapon(item)
-				store.set("weapons", storeWeapons)
-				MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
-					["@plate"] = plate,
-					["@owned"] = owned
-				})
-			end)
 		end
 	end
 

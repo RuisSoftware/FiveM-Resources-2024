@@ -139,26 +139,6 @@ function setPlayerInventoryData()
 			end
 		end
 
-		if Config.IncludeWeapons and weapons ~= nil then
-			for key, value in pairs(weapons) do
-				local weaponHash = GetHashKey(weapons[key].name)
-				local playerPed = PlayerPedId()
-				if weapons[key].name ~= "WEAPON_UNARMED" then
-					local ammo = GetAmmoInPedWeapon(playerPed, weaponHash)
-					table.insert(items, {
-						label = weapons[key].label,
-						count = ammo,
-						weight = -1,
-						type = "item_weapon",
-						name = weapons[key].name,
-						usable = false,
-						rare = false,
-						canRemove = true
-					})
-				end
-			end
-		end
-
 		SendNUIMessage({
 			action = "setSecondInventoryItems",
 			itemList = items

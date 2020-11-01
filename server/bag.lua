@@ -133,23 +133,7 @@ AddEventHandler('esx_bag:putItem', function(owner, type, item, count)
 		else
 			TriggerClientEvent('esx:showNotification', _source, _U('amount_invalid'))
 		end
-
-	elseif type == 'item_weapon' then
-
-		TriggerEvent('esx_datastore:getDataStore', 'bag', xPlayerOwner.identifier, function(store)
-			local storeWeapons = store.get('weapons') or {}
-
-			table.insert(storeWeapons, {
-				name = item,
-				ammo = count
-			})
-
-			store.set('weapons', storeWeapons)
-			xPlayer.removeWeapon(item)
-		end)
-
 	end
-
 end)
 
 ESX.RegisterServerCallback('esx_bag:getInventory', function(source, cb, owner)

@@ -64,27 +64,6 @@ function setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapon
 		end
 	end
 
-	if Config.IncludeWeapons and weapons ~= nil then
-		for key, value in pairs(weapons) do
-			local weaponHash = GetHashKey(weapons[key].name)
-			if weapons[key].name ~= "WEAPON_UNARMED" then
-				table.insert(
-					items,
-					{
-						label = weapons[key].label,
-						count = weapons[key].ammo,
-						weight = -1,
-						type = "item_weapon",
-						name = weapons[key].name,
-						usable = false,
-						rare = false,
-						canRemove = false
-					}
-				)
-			end
-		end
-	end
-
 	SendNUIMessage({
 		action = "setSecondInventoryItems",
 		itemList = items

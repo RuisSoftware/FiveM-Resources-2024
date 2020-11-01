@@ -70,22 +70,6 @@ function setPropertyInventoryData(data)
 			table.insert(items, item)
 		end
 	end
-
-	for i = 1, #propertyWeapons, 1 do
-		local weapon = propertyWeapons[i]
-		if propertyWeapons[i].name ~= "WEAPON_UNARMED" then
-			table.insert(items, {
-				label = ESX.GetWeaponLabel(weapon.name),
-				count = weapon.ammo,
-				weight = 0,
-				type = "item_weapon",
-				name = weapon.name,
-				usable = false,
-				rare = false,
-				canRemove = false
-			})
-		end
-	end
 	SendNUIMessage({
 		action = "setSecondInventoryItems",
 		itemList = items,

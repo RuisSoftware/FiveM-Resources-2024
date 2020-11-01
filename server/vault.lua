@@ -72,42 +72,6 @@ AddEventHandler('esx_inventoryhud:getItem', function(--[[owner,--]] job, type, i
 		else
 			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = "You not have permission", length = 5500})
 		end
-	elseif type == 'item_weapon' then
-		if xPlayer.job.name == job then
-			TriggerEvent('esx_datastore:getSharedDataStore', 'society_'..job, function(store)
-				local storeWeapons = store.get('weapons') or {}
-				local weaponName   = nil
-				local ammo         = nil
-				for i=1, #storeWeapons, 1 do
-					if storeWeapons[i].name == item then
-						weaponName = storeWeapons[i].name
-						ammo       = storeWeapons[i].ammo
-						table.remove(storeWeapons, i)
-						break
-					end
-				end
-				store.set('weapons', storeWeapons)
-				xPlayer.addWeapon(weaponName, ammo)
-			end)
-		elseif job == 'vault' then
-			TriggerEvent('esx_datastore:getDataStore', 'vault', xPlayerOwner.identifier, function(store)
-				local storeWeapons = store.get('weapons') or {}
-				local weaponName   = nil
-				local ammo         = nil
-				for i=1, #storeWeapons, 1 do
-					if storeWeapons[i].name == item then
-						weaponName = storeWeapons[i].name
-						ammo       = storeWeapons[i].ammo
-						table.remove(storeWeapons, i)
-						break
-					end
-				end
-				store.set('weapons', storeWeapons)
-				xPlayer.addWeapon(weaponName, ammo)
-			end)
-		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = 'You not have permission', length = 5500})
-		end
 	end
 
 end)
@@ -162,32 +126,6 @@ AddEventHandler('esx_inventoryhud:putItem', function(--[[owner,--]] job, type, i
 			end
 		else
 			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
-		end
-
-	elseif type == 'item_weapon' then
-		if xPlayer.job.name == job then
-			TriggerEvent('esx_datastore:getSharedDataStore', 'society_'..job, function(store)
-				local storeWeapons = store.get('weapons') or {}
-				table.insert(storeWeapons, {
-					name = item,
-					count = count
-				})
-				xPlayer.removeWeapon(item)
-				store.set('weapons', storeWeapons)
-
-			end)
-		elseif job == 'vault' then
-			TriggerEvent('esx_datastore:getDataStore', 'vault', xPlayerOwner.identifier, function(store)
-				local storeWeapons = store.get('weapons') or {}
-				table.insert(storeWeapons, {
-					name = item,
-					ammo = count
-				})
-				xPlayer.removeWeapon(item)
-				store.set('weapons', storeWeapons)
-			end)
-		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = 'You not have permission', length = 5500})
 		end
 	end
 

@@ -341,59 +341,6 @@ AddEventHandler("esx_trunk:getItem", function(plate, type, item, count, max, own
 			end
 		end)
 	end
-
-	if type == "item_weapon" then
-		TriggerEvent("esx_trunk:GetSharedDataStoreTrunk", plate, function(store)
-			local storeWeapons = store.get("weapons")
-
-			if storeWeapons == nil then
-				storeWeapons = {}
-			end
-
-			local weaponName = nil
-			local ammo = nil
-
-			for i = 1, #storeWeapons, 1 do
-				if storeWeapons[i].name == item then
-					weaponName = storeWeapons[i].name
-					ammo = storeWeapons[i].ammo
-					table.remove(storeWeapons, i)
-					break
-				end
-			end
-
-			store.set("weapons", storeWeapons)
-
-			xPlayer.addWeapon(weaponName, ammo)
-
-			local blackMoney = 0
-			local cashMoney = 0
-			local items = {}
-			local weapons = {}
-			weapons = (store.get("weapons") or {})
-
-			local blackAccount = (store.get("black_money")) or 0
-			if blackAccount ~= 0 then
-				blackMoney = blackAccount[1].amount
-			end
-
-			local cashAccount = (store.get("money")) or 0
-			if cashAccount ~= 0 then
-				cashMoney = cashAccount[1].amount
-			end
-
-			local coffre = (store.get("coffre") or {})
-			for i = 1, #coffre, 1 do
-				table.insert(items, {name = coffre[i].name, count = coffre[i].count, label = ESX.GetItemLabel(coffre[i].name)})
-			end
-
-			local weight = getTotalInventoryWeightTrunk(plate)
-
-			text = _U("trunk_info", plate, (weight / 100), (max / 100))
-			data = {plate = plate, max = max, myVeh = owned, text = text}
-			TriggerClientEvent("esx_inventoryhud:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
-		end)
-	end
 end)
 
 RegisterServerEvent("esx_trunk:putItem")
@@ -492,19 +439,6 @@ AddEventHandler("esx_trunk:putItem", function(plate, type, item, count, max, own
 			end)
 		else
 			TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
-		end
-	end
-
-	if type == "item_weapon" then
-		if xPlayer.hasWeapon(item) then
-			TriggerEvent("esx_trunk:GetSharedDataStoreTrunk",plate,function(store)
-				xPlayer.removeWeapon(item)
-				store.set("weapons", storeWeapons)
-				MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
-					["@plate"] = plate,
-					["@owned"] = owned
-				})
-			end)
 		end
 	end
 

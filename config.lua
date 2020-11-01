@@ -1,7 +1,6 @@
 Config = {}
 Config.Locale = "nl" -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
 Config.IncludeCash = true -- Include cash in inventory? true or false.
-Config.IncludeWeapons = true -- DEPRECATED.
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
 Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH!
 

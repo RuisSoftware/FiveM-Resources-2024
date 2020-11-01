@@ -229,7 +229,7 @@ function loadItems()
 				end
 			end
 
-			if Config.IncludeWeapons and weapons ~= nil then
+			if weapons ~= nil then
 				for key, value in pairs(weapons) do
 					local weaponHash = GetHashKey(weapons[key].name)
 					local playerPed = PlayerPedId()
