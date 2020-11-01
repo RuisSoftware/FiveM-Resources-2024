@@ -5,8 +5,6 @@ Citizen.CreateThread(function()
 		Citizen.Wait(10)
 		player = PlayerPedId()
 		coords = GetEntityCoords(player)
-		beroep = ESX.GetPlayerData().job.name
-		gradatie = ESX.GetPlayerData().job.grade
 		if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInDrugShopZone(coords) or IsInIlegalShopZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInShopNightclubZone(coords) or IsInPoliceShopZone(coords) then
 			if IsInRegularShopZone(coords) then
 				if IsControlJustReleased(0, 38) then
@@ -20,7 +18,7 @@ Citizen.CreateThread(function()
 						OpenShopInv("ilegal")
 						Citizen.Wait(2000)
 					else
-						if beroep == Config.InventoryJob.Police then
+						if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 							OpenShopInv("ilegal")
 							Citizen.Wait(2000)
 						else
@@ -42,7 +40,7 @@ Citizen.CreateThread(function()
 				end
 			end
 			if IsInPrisonShopZone(coords) then
-				if beroep == Config.InventoryJob.Police then
+				if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 					if IsControlJustReleased(0, 38) then
 						OpenShopInv("prison")
 					Citizen.Wait(2000)
@@ -74,7 +72,7 @@ Citizen.CreateThread(function()
 			end
 			if IsInPoliceShopZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					if beroep == Config.InventoryJob.Police and gradatie >= Config.ShopMinimumGradePolice then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Police and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradePolice then
 						OpenShopInv("policeshop")
 						Citizen.Wait(2000)
 					end
@@ -82,7 +80,7 @@ Citizen.CreateThread(function()
 			end
 			if IsInShopNightclubZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					if beroep == Config.InventoryJob.Nightclub then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub then
 						OpenShopInv("nightclubshop")
 						Citizen.Wait(2000)
 					end
@@ -90,7 +88,7 @@ Citizen.CreateThread(function()
 			end
 			if IsInBlackMarketZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					if beroep == Config.InventoryJob.Mafia then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia then
 						OpenShopInv("blackmarket")
 						Citizen.Wait(2000)
 					end
@@ -487,7 +485,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
 if Config.UseLicense then
 	Citizen.CreateThread(function()
 		while true do
