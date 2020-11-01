@@ -80,7 +80,7 @@ Citizen.CreateThread(function()
 			end
 			if IsInShopNightclubZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeNightclub then
 						OpenShopInv("nightclubshop")
 						Citizen.Wait(2000)
 					end
@@ -88,7 +88,7 @@ Citizen.CreateThread(function()
 			end
 			if IsInBlackMarketZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeMafia then
 						OpenShopInv("blackmarket")
 						Citizen.Wait(2000)
 					end

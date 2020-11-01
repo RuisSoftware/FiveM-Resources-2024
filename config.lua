@@ -34,6 +34,8 @@ Config.AllowMafia = true -- If true, mafia will be able to search players' trunk
 Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Illegal can enter this shop.
 Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
 Config.ShopMinimumGradePolice = 0 -- minimum grade to open the police shop
+Config.ShopMinimumGradeNightclub = 0
+Config.ShopMinimumGradeMafia = 0
 
 -- List of item names that will close ui when used.
 Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"}
