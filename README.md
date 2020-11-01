@@ -42,13 +42,21 @@ Do you have an improvement or bugfix? Feel free to share it in a Pull Request!
 Currently 9 supported languages! If you want to translate it then feel free to pull a request!
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
+Itembar:
 ![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_01.jpg)
+Pocket inventory:
 ![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_02.jpg)
+Bag inventory:
 ![3](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_03.jpg)
+Glovebox inventory:
 ![4](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_04.jpg)
+Trunk inventory:
 ![5](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_05.jpg)
+Job vault inventory:
 ![6](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_06.jpg)
+A supermarket:
 ![7](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_07.jpg)
+Police armory:
 ![8](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_08.jpg)
 
 ![css](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/customcss.png)
