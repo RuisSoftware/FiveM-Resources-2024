@@ -39,7 +39,7 @@ The latest MySQL plugin could break this resource! Only use: https://github.com/
 Do you have an improvement or bugfix? Feel free to share it in a Pull Request! 
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
-Currently 9 supported languages! If you want to translate it then feel free to pull a request!
+Currently 9 supported languages! Spread some ❤️ and send your language in a Pull Request or to Discord.
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
 Itembar:
