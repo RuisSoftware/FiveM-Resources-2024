@@ -32,7 +32,7 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
 - Multiple languages supported (check locales/ and html/locales/ directories)
-- Multiple styles
+- Multiple styles (minimum resolution is 720p and maximum is 4K)
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
 The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
