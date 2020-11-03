@@ -1,4 +1,4 @@
-# Dutch Players Edit // esx_inventoryhud // ESX 1.2 ONLY
+# Dutch Players Inventory // ESX 1.2 ONLY
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Your number 1 inventory for ESX 1.2!
 
