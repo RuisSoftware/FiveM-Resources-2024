@@ -66,6 +66,7 @@ Do you want another design? Check our [wiki](https://github.com/dutchplayers/ESX
 - We can give you support in our [International Discord Server](https://www.dutch-players.nl/joindiscord)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
 
+Always secure your private scripts with [Lua XOR Encryption](http://obfuscate.filesecuring.com/)
 ![thanks](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/thanks.png)
 If you like our edits please write a review on [Disboard](https://disboard.org/nl/server/411618887227146251#reviews)
 - Original esx_inventoryhud resource made by Trsak
