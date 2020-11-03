@@ -1,6 +1,6 @@
-# Dutch Players Inventory // ESX 1.2 ONLY
+# Dutch Players Inventory // ESX v1.2 ONLY
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
-Your number 1 inventory for ESX 1.2!
+Your number 1 free inventory for FiveM (ESX v1.2 or ESX v1-final only)!
 
 We have edited the original esx_inventoryhud resource from [Trsak](https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/).
 
