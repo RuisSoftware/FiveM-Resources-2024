@@ -1,4 +1,4 @@
-# Dutch Players Edit // esx_inventoryhud // ESX 1.2 ONLY
+# Dutch Players Inventory // ESX 1.2 ONLY
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Your number 1 inventory for ESX 1.2!
 
@@ -32,23 +32,31 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 - Another players inventory support (rob somebody)
 - Fully configurable (check config.lua and html/js/config.js)
 - Multiple languages supported (check locales/ and html/locales/ directories)
-- Multiple styles
+- Multiple styles (minimum resolution is 720p and maximum is 4K)
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
 The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
 Do you have an improvement or bugfix? Feel free to share it in a Pull Request! 
 
 ![languages](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/languages.png)
-Currently 9 supported languages! If you want to translate it then feel free to pull a request!
+Currently 9 supported languages! Spread some ❤️ and send your language in a Pull Request or to Discord.
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
+Itembar:
 ![1](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/Example_01.jpg)
+Pocket inventory:
 ![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_02.jpg)
+Bag inventory:
 ![3](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_03.jpg)
+Glovebox inventory:
 ![4](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_04.jpg)
+Trunk inventory:
 ![5](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_05.jpg)
+Job vault inventory:
 ![6](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_06.jpg)
+A supermarket:
 ![7](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_07.jpg)
+Police armory:
 ![8](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_08.jpg)
 
 ![css](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/customcss.png)
