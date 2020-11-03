@@ -51,10 +51,10 @@ AddEventHandler('esx_bag:toggleBag', function(id)
 end)
 
 Citizen.CreateThread(function()
+	while ESX == nil do Citizen.Wait(10) end
+	owner = ESX.GetPlayerData().identifier
     while true do
         Wait(5)
-		owner = ESX.GetPlayerData().identifier
-		--owner = PlayerData.identifier
         if IsControlJustReleased(0, Config.BagControl) and not IsPedInAnyVehicle(GetPlayerPed(-1), true) and not IsEntityInAir(PlayerPedId()) then
 			OpenBagInventoryMenu('bag', owner)
         end
