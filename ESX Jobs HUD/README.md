@@ -5,6 +5,8 @@
 We currently support multiple languages, but we don't have all. Spread some ❤️ and send your language in a Pull Request or to Discord.
 
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
+![1](https://raw.githubusercontent.com/dutchplayers/FiveM-Resources/master/ESX%20Jobs%20HUD/example_01.jpg)
+![2](https://raw.githubusercontent.com/dutchplayers/FiveM-Resources/master/ESX%20Jobs%20HUD/example_02.jpg)
 
 ![thanks](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/thanks.png)
 If you like our edits please write a review on [Disboard](https://disboard.org/nl/server/411618887227146251#reviews)
