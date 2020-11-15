@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
+body {
+	top:50px;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	margin: auto;
+	width:1700px;
+}
+
+.background-image {
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	background-image: linear-gradient(90deg,#3C97FF 0%, #34CAFF 39%, #30E9FF 100%);
+	
+	opacity: 0.9;
+	height: 850px;
+	width:1700px;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+}
+
+#tekst{
+	padding-top:20px;
+	font-size:25px;
+	color:white;
+	text-align:center;
+}
+
+img {
+	position: relative;
+	z-index: 1;
+	margin-right: auto;
+	margin-top: 20%;
+	font-size: 10px;
+}
+
+.tittle {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: white;
+	color: #3C97FF;
+	border: 0;
+	padding: 1%;
+	width: 100%;
+	font-family: 'Raleway', sans-serif;
+}
+.tittle2 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: white;
+	color: #3C97FF;
+	border: 0;
+	padding: 1%;
+	width: 100%;
+	font-family: 'Raleway', sans-serif;
+}
+
+.interview {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 4%;
+	border: 0;
+	color: #3C97FF;
+	background-color: white;
+	font-family: 'Raleway', sans-serif;
+}
+
+.interview:hover {
+	border: 0;
+	background-color: #3C97FF;
+	color: #fff;
+	cursor: pointer;
+}
+
+
+.interview2 {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 4%;
+	border: 0;
+	color: #fff;
+	background-color: #ff0096;
+	font-family: 'Raleway', sans-serif;
+}
+
+.interview2:hover {
+	border: 0;
+	background-color: #fff;
+	color: #1f1096;
+	cursor: pointer;
+}
+
+.interview3 {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 4%;
+	border: 0;
+	color: #fff;
+	background-color: #ff4b00;
+	font-family: 'Raleway', sans-serif;
+}
+
+.interview3:hover {
+	border: 0;
+	background-color: #fff;
+	color: #f15b00;
+	cursor: pointer;
+}
+
+.container {
+	position: relative;
+	white-space: nowrap;
+	overflow-x: hidden;
+	height: 20em;
+	width: 100%;
+	top: 30vh;
+	margin: auto;
+	-webkit-transform: translateY(-7.2em);
+	transform: translateY(-7.2em);
+}
+.container2 {
+	position: relative;
+	white-space: nowrap;
+	overflow-x: hidden;
+	height: 20em;
+	width: 100%;
+	top: 30vh;
+	margin: auto;
+	-webkit-transform: translateY(-7.2em);
+	transform: translateY(-7.2em);
+}
+
+.inner {
+	position: absolute;
+	transition: -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.inner2 {
+	position: absolute;
+	transition: -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.job {
+	font-family: sans-serif;
+	line-height: 12em;
+	width: 12em;
+	height: 12em;
+	background-color: #E6F2FF;
+	opacity: 1;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 10px;
+	position: relative;
+	bottom: -2em;
+	transition: background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	color: #fff;
+}
+
+.job:hover {
+	background: #36394aee;
+	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.4);
+	z-index:1000;
+}
+
+.job[data-scale="1"],
+.job[data-scale="3"] {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.job[data-scale="2"] {
+	-webkit-transform: scale(1.2);
+	transform: scale(1.2);
+	z-index:999;
+}
+
+
+.job2 {
+	font-family: sans-serif;
+	line-height: 12em;
+	width: 15em;
+	height: 15em;
+	background-image: radial-gradient(circle, #495173, #5b6789, #6d7da0, #8094b7, #94accf);
+	opacity: 1;
+	border-radius: 2px;
+	display: inline-block;
+	margin: 0 0.05em;
+	position: relative;
+	bottom: -2em;
+	transition: background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	color: #fff;
+}
+
+.job2:hover {
+	background: #36394aee;
+	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.4);
+	z-index:1000;
+}
+
+.job2[data-scale="1"],
+.job2[data-scale="3"] {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+}
+
+.job2[data-scale="2"] {
+	-webkit-transform: scale(1.2);
+	transform: scale(1.2);
+	z-index:999;
+}

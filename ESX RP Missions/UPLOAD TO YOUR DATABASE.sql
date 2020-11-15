@@ -1,0 +1,48 @@
+
+CREATE TABLE `opdrachten` (
+	`identifier` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`identifier`)
+);
+
+ALTER TABLE `opdrachten`
+	ADD COLUMN opdracht1 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht2 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht3 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht4 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht5 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht6 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht7 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht8 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht9 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht10 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht11 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht12 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht13 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht14 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht15 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht16 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht17 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht18 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht19 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht20 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht21 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht22 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht23 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht24 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht25 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht26 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht27 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht28 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht29 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht30 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht31 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht32 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht33 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht34 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht35 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht36 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht37 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht38 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht39 VARCHAR(255) NULL DEFAULT 'Niet behaald',
+	ADD COLUMN opdracht40 VARCHAR(255) NULL DEFAULT 'Niet behaald'
+;

@@ -1,0 +1,18 @@
+Locales['en'] = {
+	['GPS_info'] = 'Ga naar de locatie die wordt weergegeven op je ~y~GPS',
+	['cancel_mission'] = 'Je bent uit dienst gegaan',
+	['pickup'] = 'Druk op ~F6~ om te starten met werken',
+	['end_service'] = 'Persoonlijke kleding',
+	['take_service'] = 'Werkkleding',
+	['end_duty'] = 'Ga uit dienst',
+	['start_duty'] = 'Ga in dienst',
+	['end_service_notif'] = 'Je hebt je persoonlijke kleding aangedaan.',
+	['take_service_notif'] = 'Je hebt je werkkleding aangedaan.',
+	['start_job'] = 'Je bent begonnen met werken.',
+	['Vehicle_Menu_Title'] = 'Dienstvoertuig',
+	['in_vehicle'] = '~r~Je moet uit je voertuig gaan!',
+	['vehicle_broken'] = '~r~Je moet je voertuig eerst repareren...',
+	['bad_vehicle'] = 'Je kan alleen je ~b~dienstvoertuig ~w~ opslaan',
+	['not_good_veh'] = '~r~Je moet in je dienstvoertuig zitten.',
+	['stop_npc'] = 'Je bent ~g~klaar~s~ met werk | Ga terug naar het kantoor.',
+}
