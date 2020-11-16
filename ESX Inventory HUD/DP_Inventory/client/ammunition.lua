@@ -10,10 +10,12 @@ RegisterNetEvent('ammunition:useAmmoItem')
 AddEventHandler('ammunition:useAmmoItem', function(ammo)
 	local playerPed = GetPlayerPed(-1)
 	local weapon
-	local found, currentWeapon = GetCurrentPedWeapon(playerPed, true)
+	local found, currentWeaponHash = GetCurrentPedWeapon(playerPed, true)
+
 	if found then
 		for _, v in pairs(ammo.weapons) do
-			if currentWeapon == v then
+			local weaponHash = GetHashKey(v)
+			if currentWeaponHash == weaponHash then
 				weapon = v
 				break
 			end
