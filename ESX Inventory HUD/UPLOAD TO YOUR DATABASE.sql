@@ -30,18 +30,19 @@ INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_money', 'Bag Money ', 0)
 ;
 
+ALTER TABLE addon_account_data
+MODIFY owner VARCHAR(60);
+
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Inventory', 0)
 ;
 
+ALTER TABLE addon_inventory_items
+MODIFY owner VARCHAR(60);
+
 INSERT INTO `datastore` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Datastore', 0)
 ;
-
-ALTER TABLE addon_account_data
-MODIFY owner VARCHAR(60);
-ALTER TABLE addon_inventory_items
-MODIFY owner VARCHAR(60);
 
 -- ONLY ADD MORE WEAPONS IF YOU ARE SURE! ALSO ADD THE NEW WEAPONS IN CONFIG
 INSERT INTO `items` (`name`, `label`, `weight`) VALUES 
