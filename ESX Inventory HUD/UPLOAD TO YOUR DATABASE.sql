@@ -29,6 +29,10 @@ INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0)
 ;
+ALTER TABLE addon_account_data
+MODIFY owner VARCHAR(60);
+ALTER TABLE addon_inventory_items
+MODIFY owner VARCHAR(60);
 
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Inventory', 0)
