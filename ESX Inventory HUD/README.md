@@ -47,7 +47,7 @@ Itembar:
 Pocket inventory:
 ![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_02.jpg)
 Bag inventory:
-![3](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_03.jpg)
+![3](https://cdn.discordapp.com/attachments/538834196458897408/779952927376539728/DP_Inventory.jpg)
 Glovebox inventory:
 ![4](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_04.jpg)
 Trunk inventory:
