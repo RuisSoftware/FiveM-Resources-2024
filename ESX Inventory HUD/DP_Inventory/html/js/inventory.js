@@ -385,7 +385,28 @@ function setCost(item) {
     }
     return cost;
 }
+//USD FORMAT BELOW HERE
+//function setCost(item) {
+//    cost = item.price
+//    if (item.price == 0){
+//        cost = item.price + "$"
+//    }
+//    if (item.price > 0) {
+//        cost = item.price + "$"
+//    }
+//    return cost;
+//}
 
+function formatMoney(number) {
+	return number.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+}
+
+//USD FORMAT BELOW HERE
+//function formatMoney(number) {
+//	return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+//}
+
+//OLD METHOD BELOW HERE
 //function formatMoney(n, c, d, t) {
 //    var c = isNaN(c = Math.abs(c)) ? 2 : c,
 //        d = d == undefined ? "." : d,
@@ -396,14 +417,6 @@ function setCost(item) {
 //
 //    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t);
 //};
-
-function formatMoney(number) {
-	return number.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
-}
-
-//function formatMoney(number) {
-//	return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-//}
 
 $(document).ready(function () {
     $("#count").focus(function () {
