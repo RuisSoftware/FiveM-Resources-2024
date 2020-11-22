@@ -472,7 +472,7 @@ function roomMarkers()
 	for k,v in pairs(Config.Zones) do
         distance = GetDistanceBetweenCoords(coords, v.roomExit.x, v.roomExit.y, v.roomExit.z, true)
         if distance < 1.5 then
-            DrawText3Ds(v.roomExit.x, v.roomExit.y, v.roomExit.z + 0.15, _U('exit'))
+            DrawText3D(v.roomExit.x, v.roomExit.y, v.roomExit.z + 0.15, _U('exit'))
             DrawMarker(20, v.roomExit.x, v.roomExit.y, v.roomExit.z + -0.11, 0, 0.50, 0, 0, 0, 0, 0.45,0.25,0.25, 255, 0, 0, 255, 0.0, 0.10, 0, 0.0, 0, 0.0, 0)
 			if IsControlJustReleased(0, 38) then
 				TriggerEvent('DP_Motels:exitRoom', curRoom, curMotel)
