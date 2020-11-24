@@ -13,7 +13,7 @@ function refreshPropertyInventory()
 			setPropertyInventoryData(inventory);
 		end,isPlayerSafe.safeid)
 	else
-		ESX.TriggerServerCallback("DP_Woningen:getPropertyInventory",function(inventory)
+		ESX.TriggerServerCallback("esx_property:getPropertyInventory",function(inventory)
 			setPropertyInventoryData(inventory)
 		end,ESX.GetPlayerData().identifier)
 	end
@@ -103,9 +103,9 @@ RegisterNUICallback("PutIntoProperty", function(data, cb)
 			TriggerServerEvent("MF_PlayerSafes:PutItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count, isPlayerSafe.safeid, isWeapon)
 		else
 			if data.item.name == 'cash' then
-				TriggerServerEvent("DP_Woningen:putItem", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
+				TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
 			else
-				TriggerServerEvent("DP_Woningen:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+				TriggerServerEvent("esx_property:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
 			end
 		end
 	end
@@ -125,9 +125,9 @@ RegisterNUICallback("TakeFromProperty", function(data, cb)
 			TriggerServerEvent("MF_PlayerSafes:GetItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number), isPlayerSafe.safeid)
 		else
 			if data.item.name == 'cash' then
-				TriggerServerEvent("DP_Woningen:getItem", ESX.GetPlayerData().identifier, 'item_account', 'money', tonumber(data.number))
+				TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, 'item_account', 'money', tonumber(data.number))
 			else
-				TriggerServerEvent("DP_Woningen:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+				TriggerServerEvent("esx_property:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
 			end
 		end
 	end
