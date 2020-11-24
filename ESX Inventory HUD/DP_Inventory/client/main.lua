@@ -470,6 +470,19 @@ RegisterNUICallback("TakeFromFast", function(data, cb)
 	cb("ok")
 end)
 
+RegisterNUICallback("UseItem", function(data, cb)
+    TriggerServerEvent("tac:useItem", data.item.name)
+
+    if shouldCloseInventory(data.item.name) then
+        closeInventory()
+    else
+        Citizen.Wait(0)
+        loadPlayerInventory()
+    end
+
+    cb("ok")
+end)
+
 RegisterNetEvent('dp_inventory:disablenumbers')
 AddEventHandler('dp_inventory:disablenumbers', function(disabled)
 	canFire = disabled
