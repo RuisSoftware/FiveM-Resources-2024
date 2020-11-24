@@ -143,6 +143,7 @@ function lockinv()
 	end)
 end
 
+
 function getPlayerWeight()
 	Citizen.CreateThread(function()
 		ESX.TriggerServerCallback("dp_inventory:getPlayerInventoryWeight", function(cb)
@@ -405,6 +406,19 @@ RegisterNUICallback("DropItem",function(data, cb)
 	end
 	Wait(0)
 	loadPlayerInventory()
+	cb("ok")
+end)
+
+RegisterNUICallback("UseItem", function(data, cb)
+	TriggerServerEvent("esx:useItem", data.item.name)
+    TriggerEvent('dp_inventory:notification', data.item.name, _U("item_used"), 1, false)
+	if shouldCloseInventory(data.item.name) then
+		closeInventory()
+	else
+		Citizen.Wait(0)
+		loadPlayerInventory()
+	end
+	print("Made with love in the Netherlands for " .. Config.ServerName)
 	cb("ok")
 end)
 

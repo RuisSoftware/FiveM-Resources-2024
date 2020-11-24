@@ -16,7 +16,7 @@ client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/*.lua',
-	'client/secure.lua',
+	'client/thankyou.lua',
 	'client/main.lua',
 	'client/glovebox.lua',
 	'client/ammunition.lua',
