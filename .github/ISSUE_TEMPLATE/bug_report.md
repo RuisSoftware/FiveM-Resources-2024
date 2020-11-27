@@ -12,10 +12,10 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. I went to your Discord
+2. 
+3. 
+4. 
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
@@ -31,3 +31,5 @@ Add any other context about the problem here.
 
 **Followed Wiki**
 Yes/No
+
+https://www.dutch-players.nl/joindiscord
