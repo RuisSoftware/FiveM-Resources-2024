@@ -39,7 +39,6 @@ AddEventHandler('dp_inventory:getItem', function(--[[owner,--]] job, type, item,
 		end
 
 	elseif type == 'item_account' then
-		print('society_'..job..'_'..item)
 		if xPlayer.job.name == job then
 			TriggerEvent('esx_addonaccount:getSharedAccount', 'society_'..job..'_'..item, function(account)
 				local policeAccountMoney = account.money
