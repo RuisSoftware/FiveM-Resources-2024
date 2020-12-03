@@ -27,7 +27,9 @@ CREATE TABLE IF NOT EXISTS `ammunition` (
 
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
-	('bag_money', 'Bag Money ', 0)
+	('bag_money', 'Bag Money ', 0),
+	('society_police_black_money', 'Police black money ', 1)
+	('society_police_money', 'Police money ', 1)
 ;
 ALTER TABLE addon_account_data
 MODIFY owner VARCHAR(60);
