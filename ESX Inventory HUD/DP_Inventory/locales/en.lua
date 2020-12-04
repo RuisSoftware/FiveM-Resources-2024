@@ -1,5 +1,6 @@
 Locales["en"] = {
 	["cash"] = "Cash",
+	["already_weapon"] = "The player already has this weapon!",
 	["black_money"] = "Dirty Money",
 	["player_nearby"] = "Player is no longer nearby!",
 	["players_nearby"] = "There are no other players around!",
