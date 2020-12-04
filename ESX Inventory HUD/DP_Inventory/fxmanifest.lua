@@ -47,6 +47,7 @@ server_scripts {
 	'server/ammunition.lua',
 	'server/vault.lua',
 	'server/bag.lua',
+	'server/weapons.lua',
 	'server/classes/c_trunk.lua',
 	'server/classes/c_glovebox.lua',	
 	'server/versioncheck.lua',
