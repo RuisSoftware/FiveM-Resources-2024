@@ -34,9 +34,70 @@ local weapons = {
 		['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MEDIUM'),
 		['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP'),
 		['grip'] = GetHashKey('COMPONENT_AT_AR_AFGRIP'),
-		['extendedmag'] = GetHashKey('COMPONENT_CARBINERIFLE_CLIP_02'),
+		['mag'] = GetHashKey('COMPONENT_CARBINERIFLE_CLIP_02'),
 		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
-	}
+    },
+    [tostring(GetHashKey('WEAPON_PISTOL'))] = { 
+		['mag'] = GetHashKey('COMPONENT_PISTOL_CLIP_02'),
+		['suppressor'] = GetHashKey('COMPONENT_AT_PI_SUPP_02'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_PI_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_SNIPERRIFLE'))] = { 
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MAX'),
+		['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02')
+    },
+    [tostring(GetHashKey('WEAPON_PUMPSHOTGUN'))] = { 
+		['suppressor'] = GetHashKey('COMPONENT_AT_SR_SUPP'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_SPECIALCARBINE'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_SPECIALCARBINE_CLIP_02'),
+        ['drummag'] = GetHashKey('COMPONENT_SPECIALCARBINE_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MEDIUM'),
+        ['grip'] = GetHashKey('COMPONENT_AT_AR_AFGRIP'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_ASSAULTSMG'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_ASSAULTSMG_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_MICROSMG'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_MICROSMG_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_PI_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_SMG'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_SMG_CLIP_02'),
+        ['drummag'] = GetHashKey('COMPONENT_SMG_CLIP_03'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_PI_SUPP'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO_02'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_APPISTOL'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_APPISTOL_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_PI_SUPP'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_PI_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_COMBATPISTOL'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_COMBATPISTOL_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_PI_SUPP'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_PI_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_PISTOL50'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_PISTOL50_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_PI_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_ADVANCEDRIFLE'))] = { 
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_SMALL'),
+        ['mag'] = GetHashKey('COMPONENT_ADVANCEDRIFLE_CLIP_02'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    }
 }
 
 RegisterNetEvent('dp_inventory:useAttach')
@@ -49,56 +110,109 @@ AddEventHandler('dp_inventory:useAttach', function(attach)
             if currentWepAttachs[i] == attach then
                 hasAttach = true
             end
-		end
-		if weapons[tostring( hash )] ~= nil and weapons[tostring( hash )][attach] ~= nil and not hasAttach then
-			ESX.TriggerServerCallback('esx_inventory:removeItem', function(cb) end, attach)
-			table.insert(currentWepAttachs, attach)
-            GiveWeaponComponentToPed( playerPed, hash, weapons[tostring( hash )][attach] )
+        end
+        if weapons[tostring(hash)] ~= nil and weapons[tostring(hash)][attach] ~= nil and not hasAttach then
+            ESX.TriggerServerCallback('dp_inventory:removeItem', function(cb)
+                if cb then
+                    table.insert(currentWepAttachs, attach)
+                    GiveWeaponComponentToPed(playerPed, hash, weapons[tostring(hash)][attach])
+                end
+            end, attach)
+        elseif string.find(attach, 'skin') then
+            local number = tonumber(string.match(attach, "%d+"))
+            ESX.TriggerServerCallback('dp_inventory:removeItem', function(cb)
+                if cb then
+                    table.insert(currentWepAttachs, attach)
+                    SetPedWeaponTintIndex(playerPed, hash, number)
+                end
+            end, attach)
         else
-            exports['b1g_notify']:Notify('error', _("not_compatible"))
+            exports['b1g_notify']:Notify('error', _U("not_compatible"))
         end
     else
         exports['b1g_notify']:Notify('error', _U("no_weapon_selected"))
     end
 end)
 
-RegisterCommand("intrekken", function(source, args, rawCommand)
-    if currentWeapon ~= nil then
-        local playerPed = PlayerPedId()
-        local hash = GetHashKey(currentWeapon)
-        if args[1] then
-			local attach = args[1]
-            for i = 1, #currentWepAttachs do
-                if currentWepAttachs[i] == attach then
-                    ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
-                        if cb then
-                            table.remove(currentWepAttachs, i)
-                            RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][attach])
-                        else
-                            exports['b1g_notify']:Notify('error', _U("insufficient_space"))
-                        end          
-                    end, currentWepAttachs[i], 1)
-                    return
-                end
-            end
-            exports['b1g_notify']:Notify('error', _U("no_attachment"))
-		else
-			for i = 1, #currentWepAttachs do
-				if currentWepAttachs[i] ~= nil then
-					ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
-                        if cb then
-                            RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][currentWepAttachs[i]])
-							table.remove(currentWepAttachs, i)
-                        else
-                            exports['b1g_notify']:Notify('error', _U("insufficient_space"))
-                        end          
-                    end, currentWepAttachs[i], 1)
-				end
-			end
-		end
-    else
-        exports['b1g_notify']:Notify('error', _U("no_gun_in_hand"))
+RegisterNetEvent('dp_inventory:checkWeapon')
+AddEventHandler('dp_inventory:checkWeapon', function(item)
+    local coords = GetEntityCoords(GetPlayerPed(-1))
+    TriggerServerEvent('dp_inventory:weaponLocationCheck', coords, item)
+end)
+
+RegisterNetEvent('dp_inventory:getdistance')
+AddEventHandler('dp_inventory:getdistance', function(dbCoords, coords, hash, id)
+    local distnace = GetDistanceBetweenCoords(dbCoords.x, dbCoords.y, dbCoords.z, coords.x, coords.y, coords.z, true)
+    if distnace <= 3 then
+        TriggerServerEvent('dp_inventory:updateOwner',hash, id)
     end
+end)
+
+-- RegisterCommand("intrekken", function(source, args, rawCommand)
+--     if currentWeapon ~= nil then
+--         local playerPed = PlayerPedId()
+--         local hash = GetHashKey(currentWeapon)
+--         if args[1] then
+-- 			local attach = args[1]
+--             for i = 1, #currentWepAttachs do
+--                 if currentWepAttachs[i] == attach then
+--                     ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
+--                         if cb then
+--                             table.remove(currentWepAttachs, i)
+--                             RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][attach])
+--                         else
+--                             exports['b1g_notify']:Notify('error', _U("insufficient_space"))
+--                         end          
+--                     end, currentWepAttachs[i], 1)
+--                     return
+--                 end
+--             end
+--             exports['b1g_notify']:Notify('error', _U("no_attachment"))
+-- 		else
+-- 			for i = 1, #currentWepAttachs do
+-- 				if currentWepAttachs[i] ~= nil then
+-- 					ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
+--                         if cb then
+--                             RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][currentWepAttachs[i]])
+-- 							table.remove(currentWepAttachs, i)
+--                         else
+--                             exports['b1g_notify']:Notify('error', _U("insufficient_space"))
+--                         end          
+--                     end, currentWepAttachs[i], 1)
+-- 				end
+-- 			end
+-- 		end
+--     else
+--         exports['b1g_notify']:Notify('error', _U("no_gun_in_hand"))
+--     end
+-- end)
+
+Citizen.CreateThread(function()
+	while true do
+        Citizen.Wait(0)
+        if IsControlJustPressed(0, 172) and not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) then
+            if currentWeapon ~= nil then
+                local playerPed = PlayerPedId()
+                local hash = GetHashKey(currentWeapon)
+                for i = 1, #currentWepAttachs do
+                    if currentWepAttachs[i] ~= nil then
+                        if string.find(currentWepAttachs[i], 'skin') == nil then
+                            ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
+                                if cb then
+                                    RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][currentWepAttachs[i]])
+                                    table.remove(currentWepAttachs, i)
+                                else
+                                    exports['b1g_notify']:Notify('error', _U("insufficient_space"))
+                                end          
+                            end, currentWepAttachs[i], 1)
+                        end
+                    end
+                end
+            else
+                exports['b1g_notify']:Notify('error', _U("no_gun_in_hand"))
+            end
+		end
+	end
 end)
 
 function RemoveWeapon(weapon)
@@ -176,8 +290,16 @@ function GiveWeapon(weapon)
         end
         GiveWeaponToPed(playerPed, hash, 1, false, true)
         for i = 1, #currentWepAttachs do
-            if weapons[tostring( hash )] ~= nil then
+            if weapons[tostring(hash)] ~= nil then
                 GiveWeaponComponentToPed(playerPed, hash, weapons[tostring( hash )][currentWepAttachs[i]])
+            end
+            if currentWepAttachs[i] == 'skin1' then SetPedWeaponTintIndex(playerPed, hash, 1)
+            elseif currentWepAttachs[i] == 'skin2' then SetPedWeaponTintIndex(playerPed, hash, 2)
+            elseif currentWepAttachs[i] == 'skin3' then SetPedWeaponTintIndex(playerPed, hash, 3)
+            elseif currentWepAttachs[i] == 'skin4' then SetPedWeaponTintIndex(playerPed, hash, 4)
+            elseif currentWepAttachs[i] == 'skin5' then SetPedWeaponTintIndex(playerPed, hash, 5)
+            elseif currentWepAttachs[i] == 'skin6' then SetPedWeaponTintIndex(playerPed, hash, 6)
+            elseif currentWepAttachs[i] == 'skin7' then SetPedWeaponTintIndex(playerPed, hash, 7)
             end
         end
         if checkh[weapon] == hash then
