@@ -200,13 +200,29 @@ Citizen.CreateThread(function()
                 local playerPed = PlayerPedId()
                 local hash = GetHashKey(currentWeapon)
                 for i = 1, #currentWepAttachs do
-                    if currentWepAttachs[i] ~= nil then
-                        if string.find(currentWepAttachs[i], 'skin') == nil then
-                            ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
-                            RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
-                            table.remove(currentWepAttachs, i)
+                    TriggerEvent("mythic_progbar:client:progress", {
+                        name = "washing_gsr",
+                        duration = 1500,
+                        label = _U('waiting_remove'),
+                        useWhileDead = false,
+                        canCancel = false,
+                        controlDisables = {
+                            disableMovement = false,
+                            disableCarMovement = false,
+                            disableMouse = false,
+                            disableCombat = false,
+                        },
+                    }, function(status)
+                        if not status then
+                            if currentWepAttachs[i] ~= nil then
+                                if string.find(currentWepAttachs[i], 'skin') == nil then
+                                    RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
+                                    ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
+                                    table.remove(currentWepAttachs, i)
+                                end
+                            end
                         end
-                    end
+                    end)
                 end
             else
                 exports['b1g_notify']:Notify('error', _U("no_gun_in_hand"))
