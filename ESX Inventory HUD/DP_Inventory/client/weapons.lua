@@ -122,14 +122,11 @@ AddEventHandler('dp_inventory:useAttach', function(attach)
             local number = tonumber(string.match(attach, "%d+"))
             ESX.TriggerServerCallback('dp_inventory:removeItem', function(cb)
                 if cb then
-					table.remove(currentWepAttachs, 'skin')
-                    table.remove(currentWepAttachs, 'skin1')
-                    table.remove(currentWepAttachs, 'skin2')
-                    table.remove(currentWepAttachs, 'skin3')
-                    table.remove(currentWepAttachs, 'skin4')
-                    table.remove(currentWepAttachs, 'skin5')
-                    table.remove(currentWepAttachs, 'skin6')
-                    table.remove(currentWepAttachs, 'skin7')
+                    for k,v in pairs(currentWepAttachs) do
+                        if v == 'skin' or v == 'skin1' or v == 'skin2' or v == 'skin3' or v == 'skin4' or v == 'skin5' or v == 'skin6' or v == 'skin7' then
+                            table.remove(currentWepAttachs, k)
+                        end
+                    end
                     table.insert(currentWepAttachs, attach)
                     SetPedWeaponTintIndex(playerPed, hash, number)
                 end
@@ -207,7 +204,7 @@ Citizen.CreateThread(function()
                         if string.find(currentWepAttachs[i], 'skin') == nil then
                             ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
                                 if cb then
-                                    RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][currentWepAttachs[i]])
+                                    RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
                                     table.remove(currentWepAttachs, i)
                                 else
                                     exports['b1g_notify']:Notify('error', _U("insufficient_space"))
