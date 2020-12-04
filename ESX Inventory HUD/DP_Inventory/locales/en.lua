@@ -3,6 +3,7 @@ Locales["en"] = {
 	["already_weapon"] = "The player already has this weapon!",
 	["black_money"] = "Dirty Money",
 	["player_nearby"] = "Player is no longer nearby!",
+	["waiting_remove"] = 'Removing attahcment...',
 	["players_nearby"] = "There are no other players around!",
 	["openinv_help"] = "Open another player's inventory.",
 	["openinv_id"] = "Player ID",
