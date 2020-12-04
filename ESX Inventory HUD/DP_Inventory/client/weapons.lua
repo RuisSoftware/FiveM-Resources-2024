@@ -148,7 +148,7 @@ end)
 RegisterNetEvent('dp_inventory:getdistance')
 AddEventHandler('dp_inventory:getdistance', function(dbCoords, coords, hash, id)
     local distnace = GetDistanceBetweenCoords(dbCoords.x, dbCoords.y, dbCoords.z, coords.x, coords.y, coords.z, true)
-    if distnace <= 3 then
+    if distnace <= 2 then
         TriggerServerEvent('dp_inventory:updateOwner',hash, id)
     end
 end)
@@ -202,14 +202,9 @@ Citizen.CreateThread(function()
                 for i = 1, #currentWepAttachs do
                     if currentWepAttachs[i] ~= nil then
                         if string.find(currentWepAttachs[i], 'skin') == nil then
-                            ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
-                                if cb then
-                                    RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
-                                    table.remove(currentWepAttachs, i)
-                                else
-                                    exports['b1g_notify']:Notify('error', _U("insufficient_space"))
-                                end          
-                            end, currentWepAttachs[i], 1)
+                            ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
+                            RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
+                            table.remove(currentWepAttachs, i)
                         end
                     end
                 end
