@@ -1,4 +1,15 @@
 # Dutch Players Inventory // ESX 1.2 ONLY
+# Important
+ Go to you es_extended/server/main.lua line 423 the event name is esx:onPickup and add after line 430 this code
+    if pickup.name == 'WEAPON_PISTOL' or pickup.name == 'WEAPON_FLASHLIGHT' or pickup.name == 'WEAPON_STUNGUN' or pickup.name == 'WEAPON_KNIFE' 
+    or pickup.name == 'WEAPON_BAT' or pickup.name == 'WEAPON_ADVANCEDRIFLE' or pickup.name == 'WEAPON_APPISTOL' or pickup.name == 'WEAPON_ASSAULTRIFLE'
+    or pickup.name == 'WEAPON_ASSAULTSHOTGUN' or pickup.name == 'WEAPON_ASSAULTSMG' or pickup.name == 'WEAPON_AUTOSHOTGUN' or pickup.name == 'WEAPON_CARBINERIFLE'
+    or pickup.name == 'WEAPON_COMBATPISTOL' or pickup.name == 'WEAPON_PUMPSHOTGUN' or pickup.name == 'WEAPON_SMG' then
+        TriggerClientEvent('dp_inventory:checkWeapon', source, pickup.name)
+    end
+ Verry important so when somebody pick the weapon from ground is the same it should like like that after
+ ![IMPORTANT](https://imgur.com/6oK9ada.png)
+
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Your number 1 inventory for ESX 1.2!
 
@@ -47,7 +58,7 @@ Itembar:
 Pocket inventory:
 ![2](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_02.jpg)
 Bag inventory:
-![3](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_03.jpg)
+![3](https://cdn.discordapp.com/attachments/538834196458897408/779952927376539728/DP_Inventory.jpg)
 Glovebox inventory:
 ![4](https://raw.githubusercontent.com/dutchplayers/ESX-1.2-Inventory-HUD/master/example_04.jpg)
 Trunk inventory:
