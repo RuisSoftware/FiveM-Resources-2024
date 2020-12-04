@@ -90,3 +90,18 @@ AddEventHandler('dp_inventory:updateOwner', function(hash, id)
     }, function(results2)
     end)
 end)
+
+MySQL.ready(function()
+    MySQL.Async.fetchAll('SELECT * FROM ammunition', {
+    },function(results)
+        if #results ~= 0 then
+            for i=1, #results, 1 do
+                if results[i].owner == nil then
+                    MySQL.Sync.execute("DELETE FROM ammunition WHERE `id` = @id", {
+                        ['@id'] = results[i].id ,
+                    })
+                end
+            end
+        end
+    end)
+end)
