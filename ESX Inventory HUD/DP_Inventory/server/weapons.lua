@@ -35,7 +35,7 @@ ESX.RegisterServerCallback('dp_inventory:giveWeapon', function(source, cb, targe
         end)
     else
         cb(false)
-        TriggerClientEvent('esx:showNotification', source, 'Това лице притежава това оръжие') 'Човекът на който '
+        TriggerClientEvent('esx:showNotification', source, _U('already_weapon'))
     end
 end)
 
