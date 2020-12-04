@@ -20,7 +20,7 @@ Config.IllegalshopOpen = false -- if true everybody can enter this shop. If fals
 Config.UseLicense = false -- You must have esx_license working on your server. 
 
 Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
-Config.Attachments = {"flashlight", "suppressor", "scope", "grip", "skin"} -- NOT YET SUPPORTED.
+Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.
 Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
 Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"} -- List of item names that will close ui when used.
 Config.License = {Weapon = "weapon", Police = "weapon", Nightclub = "weapon"} -- What license is needed for this shop?
