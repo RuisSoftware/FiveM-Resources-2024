@@ -143,6 +143,7 @@ function lockinv()
 	end)
 end
 
+
 function getPlayerWeight()
 	Citizen.CreateThread(function()
 		ESX.TriggerServerCallback("dp_inventory:getPlayerInventoryWeight", function(cb)
@@ -400,11 +401,41 @@ RegisterNUICallback("DropItem",function(data, cb)
 		if data.item.type == "item_money" then
 			TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
 		else
+			if data.item.name == 'bag' then
+				TriggerEvent('skinchanger:change', "bags_1", 0)
+				TriggerEvent('skinchanger:change', "bags_2", 0)
+				TriggerEvent('skinchanger:getSkin', function(skin)
+					TriggerServerEvent('esx_skin:save', skin)
+					hasBag = false
+				end)
+			end
+			if data.item.name == 'WEAPON_PISTOL' or data.item.name == 'WEAPON_FLASHLIGHT' or data.item.name == 'WEAPON_STUNGUN' or data.item.name == 'WEAPON_KNIFE'
+			 or data.item.name == 'WEAPON_BAT' or data.item.name == 'WEAPON_ADVANCEDRIFLE' or data.item.name == 'WEAPON_APPISTOL' or data.item.name == 'WEAPON_ASSAULTRIFLE'
+			 or data.item.name == 'WEAPON_ASSAULTSHOTGUN' or data.item.name == 'WEAPON_ASSAULTSMG' or data.item.name == 'WEAPON_AUTOSHOTGUN' or data.item.name == 'WEAPON_CARBINERIFLE'
+			 or data.item.name == 'WEAPON_COMBATPISTOL' or data.item.name == 'WEAPON_PUMPSHOTGUN' or data.item.name == 'WEAPON_SMG' then
+				local coords = GetEntityCoords(GetPlayerPed(-1))
+				local forward = GetEntityForwardVector(GetPlayerPed(-1))
+				coords = coords + forward*1.0
+				TriggerServerEvent('dp_inventory:weaponLocation', coords, data.item.name)
+			end
 			TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 		end
 	end
 	Wait(0)
 	loadPlayerInventory()
+	cb("ok")
+end)
+
+RegisterNUICallback("UseItem", function(data, cb)
+	TriggerServerEvent("esx:useItem", data.item.name)
+    TriggerEvent('dp_inventory:notification', data.item.name, _U("item_used"), 1, false)
+	if shouldCloseInventory(data.item.name) then
+		closeInventory()
+	else
+		Citizen.Wait(0)
+		loadPlayerInventory()
+	end
+	print("Made with love in the Netherlands for " .. Config.ServerName)
 	cb("ok")
 end)
 
@@ -442,6 +473,15 @@ RegisterNUICallback("GiveItem", function(data, cb)
 		canPlayAnim = true
 		if data.item.type == "item_money" then
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), "item_account", "money", count)
+		elseif data.item.name == 'WEAPON_PISTOL' or data.item.name == 'WEAPON_FLASHLIGHT' or data.item.name == 'WEAPON_STUNGUN' or data.item.name == 'WEAPON_KNIFE'
+		or data.item.name == 'WEAPON_BAT' or data.item.name == 'WEAPON_ADVANCEDRIFLE' or data.item.name == 'WEAPON_APPISTOL' or data.item.name == 'WEAPON_ASSAULTRIFLE'
+		or data.item.name == 'WEAPON_ASSAULTSHOTGUN' or data.item.name == 'WEAPON_ASSAULTSMG' or data.item.name == 'WEAPON_AUTOSHOTGUN' or data.item.name == 'WEAPON_CARBINERIFLE'
+		or data.item.name == 'WEAPON_COMBATPISTOL' or data.item.name == 'WEAPON_PUMPSHOTGUN' or data.item.name == 'WEAPON_SMG' then
+			ESX.TriggerServerCallback('dp_inventory:giveWeapon', function(callback)
+				if callback then
+					TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
+				end
+			end,GetPlayerServerId(closestPlayer), data.item.name)
 		else
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 		end
@@ -468,19 +508,6 @@ RegisterNUICallback("TakeFromFast", function(data, cb)
 	end
 	loadPlayerInventory()
 	cb("ok")
-end)
-
-RegisterNUICallback("UseItem", function(data, cb)
-    TriggerServerEvent("tac:useItem", data.item.name)
-
-    if shouldCloseInventory(data.item.name) then
-        closeInventory()
-    else
-        Citizen.Wait(0)
-        loadPlayerInventory()
-    end
-
-    cb("ok")
 end)
 
 RegisterNetEvent('dp_inventory:disablenumbers')
