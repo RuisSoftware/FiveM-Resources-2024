@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `ammunition` (
     `hash` text not null,
     `count` int default 0 not null,
     `attach` text not null default '[]',
+	`location` VARCHAR(255) NULL,
 	UNIQUE KEY (`id`)
 );
 
