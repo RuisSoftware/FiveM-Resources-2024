@@ -480,9 +480,6 @@ RegisterNUICallback("GiveItem", function(data, cb)
 				end
 			end,GetPlayerServerId(closestPlayer), data.item.name)
 		else
-			if data.item.name == 'idcard' then
-				TriggerServerEvent('license_menu:idCardGiven', GetPlayerServerId(PlayerId()), GetPlayerServerId(closestPlayer))
-			end
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 		end
 		Wait(0)
