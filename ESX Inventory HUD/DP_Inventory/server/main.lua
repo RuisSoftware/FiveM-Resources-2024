@@ -464,6 +464,13 @@ end)
 RegisterServerEvent('dp_inventory:updateAmmoCount')
 AddEventHandler('dp_inventory:updateAmmoCount', function(hash, wepInfo)
 	local player = ESX.GetPlayerFromId(source)
+	for i=1, #wepInfo.attach do
+		if wepInfo.attach[i] ~= nil then
+			if wepInfo.attach[i] == 'skin' then
+				table.remove(wepInfo.attach,i)
+			end
+		end
+	end
 	MySQL.Async.execute('UPDATE ammunition SET count = @count, attach = @attach WHERE hash = @hash AND owner = @owner', {
 		['@owner'] = player.identifier,
 		['@hash'] = hash,
