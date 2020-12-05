@@ -471,20 +471,32 @@ AddEventHandler('dp_inventory:updateAmmoCount', function(hash, wepInfo)
 			end
 		end
 	end
-	MySQL.Async.execute('UPDATE ammunition SET count = @count, attach = @attach WHERE hash = @hash AND owner = @owner', {
+	MySQL.Async.execute('UPDATE ammunition SET count = @count, attach = @attach WHERE hash = @hash AND owner = @owner and weapon_id = @weapon_id', {
 		['@owner'] = player.identifier,
 		['@hash'] = hash,
 		['@count'] = wepInfo.count,
+		['@weapon_id'] = wepInfo.weapon_id,
+		['@weapon_id'] = wepInfo.weapon_id,
 		['@attach'] = json.encode(wepInfo.attach)
 	}, function(results)
 		if results == 0 then
-			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach) VALUES (@owner, @hash, @count, @attach)', {
+			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach, weapon_id, original_owner) VALUES (@owner, @hash, @count, @attach, @weapon_id, @original_owner)', {
 				['@owner'] = player.identifier,
 				['@hash'] = hash,
+				['@original_owner'] = player.identifier,
 				['@count'] = wepInfo.count,
+				['@weapon_id'] = wepInfo.weapon_id,
 				['@attach'] = json.encode(wepInfo.attach)
 			})
 		end
+	end)
+end)
+
+ESX.RegisterServerCallback('dp_inventory:isWeaponNumberTaken', function(source, cb, weapon)
+	MySQL.Async.fetchAll('SELECT 1 FROM ammunition WHERE weapon_id = @weapon_id', {
+		['@weapon_id'] = weapon
+	}, function(result)
+		cb(result[1] ~= nil)
 	end)
 end)
 
