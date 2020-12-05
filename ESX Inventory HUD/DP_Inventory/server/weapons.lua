@@ -9,6 +9,10 @@ ESX.RegisterServerCallback('dp_inventory:removeItem', function(source,cb, item)
     end
 end)
 
+idVar = nil
+attachmentGB = nil
+location = {}
+
 
 ESX.RegisterServerCallback('dp_inventory:giveWeapon', function(source, cb, targedId, item)
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -44,14 +48,17 @@ RegisterNetEvent('dp_inventory:weaponLocation')
 AddEventHandler('dp_inventory:weaponLocation', function(coords, item)
     local xPlayer = ESX.GetPlayerFromId(source)
     local hash = GetHashKey(item)
-    local location = {x = ESX.Math.Round(coords.x,1), y = ESX.Math.Round(coords.y,1), z = ESX.Math.Round(coords.z,1)}
+    location[hash] = {}
+    location[hash].coords = {x = ESX.Math.Round(coords.x,1), y = ESX.Math.Round(coords.y,1), z = ESX.Math.Round(coords.z,1)}
     MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE owner = @owner and hash = @hash', {
         ['@owner'] = xPlayer.identifier,
         ['@hash'] = hash
     }, function(results)
         if #results ~= 0 then
+            idVar = results[1].id
+            attachmentGB = results[1].attach
             MySQL.Async.execute('UPDATE ammunition SET location = @location, owner = @owner WHERE id = @id and hash = @hash', {
-                ['@location'] = json.encode(location),
+                ['@location'] = json.encode(location[hash].coords),
                 ['@id'] = results[1].id,
                 ['@owner'] = nil,
                 ['@hash'] = hash
@@ -65,8 +72,11 @@ RegisterNetEvent('dp_inventory:weaponLocationCheck')
 AddEventHandler('dp_inventory:weaponLocationCheck', function(coords, item)
     local _source = source
     local hash = GetHashKey(item)
-    MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash', {
+    MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND id = @id AND location = @location AND attach = @attach', {
         ['@hash'] = hash,
+        ['@id'] = idVar,
+        ['@attach'] = attachmentGB,
+        ['@location'] = json.encode(location[hash].coords) 
     },function(results)
         if #results ~= 0 then
             for i=1, #results, 1 do
