@@ -1,5 +1,5 @@
 var invLocale = new Object();
-invLocale.dropItem = "Drop";
-invLocale.useItem = "Use";
-invLocale.giveItem = "Give";
-invLocale.secondInventoryNotAvailable = "Secondary inventory is not available.";
+invLocale.dropItem = "Изхварли";
+invLocale.useItem = "Използвай";
+invLocale.giveItem = "Дай";
+invLocale.secondInventoryNotAvailable = "Втори инвентар не е наличен";

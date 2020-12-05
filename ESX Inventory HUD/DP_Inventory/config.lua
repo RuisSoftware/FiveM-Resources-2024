@@ -1,7 +1,7 @@
 Config = {}
-Config.ServerName = "Gemeente Nieuwstad"
-Config.Locale = "nl" -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
-Config.ExcludeAccountsList = {"bank", "money"} -- DO NOT TOUCH!
+Config.ServerName = 'RealLife RolePlay'
+Config.Locale = 'en' -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
+Config.ExcludeAccountsList = {'bank', 'money'} -- DO NOT TOUCH!
 
 Config.IncludeCash = true -- Include cash in inventory? true or false.
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
@@ -19,15 +19,15 @@ Config.AllowMafia = true -- If true, mafia will be able to search players' trunk
 Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Illegal can enter this shop.
 Config.UseLicense = false -- You must have esx_license working on your server. 
 
-Config.Command = {Steal = "steal", CloseInv = "closeinventory", Unequip = "unequip"} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
+Config.Command = {Steal = 'steal', CloseInv = 'closeinventory', Unequip = 'unequip'} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
 Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.
-Config.InventoryJob = {Police = "police", Nightclub = "nightclub", Mafia = "mafia", Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
-Config.CloseUiItems = {"phone", "weed_seed", "tunerchip", "fixkit", "medikit", "firstaid", "vicodin", "adrenaline", "vuurwerk", "vuurwerk2", "vuurwerk3", "vuurwerk4", "armbrace", "neckbrace", "bodybandage", "legbrace", "bandage", "billet"} -- List of item names that will close ui when used.
-Config.License = {Weapon = "weapon", Police = "weapon", Nightclub = "weapon"} -- What license is needed for this shop?
+Config.InventoryJob = {Police = 'police', Nightclub = 'nightclub', Mafia = 'mafia', Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
+Config.CloseUiItems = {'phone', 'weed_seed', 'tunerchip', 'fixkit', 'medikit', 'firstaid', 'vicodin', 'adrenaline', 'vuurwerk', 'vuurwerk2', 'vuurwerk3', 'vuurwerk4', 'armbrace', 'neckbrace', 'bodybandage', 'legbrace', 'bandage', 'billet'} -- List of item names that will close ui when used.
+Config.License = {Weapon = 'weapon', Police = 'weapon', Nightclub = 'weapon'} -- What license is needed for this shop?
 
 Config.OpenControl = 289 -- F2. player inventory, it is recommend to use the same as CloseControl.
 Config.CloseControl = 289 -- F2. player inventory, it is recommend to use the same as OpenControl.
-Config.BagControl = 288 -- F1. player bag inventory
+-- Config.BagControl = 288 -- F4. player bag inventory
 Config.SearchBag = 249 -- N. Search a bag on the ground
 Config.TakeBag = 38 -- E. Take bag on the ground
 Config.OpenKeyGlovebox = 170 -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
@@ -36,7 +36,7 @@ Config.RobKeyOne = 38 -- E
 Config.RobKeyTwo = 60 -- CTRL
 
 Config.ReloadTime = 2000 -- in miliseconds for reloading your ammunition.
-Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk TO player inventory. DEPRECATED.
+Config.MaxWeight = 24000 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk TO player inventory. DEPRECATED.
 
 Config.MaxBagItemCount = 50 
 Config.MaxDifferentBagItems = 5
@@ -140,16 +140,16 @@ Config.TrunkSize = { -- Related to Config.localWeight.
 }
 
 Config.VehiclePlate = {
-	taxi = "TAXI",
-	cop = "police",
-	police = "police",
-	ambulance = "ambulance",
-	mecano = "mechano",
-	mechanic = "mechanic",
-	police = "police",
-	nightclub = "club",
-	bahamas = "bahamas",
-	cardealer = "dealer"
+	taxi = 'TAXI',
+	cop = 'police',
+	police = 'police',
+	ambulance = 'ambulance',
+	mecano = 'mechano',
+	mechanic = 'mechanic',
+	police = 'police',
+	nightclub = 'club',
+	bahamas = 'bahamas',
+	cardealer = 'dealer'
 }
 
 Config.Shops = {
@@ -266,21 +266,21 @@ Config.Shops = {
 			--{ x = 22.09, y = -1107.28, z = 28.80 }
 		},
 		Items = {
-			{name = "ammunition_pistol", price = 1},
-			{name = "ammunition_pistol_large", price = 1},
-			{name = "ammunition_shotgun", price = 1},
-			{name = "ammunition_shotgun_large", price = 1},
-			{name = "ammunition_smg", price = 1},
-			{name = "ammunition_smg_large", price = 1},
-			{name = "ammunition_rifle", price = 1},
-			{name = "ammunition_rifle_large", price = 1},
-			{name = "ammunition_snp", price = 1},
-			{name = "ammunition_snp_large", price = 1}--,
-			--{name = "flashlight",price = 1},
-			--{name = "grip",price = 1},
-			--{name = "scope",price = 1},
-			--{name = "skin",price = 1},
-			--{name = "supressor",price = 1}
+			{name = 'ammunition_pistol', price = 1},
+			{name = 'ammunition_pistol_large', price = 1},
+			{name = 'ammunition_shotgun', price = 1},
+			{name = 'ammunition_shotgun_large', price = 1},
+			{name = 'ammunition_smg', price = 1},
+			{name = 'ammunition_smg_large', price = 1},
+			{name = 'ammunition_rifle', price = 1},
+			{name = 'ammunition_rifle_large', price = 1},
+			{name = 'ammunition_snp', price = 1},
+			{name = 'ammunition_snp_large', price = 1}--,
+			--{name = 'flashlight',price = 1},
+			--{name = 'grip',price = 1},
+			--{name = 'scope',price = 1},
+			--{name = 'skin',price = 1},
+			--{name = 'supressor',price = 1}
 		}
 	},
 
@@ -290,28 +290,28 @@ Config.Shops = {
 			{ x = 451.68, y = -980.02, z = 29.69 }
 		},
 		Items = {
-			{name = "WEAPON_FLASHLIGHT", price = 100},
-			{name = "WEAPON_STUNGUN", price = 100},
-			{name = "WEAPON_KNIFE", price = 100},
-			{name = "WEAPON_BAT", price = 100},
-			{name = "WEAPON_PISTOL", price = 100},
-			{name = "WEAPON_PUMPSHOTGUN",price = 100},
-			{name = "WEAPON_SMOKEGRENADE",price = 100},
-			{name = "WEAPON_FIREEXTINGUISHER",price = 100},
-			{name = "WEAPON_CROWBAR",price = 100},
-			{name = "WEAPON_BZGAS",price = 100},
-			{name = "ammunition_pistol",price = 100},
-			{name = "ammunition_pistol_large",price = 100},
-			{name = "ammunition_shotgun",price = 100},
-			{name = "ammunition_shotgun_large",price = 100},
-			{name = "ammunition_smg",price = 100},
-			{name = "ammunition_smg_large",price = 100},
-			{name = "ammunition_rifle",price = 100},
-			{name = "ammunition_rifle_large",price = 100},
-			{name = "ammunition_snp",price = 100},
-			{name = "ammunition_snp_large",price = 100},
-			{name = "bulletproof",price = 1000},
-			{name = "binoculars",price = 50}
+			{name = 'WEAPON_FLASHLIGHT', price = 100},
+			{name = 'WEAPON_STUNGUN', price = 100},
+			{name = 'WEAPON_KNIFE', price = 100},
+			{name = 'WEAPON_BAT', price = 100},
+			{name = 'WEAPON_PISTOL', price = 100},
+			{name = 'WEAPON_PUMPSHOTGUN',price = 100},
+			{name = 'WEAPON_SMOKEGRENADE',price = 100},
+			{name = 'WEAPON_FIREEXTINGUISHER',price = 100},
+			{name = 'WEAPON_CROWBAR',price = 100},
+			{name = 'WEAPON_BZGAS',price = 100},
+			{name = 'ammunition_pistol',price = 100},
+			{name = 'ammunition_pistol_large',price = 100},
+			{name = 'ammunition_shotgun',price = 100},
+			{name = 'ammunition_shotgun_large',price = 100},
+			{name = 'ammunition_smg',price = 100},
+			{name = 'ammunition_smg_large',price = 100},
+			{name = 'ammunition_rifle',price = 100},
+			{name = 'ammunition_rifle_large',price = 100},
+			{name = 'ammunition_snp',price = 100},
+			{name = 'ammunition_snp_large',price = 100},
+			{name = 'bulletproof',price = 1000},
+			{name = 'binoculars',price = 50}
 		}
 	},
 
@@ -320,9 +320,9 @@ Config.Shops = {
 			-- { x = -1297.96, y = -392.60, z = 35.47 }
 		},
 		Items = {
-			{name = "WEAPON_PISTOL", price = 10000},
-			{name = "ammunition_pistol",price = 1000},
-			{name = "ammunition_pistol_large",price = 1000}
+			{name = 'WEAPON_PISTOL', price = 10000},
+			{name = 'ammunition_pistol',price = 1000},
+			{name = 'ammunition_pistol_large',price = 1000}
 		}
 	},
 
@@ -361,7 +361,7 @@ Config.Throwables = { -- WEAPON NAME & WEAPON HASH
 Config.FuelCan = 883325847
 
 Config.PropList = { -- Here you can change the prop when using the item.
-	cash = {["model"] = 'prop_cash_pile_02', ["bone"] = 28422, ["x"] = 0.02, ["y"] = 0.02, ["z"] = -0.08, ["xR"] = 270.0, ["yR"] = 180.0, ["zR"] = 0.0}
+	cash = {['model'] = 'prop_cash_pile_02', ['bone'] = 28422, ['x'] = 0.02, ['y'] = 0.02, ['z'] = -0.08, ['xR'] = 270.0, ['yR'] = 180.0, ['zR'] = 0.0}
 }
 
 Config.EnableInventoryHUD = true
@@ -370,125 +370,125 @@ Config.Ammo = {
 	{
 		name = 'ammunition_pistol',
 		weapons = {
-			`WEAPON_PISTOL`,
-			`WEAPON_APPISTOL`,
-			`WEAPON_SNSPISTOL`,
-			`WEAPON_COMBATPISTOL`,
-			`WEAPON_HEAVYPISTOL`,
-			`WEAPON_MACHINEPISTOL`,
-			`WEAPON_MARKSMANPISTOL`,
-			`WEAPON_PISTOL50`,
-			`WEAPON_VINTAGEPISTOL`
+			'WEAPON_PISTOL',
+			'WEAPON_APPISTOL',
+			'WEAPON_SNSPISTOL',
+			'WEAPON_COMBATPISTOL',
+			'WEAPON_HEAVYPISTOL',
+			'WEAPON_MACHINEPISTOL',
+			'WEAPON_MARKSMANPISTOL',
+			'WEAPON_PISTOL50',
+			'WEAPON_VINTAGEPISTOL'
 		},
 		count = 30
 	},
 	{
 		name = 'ammunition_pistol_large',
 		weapons = {
-			`WEAPON_PISTOL`,
-			`WEAPON_APPISTOL`,
-			`WEAPON_SNSPISTOL`,
-			`WEAPON_COMBATPISTOL`,
-			`WEAPON_HEAVYPISTOL`,
-			`WEAPON_MACHINEPISTOL`,
-			`WEAPON_MARKSMANPISTOL`,
-			`WEAPON_PISTOL50`,
-			`WEAPON_VINTAGEPISTOL`
+			'WEAPON_PISTOL',
+			'WEAPON_APPISTOL',
+			'WEAPON_SNSPISTOL',
+			'WEAPON_COMBATPISTOL',
+			'WEAPON_HEAVYPISTOL',
+			'WEAPON_MACHINEPISTOL',
+			'WEAPON_MARKSMANPISTOL',
+			'WEAPON_PISTOL50',
+			'WEAPON_VINTAGEPISTOL'
 		},
 		count = 60
 	},
 	{
 		name = 'ammunition_shotgun',
 		weapons = {
-			`WEAPON_ASSAULTSHOTGUN`,
-			`WEAPON_AUTOSHOTGUN`,
-			`WEAPON_BULLPUPSHOTGUN`,
-			`WEAPON_DBSHOTGUN`,
-			`WEAPON_HEAVYSHOTGUN`,
-			`WEAPON_PUMPSHOTGUN`,
-			`WEAPON_SAWNOFFSHOTGUN`
+			'WEAPON_ASSAULTSHOTGUN',
+			'WEAPON_AUTOSHOTGUN',
+			'WEAPON_BULLPUPSHOTGUN',
+			'WEAPON_DBSHOTGUN',
+			'WEAPON_HEAVYSHOTGUN',
+			'WEAPON_PUMPSHOTGUN',
+			'WEAPON_SAWNOFFSHOTGUN'
 		},
 		count = 12
 	},
 	{
 		name = 'ammunition_shotgun_large',
 		weapons = {
-			`WEAPON_ASSAULTSHOTGUN`,
-			`WEAPON_AUTOSHOTGUN`,
-			`WEAPON_BULLPUPSHOTGUN`,
-			`WEAPON_DBSHOTGUN`,
-			`WEAPON_HEAVYSHOTGUN`,
-			`WEAPON_PUMPSHOTGUN`,
-			`WEAPON_SAWNOFFSHOTGUN`
+			'WEAPON_ASSAULTSHOTGUN',
+			'WEAPON_AUTOSHOTGUN',
+			'WEAPON_BULLPUPSHOTGUN',
+			'WEAPON_DBSHOTGUN',
+			'WEAPON_HEAVYSHOTGUN',
+			'WEAPON_PUMPSHOTGUN',
+			'WEAPON_SAWNOFFSHOTGUN'
 		},
 		count = 18
 	},
 	{
 		name = 'ammunition_smg',
 		weapons = {
-			`WEAPON_ASSAULTSMG`,
-			`WEAPON_MICROSMG`,
-			`WEAPON_MINISMG`,
-			`WEAPON_SMG`
+			'WEAPON_ASSAULTSMG',
+			'WEAPON_MICROSMG',
+			'WEAPON_MINISMG',
+			'WEAPON_SMG'
 		},
 		count = 45
 	},
 	{
 		name = 'ammunition_smg_large',
 		weapons = {
-			`WEAPON_ASSAULTSMG`,
-			`WEAPON_MICROSMG`,
-			`WEAPON_MINISMG`,
-			`WEAPON_SMG`
+			'WEAPON_ASSAULTSMG',
+			'WEAPON_MICROSMG',
+			'WEAPON_MINISMG',
+			'WEAPON_SMG'
 		},
 		count = 65
 	},
 	{
 		name = 'ammunition_rifle',
 		weapons = {
-			`WEAPON_ADVANCEDRIFLE`,
-			`WEAPON_ASSAULTRIFLE`,
-			`WEAPON_BULLPUPRIFLE`,
-			`WEAPON_CARBINERIFLE`,
-			`WEAPON_SPECIALCARBINE`,
-			`WEAPON_COMPACTRIFLE`
+			'WEAPON_ADVANCEDRIFLE',
+			'WEAPON_ASSAULTRIFLE',
+			'WEAPON_BULLPUPRIFLE',
+			'WEAPON_CARBINERIFLE',
+			'WEAPON_SPECIALCARBINE',
+			'WEAPON_COMPACTRIFLE'
 		},
 		count = 45
 	},
 	{
 		name = 'ammunition_rifle_large',
 		weapons = {
-			`WEAPON_ADVANCEDRIFLE`,
-			`WEAPON_ASSAULTRIFLE`,
-			`WEAPON_BULLPUPRIFLE`,
-			`WEAPON_CARBINERIFLE`,
-			`WEAPON_SPECIALCARBINE`,
-			`WEAPON_COMPACTRIFLE`
+			'WEAPON_ADVANCEDRIFLE',
+			'WEAPON_ASSAULTRIFLE',
+			'WEAPON_BULLPUPRIFLE',
+			'WEAPON_CARBINERIFLE',
+			'WEAPON_SPECIALCARBINE',
+			'WEAPON_COMPACTRIFLE'
 		},
 		count = 65
 	},
 	{
 		name = 'ammunition_snp',
 		weapons = {
-			`WEAPON_SNIPERRIFLE`,
-			`WEAPON_HEAVYSNIPER`,
-			`WEAPON_MARKSMANRIFLE`
+			'WEAPON_SNIPERRIFLE',
+			'WEAPON_HEAVYSNIPER',
+			'WEAPON_MARKSMANRIFLE'
 		},
 		count = 10
 	},
 	{
 		name = 'ammunition_snp_large',
 		weapons = {
-			`WEAPON_SNIPERRIFLE`,
-			`WEAPON_HEAVYSNIPER`,
-			`WEAPON_MARKSMANRIFLE`
+			'WEAPON_SNIPERRIFLE',
+			'WEAPON_HEAVYSNIPER',
+			'WEAPON_MARKSMANRIFLE'
 		},
 		count = 15
 	},
 	{
 		name = 'ammunition_fireextinguisher',
 		weapons = {
-			`WEAPON_FIREEXTINGUISHER`
+			'WEAPON_FIREEXTINGUISHER'
 		},
 		count = 15
 	}

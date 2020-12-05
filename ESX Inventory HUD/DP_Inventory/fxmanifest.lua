@@ -4,7 +4,7 @@ game 'gta5'
 name 'DP_Inventory'
 author 'Dutch Players'
 description 'Inventory for ESX 1.2 inspired by esx_invntoryhud from Trsak'
-version '1.0'
+version '1.1'
 url 'https://github.com/dutchplayers/FiveM-Resources'
 
 ui_page 'html/ui.html'
@@ -16,7 +16,7 @@ client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/*.lua',
-	'client/secure.lua',
+	'client/thankyou.lua',
 	'client/main.lua',
 	'client/glovebox.lua',
 	'client/ammunition.lua',
@@ -42,12 +42,12 @@ server_scripts {
 	'config.lua',
 	'locales/*.lua',
 	'server/main.lua',
+	'server/weapons.lua',
 	'server/trunk.lua',
 	'server/glovebox.lua',
 	'server/ammunition.lua',
 	'server/vault.lua',
 	'server/bag.lua',
-	'server/weapons.lua',
 	'server/classes/c_trunk.lua',
 	'server/classes/c_glovebox.lua',	
 	'server/versioncheck.lua',

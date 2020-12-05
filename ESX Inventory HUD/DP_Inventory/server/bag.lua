@@ -12,7 +12,7 @@ end)
 ESX.RegisterUsableItem('bag', function(source)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-    xPlayer.removeInventoryItem('bag', 1)
+    -- xPlayer.removeInventoryItem('bag', 1)
     
     TriggerClientEvent('dp_inventory_bag:toggleBag', source)
 end)

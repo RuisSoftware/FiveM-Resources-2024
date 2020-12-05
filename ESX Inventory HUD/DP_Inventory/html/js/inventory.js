@@ -116,7 +116,7 @@ window.addEventListener("message", function (event) {
     }else if (event.data.action == "nearPlayers") {
         $("#dialog").dialog("close");
         //   player = $(this).data("player");
-        $.post("https://DP_Inventaris/GiveItem", JSON.stringify({
+        $.post("https://DP_Inventory/GiveItem", JSON.stringify({
             player: player,
             item: event.data.item,
             number: parseInt($("#count").val())
@@ -184,7 +184,7 @@ function sendNotification(item, itemlabel, count, remove){
 
 function closeInventory() {
     $(".ui").fadeOut();
-    $.post("https://DP_Inventaris/NUIFocusOff", JSON.stringify({}));
+    $.post("https://DP_Inventory/NUIFocusOff", JSON.stringify({}));
   
 }
 
@@ -242,7 +242,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original ESX In
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
             if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
-                $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 1,
                 }));
@@ -255,7 +255,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original ESX In
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
-                $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
 
                     item: itemData,
                     slot : 2
@@ -269,7 +269,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original ESX In
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
-               $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+               $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 3
                 }));
@@ -282,7 +282,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original ESX In
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
-                $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 4
                 }));
@@ -295,7 +295,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original ESX In
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
-                $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 5
                 }));
@@ -385,7 +385,28 @@ function setCost(item) {
     }
     return cost;
 }
+//USD FORMAT BELOW HERE
+//function setCost(item) {
+//    cost = item.price
+//    if (item.price == 0){
+//        cost = item.price + "$"
+//    }
+//    if (item.price > 0) {
+//        cost = item.price + "$"
+//    }
+//    return cost;
+//}
 
+function formatMoney(number) {
+	return number.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
+}
+
+//USD FORMAT BELOW HERE
+//function formatMoney(number) {
+//	return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+//}
+
+//OLD METHOD BELOW HERE
 //function formatMoney(n, c, d, t) {
 //    var c = isNaN(c = Math.abs(c)) ? 2 : c,
 //        d = d == undefined ? "." : d,
@@ -396,14 +417,6 @@ function setCost(item) {
 //
 //    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t);
 //};
-
-function formatMoney(number) {
-	return number.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
-}
-
-//function formatMoney(number) {
-//	return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-//}
 
 $(document).ready(function () {
     $("#count").focus(function () {
@@ -442,7 +455,7 @@ $(document).ready(function () {
                         if (Hotbar[i] == false) {
                             $('#itemFast-' + itemData.slot).slideUp("slow", function() {});
                             Hotbar[i] = true
-                            $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                            $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                                 item: itemData,
                                 slot : i+1
                             }));
@@ -451,13 +464,13 @@ $(document).ready(function () {
                     }
                 } else {
                     Hotbar[itemData.slot-1] = false;
-                    $.post("https://DP_Inventaris/TakeFromFast", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromFast", JSON.stringify({
                         item: itemData
                     }));
                 }
                 
             } else {
-                $.post("https://DP_Inventaris/UseItem", JSON.stringify({
+                $.post("https://DP_Inventory/UseItem", JSON.stringify({
                     item: itemData
                 }));
                 closeInventory();
@@ -476,99 +489,99 @@ $(document).ready(function () {
         if(e.shiftKey) {
             if (itemInventory === "second") {
                 if (type === "trunk") {
-                    $.post("https://DP_Inventaris/TakeFromTrunk", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromTrunk", JSON.stringify({
     
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "property") {
-                    $.post("https://DP_Inventaris/TakeFromProperty", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromProperty", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val()),
                         owner : ownerHouse
                     }));
                 } else if (type === "vault") {
-                    $.post("https://DP_Inventaris/TakeFromVault", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromVault", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "player") {
-                    $.post("https://DP_Inventaris/TakeFromPlayer", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromPlayer", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "normal" && itemInventory === "fast") {
                     Hotbar[itemData.slot-1] = false;
-                    $.post("https://DP_Inventaris/TakeFromFast", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromFast", JSON.stringify({
                         item: itemData
                     }));
                 } else if (type === "shop") {
-                    $.post("https://DP_Inventaris/TakeFromShop", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromShop", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
     
                 } else if (type === "motels") {
-                    $.post("https://DP_Inventaris/TakeFromMotel", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromMotel", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
     
                 } else if (type === "motelsbed") {
-                    $.post("https://DP_Inventaris/TakeFromMotelBed", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromMotelBed", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "glovebox") {
-                    $.post("https://DP_Inventaris/TakeFromGlovebox", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromGlovebox", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "bag") {
-                    $.post("https://DP_Inventaris/TakeFromBag", JSON.stringify({
+                    $.post("https://DP_Inventory/TakeFromBag", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 }
             } else if (itemInventory === "main") {
                 if (type === "trunk") {
-                    $.post("https://DP_Inventaris/PutIntoTrunk", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoTrunk", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "property") {
-                    $.post("https://DP_Inventaris/PutIntoProperty", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoProperty", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val()),
                         owner : ownerHouse
                     }));
                 } else if (type === "vault") {
-                    $.post("https://DP_Inventaris/PutIntoVault", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoVault", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "player") {
-                    $.post("https://DP_Inventaris/PutIntoPlayer", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoPlayer", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "motels") {
-                    $.post("https://DP_Inventaris/PutIntoMotel", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoMotel", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }))
                 } else if (type === "motelsbed") {
-                    $.post("https://DP_Inventaris/PutIntoMotelBed", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoMotelBed", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "glovebox") {
-                    $.post("https://DP_Inventaris/PutIntoGlovebox", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoGlovebox", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
                 } else if (type === "bag") {
-                    $.post("https://DP_Inventaris/PutIntoBag", JSON.stringify({
+                    $.post("https://DP_Inventory/PutIntoBag", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
@@ -579,7 +592,7 @@ $(document).ready(function () {
         } else {
             if (type === "normal" && itemInventory === "fast") {
                 Hotbar[itemData.slot-1] = false;
-                $.post("https://DP_Inventaris/TakeFromFast", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromFast", JSON.stringify({
                     item: itemData
                 }));
             }else if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
@@ -588,7 +601,7 @@ $(document).ready(function () {
                     if (Hotbar[i] == false) {
                         $('#itemFast-' + itemData.slot).fadeOut();
                         Hotbar[i] = true
-                        $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                        $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                             item: itemData,
                             slot : i+1
                         }));
@@ -625,7 +638,7 @@ $(document).ready(function () {
                             if (Hotbar[i] == false) {
                                 $('#itemFast-' + itemData.slot).slideUp("slow", function() {});
                                 Hotbar[i] = true
-                                $.post("https://DP_Inventaris/PutIntoFast", JSON.stringify({
+                                $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                                     item: itemData,
                                     slot : i+1
                                 }));
@@ -634,13 +647,13 @@ $(document).ready(function () {
                         }
                     } else {
                         Hotbar[itemData.slot-1] = false;
-                        $.post("https://DP_Inventaris/TakeFromFast", JSON.stringify({
+                        $.post("https://DP_Inventory/TakeFromFast", JSON.stringify({
                             item: itemData
                         }));
                     }
                     
                 } else {
-                    $.post("https://DP_Inventaris/UseItem", JSON.stringify({
+                    $.post("https://DP_Inventory/UseItem", JSON.stringify({
                         item: itemData
                     }));
                     closeInventory();
@@ -663,7 +676,7 @@ $(document).ready(function () {
             if (itemInventory === "fast") {
                 return;
             }
-            $.post("https://DP_Inventaris/GiveItem", JSON.stringify({
+            $.post("https://DP_Inventory/GiveItem", JSON.stringify({
                 number: parseInt($("#count").val()),
                 item: itemData
             }));
@@ -688,7 +701,7 @@ $(document).ready(function () {
             if (itemInventory === "fast") {
                 return;}
              if (itemData.canRemove) {
-            $.post("https://DP_Inventaris/DropItem", JSON.stringify({
+            $.post("https://DP_Inventory/DropItem", JSON.stringify({
 
                 item: itemData,
                 number: parseInt($("#count").val())
@@ -704,60 +717,60 @@ $(document).ready(function () {
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "trunk" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromTrunk", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromTrunk", JSON.stringify({
 
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
 
             } else if (type === "property" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromProperty", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromProperty", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val()),
 					owner : ownerHouse
                 }));
 
             } else if (type === "bag" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromBag", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromBag", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val()),
 					
                 }));
 
             } else if (type === "vault" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromVault", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromVault", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "player" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromPlayer", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromPlayer", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             }else if (type === "normal" && itemInventory === "fast") {
                 Hotbar[itemData.slot-1] = false;
-                $.post("https://DP_Inventaris/TakeFromFast", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromFast", JSON.stringify({
                     item: itemData
                 }));
             } else if (type === "shop" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromShop", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromShop", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
 
             } else if (type === "motels" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromMotel", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromMotel", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
 
             } else if (type === "motelsbed" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromMotelBed", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromMotelBed", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "glovebox" && itemInventory === "second") {
-                $.post("https://DP_Inventaris/TakeFromGlovebox", JSON.stringify({
+                $.post("https://DP_Inventory/TakeFromGlovebox", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
@@ -772,43 +785,43 @@ $(document).ready(function () {
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "trunk" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoTrunk", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoTrunk", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "property" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoProperty", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoProperty", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val()),
 					owner : ownerHouse
                 }));
             } else if (type === "vault" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoVault", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoVault", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "player" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoPlayer", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoPlayer", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "bag" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoBag", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoBag", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "motels" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoMotel", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoMotel", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }))
             } else if (type === "motelsbed" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoMotelBed", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoMotelBed", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
             } else if (type === "glovebox" && itemInventory === "main") {
-                $.post("https://DP_Inventaris/PutIntoGlovebox", JSON.stringify({
+                $.post("https://DP_Inventory/PutIntoGlovebox", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));

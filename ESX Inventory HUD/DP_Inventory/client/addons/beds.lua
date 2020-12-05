@@ -5,7 +5,7 @@ AddEventHandler("dp_inventory:openMotelsInventoryBed", function(data)
 end)
 
 function refreshPropertyMotelBedInventory()
-	ESX.TriggerServerCallback("lsrp-motels:getPropertyInventoryBed", function(inventory)
+	ESX.TriggerServerCallback("DP_Motels:getPropertyInventoryBed", function(inventory)
 		setPropertyMotelDataBed(inventory)
 	end, ESX.GetPlayerData().identifier )
 end
@@ -89,10 +89,11 @@ RegisterNUICallback("PutIntoMotelBed", function(data, cb)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
+		print(data.item.name)
 		if data.item.name == 'cash' then
-			TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
+			TriggerServerEvent("DP_Motels:putItemBed", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
 		else
-			TriggerServerEvent("lsrp-motels:putItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+			TriggerServerEvent("DP_Motels:putItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
 		end
 	end
 	Wait(150)
@@ -107,7 +108,7 @@ RegisterNUICallback("TakeFromMotelBed", function(data, cb)
 		return
 	end
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("lsrp-motels:getItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+		TriggerServerEvent("DP_Motels:getItemBed", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
 	end
 	Wait(150)
 	refreshPropertyMotelBedInventory()

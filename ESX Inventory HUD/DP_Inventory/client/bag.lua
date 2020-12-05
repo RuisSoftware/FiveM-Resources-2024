@@ -4,7 +4,7 @@ RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
     PlayerData = xPlayer
 	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-        if skin.bags_1 ~= 23 then
+        if skin.bags_1 ~= 45 then
 			hasBag = false
 		else
 			hasBag = true
@@ -14,7 +14,7 @@ end)
 
 function OpenBagInventoryMenu(inventory, owner)
 	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-        if skin.bags_1 ~= 23 then
+        if skin.bags_1 ~= 45 then
 			hasBag = false
 		else
 			hasBag = true
@@ -35,36 +35,45 @@ function OpenBagInventoryMenu(inventory, owner)
 		--print('You dont have a bag')
 	end
 end
--- 23 24 42
+-- 23 24 45
 RegisterNetEvent('dp_inventory_bag:toggleBag')
 AddEventHandler('dp_inventory_bag:toggleBag', function(id)
     ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-        if skin.bags_1 ~= 23 then
-            TriggerEvent('skinchanger:change', "bags_1", 23)
+		if skin.bags_1 ~= 45 then
+            TriggerEvent('skinchanger:change', "bags_1", 45)
             TriggerEvent('skinchanger:change', "bags_2", 0)
             TriggerEvent('skinchanger:getSkin', function(skin)
 				TriggerServerEvent('esx_skin:save', skin)
 				hasBag = true
 			end)
 		else
-            TriggerEvent('skinchanger:change', "bags_1", 0)
-            TriggerEvent('skinchanger:change', "bags_2", 0)
-            TriggerEvent('skinchanger:getSkin', function(skin)
-				TriggerServerEvent('esx_skin:save', skin)
-				hasBag = false
-			end)
+			OpenBagInventoryMenu('bag', PlayerData.identifier)
+            -- TriggerEvent('skinchanger:change', "bags_1", 0)
+            -- TriggerEvent('skinchanger:change', "bags_2", 0)
+            -- TriggerEvent('skinchanger:getSkin', function(skin)
+			-- 	TriggerServerEvent('esx_skin:save', skin)
+			-- 	hasBag = false
+			-- end)
         end
     end)
 end)
 
-Citizen.CreateThread(function()
-	while ESX == nil do Citizen.Wait(10) end
-	while PlayerData == nil do Citizen.Wait(10) end
-	owner = PlayerData.identifier
-    while true do
-        Wait(5)
-        if IsControlJustReleased(0, Config.BagControl) and not IsPedInAnyVehicle(GetPlayerPed(-1), true) and not IsEntityInAir(PlayerPedId()) then
-			OpenBagInventoryMenu('bag', owner)
-        end
-    end
-end)
+-- Citizen.CreateThread(function()
+-- 	while ESX == nil do Citizen.Wait(10) end
+-- 	while PlayerData == nil do Citizen.Wait(10) end
+-- 	owner = PlayerData.identifier
+--     while true do
+--         Wait(5)
+--         if IsControlJustReleased(0, Config.BagControl) and not IsPedInAnyVehicle(GetPlayerPed(-1), true) and not IsEntityInAir(PlayerPedId()) then
+-- 			OpenBagInventoryMenu('bag', owner)
+--         end
+--     end
+-- end)
+
+RegisterCommand('showBagInventory', function()
+	if not IsPedInAnyVehicle(GetPlayerPed(-1), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
+		OpenBagInventoryMenu('bag', PlayerData.identifier)
+	end
+end, false)
+
+RegisterKeyMapping('showBagInventory', 'Отваряне на вашата чанта/сак', 'keyboard', 'F4')

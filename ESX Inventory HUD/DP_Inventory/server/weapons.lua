@@ -70,7 +70,7 @@ AddEventHandler('dp_inventory:weaponLocationCheck', function(coords, item)
     },function(results)
         if #results ~= 0 then
             for i=1, #results, 1 do
-                 if results[i].location ~= nil then
+                if results[i].location ~= nil then
                     local DBcoords = json.decode(results[i].location)
                     TriggerClientEvent('dp_inventory:getdistance', _source, DBcoords, coords, hash, results[i].id)
                 end

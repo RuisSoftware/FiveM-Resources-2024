@@ -215,7 +215,9 @@ Citizen.CreateThread(function()
                     }, function(status)
                         if not status then
                             if currentWepAttachs[i] ~= nil then
+                                print('sd', string.find(currentWepAttachs[i], 'skin'))
                                 if string.find(currentWepAttachs[i], 'skin') == nil then
+                                    print('asdddddddd')
                                     RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
                                     ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
                                     table.remove(currentWepAttachs, i)
