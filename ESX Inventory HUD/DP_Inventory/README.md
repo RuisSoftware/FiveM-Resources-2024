@@ -7,8 +7,25 @@
     or pickup.name == 'WEAPON_COMBATPISTOL' or pickup.name == 'WEAPON_PUMPSHOTGUN' or pickup.name == 'WEAPON_SMG' then
         TriggerClientEvent('dp_inventory:checkWeapon', source, pickup.name)
     end
- Verry important so when somebody pick the weapon from ground is the same it should like like that after
+Verry important so when somebody pick the weapon from ground is the same it should like like that after
  ![IMPORTANT](https://imgur.com/6oK9ada.png)
+    Then go to es_extended/server/functions.lua line 285 and add this
+    if name == 'WEAPON_PISTOL' or name == 'WEAPON_FLASHLIGHT' or name == 'WEAPON_STUNGUN' or name == 'WEAPON_KNIFE' or name == 'WEAPON_BAT' or name == 'WEAPON_ADVANCEDRIFLE' or name == 'WEAPON_APPISTOL' or name == 'WEAPON_ASSAULTRIFLE'
+	or name == 'WEAPON_ASSAULTSHOTGUN' or name == 'WEAPON_ASSAULTSMG' or name == 'WEAPON_AUTOSHOTGUN' or name == 'WEAPON_CARBINERIFLE' or name == 'WEAPON_COMBATPISTOL' or name == 'WEAPON_PUMPSHOTGUN' or name == 'WEAPON_SMG' then
+		local hash = GetHashKey(name)
+		MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
+			['@hash'] = hash,
+			['@owner'] =  xPlayer.identifier
+		},function(results)
+			if #results ~= 0 then
+				if results[1].weapon_id then
+					ESX.Pickups[pickupId].weaponID = results[1].weapon_id
+				end
+			end
+		end)
+	end
+    so it looks like that
+![IMPORTANT](https://imgur.com/t6b7i1M.png)
 
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Your number 1 inventory for ESX 1.2!
