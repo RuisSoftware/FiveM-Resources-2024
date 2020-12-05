@@ -9,11 +9,6 @@ ESX.RegisterServerCallback('dp_inventory:removeItem', function(source,cb, item)
     end
 end)
 
-idVar = nil
-attachmentGB = nil
-location = {}
-
-
 ESX.RegisterServerCallback('dp_inventory:giveWeapon', function(source, cb, targedId, item)
     local xPlayer = ESX.GetPlayerFromId(source)
     local xTarged = ESX.GetPlayerFromId(targedId)
@@ -45,22 +40,18 @@ end)
 
 
 RegisterNetEvent('dp_inventory:weaponLocation')
-AddEventHandler('dp_inventory:weaponLocation', function(coords, item)
+AddEventHandler('dp_inventory:weaponLocation', function(item)
     local xPlayer = ESX.GetPlayerFromId(source)
     local hash = GetHashKey(item)
-    location[hash] = {}
-    location[hash].coords = {x = ESX.Math.Round(coords.x,1), y = ESX.Math.Round(coords.y,1), z = ESX.Math.Round(coords.z,1)}
     MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE owner = @owner and hash = @hash', {
         ['@owner'] = xPlayer.identifier,
         ['@hash'] = hash
     }, function(results)
         if #results ~= 0 then
-            idVar = results[1].id
-            attachmentGB = results[1].attach
-            MySQL.Async.execute('UPDATE ammunition SET location = @location, owner = @owner WHERE id = @id and hash = @hash', {
-                ['@location'] = json.encode(location[hash].coords),
+            MySQL.Async.execute('UPDATE ammunition SET owner = @owner WHERE id = @id and hash = @hash and weapon_id = @weapon_id', {
                 ['@id'] = results[1].id,
                 ['@owner'] = nil,
+                ['@weapon_id'] = results[1].weapon_id,
                 ['@hash'] = hash
             }, function(results2)
             end)
@@ -68,36 +59,33 @@ AddEventHandler('dp_inventory:weaponLocation', function(coords, item)
     end)
 end)
 
-RegisterNetEvent('dp_inventory:weaponLocationCheck')
-AddEventHandler('dp_inventory:weaponLocationCheck', function(coords, item)
-    local _source = source
-    local hash = GetHashKey(item)
-    MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND id = @id AND location = @location AND attach = @attach', {
+ESX.RegisterServerCallback('dp_inventory:doesWeaponHas', function(source,cb,hash)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
         ['@hash'] = hash,
-        ['@id'] = idVar,
-        ['@attach'] = attachmentGB,
-        ['@location'] = json.encode(location[hash].coords) 
+        ['@owner'] =  xPlayer.identifier
     },function(results)
         if #results ~= 0 then
-            for i=1, #results, 1 do
-                if results[i].location ~= nil then
-                    local DBcoords = json.decode(results[i].location)
-                    TriggerClientEvent('dp_inventory:getdistance', _source, DBcoords, coords, hash, results[i].id)
-                end
+            if results[1].weapon_id then
+                cb(results[1].weapon_id)
+            else
+                cb(false)
             end
+        else
+            cb(false)
         end
     end)
 end)
 
-RegisterNetEvent('dp_inventory:updateOwner')
-AddEventHandler('dp_inventory:updateOwner', function(hash, id)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    MySQL.Async.execute('UPDATE ammunition SET owner = @owner, location = @location WHERE id = @id and hash = @hash', {
-        ['@location'] = nil,
-        ['@id'] = id,
-        ['@owner'] = xPlayer.identifier,
-        ['@hash'] = hash
+AddEventHandler('dp_inventory:weaponID', function(weaponID, identifier)
+    MySQL.Async.execute('UPDATE ammunition SET `owner` = @owner WHERE `weapon_id` = @weapon_id', {
+        ['@owner'] = identifier,
+        ['@weapon_id'] = weaponID,
     }, function(results2)
+        if results2 then
+        else
+            print("[DP_Inventory] [^1ERROR^7] There was an error picing a weapon from the ground")
+        end
     end)
 end)
 
