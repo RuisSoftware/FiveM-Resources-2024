@@ -413,10 +413,7 @@ RegisterNUICallback("DropItem",function(data, cb)
 			 or data.item.name == 'WEAPON_BAT' or data.item.name == 'WEAPON_ADVANCEDRIFLE' or data.item.name == 'WEAPON_APPISTOL' or data.item.name == 'WEAPON_ASSAULTRIFLE'
 			 or data.item.name == 'WEAPON_ASSAULTSHOTGUN' or data.item.name == 'WEAPON_ASSAULTSMG' or data.item.name == 'WEAPON_AUTOSHOTGUN' or data.item.name == 'WEAPON_CARBINERIFLE'
 			 or data.item.name == 'WEAPON_COMBATPISTOL' or data.item.name == 'WEAPON_PUMPSHOTGUN' or data.item.name == 'WEAPON_SMG' then
-				local coords = GetEntityCoords(GetPlayerPed(-1))
-				local forward = GetEntityForwardVector(GetPlayerPed(-1))
-				coords = coords + forward*1.0
-				TriggerServerEvent('dp_inventory:weaponLocation', coords, data.item.name)
+				TriggerServerEvent('dp_inventory:weaponLocation', data.item.name)
 			end
 			TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 		end
@@ -483,6 +480,9 @@ RegisterNUICallback("GiveItem", function(data, cb)
 				end
 			end,GetPlayerServerId(closestPlayer), data.item.name)
 		else
+			if data.item.name == 'idcard' then
+				TriggerServerEvent('license_menu:idCardGiven', GetPlayerServerId(PlayerId()), GetPlayerServerId(closestPlayer))
+			end
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 		end
 		Wait(0)
