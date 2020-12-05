@@ -2,6 +2,8 @@ local currentWeapon
 local currentWeaponSlot
 local currentWepAttachs = {}
 canFire = true
+local firsttime = true
+local weaponKey = nil
 
 RegisterNetEvent('dp_inventory:itemPopUp')
 AddEventHandler('dp_inventory:itemPopUp', function(weapon)
@@ -58,18 +60,18 @@ local weapons = {
         ['grip'] = GetHashKey('COMPONENT_AT_AR_AFGRIP'),
 		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
     },
-    [tostring(GetHashKey('WEAPON_ASSAULTSMG'))] = { 
-        ['mag'] = GetHashKey('COMPONENT_ASSAULTSMG_CLIP_02'),
-        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
-        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
-		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
-    },
-	[tostring(GetHashKey('WEAPON_ASSAULTRIFLE'))] = { 
+    [tostring(GetHashKey('WEAPON_ASSAULTRIFLE'))] = { 
         ['mag'] = GetHashKey('COMPONENT_ASSAULTRIFLE_CLIP_02'),
         ['drummag'] = GetHashKey('COMPONENT_ASSAULTRIFLE_CLIP_03'),
         ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
         ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
         ['grip'] = GetHashKey('COMPONENT_AT_AR_AFGRIP'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    },
+    [tostring(GetHashKey('WEAPON_ASSAULTSMG'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_ASSAULTSMG_CLIP_02'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
 		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
     },
     [tostring(GetHashKey('WEAPON_MICROSMG'))] = { 
@@ -147,64 +149,12 @@ AddEventHandler('dp_inventory:useAttach', function(attach)
     end
 end)
 
-RegisterNetEvent('dp_inventory:checkWeapon')
-AddEventHandler('dp_inventory:checkWeapon', function(item)
-    local coords = GetEntityCoords(GetPlayerPed(-1))
-    TriggerServerEvent('dp_inventory:weaponLocationCheck', coords, item)
-end)
-
-RegisterNetEvent('dp_inventory:getdistance')
-AddEventHandler('dp_inventory:getdistance', function(dbCoords, coords, hash, id)
-    local distnace = GetDistanceBetweenCoords(dbCoords.x, dbCoords.y, dbCoords.z, coords.x, coords.y, coords.z, true)
-    if distnace <= 2 then
-        TriggerServerEvent('dp_inventory:updateOwner',hash, id)
-    end
-end)
-
--- RegisterCommand("intrekken", function(source, args, rawCommand)
---     if currentWeapon ~= nil then
---         local playerPed = PlayerPedId()
---         local hash = GetHashKey(currentWeapon)
---         if args[1] then
--- 			local attach = args[1]
---             for i = 1, #currentWepAttachs do
---                 if currentWepAttachs[i] == attach then
---                     ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
---                         if cb then
---                             table.remove(currentWepAttachs, i)
---                             RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][attach])
---                         else
---                             exports['b1g_notify']:Notify('error', _U("insufficient_space"))
---                         end          
---                     end, currentWepAttachs[i], 1)
---                     return
---                 end
---             end
---             exports['b1g_notify']:Notify('error', _U("no_attachment"))
--- 		else
--- 			for i = 1, #currentWepAttachs do
--- 				if currentWepAttachs[i] ~= nil then
--- 					ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
---                         if cb then
---                             RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring( hash )][currentWepAttachs[i]])
--- 							table.remove(currentWepAttachs, i)
---                         else
---                             exports['b1g_notify']:Notify('error', _U("insufficient_space"))
---                         end          
---                     end, currentWepAttachs[i], 1)
--- 				end
--- 			end
--- 		end
---     else
---         exports['b1g_notify']:Notify('error', _U("no_gun_in_hand"))
---     end
--- end)
-
 Citizen.CreateThread(function()
 	while true do
         Citizen.Wait(0)
-        if IsControlJustPressed(0, 172) and not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) then
+        if IsControlJustPressed(0, 172) and not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) and not removingAttach then
             if currentWeapon ~= nil then
+                removingAttach = true
                 local playerPed = PlayerPedId()
                 local hash = GetHashKey(currentWeapon)
                 for i = 1, #currentWepAttachs do
@@ -223,9 +173,7 @@ Citizen.CreateThread(function()
                     }, function(status)
                         if not status then
                             if currentWepAttachs[i] ~= nil then
-                                print('sd', string.find(currentWepAttachs[i], 'skin'))
                                 if string.find(currentWepAttachs[i], 'skin') == nil then
-                                    print('asdddddddd')
                                     RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
                                     ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
                                     table.remove(currentWepAttachs, i)
@@ -240,41 +188,49 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
 function RemoveWeapon(weapon)
     local checkh = Config.Throwables
     local playerPed = PlayerPedId()
     local hash = GetHashKey(weapon)
-    local wepInfo = { 
-        count = GetAmmoInPedWeapon(playerPed, hash),
-        attach = currentWepAttachs
-    }
-    TriggerServerEvent('dp_inventory:updateAmmoCount', hash, wepInfo)
-    canFire = false
-    disable()
-    if checkh[weapon] == hash then
-        if GetSelectedPedWeapon(playerPed) == hash then
-            ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
-            end, weapon, 1)
+    currentWeapon = nil
+    ESX.TriggerServerCallback('dp_inventory:doesWeaponHas', function(hasWeaponId)
+        if hasWeaponId then
+            weaponKey = hasWeaponId
+        else
+            weaponKey = GenerateWeapon()
         end
-    end
-    if ESX.GetPlayerData().job ~= nil and ESX.GetPlayerData().job.name == 'police' then --and GetWeapontypeGroup(hash) == 416676503 then
-        if not HasAnimDictLoaded("reaction@intimidation@cop@unarmed") then
-            loadAnimDict( "reaction@intimidation@cop@unarmed" )
+        local wepInfo = { 
+            count = GetAmmoInPedWeapon(playerPed, hash),
+            attach = currentWepAttachs,
+            weapon_id = weaponKey
+        }
+        TriggerServerEvent('dp_inventory:updateAmmoCount', hash, wepInfo)
+        canFire = false
+        disable()
+        if checkh[weapon] == hash then
+            if GetSelectedPedWeapon(playerPed) == hash then
+                ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
+                end, weapon, 1)
+            end
         end
-        TaskPlayAnim(playerPed, "reaction@intimidation@cop@unarmed", "outro", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0 )
-		Citizen.Wait(100)
-    else
-        if not HasAnimDictLoaded("reaction@intimidation@1h") then
-            loadAnimDict( "reaction@intimidation@1h" )
+        if ESX.GetPlayerData().job ~= nil and ESX.GetPlayerData().job.name == 'police' then --and GetWeapontypeGroup(hash) == 416676503 then
+            if not HasAnimDictLoaded("reaction@intimidation@cop@unarmed") then
+                loadAnimDict( "reaction@intimidation@cop@unarmed" )
+            end
+            TaskPlayAnim(playerPed, "reaction@intimidation@cop@unarmed", "outro", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0 )
+            Citizen.Wait(100)
+        else
+            if not HasAnimDictLoaded("reaction@intimidation@1h") then
+                loadAnimDict( "reaction@intimidation@1h" )
+            end
+            TaskPlayAnimAdvanced(playerPed, "reaction@intimidation@1h", "outro", GetEntityCoords(playerPed, true), 0, 0, GetEntityHeading(playerPed), 8.0, 3.0, -1, 50, 0, 0, 0)
+            Citizen.Wait(1600)
         end
-        TaskPlayAnimAdvanced(playerPed, "reaction@intimidation@1h", "outro", GetEntityCoords(playerPed, true), 0, 0, GetEntityHeading(playerPed), 8.0, 3.0, -1, 50, 0, 0, 0)
-        Citizen.Wait(1600)
-    end
-    RemoveWeaponFromPed(playerPed, hash)
-	ClearPedTasks(playerPed)
-    canFire = true
-    TriggerEvent('dp_inventory:notification', weapon, _U("weapon_pulled"), 1, false)
+        RemoveWeaponFromPed(playerPed, hash)
+        ClearPedTasks(playerPed)
+        canFire = true
+        TriggerEvent('dp_inventory:notification', weapon, _U("weapon_pulled"), 1, false)
+    end, hash)
 end
 
 function GiveWeapon(weapon)
