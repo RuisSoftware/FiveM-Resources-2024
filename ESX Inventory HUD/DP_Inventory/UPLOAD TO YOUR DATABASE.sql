@@ -19,11 +19,12 @@ CREATE TABLE IF NOT EXISTS `inventory_trunk` (
 CREATE TABLE IF NOT EXISTS `ammunition` (
     `id` bigint unsigned auto_increment PRIMARY KEY,
     `owner` text not null,
+	`original_owner` text not null,
     `hash` text not null,
+	`weapon_id` char(60) NOT NULL,
     `count` int default 0 not null,
     `attach` text not null default '[]',
-	`location` VARCHAR(255) NULL,
-	UNIQUE KEY (`id`)
+	UNIQUE KEY (`weapon_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `grs` (
@@ -86,15 +87,15 @@ INSERT INTO `items` (`name`, `label`, `weight`) VALUES
 	('skin6', 'Orange and black weapon spray', 2),
 	('skin7', 'Light grey weapon spray', 2),
 	('suppressor', 'Suppressor', 2),
-	-- ('ammunition_pistol', 'Pistol Ammo', 10),
-	-- ('ammunition_pistol_large', 'Pistol Ammo Large', 10),
-	-- ('ammunition_rifle', 'Rifle Ammo', 10),
-	-- ('ammunition_rifle_large', 'Rifle Ammo Large', 10),
-	-- ('ammunition_shotgun', 'Shotgun Shells', 10),
+	('ammunition_pistol', 'Pistol Ammo', 10),
+	('ammunition_pistol_large', 'Pistol Ammo Large', 10),
+	('ammunition_rifle', 'Rifle Ammo', 10),
+	('ammunition_rifle_large', 'Rifle Ammo Large', 10),
+	('ammunition_shotgun', 'Shotgun Shells', 10),
 	('ammunition_shotgun_large', 'Shotgun Shells Large', 10),
 	('ammunition_smg', 'SMG Ammo', 10),
 	('ammunition_smg_large', 'SMG Ammo Large', 10),
-	-- ('ammunition_snp', 'Sniper Ammo', 10),
+	('ammunition_snp', 'Sniper Ammo', 10),
 	('ammunition_snp_large', 'Sniper Ammo Large', 10),
 	('ammunition_fireextinguisher', 'Fire Extinguisher Fuel', 10),
 	('bag', 'Bag', 1)
