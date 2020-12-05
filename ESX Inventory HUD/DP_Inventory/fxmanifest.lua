@@ -34,6 +34,7 @@ client_scripts {
 	'client/addons/vault.lua',
 	'client/addons/property.lua',
 	'client/addons/bag.lua',
+	'client/generateWeapon.lua'
 }
 
 server_scripts {
