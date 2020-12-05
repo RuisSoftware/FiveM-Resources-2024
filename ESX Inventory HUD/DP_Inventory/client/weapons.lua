@@ -64,6 +64,14 @@ local weapons = {
         ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
 		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
     },
+	[tostring(GetHashKey('WEAPON_ASSAULTRIFLE'))] = { 
+        ['mag'] = GetHashKey('COMPONENT_ASSAULTRIFLE_CLIP_02'),
+        ['drummag'] = GetHashKey('COMPONENT_ASSAULTRIFLE_CLIP_03'),
+        ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
+        ['scope'] = GetHashKey('COMPONENT_AT_SCOPE_MACRO'),
+        ['grip'] = GetHashKey('COMPONENT_AT_AR_AFGRIP'),
+		['flashlight'] = GetHashKey('COMPONENT_AT_AR_FLSH')
+    },
     [tostring(GetHashKey('WEAPON_MICROSMG'))] = { 
         ['mag'] = GetHashKey('COMPONENT_MICROSMG_CLIP_02'),
         ['suppressor'] = GetHashKey('COMPONENT_AT_AR_SUPP_02'),
