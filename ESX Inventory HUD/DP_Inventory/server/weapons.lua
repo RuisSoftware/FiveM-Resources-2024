@@ -77,6 +77,26 @@ ESX.RegisterServerCallback('dp_inventory:doesWeaponHas', function(source,cb,hash
     end)
 end)
 
+AddEventHandler('dp_inventory:changeWeaponOwner', function(originalOwner, ownerToGet, item)
+    local hash = GetHashKey(item)
+    MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
+        ['@hash'] = hash,
+        ['@owner'] =  originalOwner
+    },function(results)
+        if #results ~= 0 then
+            MySQL.Async.execute('UPDATE ammunition SET `owner` = @owner WHERE `weapon_id` = @weapon_id', {
+                ['@owner'] = ownerToGet,
+                ['@weapon_id'] = result[1].weapon_id,
+            }, function(results2)
+                if results2 then
+                else
+                    print("[DP_Inventory] [^1ERROR^7] There was an error taking a weapon from dead person")
+                end
+            end)
+        end
+    end)
+end)
+
 AddEventHandler('dp_inventory:weaponID', function(weaponID, identifier)
     MySQL.Async.execute('UPDATE ammunition SET `owner` = @owner WHERE `weapon_id` = @weapon_id', {
         ['@owner'] = identifier,
