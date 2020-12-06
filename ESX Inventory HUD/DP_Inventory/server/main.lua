@@ -59,6 +59,11 @@ AddEventHandler("dp_inventory:tradePlayerItem", function(from, target, type, ite
 	if type == "item_standard" then
 		if itemCount > 0 and item.count >= itemCount then
 			if  targetXPlayer.canCarryItem(itemName, itemCount) then
+				if itemName == 'WEAPON_PISTOL' or itemName == 'WEAPON_FLASHLIGHT' or itemName == 'WEAPON_STUNGUN' or itemName == 'WEAPON_KNIFE' or itemName == 'WEAPON_ASSAULTSMG'
+				or itemName == 'WEAPON_BAT' or itemName == 'WEAPON_ADVANCEDRIFLE' or itemName == 'WEAPON_APPISTOL' or itemName == 'WEAPON_ASSAULTRIFLE' or itemName == 'WEAPON_ASSAULTSHOTGUN'
+				or itemName == 'WEAPON_AUTOSHOTGUN' or itemName == 'WEAPON_CARBINERIFLE' or itemName == 'WEAPON_COMBATPISTOL' or itemName == 'WEAPON_PUMPSHOTGUN' or itemName == 'WEAPON_SMG' then
+					TriggerEvent('dp_inventory:changeWeaponOwner', sourceXPlayer.identifier, targetXPlayer.identifier, itemName)
+				end
 				sourceXPlayer.removeInventoryItem(itemName, itemCount)
 				targetXPlayer.addInventoryItem(itemName, itemCount)
 			else
@@ -74,14 +79,6 @@ AddEventHandler("dp_inventory:tradePlayerItem", function(from, target, type, ite
 		if itemCount > 0 and sourceXPlayer.getAccount(itemName).money >= itemCount then
 			sourceXPlayer.removeAccountMoney(itemName, itemCount)
 			targetXPlayer.addAccountMoney(itemName, itemCount)
-		end
-
-	elseif type == "item_weapon" then
-		if not targetXPlayer.hasWeapon(itemName) then
-			sourceXPlayer.removeWeapon(itemName)
-			targetXPlayer.addWeapon(itemName, itemCount)
-		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('weapon_exist_give') })
 		end
 	end
 end)
