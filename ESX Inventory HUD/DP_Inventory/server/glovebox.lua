@@ -209,6 +209,12 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 				for i = 1, #coffres, 1 do
 					if coffres[i].name == item then
 						if (coffres[i].count >= count and count > 0) then
+							if item == 'WEAPON_PISTOL' or item == 'WEAPON_FLASHLIGHT' or item == 'WEAPON_STUNGUN' or item == 'WEAPON_KNIFE' 
+							or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
+							or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
+							or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
+								TriggerEvent('dp_inventory:changeWeaponOwner',plate, xPlayer.identifier, item)
+							end
 							xPlayer.addInventoryItem(item, count)
 						if (coffres[i].count - count) == 0 then
 							table.remove(coffres, i)
@@ -372,6 +378,12 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					store.set("coffres", coffres)
+					if item == 'WEAPON_PISTOL' or item == 'WEAPON_FLASHLIGHT' or item == 'WEAPON_STUNGUN' or item == 'WEAPON_KNIFE' 
+					or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
+					or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
+					or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
+						TriggerEvent('dp_inventory:changeWeaponOwner',xPlayer.identifier, plate, item)
+					end
 					xPlayer.removeInventoryItem(item, count)
 					MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,
