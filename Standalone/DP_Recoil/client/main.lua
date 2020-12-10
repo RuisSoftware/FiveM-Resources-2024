@@ -87,21 +87,9 @@ AddEventHandler('DP_Recoil:usedWeed', function()
 	onWeed = true
 	Citizen.CreateThread(function()
 		while onWeed do
-			print('onWeed nu true')
+			notification("Door de wiet kan je nu slechter richten voor 30 seconden")
 			Wait(6000)
 			onWeed = false
-			print('onWeed nu false')
-		end
-	end)
-end)
-
-RegisterNetEvent('DP_Recoil:usedMeth')
-AddEventHandler('DP_Recoil:usedMeth', function()
-	onMeth = true
-	Citizen.CreateThread(function()
-		while onMeth do
-			Wait(6000)
-			onMeth = false
 		end
 	end)
 end)
@@ -111,11 +99,30 @@ AddEventHandler('DP_Recoil:usedCoke', function()
 	onCoke = true
 	Citizen.CreateThread(function()
 		while onCoke do
+			notification("Door de cocaine kan je nu beter richten voor 30 seconden")
 			Wait(6000)
 			onCoke = false
 		end
 	end)
 end)
+
+RegisterNetEvent('DP_Recoil:usedMeth')
+AddEventHandler('DP_Recoil:usedMeth', function()
+	onMeth = true
+	Citizen.CreateThread(function()
+		while onMeth do
+			notification("Door de meth kan je nu veel slechter richten voor 30 seconden")
+			Wait(6000)
+			onMeth = false
+		end
+	end)
+end)
+
+function notification(m)
+	SetNotificationTextEntry("STRING")
+	AddTextComponentString(m)
+	DrawNotification(false, false)
+end
 
 --[[ AVAILABLE TRIGGERS
 TriggerEvent('DP_Recoil:usedWeed')
