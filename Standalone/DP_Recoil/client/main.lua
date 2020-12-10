@@ -117,4 +117,8 @@ AddEventHandler('DP_Recoil:usedCoke', function()
 	end)
 end)
 
+--[[ AVAILABLE TRIGGERS
 TriggerEvent('DP_Recoil:usedWeed')
+TriggerEvent('DP_Recoil:usedCoke')
+TriggerEvent('DP_Recoil:usedMeth')
+]]--
