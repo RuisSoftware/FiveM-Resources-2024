@@ -1,6 +1,7 @@
 Config = {}
-Config.noDrugsRecoil = false -- also little recoil without drugs
-Config.Multiplier = {noDrugs = 1.0, Weed = 1.5, Cocaine = 0.1, Meth = 4.0, Opium = 3.0}
+Config.noDrugsRecoil = true -- also little recoil without drugs
+Config.Multiplier = {noDrugs = 1.0, Weed = 1.5, Cocaine = 0.5, Meth = 4.0, Opium = 3.0}
+Config.Time = {Weed = 30, Cocaine = 60, Meth = 120, Opium = 100}
 Config.Recoils = {
 	[453432689] = 0.3, -- PISTOL
 	[3219281620] = 0.3, -- PISTOL MK2

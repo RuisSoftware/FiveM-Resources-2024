@@ -98,7 +98,7 @@ AddEventHandler('DP_Recoil:usedWeed', function()
 	Citizen.CreateThread(function()
 		while onWeed do
 			notification("Door de wiet kan je nu slechter richten voor 30 seconden")
-			Wait(6000)
+			Wait(Config.Time.Weed* 1000)
 			onWeed = false
 		end
 	end)
@@ -110,7 +110,7 @@ AddEventHandler('DP_Recoil:usedCoke', function()
 	Citizen.CreateThread(function()
 		while onCoke do
 			notification("Door de cocaine kan je nu beter richten voor 30 seconden")
-			Wait(6000)
+			Wait(Config.Time.Coke* 1000)
 			onCoke = false
 		end
 	end)
@@ -122,7 +122,7 @@ AddEventHandler('DP_Recoil:usedMeth', function()
 	Citizen.CreateThread(function()
 		while onMeth do
 			notification("Door de meth kan je nu veel slechter richten voor 30 seconden")
-			Wait(6000)
+			Wait(Config.Time.Meth* 1000)
 			onMeth = false
 		end
 	end)
@@ -134,7 +134,7 @@ AddEventHandler('DP_Recoil:usedOpium', function()
 	Citizen.CreateThread(function()
 		while onOpium do
 			notification("Door de opium kan je nu veel slechter richten voor 30 seconden")
-			Wait(6000)
+			Wait(Config.Time.Opium* 1000)
 			onOpium = false
 		end
 	end)
