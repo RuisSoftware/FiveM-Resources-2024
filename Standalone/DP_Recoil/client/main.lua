@@ -4,6 +4,7 @@
 onWeed = false
 onCoke = false
 onMeth = false
+onOpium = false
 
 Citizen.CreateThread(function()
 	while true do
@@ -25,6 +26,9 @@ Citizen.CreateThread(function()
 						elseif onMeth then
 							local recoil = pitch+Config.Recoils[wapen]
 							totalRecoil = recoil*Config.Multiplier.Meth
+						elseif onOpium then
+							local recoil = pitch+Config.Recoils[wapen]
+							totalRecoil = recoil*Config.Multiplier.Opium
 						else
 							if Config.noDrugsRecoil then
 								local recoil = pitch+Config.Recoils[wapen]
@@ -48,6 +52,9 @@ Citizen.CreateThread(function()
 								totalRecoil = recoil*Config.Multiplier.Coke
 							elseif onMeth then
 								totalRecoil = recoil*Config.Multiplier.Meth
+							elseif onOpium then
+								local recoil = pitch+Config.Recoils[wapen]
+								totalRecoil = recoil*Config.Multiplier.Opium
 							else
 								if Config.noDrugsRecoil then
 									totalRecoil = recoil*Config.Multiplier.noDrugs
@@ -65,6 +72,9 @@ Citizen.CreateThread(function()
 								totalRecoil = recoil*Config.Multiplier.Coke
 							elseif onMeth then
 								totalRecoil = recoil*Config.Multiplier.Meth
+							elseif onOpium then
+								local recoil = pitch+Config.Recoils[wapen]
+								totalRecoil = recoil*Config.Multiplier.Opium
 							else
 								if Config.noDrugsRecoil then
 									totalRecoil = recoil*Config.Multiplier.noDrugs
@@ -118,6 +128,18 @@ AddEventHandler('DP_Recoil:usedMeth', function()
 	end)
 end)
 
+RegisterNetEvent('DP_Recoil:usedOpium')
+AddEventHandler('DP_Recoil:usedOpium', function()
+	onOpium = true
+	Citizen.CreateThread(function()
+		while onOpium do
+			notification("Door de opium kan je nu veel slechter richten voor 30 seconden")
+			Wait(6000)
+			onOpium = false
+		end
+	end)
+end)
+
 function notification(m)
 	SetNotificationTextEntry("STRING")
 	AddTextComponentString(m)
@@ -128,4 +150,12 @@ end
 TriggerEvent('DP_Recoil:usedWeed')
 TriggerEvent('DP_Recoil:usedCoke')
 TriggerEvent('DP_Recoil:usedMeth')
+TriggerEvent('DP_Recoil:usedOpium')
+
+or from server
+
+TriggerClientEvent('DP_Recoil:usedWeed', source)
+TriggerClientEvent('DP_Recoil:usedCoke', source)
+TriggerClientEvent('DP_Recoil:usedMeth', source)
+TriggerClientEvent('DP_Recoil:usedOpium', source)
 ]]--
