@@ -1,14 +1,11 @@
 # Dutch Players Inventory // ESX 1.2 ONLY
 # Important
  Go to you es_extended/server/main.lua line 423 the event name is esx:onPickup and add after line 430 this code
-    if pickup.name == 'WEAPON_PISTOL' or pickup.name == 'WEAPON_FLASHLIGHT' or pickup.name == 'WEAPON_STUNGUN' or pickup.name == 'WEAPON_KNIFE' 
-    or pickup.name == 'WEAPON_BAT' or pickup.name == 'WEAPON_ADVANCEDRIFLE' or pickup.name == 'WEAPON_APPISTOL' or pickup.name == 'WEAPON_ASSAULTRIFLE'
-    or pickup.name == 'WEAPON_ASSAULTSHOTGUN' or pickup.name == 'WEAPON_ASSAULTSMG' or pickup.name == 'WEAPON_AUTOSHOTGUN' or pickup.name == 'WEAPON_CARBINERIFLE'
-    or pickup.name == 'WEAPON_COMBATPISTOL' or pickup.name == 'WEAPON_PUMPSHOTGUN' or pickup.name == 'WEAPON_SMG' then
-        TriggerClientEvent('dp_inventory:checkWeapon', source, pickup.name)
-    end
+ 				if pickup.weaponID ~= nil then
+					TriggerEvent('dp_inventory:weaponID', pickup.weaponID, xPlayer.identifier)
+				end
 Verry important so when somebody pick the weapon from ground is the same it should like like that after
- ![IMPORTANT](https://imgur.com/6oK9ada.png)
+ ![IMPORTANT](https://imgur.com/XnC2QIk)
     Then go to es_extended/server/functions.lua line 285 and add this
 	if name == 'WEAPON_PISTOL' or name == 'WEAPON_FLASHLIGHT' or name == 'WEAPON_STUNGUN' or name == 'WEAPON_KNIFE' or name == 'WEAPON_BAT' or name == 'WEAPON_ADVANCEDRIFLE' or name == 'WEAPON_APPISTOL' or name == 'WEAPON_ASSAULTRIFLE'
 	or name == 'WEAPON_ASSAULTSHOTGUN' or name == 'WEAPON_ASSAULTSMG' or name == 'WEAPON_AUTOSHOTGUN' or name == 'WEAPON_CARBINERIFLE' or name == 'WEAPON_COMBATPISTOL' or name == 'WEAPON_PUMPSHOTGUN' or name == 'WEAPON_SMG' then
