@@ -9,11 +9,53 @@ itemShopList = {}
 
 ESX.RegisterServerCallback("dp_inventory:getPlayerInventory", function(source, cb, target)
 	local targetXPlayer = ESX.GetPlayerFromId(target)
+	local itemSlotes = {}
 	if targetXPlayer ~= nil then
-		cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout})
+		MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner', {
+			['@owner'] =  targetXPlayer.identifier
+		},function(data)
+			if #data ~= 0 then
+				for i=1, #data do
+					table.insert(itemSlotes, {
+						slot = data[i].slot,
+						item = data[i].weapon
+					})
+				end
+			else
+				itemSlotes = false
+			end
+			cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout, slotes = itemSlotes})
+		end)
 	else
 		cb(nil)
 	end
+end)
+
+RegisterNetEvent('dp_inventory:putInToSlot')
+AddEventHandler('dp_inventory:putInToSlot',function(item, slot)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE weapon = @weapon AND owner = @owner AND slot = @slot', {
+        ['@weapon'] = item,
+		['@owner'] =  xPlayer.identifier,
+		['@slot'] = slot
+	},function(results)
+		if #results == 0 then
+			MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+				['@owner'] = xPlayer.identifier,
+				['@weapon'] = item,
+				['@slot'] = slot,
+			})
+		end
+    end)
+end)
+
+RegisterNetEvent('dp_inventory:removeFromSlot')
+AddEventHandler('dp_inventory:removeFromSlot',function(item, slot)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	MySQL.Sync.execute("DELETE FROM inventory_slote WHERE `owner` = @owner AND weapon = @weapon", {
+		['@owner'] = xPlayer.identifier,
+		['@weapon'] = item,
+	})
 end)
 
 ESX.RegisterServerCallback("dp_inventory:getPlayerInventoryWeight", function(source,cb)
