@@ -495,12 +495,14 @@ RegisterNUICallback("PutIntoFast", function(data, cb)
 	if data.item.slot ~= nil then
 		fastWeapons[data.item.slot] = nil
 	end
+	TriggerServerEvent('dp_inventory:putInToSlot', data.item.name, data.slot)
 	fastWeapons[data.slot] = data.item.name
 	loadPlayerInventory()
 	cb("ok")
 end)
 
 RegisterNUICallback("TakeFromFast", function(data, cb)
+	TriggerServerEvent('dp_inventory:removeFromSlot',data.item.name, data.item.slot)
 	fastWeapons[data.item.slot] = nil
 	if string.find(data.item.name, "WEAPON_", 1) ~= nil and GetSelectedPedWeapon(PlayerPedId()) == GetHashKey(data.item.name) then
 		TriggerEvent('dp_inventory:closeinventory', source)
