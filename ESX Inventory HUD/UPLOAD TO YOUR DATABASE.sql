@@ -26,6 +26,12 @@ CREATE TABLE IF NOT EXISTS `ammunition` (
 	UNIQUE KEY (`id`)
 );
 
+CREATE TABLE IF NOT EXISTS `inventory_slote` (
+    `owner` text not null,
+    `weapon` text not null,
+    `slot` int default 0 not null
+);
+
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0),
