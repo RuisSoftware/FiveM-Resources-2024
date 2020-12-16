@@ -473,7 +473,6 @@ AddEventHandler('dp_inventory:updateAmmoCount', function(hash, wepInfo)
 		['@hash'] = hash,
 		['@count'] = wepInfo.count,
 		['@weapon_id'] = wepInfo.weapon_id,
-		['@weapon_id'] = wepInfo.weapon_id,
 		['@attach'] = json.encode(wepInfo.attach)
 	}, function(results)
 		if results == 0 then
