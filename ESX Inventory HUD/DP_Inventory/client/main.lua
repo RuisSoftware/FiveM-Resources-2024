@@ -166,6 +166,14 @@ function loadItems()
 		ESX.TriggerServerCallback("dp_inventory:getPlayerInventory", function(data)
 			items = {}
 			fastItems = {}
+			slotes = data.slotes
+			if slotes ~= nil then
+				if slotes ~= false then
+					for index=1, #slotes do
+						fastWeapons[slotes[index].slot] = slotes[index].item
+					end
+				end
+			end
 			inventory = data.inventory
 			accounts = data.accounts
 			money = data.money
