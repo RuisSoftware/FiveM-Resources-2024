@@ -19,37 +19,33 @@ CREATE TABLE IF NOT EXISTS `inventory_trunk` (
 CREATE TABLE IF NOT EXISTS `ammunition` (
     `id` bigint unsigned auto_increment PRIMARY KEY,
     `owner` text null,
-	`original_owner` text not null,
     `hash` text not null,
-	`weapon_id` char(60) NOT NULL,
     `count` int default 0 not null,
     `attach` text not null default '[]',
-	UNIQUE KEY (`weapon_id`)
+	`location` VARCHAR(255) NULL,
+	UNIQUE KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `grs` (
-  `cop` varchar(60) NOT NULL,
-  `criminal` varchar(60) NOT NULL,
-  `grs_result` int(11) NOT NULL DEFAULT 0
-) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
-
+CREATE TABLE IF NOT EXISTS `inventory_slote` (
+    `owner` text not null,
+    `weapon` text not null,
+    `slot` int default 0 not null
+);
 
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0),
-	('society_police_black_money', 'Police black money ', 1)
+	('society_police_black_money', 'Police black money ', 1),
 	('society_police_money', 'Police money ', 1)
 ;
-
 ALTER TABLE addon_account_data
+MODIFY owner VARCHAR(60);
+ALTER TABLE addon_inventory_items
 MODIFY owner VARCHAR(60);
 
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Inventory', 0)
 ;
-
-ALTER TABLE addon_inventory_items
-MODIFY owner VARCHAR(60);
 
 INSERT INTO `datastore` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Datastore', 0)
@@ -57,7 +53,6 @@ INSERT INTO `datastore` (`name`, `label`, `shared`) VALUES
 
 -- ONLY ADD MORE WEAPONS IF YOU ARE SURE! ALSO ADD THE NEW WEAPONS IN CONFIG
 INSERT INTO `items` (`name`, `label`, `weight`) VALUES 
-	('otpechatuk', 'Пръстови отпечатаци', 1),
 	('WEAPON_FLASHLIGHT', 'Flashlight', 1),
 	('WEAPON_STUNGUN', 'Taser', 100),
 	('WEAPON_KNIFE', 'Knife', 100),
