@@ -50,7 +50,21 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		HudForceWeaponWheel(false)
 		HudWeaponWheelIgnoreSelection()
-		DisableControlAction(0, 37, true)
+		DisableControlAction(1, 37, true)
+		DisableControlAction(1, 157, true)
+		DisableControlAction(1, 158, true)
+		DisableControlAction(1, 160, true)
+		DisableControlAction(1, 164, true)
+		DisableControlAction(1, 165, true)
+		DisableControlAction(2, 157, true)-- disable changing weapon
+		DisableControlAction(2, 158, true)-- disable changing weapon
+		DisableControlAction(2, 159, true)-- disable changing weapon
+		DisableControlAction(2, 160, true)-- disable changing weapon
+		DisableControlAction(2, 161, true)-- disable changing weapon
+		DisableControlAction(2, 162, true)-- disable changing weapon
+		DisableControlAction(2, 163, true)-- disable changing weapon
+		DisableControlAction(2, 164, true)-- disable changing weapon
+		DisableControlAction(2, 165, true)-- disable changing weapon
 	end
 end)
 
