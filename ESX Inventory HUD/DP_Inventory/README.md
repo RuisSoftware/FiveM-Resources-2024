@@ -8,7 +8,7 @@ Verry important so when somebody pick the weapon from ground is the same it shou
  ![IMPORTANT](https://imgur.com/XnC2QIk.png)
     Then go to es_extended/server/functions.lua line 285 and add this
 	if name == 'WEAPON_PISTOL' or name == 'WEAPON_FLASHLIGHT' or name == 'WEAPON_STUNGUN' or name == 'WEAPON_KNIFE' or name == 'WEAPON_BAT' or name == 'WEAPON_ADVANCEDRIFLE' or name == 'WEAPON_APPISTOL' or name == 'WEAPON_ASSAULTRIFLE'
-	or name == 'WEAPON_ASSAULTSHOTGUN' or name == 'WEAPON_ASSAULTSMG' or name == 'WEAPON_AUTOSHOTGUN' or name == 'WEAPON_CARBINERIFLE' or name == 'WEAPON_COMBATPISTOL' or name == 'WEAPON_PUMPSHOTGUN' or name == 'WEAPON_SMG' then
+	or name == 'WEAPON_ASSAULTSHOTGUN' or name == 'WEAPON_SNIPERRIFLE' or name == 'WEAPON_ASSAULTSMG' or name == 'WEAPON_AUTOSHOTGUN' or name == 'WEAPON_CARBINERIFLE' or name == 'WEAPON_COMBATPISTOL' or name == 'WEAPON_PUMPSHOTGUN' or name == 'WEAPON_SMG' then
 		local hash = GetHashKey(name)
 		MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
 			['@hash'] = hash,
