@@ -38,6 +38,28 @@ end
 ![IMPORTANT](https://imgur.com/Umzssai.png)
 
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
+If you are using another weapon shop we have added a support for that you just simple do this when you are giving the weapon to the player.
+You have to change some names this is an exmaple that i am using just change the attachment table and if you have a value in there that is not an attachment just blacklist it like the tint value in the example
+![Example]
+```lua
+local wepInfo = {}
+wepInfo.count = 100
+wepInfo.weapon_id = exports['DP_Inventory']:GenerateWeapon()
+if cachedData["attachedComponents"] ~= nil then
+	wepInfo.attach = {}
+	for k,v in pairs(cachedData["attachedComponents"]) do
+		if k ~= 'tint' then
+			table.insert(wepInfo.attach, k)
+		end
+	end
+end
+local skin = GetPedWeaponTintIndex(cachedData["ped"], GetHashKey(weaponModel))
+skin = 'skin'..skin
+table.insert(wepInfo.attach, skin)
+TriggerServerEvent('dp_inventory:updateAmmoCount', GetHashKey(weaponModel), wepInfo)
+local addToSlote = true
+TriggerEvent('dp_inventory:addCurrentWeapon', weaponModel, wepInfo, addToSlote)
+```
 Your number 1 inventory for ESX 1.2!
 
 We have edited the original esx_inventoryhud resource from [Trsak](https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/).
