@@ -89,6 +89,19 @@ AddEventHandler('dp_inventory:slotPut', function(item)
 												['@weapon'] = item,
 												['@slot'] = 5,
 											})
+										else
+											MySQL.Sync.execute("DELETE FROM inventory_slote WHERE `owner` = @owner AND slot = @slot", {
+												['@owner'] = xPlayer.identifier,
+												['@slot'] = 5,
+											}, function(succes)
+												if succes then
+													MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+														['@owner'] = xPlayer.identifier,
+														['@weapon'] = item,
+														['@slot'] = 5,
+													})
+												end
+											end)
 										end
 									end)
 								end
