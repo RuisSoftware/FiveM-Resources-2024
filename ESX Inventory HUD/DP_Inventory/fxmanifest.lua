@@ -69,6 +69,10 @@ files {
 	'html/img/items/*.svg'
 }
 
+exports {
+	'GenerateWeapon',
+}
+
 dependencies {
 	'es_extended',
 	'mythic_notify', -- DEPRECATED
