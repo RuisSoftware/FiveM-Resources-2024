@@ -4,7 +4,8 @@
  ```lua
  				if pickup.weaponID ~= nil then
 					TriggerEvent('dp_inventory:weaponID', pickup.weaponID, xPlayer.identifier)
-				end```
+				end
+```
 Verry important so when somebody pick the weapon from ground is the same it should like like that after
  ![IMPORTANT](https://imgur.com/XnC2QIk.png)
     Then go to es_extended/server/functions.lua line 285 and add this
