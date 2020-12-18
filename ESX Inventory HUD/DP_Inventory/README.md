@@ -39,8 +39,7 @@ end
 
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 If you are using another weapon shop we have added a support for that you just simple do this when you are giving the weapon to the player.
-You have to change some names this is an exmaple that i am using just change the attachment table and if you have a value in there that is not an attachment just blacklist it like the tint value in the example
-`Example`
+You have to change some names this is an exmaple that i am using just change the attachment table and if you have a value in there that is not an attachment just blacklist it like the tint value in the `example:`
 ```lua
 local wepInfo = {}
 wepInfo.count = 100
