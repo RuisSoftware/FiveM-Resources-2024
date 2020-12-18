@@ -22,6 +22,15 @@ AddEventHandler('dp_inventory:itemPopUp', function(weapon)
     TriggerEvent('dp_inventory:notification', weapon, _U("weapon_used"), 1, false)
 end)
 
+AddEventHandler('dp_inventory:addCurrentWeapon', function(waeponToAdd, attachments, addToSlote)
+    currentWeapon = waeponToAdd
+    currentWepAttachs = attachments.attach
+    local doBreak = false
+    if addToSlote then
+        TriggerServerEvent('dp_inventory:slotPut', waeponToAdd)
+    end
+end)
+
 RegisterNetEvent('dp_inventory:removeCurrentWeapon')
 AddEventHandler('dp_inventory:removeCurrentWeapon', function()
     if currentWeapon ~= nil then
