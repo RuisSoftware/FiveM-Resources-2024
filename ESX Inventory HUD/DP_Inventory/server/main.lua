@@ -31,6 +31,76 @@ ESX.RegisterServerCallback("dp_inventory:getPlayerInventory", function(source, c
 	end
 end)
 
+RegisterNetEvent('dp_inventory:slotPut')
+AddEventHandler('dp_inventory:slotPut', function(item)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.addInventoryItem(item,1)
+	MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+		['@owner'] =  xPlayer.identifier,
+		['@slot'] = 1
+	},function(results)
+		if #results == 0 then
+			MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+				['@owner'] = xPlayer.identifier,
+				['@weapon'] = item,
+				['@slot'] = 1,
+			})
+		else
+			MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+				['@owner'] =  xPlayer.identifier,
+				['@slot'] = 2
+			},function(results2)
+				if #results2 == 0 then
+					MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+						['@owner'] = xPlayer.identifier,
+						['@weapon'] = item,
+						['@slot'] = 2,
+					})
+				else
+					MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+						['@owner'] =  xPlayer.identifier,
+						['@slot'] = 3
+					},function(results3)
+						if #results3 == 0 then
+							MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+								['@owner'] = xPlayer.identifier,
+								['@weapon'] = item,
+								['@slot'] = 3,
+							})
+						else
+							MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+								['@owner'] =  xPlayer.identifier,
+								['@slot'] = 4
+							},function(results4)
+								if #results4 == 0 then
+									MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+										['@owner'] = xPlayer.identifier,
+										['@weapon'] = item,
+										['@slot'] = 4,
+									})
+								else
+									MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+										['@owner'] =  xPlayer.identifier,
+										['@slot'] = 5
+									},function(results5)
+										if #results5 == 0 then
+											MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+												['@owner'] = xPlayer.identifier,
+												['@weapon'] = item,
+												['@slot'] = 5,
+											})
+										end
+									end)
+								end
+							end)
+						end
+					end)
+				end
+			end)
+		end
+    end)
+end)
+
 RegisterNetEvent('dp_inventory:putInToSlot')
 AddEventHandler('dp_inventory:putInToSlot',function(item, slot)
 	local xPlayer = ESX.GetPlayerFromId(source)
