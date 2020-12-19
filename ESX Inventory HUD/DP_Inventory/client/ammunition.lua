@@ -30,7 +30,7 @@ AddEventHandler('ammunition:useAmmoItem', function(ammo)
 				--print(hash)
 				ESX.TriggerServerCallback('DP_Inventory:getAmmoCount', function(gunInfo)
 					currentWepAttachs = gunInfo.attachments
-				end)
+				end, hash)
 				ESX.TriggerServerCallback('DP_Inventory:doesWeaponHas', function(hasWeaponId)
 					if hasWeaponId then
 						weaponKey = hasWeaponId
