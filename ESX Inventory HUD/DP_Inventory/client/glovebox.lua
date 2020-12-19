@@ -10,8 +10,8 @@ local entityWorld = nil
 local globalplate = nil
 local lastChecked = 0
 
-RegisterNetEvent("dp_inventory_glovebox:setOwnedVehicle")
-AddEventHandler("dp_inventory_glovebox:setOwnedVehicle", function(vehicle)
+RegisterNetEvent("DP_Inventory_glovebox:setOwnedVehicle")
+AddEventHandler("DP_Inventory_glovebox:setOwnedVehicle", function(vehicle)
 	vehiclePlate = vehicle
 end)
 
@@ -52,7 +52,7 @@ function openGlovebox()
 			if vPlate == vFront then
 				myVeh = true
 			elseif lastChecked < GetGameTimer() - 60000 then
-				TriggerServerEvent("dp_inventory_glovebox:getOwnedVehicle")
+				TriggerServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
 				lastChecked = GetGameTimer()
 				Wait(2000)
 				for i = 1, #vehiclePlate do
@@ -143,15 +143,15 @@ end)
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded", function(xPlayer)
 	PlayerData = xPlayer
-	TriggerServerEvent("dp_inventory_glovebox:getOwnedVehicle")
+	TriggerServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
 function OpenCoffresInventoryMenu(plate, max, myVeh)
-	ESX.TriggerServerCallback("dp_inventory_glovebox:getInventoryV", function(inventory)
+	ESX.TriggerServerCallback("DP_Inventory_glovebox:getInventoryV", function(inventory)
 	text = _U("glovebox_info", plate, (inventory.weight / 100), (max / 100))
 	data = {plate = plate, max = max, myVeh = myVeh, text = text}
-	TriggerEvent("dp_inventory:openGloveboxInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
+	TriggerEvent("DP_Inventory:openGloveboxInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
 	end, plate)
 end
 

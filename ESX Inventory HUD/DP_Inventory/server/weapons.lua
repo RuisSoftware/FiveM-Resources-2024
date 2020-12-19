@@ -1,4 +1,4 @@
-ESX.RegisterServerCallback('dp_inventory:removeItem', function(source,cb, item)
+ESX.RegisterServerCallback('DP_Inventory:removeItem', function(source,cb, item)
     local xPlayer = ESX.GetPlayerFromId(source)
     local count = xPlayer.getInventoryItem(item).count
     if count >= 1 then
@@ -9,7 +9,7 @@ ESX.RegisterServerCallback('dp_inventory:removeItem', function(source,cb, item)
     end
 end)
 
-ESX.RegisterServerCallback('dp_inventory:giveWeapon', function(source, cb, targedId, item)
+ESX.RegisterServerCallback('DP_Inventory:giveWeapon', function(source, cb, targedId, item)
     local xPlayer = ESX.GetPlayerFromId(source)
     local xTarged = ESX.GetPlayerFromId(targedId)
     local hash = GetHashKey(item)
@@ -38,7 +38,7 @@ ESX.RegisterServerCallback('dp_inventory:giveWeapon', function(source, cb, targe
     end
 end)
 
-AddEventHandler('dp_inventory:changeWeaponOwner', function(originalOwner, ownerToGet, item)
+AddEventHandler('DP_Inventory:changeWeaponOwner', function(originalOwner, ownerToGet, item)
     local hash = GetHashKey(item)
     MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
         ['@hash'] = hash,
@@ -58,7 +58,7 @@ AddEventHandler('dp_inventory:changeWeaponOwner', function(originalOwner, ownerT
     end)
 end)
 
-ESX.RegisterServerCallback('dp_inventory:doesWeaponHas', function(source,cb,hash)
+ESX.RegisterServerCallback('DP_Inventory:doesWeaponHas', function(source,cb,hash)
     local xPlayer = ESX.GetPlayerFromId(source)
     MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
         ['@hash'] = hash,
@@ -76,7 +76,7 @@ ESX.RegisterServerCallback('dp_inventory:doesWeaponHas', function(source,cb,hash
     end)
 end)
 
-AddEventHandler('dp_inventory:weaponID', function(weaponID, identifier)
+AddEventHandler('DP_Inventory:weaponID', function(weaponID, identifier)
     MySQL.Async.execute('UPDATE ammunition SET `owner` = @owner WHERE `weapon_id` = @weapon_id', {
         ['@owner'] = identifier,
         ['@weapon_id'] = weaponID,
@@ -101,4 +101,83 @@ MySQL.ready(function()
             end
         end
     end)
+end)
+
+Citizen.CreateThread(function()
+	for i = 1, #Config.Attachments do
+		ESX.RegisterUsableItem(Config.Attachments[i], function(source)
+			TriggerClientEvent("DP_Inventory:useAttach", source, Config.Attachments[i])
+		end)
+	end
+end)
+
+Citizen.CreateThread(function()
+	Citizen.Wait(10)
+	MySQL.Async.fetchAll('SELECT * FROM items WHERE LCASE(name) LIKE \'%weapon_%\'', {}, function(results)
+		for k, v in pairs(results) do
+			ESX.RegisterUsableItem(v.name, function(source)
+				TriggerClientEvent('DP_Inventory:itemPopUp', source, v.name)
+			end)
+		end
+	end)
+end)
+
+RegisterServerEvent('DP_Inventory:updateAmmoCount')
+AddEventHandler('DP_Inventory:updateAmmoCount', function(hash, wepInfo)
+	local player = ESX.GetPlayerFromId(source)
+	for i=1, #wepInfo.attach do
+		if wepInfo.attach[i] ~= nil then
+			if wepInfo.attach[i] == 'skin' then
+				table.remove(wepInfo.attach,i)
+			end
+		end
+	end
+	MySQL.Async.execute('UPDATE ammunition SET count = @count, attach = @attach WHERE hash = @hash AND owner = @owner and weapon_id = @weapon_id', {
+		['@owner'] = player.identifier,
+		['@hash'] = hash,
+		['@count'] = wepInfo.count,
+		['@weapon_id'] = wepInfo.weapon_id,
+		['@attach'] = json.encode(wepInfo.attach)
+	}, function(results)
+		if results == 0 then
+			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach, weapon_id, original_owner) VALUES (@owner, @hash, @count, @attach, @weapon_id, @original_owner)', {
+				['@owner'] = player.identifier,
+				['@hash'] = hash,
+				['@original_owner'] = player.identifier,
+				['@count'] = wepInfo.count,
+				['@weapon_id'] = wepInfo.weapon_id,
+				['@attach'] = json.encode(wepInfo.attach)
+			})
+		end
+	end)
+end)
+
+ESX.RegisterServerCallback('DP_Inventory:isWeaponNumberTaken', function(source, cb, weapon)
+	MySQL.Async.fetchAll('SELECT 1 FROM ammunition WHERE weapon_id = @weapon_id', {
+		['@weapon_id'] = weapon
+	}, function(result)
+		cb(result[1] ~= nil)
+	end)
+end)
+
+ESX.RegisterServerCallback('DP_Inventory:getAmmoCount', function(source, cb, hash)
+	local player = ESX.GetPlayerFromId(source)
+	MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE owner = @owner and hash = @hash', {
+		['@owner'] = player.identifier,
+		['@hash'] = hash
+	}, function(results)
+		if #results == 0 then
+			local cbResult = {
+				ammoCount = nil,
+				attachments = {}
+			}
+			cb(cbResult)
+		else
+			local cbResult = {
+				ammoCount = results[1].count,
+				attachments = json.decode(results[1].attach)
+			}
+			cb(cbResult)
+		end
+	end)
 end)

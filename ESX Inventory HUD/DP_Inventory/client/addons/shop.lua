@@ -1,5 +1,98 @@
 local shopData = nil
 
+--[[RegisterKey('keyboard', 'E', 
+	function()
+	end,
+	-- on release
+	function()
+		player = PlayerPedId()
+		coords = GetEntityCoords(player)
+		if not IsPlayerDead(player) then
+			if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInDrugShopZone(coords) or IsInIlegalShopZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInShopNightclubZone(coords) or IsInPoliceShopZone(coords) or IsInGroothandelSupermarktZone(coords) then
+				if IsInRegularShopZone(coords) then
+					OpenShopInv('regular')
+				end
+				
+				if IsInIlegalShopZone(coords) then
+					if Config.IllegalshopOpen == true then
+						OpenShopInv('ilegal')
+					else
+						if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
+							OpenShopInv('ilegal')
+						else
+							exports['mythic_notify']:DoHudText('error', _U('no_acces'))
+						end
+					end
+				end
+				
+				if Config.useAdvancedShop == true then
+					if IsInGroothandelSupermarktZone(coords) then
+						ESX.TriggerServerCallback('DP_Inventory:heeftSupermarkt', function(hasWeaponLicense)
+							if hasWeaponLicense then
+								OpenShopInv('groothandel_supermarkt')
+							else
+								exports['mythic_notify']:DoHudText('error', 'Je beheert geen eigen winkel')
+							end
+						end, GetPlayerServerId(PlayerId()))
+					end
+				end
+				
+				if IsInRobsLiquorZone(coords) then
+					OpenShopInv('robsliquor')
+				end
+				
+				if IsInYouToolZone(coords) then
+					OpenShopInv('youtool')
+				end
+				
+				if IsInPrisonShopZone(coords) then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
+						OpenShopInv('prison')
+					end
+				end
+				
+				if IsInDrugShopZone(coords) then
+					OpenShopInv('drugs')
+				end
+				
+				if IsInWeaponShopZone(coords) then
+					if Config.UseLicense == true then
+						ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+							if hasWeaponLicense then
+								OpenShopInv('weaponshop')
+							else
+								exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+							end
+						end, GetPlayerServerId(PlayerId()), Config.License.Weapon)
+					else
+						OpenShopInv('weaponshop')
+					end
+				end
+				
+				if IsInPoliceShopZone(coords) then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Police and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradePolice then
+						OpenShopInv('policeshop')
+					end
+				end
+				
+				if IsInShopNightclubZone(coords) then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeNightclub then
+						OpenShopInv('nightclubshop')
+					end
+				end
+				
+				if IsInBlackMarketZone(coords) then
+					if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeMafia then
+						OpenShopInv('blackmarket')
+					end
+				end
+				
+			end
+		end
+	end
+)]]
+
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
@@ -8,18 +101,18 @@ Citizen.CreateThread(function()
 		if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInDrugShopZone(coords) or IsInIlegalShopZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInShopNightclubZone(coords) or IsInPoliceShopZone(coords) then
 			if IsInRegularShopZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					OpenShopInv("regular")
+					OpenShopInv('regular')
 					Citizen.Wait(2000)
 				end
 			end
 			if IsInIlegalShopZone(coords) then
 				if IsControlJustReleased(0, 38) then
 					if Config.IllegalshopOpen == true then
-						OpenShopInv("ilegal")
+						OpenShopInv('ilegal')
 						Citizen.Wait(2000)
 					else
 						if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
-							OpenShopInv("ilegal")
+							OpenShopInv('ilegal')
 							Citizen.Wait(2000)
 						else
 							exports['mythic_notify']:DoHudText('error', _U('no_acces'))
@@ -27,29 +120,40 @@ Citizen.CreateThread(function()
 					end
 				end
 			end
+			if Config.useAdvancedShop == true then
+				if IsInGroothandelSupermarktZone(coords) then
+					ESX.TriggerServerCallback('DP_Inventory:heeftSupermarkt', function(hasWeaponLicense)
+						if hasWeaponLicense then
+							OpenShopInv('groothandel_supermarkt')
+						else
+							exports['mythic_notify']:DoHudText('error', 'Je beheert geen eigen winkel')
+						end
+					end, GetPlayerServerId(PlayerId()))
+				end
+			end
 			if IsInRobsLiquorZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					OpenShopInv("robsliquor")
+					OpenShopInv('robsliquor')
 					Citizen.Wait(2000)
 				end
 			end
 			if IsInYouToolZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					OpenShopInv("youtool")
+					OpenShopInv('youtool')
 					Citizen.Wait(2000)
 				end
 			end
 			if IsInPrisonShopZone(coords) then
 				if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 					if IsControlJustReleased(0, 38) then
-						OpenShopInv("prison")
+						OpenShopInv('prison')
 					Citizen.Wait(2000)
 					end
 				end
 			end
 			if IsInDrugShopZone(coords) then
 				if IsControlJustReleased(0, 38) then
-					OpenShopInv("drugs")
+					OpenShopInv('drugs')
 					Citizen.Wait(2000)
 				end
 			end
@@ -58,14 +162,14 @@ Citizen.CreateThread(function()
 					if Config.UseLicense == true then
 						ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 							if hasWeaponLicense then
-								OpenShopInv("weaponshop")
+								OpenShopInv('weaponshop')
 								Citizen.Wait(2000)
 							else
 								exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
 							end
 						end, GetPlayerServerId(PlayerId()), Config.License.Weapon)
 					else
-						OpenShopInv("weaponshop")
+						OpenShopInv('weaponshop')
 						Citizen.Wait(2000)
 					end
 				end
@@ -73,7 +177,7 @@ Citizen.CreateThread(function()
 			if IsInPoliceShopZone(coords) then
 				if IsControlJustReleased(0, 38) then
 					if ESX.GetPlayerData().job.name == Config.InventoryJob.Police and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradePolice then
-						OpenShopInv("policeshop")
+						OpenShopInv('policeshop')
 						Citizen.Wait(2000)
 					end
 				end
@@ -81,7 +185,7 @@ Citizen.CreateThread(function()
 			if IsInShopNightclubZone(coords) then
 				if IsControlJustReleased(0, 38) then
 					if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeNightclub then
-						OpenShopInv("nightclubshop")
+						OpenShopInv('nightclubshop')
 						Citizen.Wait(2000)
 					end
 				end
@@ -89,7 +193,7 @@ Citizen.CreateThread(function()
 			if IsInBlackMarketZone(coords) then
 				if IsControlJustReleased(0, 38) then
 					if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeMafia then
-						OpenShopInv("blackmarket")
+						OpenShopInv('blackmarket')
 						Citizen.Wait(2000)
 					end
 				end
@@ -101,32 +205,32 @@ Citizen.CreateThread(function()
 end)
 
 function OpenShopInv(shoptype)
-	text = _("store")
+	text = _('store')
 	data = {text = text}
 	inventory = {}
-	ESX.TriggerServerCallback("dp_inventory:getShopItems", function(shopInv)
+	ESX.TriggerServerCallback('DP_Inventory:getShopItems', function(shopInv)
 		for i = 1, #shopInv, 1 do
 			table.insert(inventory, shopInv[i])
 		end
-		TriggerEvent("dp_inventory:openShopInventory", data, inventory)
+		TriggerEvent('DP_Inventory:openShopInventory', data, inventory)
 	end, shoptype)
 end
 
-RegisterNetEvent("dp_inventory:OpenCustomShopInventory")
-AddEventHandler("dp_inventory:OpenCustomShopInventory", function(type, shopinventory)
-	text = _("store")
+RegisterNetEvent('DP_Inventory:OpenCustomShopInventory')
+AddEventHandler('DP_Inventory:OpenCustomShopInventory', function(type, shopinventory)
+	text = _('store')
 	data = {text = text}
 	inventory = {}
-	ESX.TriggerServerCallback("dp_inventory:getCustomShopItems", function(shopInv)
+	ESX.TriggerServerCallback('DP_Inventory:getCustomShopItems', function(shopInv)
 		for i = 1, #shopInv, 1 do
 			table.insert(inventory, shopInv[i])
 		end
-		TriggerEvent("dp_inventory:openShopInventory", data, inventory)
+		TriggerEvent('DP_Inventory:openShopInventory', data, inventory)
 	end, type, shopinventory)
 end)
 
-RegisterNetEvent("dp_inventory:openShopInventory")
-AddEventHandler("dp_inventory:openShopInventory", function(data, inventory)
+RegisterNetEvent('DP_Inventory:openShopInventory')
+AddEventHandler('DP_Inventory:openShopInventory', function(data, inventory)
 	setShopInventoryData(data, inventory, weapons)
 	openShopInventory()
 end)
@@ -134,12 +238,12 @@ end)
 function setShopInventoryData(data, inventory)
 	shopData = data
 	SendNUIMessage({
-		action = "setInfoText",
+		action = 'setInfoText',
 		text = data.text
 	})
 	items = {}
 	SendNUIMessage({
-		action = "setShopInventoryItems",
+		action = 'setShopInventoryItems',
 		itemList = inventory
 	})
 end
@@ -148,26 +252,26 @@ function openShopInventory()
 	loadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
-		action = "display",
-		type = "shop"
+		action = 'display',
+		type = 'shop'
 	})
 	SetNuiFocus(true, true)
 end
 
-RegisterNUICallback("TakeFromShop", function(data, cb)
+RegisterNUICallback('TakeFromShop', function(data, cb)
 	if IsPedSittingInAnyVehicle(playerPed) then
 		return
 	end
-	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("dp_inventory:SellItemToPlayer", GetPlayerServerId(PlayerId()), data.item.type, data.item.name, tonumber(data.number))
+	if type(data.number) == 'number' and math.floor(data.number) == data.number then
+		TriggerServerEvent('DP_Inventory:SellItemToPlayer', GetPlayerServerId(PlayerId()), data.item.type, data.item.name, tonumber(data.number))
 	end
 	Wait(150)
 	loadPlayerInventory()
-	cb("ok")
+	cb('ok')
 end)
 
-RegisterNetEvent("dp_inventory:AddAmmoToWeapon")
-AddEventHandler("dp_inventory:AddAmmoToWeapon", function(hash, amount)
+RegisterNetEvent('DP_Inventory:AddAmmoToWeapon')
+AddEventHandler('DP_Inventory:AddAmmoToWeapon', function(hash, amount)
 	AddAmmoToPed(PlayerPedId(), hash, amount)
 end)
 
@@ -211,6 +315,16 @@ function IsInRobsLiquorZone(coords)
 	return false
 end
 
+function IsInGroothandelSupermarktZone(coords)
+	GroothandelSupermarkt = Config.Shops.GroothandelSupermarkt.Locations
+	for i = 1, #GroothandelSupermarkt, 1 do
+		if GetDistanceBetweenCoords(coords, GroothandelSupermarkt[i].x, GroothandelSupermarkt[i].y, GroothandelSupermarkt[i].z, true) < 1.5 then
+			return true
+		end
+	end
+	return false
+end
+
 function IsInYouToolZone(coords)
 	YouTool = Config.Shops.YouTool.Locations
 	for i = 1, #YouTool, 1 do
@@ -240,7 +354,6 @@ function IsInWeaponShopZone(coords)
 	end
 	return false
 end
-
 
 function IsInPoliceShopZone(coords)
 	PoliceShop = Config.Shops.PoliceShop.Locations
@@ -290,6 +403,11 @@ Citizen.CreateThread(function()
 			CreateBlip(vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z ), _U('regular_shop_name'), 3.0, Config.Color, Config.ShopBlipID)
 		end
 	end
+	if Config.ShowGroothandelSupermarktBlip then
+		for k, v in pairs(Config.Shops.GroothandelSupermarkt.Locations) do
+			CreateBlip(vector3(Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z ), _U('regular_shop_name'), 3.0, Config.Color, Config.ShopBlipID)
+		end
+	end
 
 	if Config.ShowRobsLiquorBlip then
 		for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
@@ -333,7 +451,7 @@ Citizen.CreateThread(function()
 		end
 	end
 
-	if Config.ShowDrugMarketBlip then
+	if Config.ShowDrugShopBlip then
 		for k, v in pairs(Config.Shops.DrugShop.Locations) do
 			CreateBlip(vector3(Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z), _U('drug_shop_name'), 3.0, Config.WeaponColor, Config.DrugShopBlipID)
 		end
@@ -358,11 +476,25 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
 					near = true
+				end
+			end
+			if Config.useAdvancedShop == true then
+				for k, v in pairs(Config.Shops.GroothandelSupermarkt.Locations) do
+					local distance = GetDistanceBetweenCoords(coords, Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z, true)
+					if distance < 10 then
+						DrawMarker(27, Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
+						if distance < 3.0 then
+							DrawText3Ds(Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z + 1, _U('open_shop'))
+							near = true
+							break
+						end
+						near = true
+					end
 				end
 			end
 			for k, v in pairs(Config.Shops.IlegalShop.Locations) do
@@ -370,7 +502,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -382,7 +514,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -394,7 +526,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -406,7 +538,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -418,7 +550,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -430,7 +562,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -442,7 +574,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -454,7 +586,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -466,7 +598,7 @@ Citizen.CreateThread(function()
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z + 1, _U("open_shop"))
+						DrawText3Ds(Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -534,11 +666,11 @@ Citizen.CreateThread(function()
 		end
 		if isInMarker and not hasAlreadyEnteredMarker then
 			hasAlreadyEnteredMarker = true
-			TriggerEvent('dp_inventory:hasEnteredMarker', currentZone)
+			TriggerEvent('DP_Inventory:hasEnteredMarker', currentZone)
 		end
 		if not isInMarker and hasAlreadyEnteredMarker then
 			hasAlreadyEnteredMarker = false
-			TriggerEvent('dp_inventory:hasExitedMarker', lastZone)
+			TriggerEvent('DP_Inventory:hasExitedMarker', lastZone)
 		end
 		if letSleep then
 			Citizen.Wait(500)
@@ -546,7 +678,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
-AddEventHandler('dp_inventory:hasEnteredMarker', function(zone)
+AddEventHandler('DP_Inventory:hasEnteredMarker', function(zone)
 	currentAction     = 'shop_menu'
 	currentActionMsg  = _U('shop_press_menu')
 	currentActionData = {zone = zone}
@@ -563,7 +695,7 @@ function OpenBuyLicenseMenu()
 	},
 	function (data, menu)
 		if data.current.value == 'yes' then
-			ESX.TriggerServerCallback('dp_inventory:buyLicense', function(bought)
+			ESX.TriggerServerCallback('DP_Inventory:buyLicense', function(bought)
 				if bought then
 					menu.close()
 				end
@@ -584,7 +716,7 @@ function DrawText3Ds(x, y, z, text)
 		SetTextProportional(1)
 		SetTextColour(255, 255, 255, 215)
 		SetTextOutline()
-		SetTextEntry("STRING")
+		SetTextEntry('STRING')
 		SetTextCentre(1)
 		AddTextComponentString(text)
 		DrawText(_x,_y)
@@ -597,7 +729,7 @@ function CreateBlip(coords, text, radius, color, sprite)
 	SetBlipColour(blip, color)
 	SetBlipScale(blip, 0.6)
 	SetBlipAsShortRange(blip, true)
-	BeginTextCommandSetBlipName("STRING")
+	BeginTextCommandSetBlipName('STRING')
 	AddTextComponentString(text)
 	EndTextCommandSetBlipName(blip)
 end

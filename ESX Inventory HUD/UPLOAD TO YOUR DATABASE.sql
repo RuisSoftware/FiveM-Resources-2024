@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `ammunition` (
 	UNIQUE KEY (`id`)
 );
 
-CREATE TABLE IF NOT EXISTS `inventory_slote` (
+CREATE TABLE IF NOT EXISTS `inventory_hotbar` (
     `owner` text not null,
-    `weapon` text not null,
+    `item` text not null,
     `slot` int default 0 not null
 );
 
@@ -43,15 +43,9 @@ MODIFY owner VARCHAR(60);
 ALTER TABLE addon_inventory_items
 MODIFY owner VARCHAR(60);
 
-ALTER TABLE addon_account_data
-MODIFY owner VARCHAR(60);
-
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Inventory', 0)
 ;
-
-ALTER TABLE addon_inventory_items
-MODIFY owner VARCHAR(60);
 
 INSERT INTO `datastore` (`name`, `label`, `shared`) VALUES
 	('bag', 'Bag Datastore', 0)

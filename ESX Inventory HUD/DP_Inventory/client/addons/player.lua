@@ -11,13 +11,13 @@ AddEventHandler( "onResourceStop", function(resource)
 	end
 end)
 
-RegisterNetEvent("dp_inventory:openPlayerInventory")
-AddEventHandler("dp_inventory:openPlayerInventory", function(target, playerName)
+RegisterNetEvent("DP_Inventory:openPlayerInventory")
+AddEventHandler("DP_Inventory:openPlayerInventory", function(target, playerName)
 	targetPlayer = target
 	targetPlayerName = playerName
 	setPlayerInventoryData()
 	openPlayerInventory()
-	TriggerServerEvent('dp_inventory:disableTargetInv', target)
+	TriggerServerEvent('DP_Inventory:disableTargetInv', target)
 end)
 
 Citizen.CreateThread(function()
@@ -41,7 +41,7 @@ Citizen.CreateThread(function()
 								prop = {},
 							}, function(status)
 								if not status then
-									TriggerEvent("dp_inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
+									TriggerEvent("DP_Inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
 								end
 							end)
 						else
@@ -64,7 +64,7 @@ Citizen.CreateThread(function()
 							prop = {},
 						}, function(status)
 							if not status then
-								TriggerEvent("dp_inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
+								TriggerEvent("DP_Inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
 							end
 						end)  
 					else
@@ -81,7 +81,7 @@ function refreshPlayerInventory()
 end
 
 function setPlayerInventoryData()
-	ESX.TriggerServerCallback("dp_inventory:getPlayerInventory", function(data)
+	ESX.TriggerServerCallback("DP_Inventory:getPlayerInventory", function(data)
 		SendNUIMessage({
 			action = "setInfoText",
 			text = "<strong>" .. _U("player_inventory") .. "</strong><br>" .. targetPlayerName .. " (" .. targetPlayer .. ")"
@@ -165,7 +165,7 @@ RegisterNUICallback("PutIntoPlayer", function(data, cb)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
-		TriggerServerEvent("dp_inventory:tradePlayerItem", GetPlayerServerId(PlayerId()), targetPlayer, data.item.type, data.item.name, count)
+		TriggerServerEvent("DP_Inventory:tradePlayerItem", GetPlayerServerId(PlayerId()), targetPlayer, data.item.type, data.item.name, count)
 	end
 	Wait(250)
 	refreshPlayerInventory()
@@ -182,7 +182,7 @@ RegisterNUICallback("TakeFromPlayer", function(data, cb)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
-		TriggerServerEvent("dp_inventory:tradePlayerItem", targetPlayer, GetPlayerServerId(PlayerId()), data.item.type, data.item.name, count)
+		TriggerServerEvent("DP_Inventory:tradePlayerItem", targetPlayer, GetPlayerServerId(PlayerId()), data.item.type, data.item.name, count)
 	end
 	Wait(250)
 	refreshPlayerInventory()

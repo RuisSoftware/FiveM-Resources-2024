@@ -1,12 +1,12 @@
-RegisterNetEvent("dp_inventory:openVaultInventory")
-AddEventHandler("dp_inventory:openVaultInventory", function(data)
+RegisterNetEvent("DP_Inventory:openVaultInventory")
+AddEventHandler("DP_Inventory:openVaultInventory", function(data)
 	setVaultInventoryData(data)
 	openVaultInventory()
 end)
 
 function refreshVaultInventory()
 	data = getMonsterVaultLicense()
-	ESX.TriggerServerCallback("dp_inventory:getVaultInventory", function(inventory)
+	ESX.TriggerServerCallback("DP_Inventory:getVaultInventory", function(inventory)
 		setVaultInventoryData(inventory)
 	end, data, true)
 end
@@ -93,14 +93,14 @@ RegisterNUICallback("PutIntoVault", function(data, cb)
 		local count = 0
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
-			TriggerServerEvent("dp_inventory:putItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
+			TriggerServerEvent("DP_Inventory:putItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
 		else
 			if data.number > data.item.count or data.number == 0 then
 				count = tonumber(data.item.count)
 			else
 				count = tonumber(data.number)
 			end
-			TriggerServerEvent("dp_inventory:putItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
+			TriggerServerEvent("DP_Inventory:putItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
 		end
 	end
 	Wait(0)
@@ -121,7 +121,7 @@ RegisterNUICallback("TakeFromVault", function(data, cb)
 		else
 			count = tonumber(data.number)
 		end
-		TriggerServerEvent("dp_inventory:getItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
+		TriggerServerEvent("DP_Inventory:getItem", --[[ESX.GetPlayerData().identifier,--]] vaultType, data.item.type, data.item.name, count)
 	end
 	Wait(0)
 	refreshVaultInventory()

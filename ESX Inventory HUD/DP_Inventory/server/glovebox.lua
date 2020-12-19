@@ -90,12 +90,12 @@ function GetSharedDataStoreGlovebox(plate)
 	return SharedDataStores[plate]
 end
 
-AddEventHandler("dp_inventory_glovebox:GetSharedDataStoreGlovebox", function(plate, cb)
+AddEventHandler("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", function(plate, cb)
 	cb(GetSharedDataStoreGlovebox(plate))
 end)
 
-RegisterServerEvent("dp_inventory_glovebox:getOwnedVehicle")
-AddEventHandler("dp_inventory_glovebox:getOwnedVehicle", function()
+RegisterServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
+AddEventHandler("DP_Inventory_glovebox:getOwnedVehicle", function()
 	local vehicules = {}
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
@@ -109,7 +109,7 @@ AddEventHandler("dp_inventory_glovebox:getOwnedVehicle", function()
 				table.insert(vehicules, {plate = vehicle.plate})
 			end
 		end
-		TriggerClientEvent("dp_inventory_glovebox:setOwnedVehicle", _source, vehicules)
+		TriggerClientEvent("DP_Inventory_glovebox:setOwnedVehicle", _source, vehicules)
 	end)
 end)
 
@@ -144,7 +144,7 @@ end
 
 function getTotalInventoryWeightGlovebox(plate)
 	local total
-	TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+	TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 		local W_weapons = getInventoryWeightGlovebox(store.get("weapons") or {})
 		local W_coffres = getInventoryWeightGlovebox(store.get("coffres") or {})
 		local W_blackMoney = 0
@@ -162,8 +162,8 @@ function getTotalInventoryWeightGlovebox(plate)
 	return total
 end
 
-ESX.RegisterServerCallback("dp_inventory_glovebox:getInventoryV", function(source, cb, plate)
-	TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+ESX.RegisterServerCallback("DP_Inventory_glovebox:getInventoryV", function(source, cb, plate)
+	TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 		local blackMoney = 0
 		local cashMoney = 0
 		local items = {}
@@ -196,15 +196,15 @@ ESX.RegisterServerCallback("dp_inventory_glovebox:getInventoryV", function(sourc
 	end)
 end)
 
-RegisterServerEvent("dp_inventory_glovebox:getItem")
-AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, count, max, owned)
+RegisterServerEvent("DP_Inventory_glovebox:getItem")
+AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, count, max, owned)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 
 	if type == "item_standard" then
 		local targetItem = xPlayer.getInventoryItem(item)
 		if xPlayer.canCarryItem(item, count) then
-			TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+			TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 				local coffres = (store.get("coffres") or {})
 				for i = 1, #coffres, 1 do
 					if coffres[i].name == item then
@@ -213,7 +213,7 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 							or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
 							or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
 							or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
-								TriggerEvent('dp_inventory:changeWeaponOwner',plate, xPlayer.identifier, item)
+								TriggerEvent('DP_Inventory:changeWeaponOwner',plate, xPlayer.identifier, item)
 							end
 							xPlayer.addInventoryItem(item, count)
 						if (coffres[i].count - count) == 0 then
@@ -255,7 +255,7 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 
 				text = _U("glovebox_info", plate, (weight / 100), (max / 100))
 				data = {plate = plate, max = max, myVeh = owned, text = text}
-				TriggerClientEvent("dp_inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
+				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			end)
 		else
 			TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'false', text = _U("player_inv_no_space") })
@@ -263,7 +263,7 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 	end
 
 	if type == "item_account" then
-		TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+		TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 			local blackMoney = store.get("black_money")
 			if (blackMoney[1].amount >= count and count > 0) then
 				blackMoney[1].amount = blackMoney[1].amount - count
@@ -289,7 +289,7 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 
 				text = _U("glovebox_info", plate, (weight / 100), (max / 100))
 				data = {plate = plate, max = max, myVeh = owned, text = text}
-				TriggerClientEvent("dp_inventory:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
+				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
 			else
 				TriggerClientEvent("pNotify:SendNotification", _source, {
 					text = _U("invalid_amount"),
@@ -303,7 +303,7 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 	end
 
 	if type == "item_money" then
-		TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+		TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 			local cashMoney = store.get("money")
 			if (cashMoney[1].amount >= count and count > 0) then
 				cashMoney[1].amount = cashMoney[1].amount - count
@@ -335,7 +335,7 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 
 				text = _U("glovebox_info", plate, (weight / 100), (max / 100))
 				data = {plate = plate, max = max, myVeh = owned, text = text}
-				TriggerClientEvent("dp_inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
+				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			else
 				TriggerClientEvent("pNotify:SendNotification", _source, {
 					text = _U("invalid_amount"),
@@ -349,8 +349,8 @@ AddEventHandler("dp_inventory_glovebox:getItem", function(plate, type, item, cou
 	end
 end)
 
-RegisterServerEvent("dp_inventory_glovebox:putItem")
-AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, count, max, owned, label)
+RegisterServerEvent("DP_Inventory_glovebox:putItem")
+AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, count, max, owned, label)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
@@ -358,7 +358,7 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 	if type == "item_standard" then
 		local playerItemCount = xPlayer.getInventoryItem(item).count
 		if (playerItemCount >= count and count > 0) then
-			TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+			TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 				local found = false
 				local coffres = (store.get("coffres") or {})
 
@@ -382,7 +382,7 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 					or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
 					or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
 					or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
-						TriggerEvent('dp_inventory:changeWeaponOwner',xPlayer.identifier, plate, item)
+						TriggerEvent('DP_Inventory:changeWeaponOwner',xPlayer.identifier, plate, item)
 					end
 					xPlayer.removeInventoryItem(item, count)
 					MySQL.Async.execute("UPDATE inventory_glovebox SET owned = @owned WHERE plate = @plate", {
@@ -399,7 +399,7 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 	if type == "item_account" then
 		local playerAccountMoney = xPlayer.getAccount(item).money
 		if (playerAccountMoney >= count and count > 0) then
-			TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+			TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 				local blackMoney = (store.get("black_money") or nil)
 				if blackMoney ~= nil then
 					blackMoney[1].amount = blackMoney[1].amount + count
@@ -427,7 +427,7 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 	if type == "item_money" then
 		local playerAccountMoney = xPlayer.getMoney()
 		if (playerAccountMoney >= count and count > 0) then
-			TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+			TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 				local cashMoney = (store.get("money") or nil)
 				if cashMoney ~= nil then
 					cashMoney[1].amount = cashMoney[1].amount + count
@@ -451,7 +451,7 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 		end
 	end
 
-	TriggerEvent("dp_inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
+	TriggerEvent("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", plate, function(store)
 		local blackMoney = 0
 		local cashMoney = 0
 		local items = {}
@@ -477,11 +477,11 @@ AddEventHandler("dp_inventory_glovebox:putItem", function(plate, type, item, cou
 
 		text = _U("glovebox_info", plate, (weight / 100), (max / 100))
 		data = {plate = plate, max = max, myVeh = owned, text = text}
-		TriggerClientEvent("dp_inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
+		TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 	end)
 end)
 
-ESX.RegisterServerCallback("dp_inventory_glovebox:getPlayerInventory", function(source, cb)
+ESX.RegisterServerCallback("DP_Inventory_glovebox:getPlayerInventory", function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local blackMoney = xPlayer.getAccount("black_money").money
 	local cashMoney = xPlayer.getMoney()

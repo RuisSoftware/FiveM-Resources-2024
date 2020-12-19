@@ -1,8 +1,6 @@
 Config = {}
-
-Config.ServerName = 'Gemeente Nieuwstad'
+Config.ServerName = 'Texel'
 Config.Locale = 'nl' -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
-
 Config.ExcludeAccountsList = {'bank', 'money'} -- DO NOT TOUCH!
 
 Config.IncludeCash = true -- Include cash in inventory? true or false.
@@ -19,19 +17,18 @@ Config.AllowPolice = true -- If true, police will be able to search players' tru
 Config.AllowNightclub = true -- If true, nightclub will be able to search players' trunks.
 Config.AllowMafia = true -- If true, mafia will be able to search players' trunks.
 Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Illegal can enter this shop.
-Config.UseLicense = false -- You must have esx_license working on your server. 
+Config.UseLicense = false -- You must have esx_licenses working on your server. 
+Config.useAdvancedShop = true -- DP_Framework shop system. Not shared, sorry. Just set to false and use the in-build custom shop.
 
 Config.Command = {Steal = 'steal', CloseInv = 'closeinventory', Unequip = 'unequip'} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
-
 Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.
-
 Config.InventoryJob = {Police = 'police', Nightclub = 'nightclub', Mafia = 'mafia', Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
 Config.CloseUiItems = {'phone', 'weed_seed', 'tunerchip', 'fixkit', 'medikit', 'firstaid', 'vicodin', 'adrenaline', 'vuurwerk', 'vuurwerk2', 'vuurwerk3', 'vuurwerk4', 'armbrace', 'neckbrace', 'bodybandage', 'legbrace', 'bandage', 'billet'} -- List of item names that will close ui when used.
 Config.License = {Weapon = 'weapon', Police = 'weapon', Nightclub = 'weapon'} -- What license is needed for this shop?
 
 Config.OpenControl = 289 -- F2. player inventory, it is recommend to use the same as CloseControl.
 Config.CloseControl = 289 -- F2. player inventory, it is recommend to use the same as OpenControl.
--- Config.BagControl = 288 -- F4. player bag inventory
+Config.BagControl = 288 -- F4. player bag inventory
 Config.SearchBag = 249 -- N. Search a bag on the ground
 Config.TakeBag = 38 -- E. Take bag on the ground
 Config.OpenKeyGlovebox = 170 -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
@@ -40,17 +37,51 @@ Config.RobKeyOne = 38 -- E
 Config.RobKeyTwo = 60 -- CTRL
 
 Config.ReloadTime = 2000 -- in miliseconds for reloading your ammunition.
-Config.MaxWeight = 24000 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk TO player inventory. DEPRECATED.
 
-Config.MaxBagItemCount = 50 
-Config.MaxDifferentBagItems = 5
+Config.InitialLockerRentPrice = 450
+Config.DailyLockerRentPrice = 250
+Config.LockerExterior = vector3(-286.23, 280.84, 89.89)
+Config.LockerInterior = vector3(1173.24, -3196.62, -39.01)
+
+Config.Lockers = {
+
+	['locker1'] = {
+		locker_name = 'Kluisje #1',
+		location = vector3(1161.87, -3199.07, -39.01),
+	},
+	
+	['locker2'] = {
+		locker_name = 'Kluisje #2',
+		location = vector3(1156.71, -3195.3, -39.01),
+	},
+	
+	['locker3'] = {
+		locker_name = 'Kluisje #3',
+		location = vector3(1157.61, 3198.92, -39.01),
+	},
+	
+	['locker4'] = {
+		locker_name = 'Kluisje #4',
+		location = vector3(1167.05, -3194.64, -39.01),
+	},
+	
+	['locker5'] = {
+		locker_name = 'Kluisje #5',
+		location = vector3(1173.29, -3194.47, -39.01),
+	},
+	
+	['locker6'] = {
+		locker_name = 'Kluisje #6',
+		location = vector3(1171.73, -3198.81, -39.01),
+	},
+	
+}
 
 Config.LicensePrice = 25000
 
 Config.ShopMinimumGradePolice = 0 -- minimum grade to open the police shop
 Config.ShopMinimumGradeNightclub = 0
 Config.ShopMinimumGradeMafia = 0
-
 
 -- BLIPS & MARKERS
 Config.MarkerSize = {x = 1.5, y = 1.5, z = 1.5}
@@ -78,10 +109,16 @@ Config.ShowIllegalShopBlip = true
 Config.IllegalShopBlipID = 110
 Config.ShowPrisonShopBlip = true
 Config.PrisonShopBlipID = 52
+Config.ShowLockerRentBlip = true
+Config.LockerRentBlipID = 357
+Config.LockerRentBlipSize = 1.0
+Config.LockerRentBlipColor = 3
 
 Config.Weight = 80 -- Limit, unit can be whatever you want. Originally grams (as average people can hold 25kg).
 Config.DefaultWeight = 1 -- Default weight for an item.
 Config.MaxBagWeight = 20
+Config.MaxBagItemCount = 50 
+Config.MaxDifferentBagItems = 5
 
 Config.localWeight = { -- Fill this with all your items. This is only for trunk and glovebox! Change your pocket inventory weights in your database! (items table)
 	bread = 1,
@@ -159,6 +196,7 @@ Config.VehiclePlate = {
 Config.Shops = {
 	RegularShop = {
 		Locations = {
+			{x = 270.45,   y = -980.84,  z = 28.36}
 			--{x = 374.875,   y = 327.896,  z = 102.566}
 			--{x = 2557.458,  y = 382.282,  z = 107.622},
 			--{x = -3038.939, y = 585.954,  z = 6.908},
@@ -175,22 +213,170 @@ Config.Shops = {
 			--{x = 25.723,   y = -1346.966, z = 28.497}
 		},
 		Items = {
-			{name = 'bread', price = 1},
-			{name = 'water', price = 1},
-			{name = 'lemon', price = 1},
-			{name = 'phone', price = 1},
-			{name = 'hamburger', price = 1},
-			{name = 'icedcoffee', price = 1},
-			{name = 'juice', price = 1},
-			{name = 'coffeecup', price = 1},
-			{name = 'cucumbers', price = 1},
-			{name = 'garlic', price = 1},
-			{name = 'energy', price = 1},
-			{name = 'lemonade', price = 1},
-			{name = 'banana', price = 1},
-			{name = 'dildo', price = 1},
-			{name = 'icetea', price = 1},
-			{name = 'sim', price = 1}
+			{name = 'bread', price = 6},
+			{name = 'water', price = 6},
+			{name = 'lemon', price = 6},
+			{name = 'phone', price = 550},
+			{name = 'hamburger', price = 7},
+			{name = 'icedcoffee', price = 7},
+			{name = 'juice', price = 7},
+			{name = 'coffeecup', price = 7},
+			{name = 'cucumbers', price = 6},
+			{name = 'garlic', price = 6},
+			{name = 'energy', price = 8},
+			{name = 'lemonade', price = 7},
+			{name = 'banana', price = 6},
+			{name = 'dildo', price = 35},
+			{name = 'icetea', price = 7},
+			{name = 'stressbal', price = 7},
+			{name = 'neckbrace', price = 130},
+			{name = 'armbrace', price = 130},
+			{name = 'legbrace', price = 130},
+			{name = 'bodybandage', price = 130},
+			{name = 'bandage', price = 65},
+			{name = 'hoestdrank', price = 15},
+			{name = 'antibiotico', price = 19},
+			{ name = 'antibioticorosacea', price = 28}
+		}
+	},
+
+	GroothandelSupermarkt = {
+		Locations = {
+			{ x = 50.57, y = -1754.93, z = 28.61 }
+		},
+		Items = {
+			{ name = 'bread', price = 1},
+			{ name = 'water', price = 1},
+			{ name = 'medikit', price = 1000},
+			{ name = 'bandage', price = 25},
+			{ name = 'cough_med', price = 2},
+			{ name = 'hoestdrank', price = 2},
+			{ name = 'antibiotico', price = 5},
+			{ name = 'antibioticorosacea', price = 10},
+			{ name = "bodybandage",       price = 50},
+			{ name = "neckbrace",       price = 50},
+			{ name = "armbrace",       price = 50},
+			{ name = "legbrace",       price = 50},
+			{ name = "croquettes",       price = 3},
+			{ name = "martini",       price = 3},
+			{ name = "tequila",       price = 3},
+			{ name = "whisky",       price = 3},
+			{ name = "rhum",       price = 3},
+			{ name = "vodka",       price = 3},
+			{ name = "tyton",       price = 3},
+			{ name = "jagercerbere",       price = 4},
+			{ name = "mixapero",       price = 4},
+			{ name = "mojito",       price = 4},
+			{ name = "rhumcoca",       price = 4},
+			{ name = "rhumfruit",       price = 4},
+			{ name = "vodkafruit",       price = 4},
+			{ name = "vodkaenergy",       price = 4},
+			{ name = "whiskycoca",       price = 4},
+			{ name = "jagerbomb",       price = 4},
+			{ name = "hamburger",       price = 5},
+			{ name = "bolchips",       price = 1},
+			{ name = "bolpistache",       price = 1},
+			{ name = "bolnoixcajou",       price = 1},
+			{ name = "bolcacahuetes",       price = 1},
+			{ name = "limonade",       price = 2},
+			{ name = "drpepper",       price =3},
+			{ name = "energy",       price = 3},
+			{ name = "icetea",       price = 3},
+			{ name = "jusfruit",       price = 3},
+			{ name = "wine",       price = 4},
+			{ name = "smoothie",       price = 3},
+			{ name = "margarita",       price = 3},
+			{ name = "frappe",       price = 4},
+			{ name = "latte",       price = 4},
+			{ name = "cocktail",       price = 4},
+			{ name = "champagne",       price =4},
+			{ name = "cappuchino",       price = 4},
+			{ name = "milkshake",       price = 4},
+			{ name = "milkshake2",       price = 4},
+			{ name = "milkshake3",       price = 4},
+			{ name = "beercan",       price = 4},
+			{ name = "chocolatemilk",       price = 4},
+			{ name = "coffeecup",       price = 4},
+			{ name = "coconutdrink",       price = 4},
+			{ name = "icedcoffee",       price = 4},
+			{ name = "icedcoffee2",       price = 4},
+			{ name = "fixkit",       price = 1000},
+			{ name = "dierenvoeding",       price = 5},
+			{ name = "fishbait",       price = 15},
+			{ name = "fishingrod",       price = 55},
+			{ name = "turtlebait",       price = 35},
+			{ name = "lokalizator",       price = 420},
+			{ name = "hifi",       price = 25},
+			{ name = "raspberry",       price = 50},
+			{ name = "phone",       price = 500},
+			{ name = "sim",       price = 5},
+			{ name = "dildo",       price = 13},
+			{ name = "dildo2",       price = 15},
+			{ name = "saucisson",       price = 5},
+			{ name = "soda",       price = 4},
+			{ name = "apple",       price = 4},
+			{ name = "aubergine",       price = 5},
+			{ name = "avocado",       price = 6},
+			{ name = "banana",       price = 4},
+			{ name = "beetroot",       price = 5},
+			{ name = "broccoli",       price = 5},
+			{ name = "carrot",       price = 5},
+			{ name = "cherries",       price = 6},
+			{ name = "coconut",       price = 8},
+			{ name = "corn",       price = 4},
+			{ name = "cucumbers",       price = 5},
+			{ name = "garlic",       price = 6},
+			{ name = "kiwi",       price = 5},
+			{ name = "lemon",       price = 5},
+			{ name = "mango",       price = 9},
+			{ name = "orange",       price = 6},
+			{ name = "paprika",       price = 5},
+			{ name = "pear",       price = 4},
+			{ name = "pineapple",       price = 6},
+			{ name = "pumpkin",       price = 5},
+			{ name = "radish",       price = 5},
+			{ name = "strawberry",       price = 7},
+			{ name = "tomato",       price = 5},
+			{ name = "tea",       price = 5},
+			{ name = "watermelon",       price = 8},
+			{ name = "milkbottle",       price = 6},
+			{ name = "milkbox",       price = 6},
+			{ name = "billet",       price = 55},
+			{ name = "cheese",       price = 25},
+			{ name = "stroopwafel",       price = 5},
+			{ name = "vuurwerk",       price = 25},
+			{ name = "vuurwerk2",       price = 25},
+			{ name = "vuurwerk3",       price = 25},
+			{ name = "vuurwerk4",       price = 25},
+			{ name = "duikvrouw0",       price = 185},
+			{ name = "duikvrouw1",       price = 185},
+			{ name = "duikvrouw12",       price = 185},
+			{ name = "duikvrouw13",       price = 185},
+			{ name = "duikvrouw14",       price = 185},
+			{ name = "duikvrouw15",       price = 185},
+			{ name = "duikvrouw16",       price = 185},
+			{ name = "duikvrouw17",       price = 185},
+			{ name = "duikvrouw18",       price = 185},
+			{ name = "duikvrouw19",       price = 185},
+			{ name = "duikvrouw2",       price = 185},
+			{ name = "duikvrouw3",       price = 185},
+			{ name = "duikvrouw4",       price = 185},
+			{ name = "duikvrouw5",       price = 185},
+			{ name = "duikvrouw6",       price = 185},
+			{ name = "duikvrouw7",       price = 185},
+			{ name = "duikvrouw8",       price = 185},
+			{ name = "duikvrouw9",       price = 185},
+			{ name = "duikvrouw10",       price = 185},
+			{ name = "duikvrouw20",       price = 185},
+			{ name = "duikvrouw21",       price = 185},
+			{ name = "duikvrouw22",       price = 185},
+			{ name = "duikvrouw23",       price = 185},
+			{ name = "duikvrouw24",       price = 185},
+			{ name = "duikvrouw25",       price = 185},
+			{ name = "duikvrouw26",       price = 185},
+			{ name = "general_spray_paint",       price = 200},
+			{ name = "bironlack_spray_paint",       price = 200},
+			{ name = "sponge",       price = 5},
 		}
 	},
 
@@ -206,11 +392,11 @@ Config.Shops = {
 
 	DrugShop = {
 		Locations = {
-			--{ x = 468.58, y = -3205.64, z = 9.79 }
+			{ x = 377.0, y = -828.49, z = 28.3 }
 		},
 		Items = {
-			{ name = 'bread', price = 1},
-			{ name = 'water', price = 1}
+			{ name = 'joint', price = 10},
+			{ name = 'blunt', price = 15}
 		}
 	},
 
@@ -288,22 +474,16 @@ Config.Shops = {
 		}
 	},
 
-
 	PoliceShop = { -- available for Config.InventoryJob.Police
 		Locations = {
-			{ x = 451.68, y = -980.02, z = 29.69 }
+			{ x = 484.14 , y = -1004.69, z = 24.73 }
 		},
 		Items = {
 			{name = 'WEAPON_FLASHLIGHT', price = 100},
 			{name = 'WEAPON_STUNGUN', price = 100},
-			{name = 'WEAPON_KNIFE', price = 100},
-			{name = 'WEAPON_BAT', price = 100},
+			{name = 'WEAPON_NIGHTSTICK', price = 100},
 			{name = 'WEAPON_PISTOL', price = 100},
-			{name = 'WEAPON_PUMPSHOTGUN',price = 100},
-			{name = 'WEAPON_SMOKEGRENADE',price = 100},
 			{name = 'WEAPON_FIREEXTINGUISHER',price = 100},
-			{name = 'WEAPON_CROWBAR',price = 100},
-			{name = 'WEAPON_BZGAS',price = 100},
 			{name = 'ammunition_pistol',price = 100},
 			{name = 'ammunition_pistol_large',price = 100},
 			{name = 'ammunition_shotgun',price = 100},
@@ -314,6 +494,7 @@ Config.Shops = {
 			{name = 'ammunition_rifle_large',price = 100},
 			{name = 'ammunition_snp',price = 100},
 			{name = 'ammunition_snp_large',price = 100},
+			{name = 'ammunition_fireextinguisher',price = 100},
 			{name = 'bulletproof',price = 1000},
 			{name = 'binoculars',price = 50}
 		}
@@ -338,15 +519,31 @@ Config.Shops = {
 
 	ShopNightclub = { -- available for Config.InventoryJob.Nightclub
 		Locations = {
-	    	--{ x = -1518.48, y = 113.1, z = 49.05 }
+	    	{ x = 22.09, y = -1107.28, z = 28.80 }
 		},
 		Items = {
-			{name = 'beer', price = 1},
-			{name = 'wine', price = 1},
-			{name = 'vodka', price = 1},
-			{name = 'tequila', price = 1},
-			{name = 'whisky', price = 1},
-			{name = 'grand_cru', price = 1}
+			{name = 'WEAPON_FLASHLIGHT', price = 100},
+			{name = 'WEAPON_KNIFE', price = 100},
+			{name = 'WEAPON_BAT', price = 100},
+			{name = 'WEAPON_PISTOL', price = 100},
+			{name = 'WEAPON_PUMPSHOTGUN',price = 100},
+			{name = 'WEAPON_SMOKEGRENADE',price = 100},
+			{name = 'WEAPON_FIREEXTINGUISHER',price = 100},
+			{name = 'WEAPON_CROWBAR',price = 100},
+			{name = 'WEAPON_BZGAS',price = 100},
+			{name = 'ammunition_pistol',price = 100},
+			{name = 'ammunition_pistol_large',price = 100},
+			{name = 'ammunition_shotgun',price = 100},
+			{name = 'ammunition_shotgun_large',price = 100},
+			{name = 'ammunition_smg',price = 100},
+			{name = 'ammunition_smg_large',price = 100},
+			{name = 'ammunition_rifle',price = 100},
+			{name = 'ammunition_rifle_large',price = 100},
+			{name = 'ammunition_snp',price = 100},
+			{name = 'ammunition_snp_large',price = 100},
+			{name = 'ammunition_fireextinguisher',price = 100},
+			{name = 'bulletproof',price = 1000},
+			{name = 'binoculars',price = 50}
 		}
 	},
 }
@@ -562,4 +759,3 @@ Config.Vault = {
 		needItemLicense = false,
 	}
 }
-

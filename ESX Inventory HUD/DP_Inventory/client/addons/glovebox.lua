@@ -1,13 +1,13 @@
 local gloveboxData = nil
 
-RegisterNetEvent("dp_inventory:openGloveboxInventory")
-AddEventHandler("dp_inventory:openGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
+RegisterNetEvent("DP_Inventory:openGloveboxInventory")
+AddEventHandler("DP_Inventory:openGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 	openGloveboxInventory()
 end)
 
-RegisterNetEvent("dp_inventory:refreshGloveboxInventory")
-AddEventHandler("dp_inventory:refreshGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
+RegisterNetEvent("DP_Inventory:refreshGloveboxInventory")
+AddEventHandler("DP_Inventory:refreshGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 end)
 
@@ -86,7 +86,7 @@ RegisterNUICallback("PutIntoGlovebox", function(data, cb)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
-		TriggerServerEvent("dp_inventory_glovebox:putItem", gloveboxData.plate, data.item.type, data.item.name, count, gloveboxData.max, gloveboxData.myVeh, data.item.label)
+		TriggerServerEvent("DP_Inventory_glovebox:putItem", gloveboxData.plate, data.item.type, data.item.name, count, gloveboxData.max, gloveboxData.myVeh, data.item.label)
 	end
 	Wait(500)
 	loadPlayerInventory()
@@ -95,7 +95,7 @@ end)
 
 RegisterNUICallback("TakeFromGlovebox", function(data, cb)
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("dp_inventory_glovebox:getItem", gloveboxData.plate, data.item.type, data.item.name, tonumber(data.number), gloveboxData.max, gloveboxData.myVeh)
+		TriggerServerEvent("DP_Inventory_glovebox:getItem", gloveboxData.plate, data.item.type, data.item.name, tonumber(data.number), gloveboxData.max, gloveboxData.myVeh)
 	end
 	Wait(500)
 	loadPlayerInventory()

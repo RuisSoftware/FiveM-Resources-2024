@@ -61,6 +61,10 @@ window.addEventListener("message", function (event) {
             $(".info-div").show();
             $(".weight-div").show();
             $("#otherInventory").show();
+        } else if (type === "locker") {
+            $(".info-div").show();
+            $(".weight-div").show();
+            $("#otherInventory").show();
         }
 
     $(".ui").fadeIn();
@@ -505,6 +509,11 @@ $(document).ready(function () {
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
+                } else if (type === "locker") {
+                    $.post("https://DP_Inventory/TakeFromLocker", JSON.stringify({
+                        item: itemData,
+                        number: parseInt($("#count").val())
+                    }));
                 } else if (type === "player") {
                     $.post("https://DP_Inventory/TakeFromPlayer", JSON.stringify({
                         item: itemData,
@@ -557,6 +566,11 @@ $(document).ready(function () {
                     }));
                 } else if (type === "vault") {
                     $.post("https://DP_Inventory/PutIntoVault", JSON.stringify({
+                        item: itemData,
+                        number: parseInt($("#count").val())
+                    }));
+                } else if (type === "locker") {
+                    $.post("https://DP_Inventory/PutIntoLocker", JSON.stringify({
                         item: itemData,
                         number: parseInt($("#count").val())
                     }));
@@ -742,6 +756,11 @@ $(document).ready(function () {
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));
+            } else if (type === "locker" && itemInventory === "second") {
+                $.post("https://DP_Inventory/TakeFromLocker", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
             } else if (type === "player" && itemInventory === "second") {
                 $.post("https://DP_Inventory/TakeFromPlayer", JSON.stringify({
                     item: itemData,
@@ -797,6 +816,11 @@ $(document).ready(function () {
                 }));
             } else if (type === "vault" && itemInventory === "main") {
                 $.post("https://DP_Inventory/PutIntoVault", JSON.stringify({
+                    item: itemData,
+                    number: parseInt($("#count").val())
+                }));
+            } else if (type === "locker" && itemInventory === "main") {
+                $.post("https://DP_Inventory/PutIntoLocker", JSON.stringify({
                     item: itemData,
                     number: parseInt($("#count").val())
                 }));

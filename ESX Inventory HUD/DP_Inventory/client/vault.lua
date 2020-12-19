@@ -17,11 +17,11 @@ function OpenVaultInventoryMenu(data)
 	if data.job == PlayerData.job.name or data.job == 'vault' then
 		--print(data.needItemLicense)
 		vaultType = data
-		ESX.TriggerServerCallback("dp_inventory:getVaultInventory", function(inventory)
+		ESX.TriggerServerCallback("DP_Inventory:getVaultInventory", function(inventory)
 			if not inventory then
 				exports['mythic_notify']:SendAlert('error', 'Niets gevonden')
 			else
-				TriggerEvent("dp_inventory:openVaultInventory", inventory)
+				TriggerEvent("DP_Inventory:openVaultInventory", inventory)
 			end
 		end,
 		data)

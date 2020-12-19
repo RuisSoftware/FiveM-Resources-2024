@@ -10,8 +10,8 @@ local entityWorld = nil
 local globalplate = nil
 local lastChecked = 0
 
-RegisterNetEvent("dp_inventory_trunk:setOwnedVehicule")
-AddEventHandler("dp_inventory_trunk:setOwnedVehicule", function(vehicle)
+RegisterNetEvent("DP_Inventory_trunk:setOwnedVehicule")
+AddEventHandler("DP_Inventory_trunk:setOwnedVehicule", function(vehicle)
 	vehiclePlate = vehicle
 end)
 
@@ -52,7 +52,7 @@ function openTrunk()
 			if vPlate == vFront then
 				myVeh = true
 			elseif lastChecked < GetGameTimer() - 60000 then
-				TriggerServerEvent("dp_inventory_trunk:getOwnedVehicle")
+				TriggerServerEvent("DP_Inventory_trunk:getOwnedVehicle")
 				lastChecked = GetGameTimer()
 				Wait(2000)
 				for i = 1, #vehiclePlate do
@@ -154,15 +154,15 @@ end)
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded",function(xPlayer)
 	PlayerData = xPlayer
-	TriggerServerEvent("dp_inventory_trunk:getOwnedVehicle")
+	TriggerServerEvent("DP_Inventory_trunk:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
 function OpenCoffreInventoryMenu(plate, max, myVeh)
-	ESX.TriggerServerCallback("dp_inventory_trunk:getInventoryV", function(inventory)
+	ESX.TriggerServerCallback("DP_Inventory_trunk:getInventoryV", function(inventory)
 		text = _U("trunk_info", plate, (inventory.weight / 100), (max / 100))
 		data = {plate = plate, max = max, myVeh = myVeh, text = text}
-		TriggerEvent("dp_inventory:openTrunkInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
+		TriggerEvent("DP_Inventory:openTrunkInventory", data, inventory.blackMoney, inventory.cashMoney, inventory.items, inventory.weapons)
 	end, plate)
 end
 

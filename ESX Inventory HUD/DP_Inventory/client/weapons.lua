@@ -1,12 +1,13 @@
 local currentWeapon
 local currentWeaponSlot
 local currentWepAttachs = {}
-canFire = true
 local firsttime = true
-local weaponKey = nil
+local weaponKey = nillocal NumberCharset = {}
+local Charset = {}
+canFire = true
 
-RegisterNetEvent('dp_inventory:itemPopUp')
-AddEventHandler('dp_inventory:itemPopUp', function(weapon)
+RegisterNetEvent('DP_Inventory:itemPopUp')
+AddEventHandler('DP_Inventory:itemPopUp', function(weapon)
     if currentWeapon == weapon then
         RemoveWeapon(currentWeapon)
         currentWeapon = nil
@@ -19,20 +20,20 @@ AddEventHandler('dp_inventory:itemPopUp', function(weapon)
     end
     currentWeapon = weapon
     GiveWeapon(currentWeapon)
-    TriggerEvent('dp_inventory:notification', weapon, _U("weapon_used"), 1, false)
+    TriggerEvent('DP_Inventory:notification', weapon, _U("weapon_used"), 1, false)
 end)
 
-AddEventHandler('dp_inventory:addCurrentWeapon', function(waeponToAdd, attachments, addToSlote)
+AddEventHandler('DP_Inventory:addCurrentWeapon', function(waeponToAdd, attachments, addToSlote)
     currentWeapon = waeponToAdd
     currentWepAttachs = attachments.attach
     local doBreak = false
     if addToSlote then
-        TriggerServerEvent('dp_inventory:slotPut', waeponToAdd)
+        TriggerServerEvent('DP_Inventory:slotPut', waeponToAdd)
     end
 end)
 
-RegisterNetEvent('dp_inventory:removeCurrentWeapon')
-AddEventHandler('dp_inventory:removeCurrentWeapon', function()
+RegisterNetEvent('DP_Inventory:removeCurrentWeapon')
+AddEventHandler('DP_Inventory:removeCurrentWeapon', function()
     if currentWeapon ~= nil then
         RemoveWeapon(currentWeapon)
         currentWeapon = nil
@@ -119,8 +120,8 @@ local weapons = {
     }
 }
 
-RegisterNetEvent('dp_inventory:useAttach')
-AddEventHandler('dp_inventory:useAttach', function(attach)
+RegisterNetEvent('DP_Inventory:useAttach')
+AddEventHandler('DP_Inventory:useAttach', function(attach)
     local playerPed = PlayerPedId()
     local hasAttach = false
     if currentWeapon ~= nil then
@@ -131,7 +132,7 @@ AddEventHandler('dp_inventory:useAttach', function(attach)
             end
         end
         if weapons[tostring(hash)] ~= nil and weapons[tostring(hash)][attach] ~= nil and not hasAttach then
-            ESX.TriggerServerCallback('dp_inventory:removeItem', function(cb)
+            ESX.TriggerServerCallback('DP_Inventory:removeItem', function(cb)
                 if cb then
                     table.insert(currentWepAttachs, attach)
                     GiveWeaponComponentToPed(playerPed, hash, weapons[tostring(hash)][attach])
@@ -139,7 +140,7 @@ AddEventHandler('dp_inventory:useAttach', function(attach)
             end, attach)
         elseif string.find(attach, 'skin') then
             local number = tonumber(string.match(attach, "%d+"))
-            ESX.TriggerServerCallback('dp_inventory:removeItem', function(cb)
+            ESX.TriggerServerCallback('DP_Inventory:removeItem', function(cb)
                 if cb then
                     for k,v in pairs(currentWepAttachs) do
                         if v == 'skin' or v == 'skin1' or v == 'skin2' or v == 'skin3' or v == 'skin4' or v == 'skin5' or v == 'skin6' or v == 'skin7' then
@@ -184,7 +185,7 @@ Citizen.CreateThread(function()
                             }, function(status)
                                 if not status then
                                     RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
-                                    ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
+                                    ESX.TriggerServerCallback('DP_Inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
                                     table.remove(currentWepAttachs, i)
                                     removingAttach = false
                                 end
@@ -198,12 +199,13 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
 function RemoveWeapon(weapon)
     local checkh = Config.Throwables
     local playerPed = PlayerPedId()
     local hash = GetHashKey(weapon)
     currentWeapon = nil
-    ESX.TriggerServerCallback('dp_inventory:doesWeaponHas', function(hasWeaponId)
+    ESX.TriggerServerCallback('DP_Inventory:doesWeaponHas', function(hasWeaponId)
         if hasWeaponId then
             weaponKey = hasWeaponId
         else
@@ -214,12 +216,12 @@ function RemoveWeapon(weapon)
             attach = currentWepAttachs,
             weapon_id = weaponKey
         }
-        TriggerServerEvent('dp_inventory:updateAmmoCount', hash, wepInfo)
+        TriggerServerEvent('DP_Inventory:updateAmmoCount', hash, wepInfo)
         canFire = false
         disable()
         if checkh[weapon] == hash then
             if GetSelectedPedWeapon(playerPed) == hash then
-                ESX.TriggerServerCallback('dp_inventory:addPlayerItem', function(cb)
+                ESX.TriggerServerCallback('DP_Inventory:addPlayerItem', function(cb)
                 end, weapon, 1)
             end
         end
@@ -239,7 +241,7 @@ function RemoveWeapon(weapon)
         RemoveWeaponFromPed(playerPed, hash)
         ClearPedTasks(playerPed)
         canFire = true
-        TriggerEvent('dp_inventory:notification', weapon, _U("weapon_pulled"), 1, false)
+        TriggerEvent('DP_Inventory:notification', weapon, _U("weapon_pulled"), 1, false)
     end, hash)
 end
 
@@ -253,7 +255,7 @@ function GiveWeapon(weapon)
     if weapon == 'WEAPON_PETROLCAN' then
         local coords = GetEntityCoords(playerPed)
         if IsAnyVehicleNearPoint(coords.x, coords.y, coords.z, 2.0) then
-            TriggerEvent('dp_inventory:removeCurrentWeapon')
+            TriggerEvent('DP_Inventory:removeCurrentWeapon')
             TriggerEvent('joca_fuel:useJerryCan')
         else
             canFire = false
@@ -266,7 +268,7 @@ function GiveWeapon(weapon)
             canFire = true
         end
     else
-      ESX.TriggerServerCallback('dp_inventory:getAmmoCount', function(gunInfo)
+      ESX.TriggerServerCallback('DP_Inventory:getAmmoCount', function(gunInfo)
         currentWepAttachs = gunInfo.attachments
         canFire = false
         disable()
@@ -295,7 +297,7 @@ function GiveWeapon(weapon)
             end
         end
         if checkh[weapon] == hash then
-            ESX.TriggerServerCallback('dp_inventory:takePlayerItem', function(cb)
+            ESX.TriggerServerCallback('DP_Inventory:takePlayerItem', function(cb)
                 SetPedAmmo(playerPed, hash, 1)
             end, weapon, 1)
         elseif Config.FuelCan == hash and gunInfo.ammoCount == nil then
@@ -323,5 +325,52 @@ function loadAnimDict(dict)
 	while (not HasAnimDictLoaded(dict)) do
 		RequestAnimDict(dict)
 		Citizen.Wait(10)
+	end
+end
+
+for i = 48,  57 do table.insert(NumberCharset, string.char(i)) end
+for i = 65,  90 do table.insert(Charset, string.char(i)) end
+for i = 97, 122 do table.insert(Charset, string.char(i)) end
+
+function GenerateWeapon()
+	local generatedWeapon
+	local doBreak = false
+
+	while true do
+		Citizen.Wait(2)
+		math.randomseed(GetGameTimer())
+		generatedWeapon = GetRandomLetter(30) .. GetRandomNumber(30)
+
+		ESX.TriggerServerCallback('DP_Inventory:isWeaponNumberTaken', function(isWeaponTaken)
+			if not isWeaponTaken then
+				doBreak = true
+			end
+		end, generatedWeapon)
+
+		if doBreak then
+			break
+		end
+	end
+
+	return generatedWeapon
+end
+
+function GetRandomNumber(length)
+	Citizen.Wait(0)
+	math.randomseed(GetGameTimer())
+	if length > 0 then
+		return GetRandomNumber(length - 1) .. NumberCharset[math.random(1, #NumberCharset)]
+	else
+		return ''
+	end
+end
+
+function GetRandomLetter(length)
+	Citizen.Wait(0)
+	math.randomseed(GetGameTimer())
+	if length > 0 then
+		return GetRandomLetter(length - 1) .. Charset[math.random(1, #Charset)]
+	else
+		return ''
 	end
 end

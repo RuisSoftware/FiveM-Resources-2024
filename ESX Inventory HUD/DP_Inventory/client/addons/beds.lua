@@ -1,5 +1,5 @@
-RegisterNetEvent("dp_inventory:openMotelsInventoryBed")
-AddEventHandler("dp_inventory:openMotelsInventoryBed", function(data)
+RegisterNetEvent("DP_Inventory:openMotelsInventoryBed")
+AddEventHandler("DP_Inventory:openMotelsInventoryBed", function(data)
 	setPropertyMotelDataBed(data)
 	openMotelInventoryBed()
 end)

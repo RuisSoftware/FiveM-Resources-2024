@@ -21,8 +21,8 @@ function OpenBagInventoryMenu(inventory, owner)
         end
     end)
 	if hasBag then
-		ESX.TriggerServerCallback("dp_inventory_bag:getInventory",function(inventory)
-			TriggerEvent("dp_inventory:openBagInventory", inventory)
+		ESX.TriggerServerCallback("DP_Inventory_bag:getInventory",function(inventory)
+			TriggerEvent("DP_Inventory:openBagInventory", inventory)
 			TriggerEvent('trew_hud_ui:toggleUit')
 			if Config.CameraAnimationBag == true then
 				if not IsPedSittingInAnyVehicle(PlayerPedId()) then
@@ -36,8 +36,8 @@ function OpenBagInventoryMenu(inventory, owner)
 	end
 end
 -- 23 24 45
-RegisterNetEvent('dp_inventory_bag:toggleBag')
-AddEventHandler('dp_inventory_bag:toggleBag', function(id)
+RegisterNetEvent('DP_Inventory_bag:toggleBag')
+AddEventHandler('DP_Inventory_bag:toggleBag', function(id)
     ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
 		if skin.bags_1 ~= 45 then
             TriggerEvent('skinchanger:change', "bags_1", 45)

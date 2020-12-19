@@ -1,4 +1,5 @@
 isInInventory = false
+maxWeight = nil
 ESX = nil
 
 local fastWeapons = {
@@ -24,8 +25,8 @@ end)
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded", function(xPlayer)
 	PlayerData = xPlayer
-	TriggerServerEvent("dp_inventory_trunk:getOwnedVehicle")
-	TriggerServerEvent("dp_inventory_glovebox:getOwnedVehicle")
+	TriggerServerEvent("DP_Inventory_trunk:getOwnedVehicle")
+	TriggerServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
@@ -40,8 +41,8 @@ end)
 
 AddEventHandler("onResourceStart", function()
 	PlayerData = xPlayer
-	TriggerServerEvent("dp_inventory_trunk:getOwnedVehicle")
-	TriggerServerEvent("dp_inventory_glovebox:getOwnedVehicle")
+	TriggerServerEvent("DP_Inventory_trunk:getOwnedVehicle")
+	TriggerServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
@@ -81,27 +82,27 @@ Citizen.CreateThread(function()
 			elseif  IsDisabledControlJustReleased(1, 157) and canFire then
 				if fastWeapons[1] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[1])
-					TriggerEvent('dp_inventory:notification', fastWeapons[1], _U("item_used"), 1, false)
+					TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 158) and canFire then
 				if fastWeapons[2] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[2])
-					TriggerEvent('dp_inventory:notification', fastWeapons[2], _U("item_used"), 1, false)
+					TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 160) and canFire then
 				if fastWeapons[3] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[3])
-					TriggerEvent('dp_inventory:notification', fastWeapons[3], _U("item_used"), 1, false)
+					TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 164) and canFire then
 				if fastWeapons[4] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[4])
-					TriggerEvent('dp_inventory:notification', fastWeapons[4], _U("item_used"), 1, false)
+					TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 165) and canFire then
 				if fastWeapons[5] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[5])
-					TriggerEvent('dp_inventory:notification', fastWeapons[5], _U("item_used"), 1, false)
+					TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 37) then
 				HudForceWeaponWheel(false)
@@ -157,17 +158,21 @@ function lockinv()
 	end)
 end
 
-
 function getPlayerWeight()
 	Citizen.CreateThread(function()
-		ESX.TriggerServerCallback("dp_inventory:getPlayerInventoryWeight", function(cb)
+		if maxWeight == nil then
+			ESX.TriggerServerCallback("DP_Inventory:getMaxInventoryWeight", function(cb)
+				maxWeight = cb
+			end)
+		end
+		ESX.TriggerServerCallback("DP_Inventory:getPlayerInventoryWeight", function(cb)
 			local playerweight = cb
 			SendNUIMessage({
 				action = "setWeightText",
-				text =  "<strong>         "..tostring(playerweight).."/"..tostring(Config.MaxWeight).."KG<strong>"
+				text =  "<strong>         "..tostring(playerweight).."/"..tostring(maxWeight).."KG<strong>"
 			})
 			weight = playerweight
-			if weight >= Config.MaxWeight then
+			if weight >= maxWeight then
 				weight = 100
 			end
 			WeightLoaded = true
@@ -177,7 +182,7 @@ end
 
 function loadItems()
 	Citizen.CreateThread(function()
-		ESX.TriggerServerCallback("dp_inventory:getPlayerInventory", function(data)
+		ESX.TriggerServerCallback("DP_Inventory:getPlayerInventory", function(data)
 			items = {}
 			fastItems = {}
 			slotes = data.slotes
@@ -447,7 +452,7 @@ end)
 
 RegisterNUICallback("UseItem", function(data, cb)
 	TriggerServerEvent("esx:useItem", data.item.name)
-    TriggerEvent('dp_inventory:notification', data.item.name, _U("item_used"), 1, false)
+    TriggerEvent('DP_Inventory:notification', data.item.name, _U("item_used"), 1, false)
 	if shouldCloseInventory(data.item.name) then
 		closeInventory()
 	else
@@ -496,7 +501,7 @@ RegisterNUICallback("GiveItem", function(data, cb)
 		or data.item.name == 'WEAPON_BAT' or data.item.name == 'WEAPON_ADVANCEDRIFLE' or data.item.name == 'WEAPON_APPISTOL' or data.item.name == 'WEAPON_ASSAULTRIFLE'
 		or data.item.name == 'WEAPON_ASSAULTSHOTGUN' or data.item.name == 'WEAPON_ASSAULTSMG' or data.item.name == 'WEAPON_AUTOSHOTGUN' or data.item.name == 'WEAPON_CARBINERIFLE'
 		or data.item.name == 'WEAPON_COMBATPISTOL' or data.item.name == 'WEAPON_PUMPSHOTGUN' or data.item.name == 'WEAPON_SMG' then
-			ESX.TriggerServerCallback('dp_inventory:giveWeapon', function(callback)
+			ESX.TriggerServerCallback('DP_Inventory:giveWeapon', function(callback)
 				if callback then
 					TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 				end
@@ -517,30 +522,30 @@ RegisterNUICallback("PutIntoFast", function(data, cb)
 	if data.item.slot ~= nil then
 		fastWeapons[data.item.slot] = nil
 	end
-	TriggerServerEvent('dp_inventory:putInToSlot', data.item.name, data.slot)
+	TriggerServerEvent('DP_Inventory:putInToSlot', data.item.name, data.slot)
 	fastWeapons[data.slot] = data.item.name
 	loadPlayerInventory()
 	cb("ok")
 end)
 
 RegisterNUICallback("TakeFromFast", function(data, cb)
-	TriggerServerEvent('dp_inventory:removeFromSlot',data.item.name, data.item.slot)
+	TriggerServerEvent('DP_Inventory:removeFromSlot',data.item.name, data.item.slot)
 	fastWeapons[data.item.slot] = nil
 	if string.find(data.item.name, "WEAPON_", 1) ~= nil and GetSelectedPedWeapon(PlayerPedId()) == GetHashKey(data.item.name) then
-		TriggerEvent('dp_inventory:closeinventory', source)
+		TriggerEvent('DP_Inventory:closeinventory', source)
 		RemoveWeapon(data.item.name)
 	end
 	loadPlayerInventory()
 	cb("ok")
 end)
 
-RegisterNetEvent('dp_inventory:disablenumbers')
-AddEventHandler('dp_inventory:disablenumbers', function(disabled)
+RegisterNetEvent('DP_Inventory:disablenumbers')
+AddEventHandler('DP_Inventory:disablenumbers', function(disabled)
 	canFire = disabled
 end)
 
-RegisterNetEvent('dp_inventory:notification')
-AddEventHandler('dp_inventory:notification', function(sourceitemname, sourceitemlabel, sourceitemcount, sourceitemremove)
+RegisterNetEvent('DP_Inventory:notification')
+AddEventHandler('DP_Inventory:notification', function(sourceitemname, sourceitemlabel, sourceitemcount, sourceitemremove)
 	SendNUIMessage({
 		action = "notification",
 		itemname = sourceitemname,
@@ -550,13 +555,13 @@ AddEventHandler('dp_inventory:notification', function(sourceitemname, sourceitem
 	})
 end)
 
-RegisterNetEvent('dp_inventory:closeinventory')
-AddEventHandler('dp_inventory:closeinventory', function()
+RegisterNetEvent('DP_Inventory:closeinventory')
+AddEventHandler('DP_Inventory:closeinventory', function()
 	closeInventory()
 end)
 
-RegisterNetEvent('dp_inventory:clearfastitems')
-AddEventHandler('dp_inventory:clearfastitems', function()
+RegisterNetEvent('DP_Inventory:clearfastitems')
+AddEventHandler('DP_Inventory:clearfastitems', function()
 	fastWeapons = {
 		[1] = nil,
 		[2] = nil,
@@ -567,7 +572,7 @@ AddEventHandler('dp_inventory:clearfastitems', function()
 	RemoveAllPedWeapons(PlayerPedId(), true)
 end)
 
-RegisterNetEvent('dp_inventory:doClose')
-AddEventHandler('dp_inventory:doClose', function(...)
+RegisterNetEvent('DP_Inventory:doClose')
+AddEventHandler('DP_Inventory:doClose', function(...)
 	closeInventory(...);
 end)

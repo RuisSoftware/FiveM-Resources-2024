@@ -89,12 +89,12 @@ function GetSharedDataStoreTrunk(plate)
 	return SharedDataStores[plate]
 end
 
-AddEventHandler("dp_inventory_trunk:GetSharedDataStoreTrunk", function(plate, cb)
+AddEventHandler("DP_Inventory_trunk:GetSharedDataStoreTrunk", function(plate, cb)
 	cb(GetSharedDataStoreTrunk(plate))
 end)
 
-RegisterServerEvent("dp_inventory_trunk:getOwnedVehicle")
-AddEventHandler("dp_inventory_trunk:getOwnedVehicle", function()
+RegisterServerEvent("DP_Inventory_trunk:getOwnedVehicle")
+AddEventHandler("DP_Inventory_trunk:getOwnedVehicle", function()
 	local vehicules = {}
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
@@ -108,7 +108,7 @@ AddEventHandler("dp_inventory_trunk:getOwnedVehicle", function()
 				table.insert(vehicules, {plate = vehicle.plate})
 			end
 		end
-		TriggerClientEvent("dp_inventory_trunk:setOwnedVehicule", _source, vehicules)
+		TriggerClientEvent("DP_Inventory_trunk:setOwnedVehicule", _source, vehicules)
 	end)
 end)
 
@@ -143,7 +143,7 @@ end
 
 function getTotalInventoryWeightTrunk(plate)
 	local total
-	TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+	TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 		local W_weapons = getInventoryWeightTrunk(store.get("weapons") or {})
 		local W_coffre = getInventoryWeightTrunk(store.get("coffre") or {})
 		local W_blackMoney = 0
@@ -162,8 +162,8 @@ function getTotalInventoryWeightTrunk(plate)
 	return total
 end
 
-ESX.RegisterServerCallback("dp_inventory_trunk:getInventoryV", function(source, cb, plate)
-	TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+ESX.RegisterServerCallback("DP_Inventory_trunk:getInventoryV", function(source, cb, plate)
+	TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 		local blackMoney = 0
 		local cashMoney = 0
 		local items = {}
@@ -196,15 +196,15 @@ ESX.RegisterServerCallback("dp_inventory_trunk:getInventoryV", function(source, 
 	end)
 end)
 
-RegisterServerEvent("dp_inventory_trunk:getItem")
-AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count, max, owned)
+RegisterServerEvent("DP_Inventory_trunk:getItem")
+AddEventHandler("DP_Inventory_trunk:getItem", function(plate, type, item, count, max, owned)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 
 	if type == "item_standard" then
 		local targetItem = xPlayer.getInventoryItem(item)
 		if xPlayer.canCarryItem(item, count) then
-			TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+			TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 				local coffre = (store.get("coffre") or {})
 				for i = 1, #coffre, 1 do
 					if coffre[i].name == item then
@@ -213,7 +213,7 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
     						or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
     						or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
     						or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
-								TriggerEvent('dp_inventory:changeWeaponOwner',plate, xPlayer.identifier, item)
+								TriggerEvent('DP_Inventory:changeWeaponOwner',plate, xPlayer.identifier, item)
 							end
 							xPlayer.addInventoryItem(item, count)
 							if (coffre[i].count - count) == 0 then
@@ -255,7 +255,7 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 
 				text = _U("trunk_info", plate, (weight / 100), (max / 100))
 				data = {plate = plate, max = max, myVeh = owned, text = text}
-				TriggerClientEvent("dp_inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
+				TriggerClientEvent("DP_Inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			end)
 		else
 			TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'false', text = _U("player_inv_no_space") })
@@ -263,7 +263,7 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 	end
 
 	if type == "item_account" then
-		TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+		TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 			local blackMoney = store.get("black_money")
 			if (blackMoney[1].amount >= count and count > 0) then
 				blackMoney[1].amount = blackMoney[1].amount - count
@@ -295,7 +295,7 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 
 				text = _U("trunk_info", plate, (weight / 100), (max / 100))
 				data = {plate = plate, max = max, myVeh = owned, text = text}
-				TriggerClientEvent("dp_inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
+				TriggerClientEvent("DP_Inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			else
 				TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_amount") })
 			end
@@ -303,7 +303,7 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 	end
 
 	if type == "item_money" then
-		TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+		TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 			local cashMoney = store.get("money")
 			if (cashMoney[1].amount >= count and count > 0) then
 				cashMoney[1].amount = cashMoney[1].amount - count
@@ -335,7 +335,7 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 
 				text = _U("trunk_info", plate, (weight / 100), (max / 100))
 				data = {plate = plate, max = max, myVeh = owned, text = text}
-				TriggerClientEvent("dp_inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
+				TriggerClientEvent("DP_Inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			else
 				TriggerClientEvent("pNotify:SendNotification", _source, {
 					text = _U("invalid_amount"),
@@ -349,8 +349,8 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 	end
 end)
 
-RegisterServerEvent("dp_inventory_trunk:putItem")
-AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count, max, owned, label)
+RegisterServerEvent("DP_Inventory_trunk:putItem")
+AddEventHandler("DP_Inventory_trunk:putItem", function(plate, type, item, count, max, owned, label)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
@@ -359,7 +359,7 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 		local playerItemCount = xPlayer.getInventoryItem(item).count
 
 		if (playerItemCount >= count and count > 0) then
-			TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+			TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 				local found = false
 				local coffre = (store.get("coffre") or {})
 
@@ -383,7 +383,7 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 					or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
 					or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
 					or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
-						TriggerEvent('dp_inventory:changeWeaponOwner',xPlayer.identifier, plate, item)
+						TriggerEvent('DP_Inventory:changeWeaponOwner',xPlayer.identifier, plate, item)
 					end
 					xPlayer.removeInventoryItem(item, count)
 					MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
@@ -400,7 +400,7 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 	if type == "item_account" then
 		local playerAccountMoney = xPlayer.getAccount(item).money
 		if (playerAccountMoney >= count and count > 0) then
-			TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+			TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 				local blackMoney = (store.get("black_money") or nil)
 				if blackMoney ~= nil then
 					blackMoney[1].amount = blackMoney[1].amount + count
@@ -428,7 +428,7 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 		local playerAccountMoney = xPlayer.getMoney()
 
 		if (playerAccountMoney >= count and count > 0) then
-			TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+			TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 				local cashMoney = (store.get("money") or nil)
 				if cashMoney ~= nil then
 					cashMoney[1].amount = cashMoney[1].amount + count
@@ -454,7 +454,7 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 		end
 	end
 
-	TriggerEvent("dp_inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
+	TriggerEvent("DP_Inventory_trunk:GetSharedDataStoreTrunk", plate, function(store)
 		local blackMoney = 0
 		local cashMoney = 0
 		local items = {}
@@ -480,11 +480,11 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 
 		text = _U("trunk_info", plate, (weight / 100), (max / 100))
 		data = {plate = plate, max = max, myVeh = owned, text = text}
-		TriggerClientEvent("dp_inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
+		TriggerClientEvent("DP_Inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
 	end)
 end)
 
-ESX.RegisterServerCallback("dp_inventory_trunk:getPlayerInventory", function(source, cb)
+ESX.RegisterServerCallback("DP_Inventory_trunk:getPlayerInventory", function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local blackMoney = xPlayer.getAccount("black_money").money
 	local cashMoney = xPlayer.getMoney()

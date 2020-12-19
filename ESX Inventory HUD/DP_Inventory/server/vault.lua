@@ -1,5 +1,5 @@
-RegisterServerEvent('dp_inventory:getItem')
-AddEventHandler('dp_inventory:getItem', function(--[[owner,--]] job, type, item, count)
+RegisterServerEvent('DP_Inventory:getItem')
+AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item, count)
 	local _source      = source
 	local xPlayer      = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(xPlayer.identifier)
@@ -77,8 +77,8 @@ AddEventHandler('dp_inventory:getItem', function(--[[owner,--]] job, type, item,
 
 end)
 
-RegisterServerEvent('dp_inventory:putItem')
-AddEventHandler('dp_inventory:putItem', function(--[[owner,--]] job, type, item, count)
+RegisterServerEvent('DP_Inventory:putItem')
+AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item, count)
 	local _source      = source
 	local xPlayer      = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(xPlayer.identifier)
@@ -155,7 +155,7 @@ AddEventHandler('dp_inventory:putItem', function(--[[owner,--]] job, type, item,
 	end
 end)
 
-ESX.RegisterServerCallback('dp_inventory:getVaultInventory', function(source, cb, item, refresh)
+ESX.RegisterServerCallback('DP_Inventory:getVaultInventory', function(source, cb, item, refresh)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local xItem
 	if item.needItemLicense ~= '' or item.needItemLicense ~= nil then

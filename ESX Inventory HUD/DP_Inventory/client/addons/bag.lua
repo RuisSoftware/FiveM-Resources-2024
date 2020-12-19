@@ -1,11 +1,11 @@
-RegisterNetEvent("dp_inventory:openBagInventory")
-AddEventHandler("dp_inventory:openBagInventory", function(data)
+RegisterNetEvent("DP_Inventory:openBagInventory")
+AddEventHandler("DP_Inventory:openBagInventory", function(data)
 	setPropertyBagData(data)
 	openBagInventory()
 end)
 
 function refreshPropertyBagInventory()
-	ESX.TriggerServerCallback("dp_inventory_bag:getInventory", function(inventory)
+	ESX.TriggerServerCallback("DP_Inventory_bag:getInventory", function(inventory)
 		setPropertyBagData(inventory)
 	end, ESX.GetPlayerData().identifier )
 end
@@ -91,9 +91,9 @@ RegisterNUICallback("PutIntoBag", function(data, cb)
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
 		if data.item.name == 'cash' then
-			TriggerServerEvent("dp_inventory_bag:putItem", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
+			TriggerServerEvent("DP_Inventory_bag:putItem", ESX.GetPlayerData().identifier, 'item_account', 'money', count)
 		else
-			TriggerServerEvent("dp_inventory_bag:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
+			TriggerServerEvent("DP_Inventory_bag:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
 		end
 	end
 	Wait(150)
@@ -108,7 +108,7 @@ RegisterNUICallback("TakeFromBag", function(data, cb)
 		return
 	end
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("dp_inventory_bag:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
+		TriggerServerEvent("DP_Inventory_bag:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
 	end
 	Wait(150)
 	refreshPropertyBagInventory()

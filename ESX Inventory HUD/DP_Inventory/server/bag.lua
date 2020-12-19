@@ -14,11 +14,11 @@ ESX.RegisterUsableItem('bag', function(source)
 
     -- xPlayer.removeInventoryItem('bag', 1)
     
-    TriggerClientEvent('dp_inventory_bag:toggleBag', source)
+    TriggerClientEvent('DP_Inventory_bag:toggleBag', source)
 end)
 
-RegisterServerEvent('dp_inventory_bag:getItem')
-AddEventHandler('dp_inventory_bag:getItem', function(owner, type, item, count)
+RegisterServerEvent('DP_Inventory_bag:getItem')
+AddEventHandler('DP_Inventory_bag:getItem', function(owner, type, item, count)
 	local _source      = source
 	local xPlayer      = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
@@ -89,8 +89,8 @@ function getBagWeight(identifier)
 	return bagWeight
 end
 
-RegisterServerEvent('dp_inventory_bag:putItem')
-AddEventHandler('dp_inventory_bag:putItem', function(owner, type, item, count)
+RegisterServerEvent('DP_Inventory_bag:putItem')
+AddEventHandler('DP_Inventory_bag:putItem', function(owner, type, item, count)
 	local _source      = source
 	local xPlayer      = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
@@ -136,7 +136,7 @@ AddEventHandler('dp_inventory_bag:putItem', function(owner, type, item, count)
 	end
 end)
 
-ESX.RegisterServerCallback('dp_inventory_bag:getInventory', function(source, cb, owner)
+ESX.RegisterServerCallback('DP_Inventory_bag:getInventory', function(source, cb, owner)
 	local xPlayer    = ESX.GetPlayerFromIdentifier(owner)
 	local blackMoney = 0
 	local money = 0
@@ -167,7 +167,7 @@ ESX.RegisterServerCallback('dp_inventory_bag:getInventory', function(source, cb,
 	})
 end)
 
-ESX.RegisterServerCallback('dp_inventory_bag:getPlayerInventory', function(source, cb)
+ESX.RegisterServerCallback('DP_Inventory_bag:getPlayerInventory', function(source, cb)
 	local xPlayer    = ESX.GetPlayerFromId(source)
 	local blackMoney = xPlayer.getAccount('black_money').money
 	local money = xPlayer.getAccount('money').money

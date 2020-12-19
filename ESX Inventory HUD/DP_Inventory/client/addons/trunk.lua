@@ -1,13 +1,13 @@
 local trunkData = nil
 
-RegisterNetEvent("dp_inventory:openTrunkInventory")
-AddEventHandler("dp_inventory:openTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
+RegisterNetEvent("DP_Inventory:openTrunkInventory")
+AddEventHandler("DP_Inventory:openTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 	openTrunkInventory()
 end)
 
-RegisterNetEvent("dp_inventory:refreshTrunkInventory")
-AddEventHandler("dp_inventory:refreshTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
+RegisterNetEvent("DP_Inventory:refreshTrunkInventory")
+AddEventHandler("DP_Inventory:refreshTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 end)
 
@@ -86,7 +86,7 @@ RegisterNUICallback("PutIntoTrunk", function(data, cb)
 		if data.item.type == "item_weapon" then
 			count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
 		end
-		TriggerServerEvent("dp_inventory_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
+		TriggerServerEvent("DP_Inventory_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
 	end
 	Wait(500)
 	loadPlayerInventory()
@@ -95,7 +95,7 @@ end)
 
 RegisterNUICallback("TakeFromTrunk", function(data, cb)
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
-		TriggerServerEvent("dp_inventory_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
+		TriggerServerEvent("DP_Inventory_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
 	end
 	Wait(500)
 	loadPlayerInventory()
