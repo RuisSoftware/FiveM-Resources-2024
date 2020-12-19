@@ -2,7 +2,8 @@ local currentWeapon
 local currentWeaponSlot
 local currentWepAttachs = {}
 local firsttime = true
-local weaponKey = nillocal NumberCharset = {}
+local weaponKey = nil
+local NumberCharset = {}
 local Charset = {}
 canFire = true
 

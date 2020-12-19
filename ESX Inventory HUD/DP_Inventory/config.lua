@@ -465,12 +465,12 @@ Config.Shops = {
 			{name = 'ammunition_rifle', price = 1},
 			{name = 'ammunition_rifle_large', price = 1},
 			{name = 'ammunition_snp', price = 1},
-			{name = 'ammunition_snp_large', price = 1}--,
-			--{name = 'flashlight',price = 1},
+			{name = 'ammunition_snp_large', price = 1},
+			{name = 'flashlight',price = 1},
 			--{name = 'grip',price = 1},
 			--{name = 'scope',price = 1},
 			--{name = 'skin',price = 1},
-			--{name = 'supressor',price = 1}
+			--{name = 'suppressor',price = 1}
 		}
 	},
 
@@ -496,7 +496,8 @@ Config.Shops = {
 			{name = 'ammunition_snp_large',price = 100},
 			{name = 'ammunition_fireextinguisher',price = 100},
 			{name = 'bulletproof',price = 1000},
-			{name = 'binoculars',price = 50}
+			{name = 'binoculars',price = 50},
+			{name = 'flashlight',price = 100}
 		}
 	},
 
@@ -543,7 +544,8 @@ Config.Shops = {
 			{name = 'ammunition_snp_large',price = 100},
 			{name = 'ammunition_fireextinguisher',price = 100},
 			{name = 'bulletproof',price = 1000},
-			{name = 'binoculars',price = 50}
+			{name = 'binoculars',price = 50},
+			{name = 'flashlight',price = 100}
 		}
 	},
 }

@@ -10,12 +10,11 @@ RegisterNetEvent('ammunition:useAmmoItem')
 AddEventHandler('ammunition:useAmmoItem', function(ammo)
 	local playerPed = GetPlayerPed(-1)
 	local weapon
-	local found, currentWeaponHash = GetCurrentPedWeapon(playerPed, true)
-
+	local found, currentWeapon = GetCurrentPedWeapon(playerPed, true)
 	if found then
 		for _, v in pairs(ammo.weapons) do
 			local weaponHash = GetHashKey(v)
-			if currentWeaponHash == weaponHash then
+			if currentWeapon == weaponHash then
 				weapon = v
 				break
 			end
@@ -25,13 +24,37 @@ AddEventHandler('ammunition:useAmmoItem', function(ammo)
 			local newAmmo = pedAmmo + ammo.count
 			ClearPedTasks(playerPed)
 			local found, maxAmmo = GetMaxAmmo(playerPed, weapon)
+			--print(weapon)
 			if newAmmo < maxAmmo then
-				TaskReloadWeapon(playerPed)
-				if Config.EnableInventoryHUD then
-					TriggerServerEvent('disc-inventoryhud:updateAmmoCount', weapon, newAmmo)
+				local hash = GetHashKey(weapon)
+				--print(hash)
+				ESX.TriggerServerCallback('DP_Inventory:getAmmoCount', function(gunInfo)
+					currentWepAttachs = gunInfo.attachments
+				end)
+				ESX.TriggerServerCallback('DP_Inventory:doesWeaponHas', function(hasWeaponId)
+					if hasWeaponId then
+						weaponKey = hasWeaponId
+						--print(weaponKey)
+					else
+						weaponKey = GenerateWeapon()
+						--print(weaponKey)
+					end
+				end, hash)
+				while weaponKey == nil do
+				Wait(0)
 				end
+				local wepInfo = { 
+					count = newAmmo,
+					attach = currentWepAttachs or '{}',
+					weapon_id = weaponKey
+				}
+				--print(wepInfo.count)
+				--print(wepInfo.attach)
+				--print(wepInfo.weapon_id)
+				TriggerServerEvent('DP_Inventory:updateAmmoCount', hash, wepInfo)
 				SetPedAmmo(playerPed, weapon, newAmmo)
 				TriggerServerEvent('ammunition:removeAmmoItem', ammo)
+				TaskReloadWeapon(playerPed)
 				exports['mythic_notify']:SendAlert('success', _U('reloaded'))
 			else
 				exports['mythic_notify']:SendAlert('error', _U('max_ammo'))
@@ -39,3 +62,4 @@ AddEventHandler('ammunition:useAmmoItem', function(ammo)
 		end
 	end
 end)
+
