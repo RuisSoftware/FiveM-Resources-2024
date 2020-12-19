@@ -9,11 +9,136 @@ itemShopList = {}
 
 ESX.RegisterServerCallback("dp_inventory:getPlayerInventory", function(source, cb, target)
 	local targetXPlayer = ESX.GetPlayerFromId(target)
+	local itemSlotes = {}
 	if targetXPlayer ~= nil then
-		cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout})
+		MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner', {
+			['@owner'] =  targetXPlayer.identifier
+		},function(data)
+			if #data ~= 0 then
+				for i=1, #data do
+					table.insert(itemSlotes, {
+						slot = data[i].slot,
+						item = data[i].weapon
+					})
+				end
+			else
+				itemSlotes = false
+			end
+			cb({inventory = targetXPlayer.inventory, money = targetXPlayer.getMoney(), accounts = targetXPlayer.accounts, weapons = targetXPlayer.loadout, slotes = itemSlotes})
+		end)
 	else
 		cb(nil)
 	end
+end)
+
+RegisterNetEvent('dp_inventory:slotPut')
+AddEventHandler('dp_inventory:slotPut', function(item)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.addInventoryItem(item,1)
+	MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+		['@owner'] =  xPlayer.identifier,
+		['@slot'] = 1
+	},function(results)
+		if #results == 0 then
+			MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+				['@owner'] = xPlayer.identifier,
+				['@weapon'] = item,
+				['@slot'] = 1,
+			})
+		else
+			MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+				['@owner'] =  xPlayer.identifier,
+				['@slot'] = 2
+			},function(results2)
+				if #results2 == 0 then
+					MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+						['@owner'] = xPlayer.identifier,
+						['@weapon'] = item,
+						['@slot'] = 2,
+					})
+				else
+					MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+						['@owner'] =  xPlayer.identifier,
+						['@slot'] = 3
+					},function(results3)
+						if #results3 == 0 then
+							MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+								['@owner'] = xPlayer.identifier,
+								['@weapon'] = item,
+								['@slot'] = 3,
+							})
+						else
+							MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+								['@owner'] =  xPlayer.identifier,
+								['@slot'] = 4
+							},function(results4)
+								if #results4 == 0 then
+									MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+										['@owner'] = xPlayer.identifier,
+										['@weapon'] = item,
+										['@slot'] = 4,
+									})
+								else
+									MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE owner = @owner AND slot = @slot', {
+										['@owner'] =  xPlayer.identifier,
+										['@slot'] = 5
+									},function(results5)
+										if #results5 == 0 then
+											MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+												['@owner'] = xPlayer.identifier,
+												['@weapon'] = item,
+												['@slot'] = 5,
+											})
+										else
+											MySQL.Sync.execute("DELETE FROM inventory_slote WHERE `owner` = @owner AND slot = @slot", {
+												['@owner'] = xPlayer.identifier,
+												['@slot'] = 5,
+											}, function(succes)
+												if succes then
+													MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+														['@owner'] = xPlayer.identifier,
+														['@weapon'] = item,
+														['@slot'] = 5,
+													})
+												end
+											end)
+										end
+									end)
+								end
+							end)
+						end
+					end)
+				end
+			end)
+		end
+    end)
+end)
+
+RegisterNetEvent('dp_inventory:putInToSlot')
+AddEventHandler('dp_inventory:putInToSlot',function(item, slot)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	MySQL.Async.fetchAll('SELECT * FROM inventory_slote WHERE weapon = @weapon AND owner = @owner AND slot = @slot', {
+        ['@weapon'] = item,
+		['@owner'] =  xPlayer.identifier,
+		['@slot'] = slot
+	},function(results)
+		if #results == 0 then
+			MySQL.Async.execute('INSERT INTO inventory_slote (owner, weapon, slot) VALUES (@owner, @weapon, @slot)', {
+				['@owner'] = xPlayer.identifier,
+				['@weapon'] = item,
+				['@slot'] = slot,
+			})
+		end
+    end)
+end)
+
+RegisterNetEvent('dp_inventory:removeFromSlot')
+AddEventHandler('dp_inventory:removeFromSlot',function(item, slot)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	MySQL.Sync.execute("DELETE FROM inventory_slote WHERE `owner` = @owner AND weapon = @weapon", {
+		['@owner'] = xPlayer.identifier,
+		['@weapon'] = item,
+	})
 end)
 
 ESX.RegisterServerCallback("dp_inventory:getPlayerInventoryWeight", function(source,cb)
@@ -59,6 +184,11 @@ AddEventHandler("dp_inventory:tradePlayerItem", function(from, target, type, ite
 	if type == "item_standard" then
 		if itemCount > 0 and item.count >= itemCount then
 			if  targetXPlayer.canCarryItem(itemName, itemCount) then
+				if itemName == 'WEAPON_PISTOL' or itemName == 'WEAPON_FLASHLIGHT' or itemName == 'WEAPON_STUNGUN' or itemName == 'WEAPON_KNIFE' or itemName == 'WEAPON_ASSAULTSMG'
+				or itemName == 'WEAPON_BAT' or itemName == 'WEAPON_ADVANCEDRIFLE' or itemName == 'WEAPON_APPISTOL' or itemName == 'WEAPON_ASSAULTRIFLE' or itemName == 'WEAPON_ASSAULTSHOTGUN'
+				or itemName == 'WEAPON_AUTOSHOTGUN' or itemName == 'WEAPON_CARBINERIFLE' or itemName == 'WEAPON_COMBATPISTOL' or itemName == 'WEAPON_PUMPSHOTGUN' or itemName == 'WEAPON_SMG' then
+					TriggerEvent('dp_inventory:changeWeaponOwner', sourceXPlayer.identifier, targetXPlayer.identifier, itemName)
+				end
 				sourceXPlayer.removeInventoryItem(itemName, itemCount)
 				targetXPlayer.addInventoryItem(itemName, itemCount)
 			else
@@ -74,14 +204,6 @@ AddEventHandler("dp_inventory:tradePlayerItem", function(from, target, type, ite
 		if itemCount > 0 and sourceXPlayer.getAccount(itemName).money >= itemCount then
 			sourceXPlayer.removeAccountMoney(itemName, itemCount)
 			targetXPlayer.addAccountMoney(itemName, itemCount)
-		end
-
-	elseif type == "item_weapon" then
-		if not targetXPlayer.hasWeapon(itemName) then
-			sourceXPlayer.removeWeapon(itemName)
-			targetXPlayer.addWeapon(itemName, itemCount)
-		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('weapon_exist_give') })
 		end
 	end
 end)
@@ -464,20 +586,38 @@ end)
 RegisterServerEvent('dp_inventory:updateAmmoCount')
 AddEventHandler('dp_inventory:updateAmmoCount', function(hash, wepInfo)
 	local player = ESX.GetPlayerFromId(source)
-	MySQL.Async.execute('UPDATE ammunition SET count = @count, attach = @attach WHERE hash = @hash AND owner = @owner', {
+	for i=1, #wepInfo.attach do
+		if wepInfo.attach[i] ~= nil then
+			if wepInfo.attach[i] == 'skin' then
+				table.remove(wepInfo.attach,i)
+			end
+		end
+	end
+	MySQL.Async.execute('UPDATE ammunition SET count = @count, attach = @attach WHERE hash = @hash AND owner = @owner and weapon_id = @weapon_id', {
 		['@owner'] = player.identifier,
 		['@hash'] = hash,
 		['@count'] = wepInfo.count,
+		['@weapon_id'] = wepInfo.weapon_id,
 		['@attach'] = json.encode(wepInfo.attach)
 	}, function(results)
 		if results == 0 then
-			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach) VALUES (@owner, @hash, @count, @attach)', {
+			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach, weapon_id, original_owner) VALUES (@owner, @hash, @count, @attach, @weapon_id, @original_owner)', {
 				['@owner'] = player.identifier,
 				['@hash'] = hash,
+				['@original_owner'] = player.identifier,
 				['@count'] = wepInfo.count,
+				['@weapon_id'] = wepInfo.weapon_id,
 				['@attach'] = json.encode(wepInfo.attach)
 			})
 		end
+	end)
+end)
+
+ESX.RegisterServerCallback('dp_inventory:isWeaponNumberTaken', function(source, cb, weapon)
+	MySQL.Async.fetchAll('SELECT 1 FROM ammunition WHERE weapon_id = @weapon_id', {
+		['@weapon_id'] = weapon
+	}, function(result)
+		cb(result[1] ~= nil)
 	end)
 end)
 

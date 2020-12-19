@@ -39,6 +39,7 @@ AddEventHandler('dp_inventory:getItem', function(--[[owner,--]] job, type, item,
 		end
 
 	elseif type == 'item_account' then
+		print('society_'..job..'_'..item)
 		if xPlayer.job.name == job then
 			TriggerEvent('esx_addonaccount:getSharedAccount', 'society_'..job..'_'..item, function(account)
 				local policeAccountMoney = account.money
@@ -127,8 +128,31 @@ AddEventHandler('dp_inventory:putItem', function(--[[owner,--]] job, type, item,
 		else
 			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
 		end
+	elseif type == 'item_money' then
+		local playerAccountMoney = xPlayer.getMoney()
+		if playerAccountMoney >= count and count > 0 then
+			xPlayer.removeMoney(count)
+			if xPlayer.job.name == job and job == 'police' then
+				TriggerEvent('esx_addonaccount:getSharedAccount', 'society_'..job..'_money', function(account)
+					print('account',account)
+					account.addMoney(count)
+				end)
+			elseif xPlayer.job.name == job and job == 'nachtclub' then
+				TriggerEvent('esx_addonaccount:getSharedAccount', 'society_'..job..'_money', function(account)
+					account.addMoney(count)
+				end)
+			elseif job == 'vault' then
+				TriggerEvent('esx_addonaccount:getAccount', 'vault_' .. item, xPlayerOwner.identifier, function(account)
+					account.addMoney(count)
+				end)
+			else
+				xPlayer.addAccountMoney(item, count)
+				TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = 'This job not allow for black money', length = 5500})
+			end
+		else
+			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
+		end
 	end
-
 end)
 
 ESX.RegisterServerCallback('dp_inventory:getVaultInventory', function(source, cb, item, refresh)

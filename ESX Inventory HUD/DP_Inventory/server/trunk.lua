@@ -209,13 +209,19 @@ AddEventHandler("dp_inventory_trunk:getItem", function(plate, type, item, count,
 				for i = 1, #coffre, 1 do
 					if coffre[i].name == item then
 						if (coffre[i].count >= count and count > 0) then
-						xPlayer.addInventoryItem(item, count)
-						if (coffre[i].count - count) == 0 then
-							table.remove(coffre, i)
-						else
-							coffre[i].count = coffre[i].count - count
-						end
-						break
+							if item == 'WEAPON_PISTOL' or item == 'WEAPON_FLASHLIGHT' or item == 'WEAPON_STUNGUN' or item == 'WEAPON_KNIFE' 
+    						or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
+    						or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
+    						or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
+								TriggerEvent('dp_inventory:changeWeaponOwner',plate, xPlayer.identifier, item)
+							end
+							xPlayer.addInventoryItem(item, count)
+							if (coffre[i].count - count) == 0 then
+								table.remove(coffre, i)
+							else
+								coffre[i].count = coffre[i].count - count
+							end
+							break
 						else
 							TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("invalid_quantity") })
 						end
@@ -373,6 +379,12 @@ AddEventHandler("dp_inventory_trunk:putItem", function(plate, type, item, count,
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					store.set("coffre", coffre)
+					if item == 'WEAPON_PISTOL' or item == 'WEAPON_FLASHLIGHT' or item == 'WEAPON_STUNGUN' or item == 'WEAPON_KNIFE' 
+					or item == 'WEAPON_BAT' or item == 'WEAPON_ADVANCEDRIFLE' or item == 'WEAPON_APPISTOL' or item == 'WEAPON_ASSAULTRIFLE'
+					or item == 'WEAPON_ASSAULTSHOTGUN' or item == 'WEAPON_ASSAULTSMG' or item == 'WEAPON_AUTOSHOTGUN' or item == 'WEAPON_CARBINERIFLE'
+					or item == 'WEAPON_COMBATPISTOL' or item == 'WEAPON_PUMPSHOTGUN' or item == 'WEAPON_SMG' then
+						TriggerEvent('dp_inventory:changeWeaponOwner',xPlayer.identifier, plate, item)
+					end
 					xPlayer.removeInventoryItem(item, count)
 					MySQL.Async.execute("UPDATE inventory_trunk SET owned = @owned WHERE plate = @plate", {
 						["@plate"] = plate,

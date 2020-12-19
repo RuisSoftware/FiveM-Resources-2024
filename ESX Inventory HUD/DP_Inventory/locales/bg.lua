@@ -1,11 +1,11 @@
-Locales["en"] = {
+Locales["bg"] = {
 	["cash"] = "Cash",
-	["already_weapon"] = "The player already has this weapon!",
+	["already_weapon"] = "Това лице притежава това оръжие!",
 	["black_money"] = "Dirty Money",
 	["player_nearby"] = "Player is no longer nearby!",
-	["waiting_remove"] = 'Removing attahcment...',
 	["players_nearby"] = "There are no other players around!",
 	["openinv_help"] = "Open another player's inventory.",
+	["waiting_remove"] = 'Removing attahcment...',
 	["openinv_id"] = "Player ID",
 	["no_permissions"] = "You don't have permissions to do that!",
 	["no_player"] = "Cannot find player!",

@@ -1,6 +1,8 @@
 Config = {}
+
 Config.ServerName = 'Gemeente Nieuwstad'
 Config.Locale = 'nl' -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
+
 Config.ExcludeAccountsList = {'bank', 'money'} -- DO NOT TOUCH!
 
 Config.IncludeCash = true -- Include cash in inventory? true or false.
@@ -20,14 +22,16 @@ Config.IllegalshopOpen = false -- if true everybody can enter this shop. If fals
 Config.UseLicense = false -- You must have esx_license working on your server. 
 
 Config.Command = {Steal = 'steal', CloseInv = 'closeinventory', Unequip = 'unequip'} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
-Config.Attachments = {'flashlight', 'suppressor', 'scope', 'grip', 'skin'} -- NOT YET SUPPORTED.
+
+Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.
+
 Config.InventoryJob = {Police = 'police', Nightclub = 'nightclub', Mafia = 'mafia', Illegal = nil, Ambulance = 'ambulance'} -- This must be the name used in your database/jobs table.
 Config.CloseUiItems = {'phone', 'weed_seed', 'tunerchip', 'fixkit', 'medikit', 'firstaid', 'vicodin', 'adrenaline', 'vuurwerk', 'vuurwerk2', 'vuurwerk3', 'vuurwerk4', 'armbrace', 'neckbrace', 'bodybandage', 'legbrace', 'bandage', 'billet'} -- List of item names that will close ui when used.
 Config.License = {Weapon = 'weapon', Police = 'weapon', Nightclub = 'weapon'} -- What license is needed for this shop?
 
 Config.OpenControl = 289 -- F2. player inventory, it is recommend to use the same as CloseControl.
 Config.CloseControl = 289 -- F2. player inventory, it is recommend to use the same as OpenControl.
-Config.BagControl = 288 -- F1. player bag inventory
+-- Config.BagControl = 288 -- F4. player bag inventory
 Config.SearchBag = 249 -- N. Search a bag on the ground
 Config.TakeBag = 38 -- E. Take bag on the ground
 Config.OpenKeyGlovebox = 170 -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
@@ -36,7 +40,7 @@ Config.RobKeyOne = 38 -- E
 Config.RobKeyTwo = 60 -- CTRL
 
 Config.ReloadTime = 2000 -- in miliseconds for reloading your ammunition.
-Config.MaxWeight = 80 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk TO player inventory. DEPRECATED.
+Config.MaxWeight = 24000 -- Use the same weight as in your /es_extended/config.lua/ ## used for glovebox and trunk TO player inventory. DEPRECATED.
 
 Config.MaxBagItemCount = 50 
 Config.MaxDifferentBagItems = 5

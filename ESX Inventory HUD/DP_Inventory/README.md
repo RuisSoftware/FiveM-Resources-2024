@@ -1,16 +1,64 @@
 # Dutch Players Inventory // ESX 1.2 ONLY
 # Important
  Go to you es_extended/server/main.lua line 423 the event name is esx:onPickup and add after line 430 this code
-    if pickup.name == 'WEAPON_PISTOL' or pickup.name == 'WEAPON_FLASHLIGHT' or pickup.name == 'WEAPON_STUNGUN' or pickup.name == 'WEAPON_KNIFE' 
-    or pickup.name == 'WEAPON_BAT' or pickup.name == 'WEAPON_ADVANCEDRIFLE' or pickup.name == 'WEAPON_APPISTOL' or pickup.name == 'WEAPON_ASSAULTRIFLE'
-    or pickup.name == 'WEAPON_ASSAULTSHOTGUN' or pickup.name == 'WEAPON_ASSAULTSMG' or pickup.name == 'WEAPON_AUTOSHOTGUN' or pickup.name == 'WEAPON_CARBINERIFLE'
-    or pickup.name == 'WEAPON_COMBATPISTOL' or pickup.name == 'WEAPON_PUMPSHOTGUN' or pickup.name == 'WEAPON_SMG' then
-        TriggerClientEvent('dp_inventory:checkWeapon', source, pickup.name)
-    end
- Verry important so when somebody pick the weapon from ground is the same it should like like that after
- ![IMPORTANT](https://imgur.com/6oK9ada.png)
+ ```lua
+if pickup.weaponID ~= nil then
+	TriggerEvent('dp_inventory:weaponID', pickup.weaponID, xPlayer.identifier)
+end
+```
+Verry important so when somebody pick the weapon from ground is the same it should like like that after
+ ![IMPORTANT](https://imgur.com/XnC2QIk.png)
+    Then go to es_extended/server/functions.lua line 285 and add this
+ ```lua
+if name == 'WEAPON_PISTOL' or name == 'WEAPON_FLASHLIGHT' or name == 'WEAPON_STUNGUN' or name == 'WEAPON_KNIFE' or name == 'WEAPON_BAT' or name == 'WEAPON_ADVANCEDRIFLE' or name == 'WEAPON_APPISTOL' or name == 'WEAPON_ASSAULTRIFLE'
+or name == 'WEAPON_ASSAULTSHOTGUN' or name == 'WEAPON_ASSAULTSMG' or name == 'WEAPON_AUTOSHOTGUN' or name == 'WEAPON_CARBINERIFLE' or name == 'WEAPON_SNIPERRIFLE' or name == 'WEAPON_COMBATPISTOL' or name == 'WEAPON_PUMPSHOTGUN' or name == 'WEAPON_SMG' then
+	local hash = GetHashKey(name)
+	MySQL.Async.fetchAll('SELECT * FROM ammunition WHERE hash = @hash AND owner = @owner', {
+		['@hash'] = hash,
+		['@owner'] =  xPlayer.identifier
+	},function(results)
+		if #results ~= 0 then
+			if results[1].weapon_id then
+				ESX.Pickups[pickupId].weaponID = results[1].weapon_id
+				MySQL.Async.execute('UPDATE ammunition SET owner = @owner WHERE id = @id and hash = @hash and weapon_id = @weapon_id', {
+					['@id'] = results[1].id,
+					['@owner'] = nil,
+					['@weapon_id'] = results[1].weapon_id,
+					['@hash'] = hash
+				}, function(results2)
+				end)
+			else
+				ESX.Pickups[pickupId].weaponID = nil
+			end
+		end
+	end)
+end
+```
+    so it looks like that
+![IMPORTANT](https://imgur.com/Umzssai.png)
 
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
+If you are using another weapon shop we have added a support for that you just simple do this when you are giving the weapon to the player.
+You have to change some names this is an exmaple that i am using just change the attachment table and if you have a value in there that is not an attachment just blacklist it like the tint value in the `example:`
+```lua
+local wepInfo = {}
+wepInfo.count = 100
+wepInfo.weapon_id = exports['DP_Inventory']:GenerateWeapon()
+if cachedData["attachedComponents"] ~= nil then
+	wepInfo.attach = {}
+	for k,v in pairs(cachedData["attachedComponents"]) do
+		if k ~= 'tint' then
+			table.insert(wepInfo.attach, k)
+		end
+	end
+end
+local skin = GetPedWeaponTintIndex(cachedData["ped"], GetHashKey(weaponModel))
+skin = 'skin'..skin
+table.insert(wepInfo.attach, skin)
+TriggerServerEvent('dp_inventory:updateAmmoCount', GetHashKey(weaponModel), wepInfo)
+local addToSlote = true
+TriggerEvent('dp_inventory:addCurrentWeapon', weaponModel, wepInfo, addToSlote)
+```
 Your number 1 inventory for ESX 1.2!
 
 We have edited the original esx_inventoryhud resource from [Trsak](https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/).

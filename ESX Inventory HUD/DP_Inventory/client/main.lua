@@ -50,7 +50,21 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		HudForceWeaponWheel(false)
 		HudWeaponWheelIgnoreSelection()
-		DisableControlAction(0, 37, true)
+		DisableControlAction(1, 37, true)
+		DisableControlAction(1, 157, true)
+		DisableControlAction(1, 158, true)
+		DisableControlAction(1, 160, true)
+		DisableControlAction(1, 164, true)
+		DisableControlAction(1, 165, true)
+		DisableControlAction(2, 157, true)-- disable changing weapon
+		DisableControlAction(2, 158, true)-- disable changing weapon
+		DisableControlAction(2, 159, true)-- disable changing weapon
+		DisableControlAction(2, 160, true)-- disable changing weapon
+		DisableControlAction(2, 161, true)-- disable changing weapon
+		DisableControlAction(2, 162, true)-- disable changing weapon
+		DisableControlAction(2, 163, true)-- disable changing weapon
+		DisableControlAction(2, 164, true)-- disable changing weapon
+		DisableControlAction(2, 165, true)-- disable changing weapon
 	end
 end)
 
@@ -166,6 +180,14 @@ function loadItems()
 		ESX.TriggerServerCallback("dp_inventory:getPlayerInventory", function(data)
 			items = {}
 			fastItems = {}
+			slotes = data.slotes
+			if slotes ~= nil then
+				if slotes ~= false then
+					for index=1, #slotes do
+						fastWeapons[slotes[index].slot] = slotes[index].item
+					end
+				end
+			end
 			inventory = data.inventory
 			accounts = data.accounts
 			money = data.money
@@ -401,6 +423,20 @@ RegisterNUICallback("DropItem",function(data, cb)
 		if data.item.type == "item_money" then
 			TriggerServerEvent("esx:removeInventoryItem", "item_account", "money", data.number)
 		else
+			if data.item.name == 'bag' then
+				TriggerEvent('skinchanger:change', "bags_1", 0)
+				TriggerEvent('skinchanger:change', "bags_2", 0)
+				TriggerEvent('skinchanger:getSkin', function(skin)
+					TriggerServerEvent('esx_skin:save', skin)
+					hasBag = false
+				end)
+			end
+			if data.item.name == 'idcard' then
+				local coords = GetEntityCoords(GetPlayerPed(-1))
+				local forward = GetEntityForwardVector(GetPlayerPed(-1))
+				coords = coords + forward*1.0
+				TriggerServerEvent('license_menu:idCardLocation', coords)
+			end
 			TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 		end
 	end
@@ -456,7 +492,19 @@ RegisterNUICallback("GiveItem", function(data, cb)
 		canPlayAnim = true
 		if data.item.type == "item_money" then
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), "item_account", "money", count)
+		elseif data.item.name == 'WEAPON_PISTOL' or data.item.name == 'WEAPON_FLASHLIGHT' or data.item.name == 'WEAPON_STUNGUN' or data.item.name == 'WEAPON_KNIFE'
+		or data.item.name == 'WEAPON_BAT' or data.item.name == 'WEAPON_ADVANCEDRIFLE' or data.item.name == 'WEAPON_APPISTOL' or data.item.name == 'WEAPON_ASSAULTRIFLE'
+		or data.item.name == 'WEAPON_ASSAULTSHOTGUN' or data.item.name == 'WEAPON_ASSAULTSMG' or data.item.name == 'WEAPON_AUTOSHOTGUN' or data.item.name == 'WEAPON_CARBINERIFLE'
+		or data.item.name == 'WEAPON_COMBATPISTOL' or data.item.name == 'WEAPON_PUMPSHOTGUN' or data.item.name == 'WEAPON_SMG' then
+			ESX.TriggerServerCallback('dp_inventory:giveWeapon', function(callback)
+				if callback then
+					TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
+				end
+			end,GetPlayerServerId(closestPlayer), data.item.name)
 		else
+			if data.item.name == 'idcard' then
+				TriggerServerEvent('license_menu:idCardGiven', GetPlayerServerId(PlayerId()), GetPlayerServerId(closestPlayer))
+			end
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 		end
 		Wait(0)
@@ -469,12 +517,14 @@ RegisterNUICallback("PutIntoFast", function(data, cb)
 	if data.item.slot ~= nil then
 		fastWeapons[data.item.slot] = nil
 	end
+	TriggerServerEvent('dp_inventory:putInToSlot', data.item.name, data.slot)
 	fastWeapons[data.slot] = data.item.name
 	loadPlayerInventory()
 	cb("ok")
 end)
 
 RegisterNUICallback("TakeFromFast", function(data, cb)
+	TriggerServerEvent('dp_inventory:removeFromSlot',data.item.name, data.item.slot)
 	fastWeapons[data.item.slot] = nil
 	if string.find(data.item.name, "WEAPON_", 1) ~= nil and GetSelectedPedWeapon(PlayerPedId()) == GetHashKey(data.item.name) then
 		TriggerEvent('dp_inventory:closeinventory', source)

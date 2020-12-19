@@ -93,7 +93,7 @@ function openTrunk()
 									useWhileDead = false,
 									canCancel = true,
 									controlDisables = {},
-									animation = false,
+									animation = nil,
 									prop = {},
 								}, function(status)
 									if not status then

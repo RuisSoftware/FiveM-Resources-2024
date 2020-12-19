@@ -34,6 +34,7 @@ client_scripts {
 	'client/addons/vault.lua',
 	'client/addons/property.lua',
 	'client/addons/bag.lua',
+	'client/generateWeapon.lua'
 }
 
 server_scripts {
@@ -42,6 +43,7 @@ server_scripts {
 	'config.lua',
 	'locales/*.lua',
 	'server/main.lua',
+	'server/weapons.lua',
 	'server/trunk.lua',
 	'server/glovebox.lua',
 	'server/ammunition.lua',
@@ -65,6 +67,10 @@ files {
 	'html/img/items/*.png',
 	'html/img/items/*.jpg',
 	'html/img/items/*.svg'
+}
+
+exports {
+	'GenerateWeapon',
 }
 
 dependencies {
