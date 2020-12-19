@@ -17,14 +17,15 @@ CREATE TABLE IF NOT EXISTS `inventory_trunk` (
 );
 
 CREATE TABLE IF NOT EXISTS `ammunition` (
-    `weapon_id` bigint unsigned auto_increment PRIMARY KEY,
+    `id` bigint unsigned auto_increment PRIMARY KEY,
     `owner` text null,
     `hash` text not null,
+    `weapon_id` text not null,
     `count` int default 0 not null,
     `attach` text not null default '[]',
 	`location` VARCHAR(255) NULL,
 	`original_owner` text NULL,
-	UNIQUE KEY (`weapon_id`)
+	UNIQUE KEY (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `inventory_hotbar` (
