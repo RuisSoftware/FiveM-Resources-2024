@@ -1,5 +1,5 @@
-INSERT INTO `jobs` (`name`, `label`, `SecondaryJob`) VALUES
-('runner', 'Athleet', 1);
+INSERT INTO `jobs` (`name`, `label`) VALUES
+('runner', 'Athleet');
 
 CREATE TABLE `marathon_times` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -1,5 +1,5 @@
-INSERT INTO `jobs` (`name`, `label`, `SecondaryJob`) VALUES
-('poolcleaner', 'Zwembad', 1);
+INSERT INTO `jobs` (`name`, `label`) VALUES
+('poolcleaner', 'Zwembad');
 
 INSERT INTO `job_grades` (`job_name`, `grade`, `name`, `label`, `salary`, `skin_male`, `skin_female`) VALUES
 ('poolcleaner', 0, 'interim', 'Schoonmaker', 150, '{}', '{}');
