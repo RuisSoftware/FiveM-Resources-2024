@@ -18,13 +18,15 @@ CREATE TABLE IF NOT EXISTS `inventory_trunk` (
 
 CREATE TABLE IF NOT EXISTS `ammunition` (
     `id` bigint unsigned auto_increment PRIMARY KEY,
-    `owner` text null,
+    `owner` text not null,
+	`original_owner` text not null,
     `hash` text not null,
+	`weapon_id` char(60) NOT NULL,
     `count` int default 0 not null,
     `attach` text not null default '[]',
-	`location` VARCHAR(255) NULL,
-	UNIQUE KEY (`id`)
+	UNIQUE KEY (`weapon_id`)
 );
+
 
 CREATE TABLE IF NOT EXISTS `inventory_slote` (
     `owner` text not null,
