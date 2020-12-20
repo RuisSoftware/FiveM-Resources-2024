@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `ammunition` (
 	UNIQUE KEY (`weapon_id`)
 );
 
-
 CREATE TABLE IF NOT EXISTS `inventory_hotbar` (
     `owner` text not null,
     `item` text not null,
@@ -43,7 +42,8 @@ INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0),
 	('society_police_black_money', 'Police black money ', 1),
-	('society_police_money', 'Police money ', 1)
+	('society_police_money', 'Police money ', 1),
+	('locker',	'Locker',	0)
 ;
 ALTER TABLE addon_account_data
 MODIFY owner VARCHAR(60);
@@ -51,11 +51,13 @@ ALTER TABLE addon_inventory_items
 MODIFY owner VARCHAR(60);
 
 INSERT INTO `addon_inventory` (`name`, `label`, `shared`) VALUES
-	('bag', 'Bag Inventory', 0)
+	('bag', 'Bag Inventory', 0),
+	('locker',	'Locker',	0)
 ;
 
 INSERT INTO `datastore` (`name`, `label`, `shared`) VALUES
-	('bag', 'Bag Datastore', 0)
+	('bag', 'Bag Datastore', 0),
+	('locker',	'Locker',	0)
 ;
 
 -- ONLY ADD MORE WEAPONS IF YOU ARE SURE! ALSO ADD THE NEW WEAPONS IN CONFIG
