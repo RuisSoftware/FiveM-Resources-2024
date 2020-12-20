@@ -36,7 +36,7 @@ CreateThread(function()
 	local disableVersionCheck = GetResourceMetadata(GetCurrentResourceName(), 'disable_version_check') == 'yes'
 	local disableVersionMessage = GetResourceMetadata(GetCurrentResourceName(), 'disable_version_check_message') == 'yes'
 	if not disableVersionCheck then
-		PerformHttpRequest('https://raw.githubusercontent.com/dutchplayers/FiveM-Resources/master/ESX%20Inventory%20HUD/version',
+		PerformHttpRequest('https://raw.githubusercontent.com/dutchplayers/FiveM-Resources/master/ESX/Inventory%20HUD/version',
 		function(err,body)
 			if err == 200 then
 				local version = GetResourceMetadata(GetCurrentResourceName(), 'version')
