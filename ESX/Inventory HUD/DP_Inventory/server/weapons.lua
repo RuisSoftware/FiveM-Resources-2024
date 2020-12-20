@@ -140,7 +140,7 @@ AddEventHandler('DP_Inventory:updateAmmoCount', function(hash, wepInfo)
 		['@attach'] = json.encode(wepInfo.attach)
 	}, function(results)
 		if results == 0 then
-			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach, weapon_id, original_owner) VALUES (@owner, @hash, @count, @attach, @weapon_id, @original_owner)', {
+			MySQL.Async.execute('INSERT INTO ammunition (owner, hash, count, attach, weapon_id, original_owner) VALUES (@owner, @hash, @count, @attach, @weapon_id, @original_owner) ON DUPLICATE KEY UPDATE owner = @owner, hash = @hash, count = @count, attach = @attach, weapon_id = @weapon_id, original_owner = @original_owner', {
 				['@owner'] = player.identifier,
 				['@hash'] = hash,
 				['@original_owner'] = player.identifier,
