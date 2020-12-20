@@ -72,18 +72,19 @@ We did not make any of these scripts. We do not take any credits. Did we forget 
 > Read other support files to make esx_inventoryhud work with esx_policejob and esx_property!
 
 ![features](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/features.png)
-- Drag and drop
+- Drag and drop to use an item
 - Double click to use an item
-- Using items
-- Dropping items
-- Giving items
-- Item hotbar
+- Dropping items and pick them up
+- Giving items to other players
+- Item hotbar with saved position in database
 - Use item by 1-5 key
 - Accounts support (bank, black money, ...)
 - Weapons and ammunition clips as item
+- Weapon attachements (like a flashlight on your pistol)
 - Configurable shops in config (police, nightclub, blackmarket, weapons)
 - Property support (esx_property)
 - Motels support (lsrp-motels)
+- Rentable lockers (integrated)
 - Trunk support (integrated)
 - Glovebox support (integrated)
 - Bag support (integrated)
