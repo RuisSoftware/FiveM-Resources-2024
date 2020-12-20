@@ -21,6 +21,7 @@ Config.UseLicense = false -- You must have esx_licenses working on your server.
 Config.useAdvancedShop = true -- DP_Framework shop system. Not shared, sorry. Just set to false and use the in-build custom shop.
 Config.disableVersionCheck = false
 Config.disableVersionMessage = false
+Config.versionCheckDelay = 10 -- in minutes
 
 Config.Command = {Steal = 'steal', CloseInv = 'closeinventory', Unequip = 'unequip'} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
 Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.

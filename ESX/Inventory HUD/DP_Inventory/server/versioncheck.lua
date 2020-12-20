@@ -13,7 +13,7 @@ local update =
 
 ^4=========================================
 ^2❤️ ESX Inventory HUD for ESX 1.2 ❤️
-^3 You use the latest version.
+^3 You use the latest version. (^6%s^3)
 ^4=========================================
 ^7
 ]]
@@ -22,7 +22,7 @@ local mismatch =
 [[
 
 ^4===================================================
-^1❤️ ESX Inventory HUD for ESX 1.2 ❤ ️
+^1❤️ ESX Inventory HUD for ESX 1.2 ❤️ 
 ^1 You're running ^6%s ^1and the latest is ^6%s
 ^4===================================================
 ^7
@@ -35,7 +35,7 @@ CreateThread(function()
 				local version = GetResourceMetadata(GetCurrentResourceName(), 'version')
 				if version == tostring(body) then
 					if not Config.disableVersionMessage then
-						print(update)
+						print(update:format(version))
 					end
 				else
 					print(mismatch:format(version or 'Unkown', body))
@@ -45,7 +45,7 @@ CreateThread(function()
 				--print(error)
 			end
 		end, 'GET', json.encode({}), {ContentType = 'html/text'})
-		Wait(60000)
+		Wait(Config.versionCheckDelay*60000)
 	end
 end)
 
