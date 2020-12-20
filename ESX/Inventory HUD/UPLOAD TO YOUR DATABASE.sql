@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `inventory_hotbar` (
     `slot` int default 0 not null
 );
 
-CREATE TABLE `inventory_lockers` (
+CREATE TABLE IF NOT EXISTS `inventory_lockers` (
   `owner` varchar(50) NOT NULL,
   `lockerName` varchar(50) NOT NULL
 );
