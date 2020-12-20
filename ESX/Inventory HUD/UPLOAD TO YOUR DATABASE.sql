@@ -34,6 +34,11 @@ CREATE TABLE IF NOT EXISTS `inventory_hotbar` (
     `slot` int default 0 not null
 );
 
+CREATE TABLE `inventory_lockers` (
+  `owner` varchar(50) NOT NULL,
+  `lockerName` varchar(50) NOT NULL
+);
+
 INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_black_money', 'Bag Black Money ', 0),
 	('bag_money', 'Bag Money ', 0),
