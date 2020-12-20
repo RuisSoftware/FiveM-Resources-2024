@@ -9,9 +9,6 @@ url 'https://github.com/dutchplayers/FiveM-Resources'
 
 ui_page 'html/ui.html'
 
-disable_version_check 'no'
-disable_version_check_message 'no'
-
 client_scripts {
 	'@es_extended/locale.lua',
 	'config.lua',
