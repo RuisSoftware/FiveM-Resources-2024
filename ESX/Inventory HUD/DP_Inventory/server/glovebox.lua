@@ -76,7 +76,7 @@ function MakeDataStoreGlovebox(plate)
 	local owned = getOwnedVehicle(plate)
 	local dataStore = CreateDataStoreGlovebox(plate, owned, data)
 	SharedDataStores[plate] = dataStore
-	MySQL.Async.execute("INSERT INTO inventory_glovebox(plate,data,owned) VALUES (@plate,'{}',@owned)", {
+	MySQL.Async.execute("INSERT INTO inventory_glovebox(plate,data,owned) VALUES (@plate,'{}',@owned) ON DUPLICATE KEY UPDATE plate = @plate, data = '{}', owned = @owned", {
 		["@plate"] = plate,
 		["@owned"] = owned
 	})
