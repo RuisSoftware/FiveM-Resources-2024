@@ -3,7 +3,7 @@
  Go to you es_extended/server/main.lua line 423 the event name is esx:onPickup and add after line 430 this code
  ```lua
 if pickup.weaponID ~= nil then
-	TriggerEvent('dp_inventory:weaponID', pickup.weaponID, xPlayer.identifier)
+	TriggerEvent('DP_Inventory:weaponID', pickup.weaponID, xPlayer.identifier)
 end
 ```
 Very important so when somebody pick the weapon from ground is the same it should like like that after
