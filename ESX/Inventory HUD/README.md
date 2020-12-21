@@ -59,6 +59,126 @@ TriggerServerEvent('dp_inventory:updateAmmoCount', GetHashKey(weaponModel), wepI
 local addToSlote = true
 TriggerEvent('dp_inventory:addCurrentWeapon', weaponModel, wepInfo, addToSlote)
 ```
+
+For police job you ca do like that and when they buy it its going to have a unique weapon id.
+This is clined line 1092
+```lua
+local hasWeapon = false
+for number,items in pairs(PlayerData.inventory) do
+	if items.name == v.weapon then 
+		hasWeapon = true
+	end
+end
+```
+esx_policejob/client/main.lua line 1184 replace all with the code
+```lua
+function OpenWeaponComponentShop(components, weaponName, parentShop)
+	ESX.TriggerServerCallback('DP_Inventory:getAttachments', function(componentsDB)
+		for i=1,#components do
+			if type(components[i]) == 'table' then
+				for k,v in pairs(components[i]) do
+					if k == 'name' then
+						if v == 'clip_default' then
+							table.remove(components, i)
+						end
+					end
+				end
+			end
+			if componentsDB ~= nil then
+				for j=i, #componentsDB do
+					if components[i] ~= nil then
+						if componentsDB[j] == components[i].name then
+							components[i].label = ('%s: <span style="color:green;">%s</span>'):format(components[i].componentNameL, _U('armory_owned'))
+							components[i].hasComponent = true
+						elseif componentsDB[j] == 'mag' and components[i].name == 'clip_extended' then
+							components[i].label = ('%s: <span style="color:green;">%s</span>'):format(components[i].componentNameL, _U('armory_owned'))
+							components[i].hasComponent = true
+						end
+					end
+				end
+			end
+		end
+		ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'armory_buy_weapons_components', {
+			title    = _U('armory_componenttitle'),
+			align    = 'top-left',
+			elements = components
+		}, function(data, menu)
+			if data.current.hasComponent then
+				ESX.ShowNotification(_U('armory_hascomponent'))
+			else
+				ESX.TriggerServerCallback('esx_policejob:buyWeapon', function(bought)
+					if bought then
+						if data.current.price > 0 then
+							ESX.ShowNotification(_U('armory_bought', data.current.componentLabel, ESX.Math.GroupDigits(data.current.price)))
+						end
+	
+						menu.close()
+						parentShop.close()
+						OpenBuyWeaponsMenu()
+					else
+						ESX.ShowNotification(_U('armory_money'))
+					end
+				end, weaponName, 2, data.current.componentNum)
+			end
+		end, function(data, menu)
+			menu.close()
+		end)
+	end, weaponName)
+end
+```
+esx_policejob/server/main.lua line 371 replace all with the code
+```lua
+ESX.RegisterServerCallback('esx_policejob:buyWeapon', function(source, cb, weaponName, type, componentNum)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local authorizedWeapons, selectedWeapon = Config.AuthorizedWeapons[xPlayer.job.grade_name]
+
+	for k,v in ipairs(authorizedWeapons) do
+		if v.weapon == weaponName then
+			selectedWeapon = v
+			break
+		end
+	end
+
+	if not selectedWeapon then
+		print(('esx_policejob: %s attempted to buy an invalid weapon.'):format(xPlayer.identifier))
+		cb(false)
+	else
+		-- Weapon
+		if type == 1 then
+			if xPlayer.getMoney() >= selectedWeapon.price then
+				xPlayer.removeMoney(selectedWeapon.price)
+				TriggerClientEvent('DP_Inventory:buyWeaponPolice', source, xPlayer, weaponName, 14)
+				cb(true)
+			else
+				cb(false)
+			end
+
+		-- Weapon Component
+		elseif type == 2 then
+			local price = selectedWeapon.components[componentNum]
+			local weaponNum, weapon = ESX.GetWeapon(weaponName)
+			local component = weapon.components[componentNum]
+
+			if component then
+				if xPlayer.getMoney() >= price then
+					xPlayer.removeMoney(price)
+					local compName = component.name
+					if compName == 'clip_extended' then
+						compName = 'mag'
+					end
+					TriggerEvent('DP_Inventory:giveWeaponComponent',xPlayer, compName, weaponName)
+					cb(true)
+				else
+					cb(false)
+				end
+			else
+				print(('esx_policejob: %s attempted to buy an invalid weapon component.'):format(xPlayer.identifier))
+				cb(false)
+			end
+		end
+	end
+end)
+```
 Your number 1 inventory for ESX 1.2!
 
 We have edited the original esx_inventoryhud resource from [Trsak](https://forum.cfx.re/t/release-esx-inventory-hud-2-4-properties-trunks-players-shops-storages/).
