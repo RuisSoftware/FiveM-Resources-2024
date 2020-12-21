@@ -33,6 +33,12 @@ AddEventHandler('DP_Inventory:addCurrentWeapon', function(waeponToAdd, attachmen
     end
 end)
 
+RegisterNetEvent('DP_Inventory:buyWeaponPolice')
+AddEventHandler('DP_Inventory:buyWeaponPolice', function(xPlayer, weapon, ammo)
+    local weapon_id = GeneratePoliceWeapon()
+    TriggerServerEvent('DP_Inventory:buyWeapon', xPlayer, weapon, weapon_id, ammo)
+end)
+
 RegisterNetEvent('DP_Inventory:removeCurrentWeapon')
 AddEventHandler('DP_Inventory:removeCurrentWeapon', function()
     if currentWeapon ~= nil then
@@ -354,6 +360,29 @@ function GenerateWeapon()
 	end
 
 	return generatedWeapon
+end
+
+function GeneratePoliceWeapon()
+	local generatedPoliceWeapon
+	local doBreak = false
+
+	while true do
+		Citizen.Wait(2)
+		math.randomseed(GetGameTimer())
+		generatedPoliceWeapon = GetRandomLetter(15) .. GetRandomNumber(15) .. 'POLICE' ..GetRandomLetter(5) .. 'POLICE' ..GetRandomNumber(5)
+
+		ESX.TriggerServerCallback('DP_Inventory:isWeaponNumberTaken', function(isWeaponTaken)
+			if not isWeaponTaken then
+				doBreak = true
+			end
+		end, generatedPoliceWeapon)
+
+		if doBreak then
+			break
+		end
+	end
+
+	return generatedPoliceWeapon
 end
 
 function GetRandomNumber(length)
