@@ -161,7 +161,7 @@ ESX.RegisterServerCallback('DP_Inventory:getShopItems', function(source, cb, sho
 			end
 		end
 		if shoptype == 'nightclubshop' then
-			for _, v in pairs(Config.Shops.NightclubShop.Items) do
+			for _, v in pairs(Config.Shops.ShopNightclub.Items) do
 				if v.name == itemResult[i].name then
 					table.insert(itemShopList, {
 						type = 'item_standard',
