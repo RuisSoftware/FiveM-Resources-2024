@@ -83,27 +83,27 @@ Citizen.CreateThread(function()
 			elseif  IsDisabledControlJustReleased(1, 157) and canFire then
 				if fastWeapons[1] ~= nil and UpdateOnscreenKeyboard() == 2 then
 					TriggerServerEvent("esx:useItem", fastWeapons[1])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U("item_used"), 1, false)
+					if not string.find(fastWeapons[1], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U("item_used"), 1, false) end
 				end
 			elseif IsDisabledControlJustReleased(1, 158) and canFire then
 				if fastWeapons[2] ~= nil and UpdateOnscreenKeyboard() == 2 then
 					TriggerServerEvent("esx:useItem", fastWeapons[2])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U("item_used"), 1, false)
+					if not string.find(fastWeapons[1], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U("item_used"), 1, false) end
 				end
 			elseif IsDisabledControlJustReleased(1, 160) and canFire then
 				if fastWeapons[3] ~= nil and UpdateOnscreenKeyboard() == 2 then
 					TriggerServerEvent("esx:useItem", fastWeapons[3])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U("item_used"), 1, false)
+					if not string.find(fastWeapons[1], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U("item_used"), 1, false) end
 				end
 			elseif IsDisabledControlJustReleased(1, 164) and canFire then
 				if fastWeapons[4] ~= nil and UpdateOnscreenKeyboard() == 2 then
 					TriggerServerEvent("esx:useItem", fastWeapons[4])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U("item_used"), 1, false)
+					if not string.find(fastWeapons[1], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U("item_used"), 1, false) end
 				end
 			elseif IsDisabledControlJustReleased(1, 165) and canFire then
 				if fastWeapons[5] ~= nil and UpdateOnscreenKeyboard() == 2 then
 					TriggerServerEvent("esx:useItem", fastWeapons[5])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U("item_used"), 1, false)
+					if not string.find(fastWeapons[1], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U("item_used"), 1, false) end
 				end
 			elseif IsDisabledControlJustReleased(1, 37) then
 				HudForceWeaponWheel(false)
