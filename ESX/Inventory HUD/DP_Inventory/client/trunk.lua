@@ -9,6 +9,21 @@ local CloseToVehicle = false
 local entityWorld = nil
 local globalplate = nil
 local lastChecked = 0
+local vehStorage = {}
+
+function setVehicleTable()
+	local vehicleTable = {['adder']=1, ['osiris']=0, ['pfister811']=0, ['penetrator']=0, ['autarch']=0, ['bullet']=0, ['cheetah']=0, ['cyclone']=0, ['voltic']=0, ['reaper']=1, ['entityxf']=0, ['t20']=0, ['taipan']=0, ['tempesta']=2, ['tezeract']=0, ['torero']=1, ['turismor']=0, ['fmj']=0, ['gp1']=2, ['infernus ']=0, ['italigtb']=1, ['italigtb2']=1, ['nero']=2, ['nero2']=0, ['vacca']=1, ['vagner']=0, ['visione']=0, ['prototipo']=0, ['xa21']=2, ['zentorno']=0}
+	--[[
+		0 = vehicle has no storage
+		1 = vehicle storage is in bonnet
+	]]
+	for k, v in pairs(vehicleTable) do
+	getHash = GetHashKey(k)
+	vehStorage[getHash] = v
+	end
+end
+  
+setVehicleTable()
 
 RegisterNetEvent("DP_Inventory_trunk:setOwnedVehicule")
 AddEventHandler("DP_Inventory_trunk:setOwnedVehicule", function(vehicle)
@@ -28,27 +43,26 @@ function getItemyWeight(item)
 end
 
 function VehicleInFront()
-	local pos = GetEntityCoords(GetPlayerPed(-1))
-	local entityWorld = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 4.0, 0.0)
-	local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, GetPlayerPed(-1), 0)
+	local pos = GetEntityCoords(PlayerPedId())
+	local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 4.0, 0.0)
+	local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, PlayerPedId(), 0)
 	local a, b, c, d, result = GetRaycastResult(rayHandle)
 	return result
 end
 
 function openTrunk()
-	local playerPed = GetPlayerPed(-1)
-	local coords = GetEntityCoords(playerPed)
-	local vehicle = VehicleInFront()
-	globalplate = GetVehicleNumberPlateText(vehicle)
-
+	local playerPed = PlayerPedId()
 	if not IsPedInAnyVehicle(playerPed) then
+		local coords = GetEntityCoords(playerPed)
+		local vehicle = VehicleInFront()
+		globalplate = GetVehicleNumberPlateText(vehicle)
+
 		myVeh = false
-		local thisVeh = VehicleInFront()
 		PlayerData = ESX.GetPlayerData()
 
 		for i = 1, #vehiclePlate do
 			local vPlate = all_trim(vehiclePlate[i].plate)
-			local vFront = all_trim(GetVehicleNumberPlateText(thisVeh))
+			local vFront = all_trim(GetVehicleNumberPlateText(vehicle))
 			if vPlate == vFront then
 				myVeh = true
 			elseif lastChecked < GetGameTimer() - 60000 then
@@ -57,7 +71,7 @@ function openTrunk()
 				Wait(2000)
 				for i = 1, #vehiclePlate do
 					local vPlate = all_trim(vehiclePlate[i].plate)
-					local vFront = all_trim(GetVehicleNumberPlateText(thisVeh))
+					local vFront = all_trim(GetVehicleNumberPlateText(vehicle))
 					if vPlate == vFront then
 						myVeh = true
 					end
@@ -67,22 +81,27 @@ function openTrunk()
 
 		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.CheckOwnership and myVeh) then
 			if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
-				CloseToVehicle = true
 				local vehFront = VehicleInFront()
-				local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-				local closecar = GetClosestVehicle(x, y, z, 4.0, 0, 71)
-
-				if vehFront > 0 and closecar ~= nil and GetPedInVehicleSeat(closecar, -1) ~= GetPlayerPed(-1) then
+				vehHash = GetEntityModel(vehFront)
+				checkVehicle = vehStorage[vehHash]
+				if checkVehicle == 1 then open, vehBone = 4, GetEntityBoneIndexByName(vehFront, 'bonnet')
+				elseif checkVehicle == nil then open, vehBone = 5, GetEntityBoneIndexByName(vehFront, 'boot') elseif checkVehicle == 2 then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') else exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby')) return end
+				local vehiclePos = GetWorldPositionOfEntityBone(vehFront, vehBone)
+		
+				local pedDistance = GetDistanceBetweenCoords(vehiclePos, coords, 1)
+				if (open == 5 and checkVehicle == nil) then if pedDistance < 3.0 then CloseToVehicle = true end elseif (open == 5 and checkVehicle == 2) then if pedDistance < 3.0 then CloseToVehicle = true end elseif open == 4 then if pedDistance < 3.0 then CloseToVehicle = true end end	
+			
+				if vehFront > 0 and GetPedInVehicleSeat(vehFront, -1) ~= PlayerPedId() and CloseToVehicle then
 					lastVehicle = vehFront
-					local model = GetDisplayNameFromVehicleModel(GetEntityModel(closecar))
-					local locked = GetVehicleDoorLockStatus(closecar)
+					local model = GetDisplayNameFromVehicleModel(GetEntityModel(vehFront))
+					local locked = GetVehicleDoorLockStatus(vehFront)
 					local class = GetVehicleClass(vehFront)
 					ESX.UI.Menu.CloseAll()
 					if ESX.UI.Menu.IsOpen("default", GetCurrentResourceName(), "inventory") then
-						SetVehicleDoorShut(vehFront, 5, false)
+						SetVehicleDoorShut(vehFront, open, false)
 					else
-						if locked == 1 or class == 15 or class == 16 or class == 14 then
-							SetVehicleDoorOpen(vehFront, 5, false, false)
+						if locked == 1 then
+							SetVehicleDoorOpen(vehFront, open, false, false)
 							ESX.UI.Menu.CloseAll()
 							if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 								CloseToVehicle = true
@@ -97,10 +116,14 @@ function openTrunk()
 									prop = {},
 								}, function(status)
 									if not status then
-										OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.TrunkSize[class], myVeh)
-										if Config.CameraAnimationTrunk == true then
-											DeleteSkinCam()
-											loadCamera(0, 3)
+										if VehicleInFront() == lastVehicle then
+											OpenCoffreInventoryMenu(GetVehicleNumberPlateText(vehFront), Config.TrunkSize[class], myVeh)
+											if Config.CameraAnimationTrunk == true then
+												DeleteSkinCam()
+												loadCamera(0, 3)
+											end
+										else
+											exports['mythic_notify']:SendAlert('error', _U('trunk_closed'))
 										end
 									end
 								end)
@@ -135,21 +158,33 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Wait(0)
-		local pos = GetEntityCoords(GetPlayerPed(-1))
-		if CloseToVehicle then
-			local vehicle = GetClosestVehicle(pos["x"], pos["y"], pos["z"], 5.0, 0, 70)
-			if DoesEntityExist(vehicle) then
+	Wait(50)
+
+	if CloseToVehicle then
+		local playerPed = GetPlayerPed(-1)
+		local coords = GetEntityCoords(playerPed)
+		local vehicle = VehicleInFront()
+		
+		if checkVehicle == 1 then open, vehBone = 4, GetEntityBoneIndexByName(vehicle, 'bonnet')
+		elseif checkVehicle == nil then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') elseif checkVehicle == 2 then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') else return end
+		
+		local vehiclePos = GetWorldPositionOfEntityBone(vehicle, vehBone)
+		local pedDistance = GetDistanceBetweenCoords(vehiclePos, coords, 1)
+
+		local isClose = false
+		if (open == 5 and checkVehicle == nil) then if pedDistance < 3.0 then isClose = true end elseif (open == 5 and checkVehicle == 2) then if pedDistance < 3.0 then isClose = true end elseif open == 4 then if pedDistance < 3.0 then isClose = true end end
+		if DoesEntityExist(vehicle) and isClose then
 			CloseToVehicle = true
-			else
+		else
 			CloseToVehicle = false
 			lastOpen = false
 			ESX.UI.Menu.CloseAll()
-			SetVehicleDoorShut(lastVehicle, 5, false)
-			end
+			SetVehicleDoorShut(lastVehicle, open, false)
+			lastVehicle = nil
+		end
 		end
 	end
-end)
+  end)
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded",function(xPlayer)
