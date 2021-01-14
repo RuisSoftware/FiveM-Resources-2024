@@ -53,6 +53,7 @@ AddEventHandler('DP_Inventory:stopRentingLocker', function(lockerId, lockerName)
 	end)
 end)
 
+oldESX = false -- dont touch
 function PayLockerRent(d, h, m)
 	MySQL.Async.fetchAll('SELECT * FROM inventory_lockers', {}, function(result)
 		for i=1, #result, 1 do
@@ -61,7 +62,24 @@ function PayLockerRent(d, h, m)
 				xPlayer.removeAccountMoney('bank', Config.DailyLockerRentPrice)
 				TriggerClientEvent('mythic_notify:client:SendAlert', xPlayer.source, { type = 'inform', text = 'Je betaalde €'..Config.DailyLockerRentPrice..' voor de verhuur van kluisjes.', length = 8000 })
 			else
-				MySQL.Sync.execute('UPDATE users SET bank = bank - @bank WHERE owner = @identifier', { ['@bank'] = Config.DailyLockerRentPrice, ['@identifier'] = result[i].identifier })
+				if oldESX then
+					MySQL.Sync.execute('UPDATE users SET bank = bank - @bank WHERE owner = @identifier', { ['@bank'] = Config.DailyLockerRentPrice, ['@identifier'] = result[i].identifier })
+				else
+					print("[^1"..GetCurrentResourceName().."^7] An error occured while removing money from "..identifier.." ("..tostring(Config.DailyLockerRentPrice).."$). The player is offline. Forcing removing money")
+					MySQL.Async.fetchScalar('SELECT accounts FROM users WHERE identifier = @identifier', {
+						['@identifier'] = result[i].identifier
+					}, function(result)
+						if result then
+							local foundAccounts = json.decode(result)            
+							foundAccounts.bank = foundAccounts.bank - Config.DailyLockerRentPrice
+							MySQL.Async.execute('UPDATE users SET accounts = @accounts WHERE identifier = @identifier', {
+								['@accounts'] = json.encode(foundAccounts),
+								['@identifier'] = result[i].identifier
+							}, function()
+							end)
+						end
+					end)
+				end
 			end
 		end
 	end)
