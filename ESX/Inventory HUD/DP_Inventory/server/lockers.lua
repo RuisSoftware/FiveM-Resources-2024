@@ -65,7 +65,7 @@ function PayLockerRent(d, h, m)
 				if oldESX then
 					MySQL.Sync.execute('UPDATE users SET bank = bank - @bank WHERE owner = @identifier', { ['@bank'] = Config.DailyLockerRentPrice, ['@identifier'] = result[i].identifier })
 				else
-					print("[^1"..GetCurrentResourceName().."^7] An error occured while removing money from "..identifier.." ("..tostring(Config.DailyLockerRentPrice).."$). The player is offline. Forcing removing money")
+					print("[^1"..GetCurrentResourceName().."^7] An error occured while removing money from "..result[i].identifier.." ("..tostring(Config.DailyLockerRentPrice).."$). The player is offline. Forcing removing money")
 					MySQL.Async.fetchScalar('SELECT accounts FROM users WHERE identifier = @identifier', {
 						['@identifier'] = result[i].identifier
 					}, function(result)
