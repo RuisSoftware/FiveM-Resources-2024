@@ -353,7 +353,7 @@ ESX.RegisterServerCallback('DP_Inventory:buyLicense', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	if xPlayer.getMoney() >= Config.LicensePrice then
 		xPlayer.removeMoney(Config.LicensePrice)
-		TriggerEvent('esx_licenses:addLicense', source, 'weapon', function()
+		TriggerEvent('esx_license:addLicense', source, 'weapon', function()
 			cb(true)
 		end)
 	else
