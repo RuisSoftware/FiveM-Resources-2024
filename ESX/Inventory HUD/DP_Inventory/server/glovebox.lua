@@ -271,6 +271,7 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				xPlayer.addAccountMoney(item, count)
 
 				local blackMoney = 0
+				local cashMoney = 0
 				local items = {}
 				local weapons = {}
 				weapons = (store.get("weapons") or {})
@@ -278,6 +279,11 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				local blackAccount = (store.get("black_money")) or 0
 				if blackAccount ~= 0 then
 					blackMoney = blackAccount[1].amount
+				end
+						
+				local cashAccount = (store.get("money")) or 0
+				if cashAccount ~= 0 then
+					cashMoney = cashAccount[1].amount
 				end
 
 				local coffres = (store.get("coffres") or {})
@@ -408,7 +414,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					table.insert(blackMoney, {amount = count})
 				end
 
-				if (getTotalInventoryWeightGlovebox(plate) + blackMoney[1].amount / 10) > max then
+				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					xPlayer.removeAccountMoney(item, count)
@@ -435,7 +441,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					cashMoney = {}
 					table.insert(cashMoney, {amount = count})
 				end
-				if (getTotalInventoryWeightGlovebox(plate) + cashMoney[1].amount / 10) > max then
+				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					xPlayer.removeMoney(count)
