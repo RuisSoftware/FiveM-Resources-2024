@@ -408,7 +408,7 @@ AddEventHandler("DP_Inventory_trunk:putItem", function(plate, type, item, count,
 					blackMoney = {}
 					table.insert(blackMoney, {amount = count})
 				end
-				if (getTotalInventoryWeightTrunk(plate) + blackMoney[1].amount / 10) > max then
+				if (getTotalInventoryWeightTrunk(plate) + (count / 10)) > max then
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					xPlayer.removeAccountMoney(item, count)
@@ -437,7 +437,7 @@ AddEventHandler("DP_Inventory_trunk:putItem", function(plate, type, item, count,
 					table.insert(cashMoney, {amount = count})
 				end
 
-				if (getTotalInventoryWeightTrunk(plate) + cashMoney[1].amount / 10) > max then
+				if (getTotalInventoryWeightTrunk(plate) + (count / 10)) > max then
 
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
