@@ -85,4 +85,10 @@ Locales["en"] = {
 	['not_enough_in_vault'] = 'there is not enough space for this item in the safe!',
 	['player_cannot_hold'] = 'you dont have enough space in your inventory!',
 	['amount_invalid'] = 'invalid number',
+	-- Lockers
+	['locker_blip'] = 'Locker',
+	['enter_lockerroom'] = 'Enter Locker room',
+	['exit_lockerroom'] = 'Enter Locker room',
+	['open_locker'] = 'Open Locker',
+	['cancel_lockerrent'] = 'Cancel Rent on Locker',
 }
