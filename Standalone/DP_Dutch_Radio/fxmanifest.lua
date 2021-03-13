@@ -1,12 +1,12 @@
 fx_version 'cerulean'
-game 'gta5'
+game "gta5"
 
-name 'DP_Dutch_Radio'
-author 'Dutch Players'
-description 'Free, Dutch Radio'
-version '1.2.2'
-url 'https://github.com/dutchplayers/FiveM-Resources'
+name "fivem-radio"
+description "An in-game radio with real stations."
+author "Hellslicer"
+version "1.0.0"
 
+-- Example custom radios
 supersede_radio "RADIO_01_CLASS_ROCK" { url = "	http://icecast.omroep.nl/radio1-bb-mp3", volume = 0.2, name = "Radio 1" }
 supersede_radio "RADIO_02_POP" { url = "http://icecast.omroep.nl/radio2-bb-mp3", volume = 0.2, name = "Radio 2" }
 supersede_radio "RADIO_03_HIPHOP_NEW" { url = "http://icecast.omroep.nl/3fm-bb-mp3", volume = 0.2, name = "3FM" }
@@ -16,7 +16,6 @@ supersede_radio "RADIO_06_COUNTRY" { url = "http://playerservices.streamtheworld
 supersede_radio "RADIO_07_DANCE_01" { url = "http://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR11.mp3", volume = 0.2, name = "Radio 538 Hitzone" }
 supersede_radio "RADIO_08_MEXICAN" { url = "https://stream.100p.nl/100pctnl.mp3", volume = 0.2, name = "100%NL" }
 supersede_radio "RADIO_09_HIPHOP_OLD" { url = "	https://stream.100p.nl/web01_mp3", volume = 0.2, name = "100%NL Feest" }
----------------geen radio icon
 supersede_radio "RADIO_12_REGGAE" { url = "https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3", volume = 0.2, name = "QMusic" }
 supersede_radio "RADIO_13_JAZZ" { url = "https://stream.slam.nl/slam_mp3", volume = 0.2, name = "Slam!" }
 supersede_radio "RADIO_14_DANCE_02" { url = "http://stream.radiocorp.nl/web10_mp3", volume = 0.2, name = "Slam! Non Stop" }
