@@ -22,7 +22,7 @@ function setVehicleTable()
 	vehStorage[getHash] = v
 	end
 end
-  
+
 setVehicleTable()
 
 RegisterNetEvent("DP_Inventory_trunk:setOwnedVehicule")
@@ -52,11 +52,12 @@ end
 
 function openTrunk()
 	local playerPed = PlayerPedId()
+	
+
 	if not IsPedInAnyVehicle(playerPed) then
 		local coords = GetEntityCoords(playerPed)
 		local vehicle = VehicleInFront()
 		globalplate = GetVehicleNumberPlateText(vehicle)
-
 		myVeh = false
 		PlayerData = ESX.GetPlayerData()
 

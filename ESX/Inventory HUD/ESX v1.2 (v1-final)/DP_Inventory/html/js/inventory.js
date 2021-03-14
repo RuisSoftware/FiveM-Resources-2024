@@ -240,7 +240,7 @@ function inventorySetup(items, fastItems) {
     }
 }
 
-function makeDraggables(){ // Fast items by Condo, merged to the original ESX Inventory HUD by Tsrak.
+function makeDraggables(){ // Fast items by Condo, merged to the original DP Inventory HUD by Tsrak.
 	$('#itemFast-1').droppable({
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");

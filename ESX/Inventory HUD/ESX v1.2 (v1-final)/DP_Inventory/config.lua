@@ -1,27 +1,27 @@
 Config = {}
-Config.ServerName = 'Texel'
+Config.ServerName = 'Zeestad'
 Config.Locale = 'nl' -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
 Config.ExcludeAccountsList = {'bank', 'money'} -- DO NOT TOUCH!
 
 Config.IncludeCash = true -- Include cash in inventory? true or false.
 Config.IncludeAccounts = true -- Include accounts (bank, black money, ...)? true or false.
-Config.CameraAnimationPocket = true -- Set camera focus towards player if in inventory.
-Config.CameraAnimationBag = true -- Set camera focus towards player if in inventory.
-Config.CameraAnimationTrunk = true -- Set camera focus towards player if in inventory.
-Config.CameraAnimationGlovebox = true -- Set camera focus towards player if in inventory.
+Config.CameraAnimationPocket = false -- Set camera focus towards player if in inventory.
+Config.CameraAnimationBag = false -- Set camera focus towards player if in inventory.
+Config.CameraAnimationTrunk = false -- Set camera focus towards player if in inventory.
+Config.CameraAnimationGlovebox = false -- Set camera focus towards player if in inventory.
 Config.EverybodyCanRob = true -- Rob a dead or mugging or handcuffed person or allow jobs only?
 Config.JobOnlyInventory = true -- Can jobs use /openinventory ID from anywere? If False only admins can do this.
 Config.AllowModerators = false -- Can moderators use /openinventory ID from anywere?
-Config.CheckOwnership = false -- If true, Only owner of vehicle can store items in trunk and glovebox. Only if this is on TRUE Config.Allow.JOBNAME will work.
+Config.CheckOwnership = false -- If true, Only owner of vehicle can store items in trunk and glovebox. Only if this is on TRUE Config.AllowJOBNAME will work.
 Config.AllowPolice = true -- If true, police will be able to search players' trunks.
 Config.AllowNightclub = true -- If true, nightclub will be able to search players' trunks.
 Config.AllowMafia = true -- If true, mafia will be able to search players' trunks.
 Config.IllegalshopOpen = false -- if true everybody can enter this shop. If false only Config.InventoryJob.Illegal can enter this shop.
-Config.UseLicense = false -- You must have esx_licenses working on your server. 
-Config.useAdvancedShop = true -- DP_Framework shop system. Not shared, sorry. Just set to false and use the in-build custom shop.
+Config.UseLicense = false -- You must have esx_license working on your server. 
+Config.useAdvancedShop = false -- es_extended shop system. Not shared, sorry. Just set to false and use the in-build custom shop.
 Config.disableVersionCheck = false
 Config.disableVersionMessage = false
-Config.versionCheckDelay = 10 -- in minutes
+Config.versionCheckDelay = 10 -- In minutes
 
 Config.Command = {Steal = 'steal', CloseInv = 'closeinventory', Unequip = 'unequip'} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
 Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.
@@ -82,33 +82,33 @@ Config.Lockers = {
 
 Config.LicensePrice = 25000
 
-Config.ShopMinimumGradePolice = 0 -- minimum grade to open the police shop
+Config.ShopMinimumGradePolice = 9 -- minimum grade to open the police shop
 Config.ShopMinimumGradeNightclub = 0
 Config.ShopMinimumGradeMafia = 0
 
 -- BLIPS & MARKERS
 Config.MarkerSize = {x = 1.5, y = 1.5, z = 1.5}
 Config.MarkerColor = {r = 0, g = 128, b = 255}
-Config.Color = 2 -- currently used for most shop blip color.
+Config.Color = 0 -- currently used for most shop blip color.
 Config.WeaponColor = 1 -- to be optimized....
 
 Config.ShowDrugMarketBlip = true
 Config.DrugStoreBlipID = 140
 Config.ShowRegularShopBlip = true
-Config.ShopBlipID = 52
+Config.ShopBlipID = 59
 Config.ShowRobsLiquorBlip = true
 Config.LiquorBlipID = 93
 Config.ShowYouToolBlip = true
 Config.YouToolBlipID = 402
-Config.ShowBlackMarketBlip = true
+Config.ShowBlackMarketBlip = false
 Config.BlackMarketBlipID = 110
-Config.ShowPoliceShopBlip = true
+Config.ShowPoliceShopBlip = false
 Config.PoliceShopBlipID = 110
-Config.ShowNightclubShopBlip = true
+Config.ShowNightclubShopBlip = false
 Config.NightclubShopBlipID = 110
-Config.ShowWeaponShopBlip = true
+Config.ShowWeaponShopBlip = false
 Config.WeaponShopBlipID = 110
-Config.ShowIllegalShopBlip = true
+Config.ShowIllegalShopBlip = false
 Config.IllegalShopBlipID = 110
 Config.ShowPrisonShopBlip = true
 Config.PrisonShopBlipID = 52
@@ -134,6 +134,31 @@ Config.localWeight = { -- Fill this with all your items. This is only for trunk 
 }
 
 Config.GloveboxSize = { -- Related to Config.localWeight.
+	[0] = 30, --Compact
+	[1] = 40, --Sedan
+	[2] = 70, --SUV
+	[3] = 25, --Coupes
+	[4] = 30, --Muscle
+	[5] = 10, --Sports Classics
+	[6] = 5, --Sports
+	[7] = 5, --Super
+	[8] = 5, --Motorcycles
+	[9] = 180, --Off-road
+	[10] = 300, --Industrial
+	[11] = 70, --Utility
+	[12] = 100, --Vans
+	[13] = 0, --Cycles
+	[14] = 5, --Boats
+	[15] = 20, --Helicopters
+	[16] = 0, --Planes
+	[17] = 40, --Service
+	[18] = 40, --Emergency
+	[19] = 0, --Military
+	[20] = 300, --Commercial
+	[21] = 0 --Trains
+}
+
+Config.TrunkSize = { -- Related to Config.localWeight.
 	[0] = 300, --Compact
 	[1] = 400, --Sedan
 	[2] = 700, --SUV
@@ -158,31 +183,6 @@ Config.GloveboxSize = { -- Related to Config.localWeight.
 	[21] = 0 --Trains
 }
 
-Config.TrunkSize = { -- Related to Config.localWeight.
-	[0] = 3000, --Compact
-	[1] = 4000, --Sedan
-	[2] = 7000, --SUV
-	[3] = 2500, --Coupes
-	[4] = 3000, --Muscle
-	[5] = 1000, --Sports Classics
-	[6] = 500, --Sports
-	[7] = 500, --Super
-	[8] = 500, --Motorcycles
-	[9] = 18000, --Off-road
-	[10] = 30000, --Industrial
-	[11] = 7000, --Utility
-	[12] = 10000, --Vans
-	[13] = 0, --Cycles
-	[14] = 500, --Boats
-	[15] = 2000, --Helicopters
-	[16] = 0, --Planes
-	[17] = 4000, --Service
-	[18] = 4000, --Emergency
-	[19] = 0, --Military
-	[20] = 30000, --Commercial
-	[21] = 0 --Trains
-}
-
 Config.VehiclePlate = {
 	taxi = 'TAXI',
 	cop = 'police',
@@ -191,7 +191,8 @@ Config.VehiclePlate = {
 	mecano = 'mechano',
 	mechanic = 'mechanic',
 	police = 'police',
-	nightclub = 'club',
+	nightclub = 'nightclub',
+	nightclub = 'nightclub',
 	bahamas = 'bahamas',
 	cardealer = 'dealer'
 }
@@ -199,27 +200,26 @@ Config.VehiclePlate = {
 Config.Shops = {
 	RegularShop = {
 		Locations = {
-			{x = 270.45,   y = -980.84,  z = 28.36}
-			--{x = 374.875,   y = 327.896,  z = 102.566}
-			--{x = 2557.458,  y = 382.282,  z = 107.622},
-			--{x = -3038.939, y = 585.954,  z = 6.908},
-			--{x = -3241.927, y = 1001.462, z = 11.830},
-			--{x = 547.431,   y = 2671.710, z = 41.156},
-			--{x = 1961.464,  y = 3740.672, z = 31.343},
-			--{x = 2678.916,  y = 3280.671, z = 54.241},
-			--{x = 1729.216,  y = 6414.131, z = 34.037},
-			--{x = -48.519,   y = -1757.514, z = 28.421},
-			--{x = 1163.373,  y = -323.801,  z = 68.205},
-			--{x = -707.501,  y = -914.260,  z = 18.215},
-			--{x = -1820.523, y = 792.518,   z = 137.118},
-			--{x = 1698.388,  y = 4924.404,  z = 41.063},
-			--{x = 25.723,   y = -1346.966, z = 28.497}
+			{x = 190.7,   y = -888.52,  z = 29.71}
+			{x = 374.875,   y = 327.896,  z = 102.566}
+			{x = 2557.458,  y = 382.282,  z = 107.622},
+			{x = -3038.939, y = 585.954,  z = 6.908},
+			{x = -3241.927, y = 1001.462, z = 11.830},
+			{x = 547.431,   y = 2671.710, z = 41.156},
+			{x = 1961.464,  y = 3740.672, z = 31.343},
+			{x = 2678.916,  y = 3280.671, z = 54.241},
+			{x = 1729.216,  y = 6414.131, z = 34.037},
+			{x = -48.519,   y = -1757.514, z = 28.421},
+			{x = 1163.373,  y = -323.801,  z = 68.205},
+			{x = -707.501,  y = -914.260,  z = 18.215},
+			{x = -1820.523, y = 792.518,   z = 137.118},
+			{x = 1698.388,  y = 4924.404,  z = 41.063},
+			{x = 25.723,   y = -1346.966, z = 28.497}
 		},
 		Items = {
 			{name = 'bread', price = 6},
 			{name = 'water', price = 6},
 			{name = 'lemon', price = 6},
-			{name = 'phone', price = 550},
 			{name = 'hamburger', price = 7},
 			{name = 'icedcoffee', price = 7},
 			{name = 'juice', price = 7},
@@ -232,14 +232,17 @@ Config.Shops = {
 			{name = 'dildo', price = 35},
 			{name = 'icetea', price = 7},
 			{name = 'stressbal', price = 7},
-			{name = 'neckbrace', price = 130},
-			{name = 'armbrace', price = 130},
-			{name = 'legbrace', price = 130},
-			{name = 'bodybandage', price = 130},
+			{name = 'neckbrace', price = 95},
+			{name = 'armbrace', price = 85},
+			{name = 'legbrace', price = 90},
+			{name = 'bodybandage', price = 100},
 			{name = 'bandage', price = 65},
 			{name = 'hoestdrank', price = 15},
 			{name = 'antibiotico', price = 19},
-			{ name = 'antibioticorosacea', price = 28}
+			{name = 'antibioticorosacea', price = 28},
+			{name = 'fishbait', price = 31},
+			{name = 'fishingrod', price = 65},
+			{name = 'tyton', price = 12}
 		}
 	},
 
@@ -385,7 +388,7 @@ Config.Shops = {
 
 	IlegalShop = {
 		Locations = {
-			--{ x = 468.58, y = -3205.64, z = 9.79 }
+			{ x = 468.58, y = -3205.64, z = 9.79 }
 		},
 		Items = {
 			{ name = 'bread', price = 1},
@@ -405,21 +408,20 @@ Config.Shops = {
 
 	RobsLiquor = {
 		Locations = {
-		 	--{ x = 1135.808, y = -982.281, z = 45.415 }
+		 	{ x = 964.38, y = 33.54, z = 73.88 }
 		},
 		Items = {
-			{name = 'beer', price = 1},
-			{name = 'wine', price = 1},
-			{name = 'vodka', price = 1},
-			{name = 'tequila', price = 1},
-			{name = 'whisky', price = 1},
-			{name = 'grand_cru', price = 1}
+			{name = 'beer', price = 12},
+			{name = 'wine', price = 12},
+			{name = 'vodka', price = 18},
+			{name = 'tequila', price = 18},
+			{name = 'whiskey', price = 20}
 		}
 	},
 
 	YouTool = {
 		Locations = {
-			-- { x = 2748.0, y = 3473.0, z = 55.68 }
+			{ x = 2748.0, y = 3473.0, z = 55.68 }
 		},
 		Items = {
 			{name = 'drill', price = 1},
@@ -442,7 +444,7 @@ Config.Shops = {
 
 	PrisonShop = {
 		Locations = {
-		 	-- { x = -1103.05, y = -823.72, z = 14.48 }
+		 	{ x = -1103.05, y = -823.72, z = 14.48 }
 		},
 		Items = {
 			{name = 'bread', price = 1},
@@ -456,7 +458,7 @@ Config.Shops = {
 
 	WeaponShop = {
 		Locations = {
-			--{ x = 22.09, y = -1107.28, z = 28.80 }
+			{ x = 22.09, y = -1107.28, z = 28.80 }
 		},
 		Items = {
 			{name = 'ammunition_pistol', price = 1},
@@ -479,7 +481,7 @@ Config.Shops = {
 
 	PoliceShop = { -- available for Config.InventoryJob.Police
 		Locations = {
-			{ x = 484.14 , y = -1004.69, z = 24.73 }
+			{ x = 482.68 , y = -995.99, z = 29.69 }
 		},
 		Items = {
 			{name = 'WEAPON_FLASHLIGHT', price = 100},
@@ -499,14 +501,14 @@ Config.Shops = {
 			{name = 'ammunition_snp_large',price = 100},
 			{name = 'ammunition_fireextinguisher',price = 100},
 			{name = 'bulletproof',price = 1000},
-			{name = 'binoculars',price = 50},
+			--{name = 'binoculars',price = 50},
 			{name = 'flashlight',price = 100}
 		}
 	},
 
 	BlackMarket = { -- available for Config.InventoryJob.Mafia
 		Locations = {
-			-- { x = -1297.96, y = -392.60, z = 35.47 }
+			{ x = -1297.96, y = -392.60, z = 35.47 }
 		},
 		Items = {
 			{name = 'WEAPON_PISTOL', price = 10000},
@@ -523,31 +525,32 @@ Config.Shops = {
 
 	ShopNightclub = { -- available for Config.InventoryJob.Nightclub
 		Locations = {
-	    	{ x = 22.09, y = -1107.28, z = 28.80 }
+	    	{ x = -2677.92, y = 1334.81, z = 139.88 },
+	    	{ x = -1879.94, y = 2063.07, z = 134.92 }
 		},
 		Items = {
-			{name = 'WEAPON_FLASHLIGHT', price = 100},
-			{name = 'WEAPON_KNIFE', price = 100},
-			{name = 'WEAPON_BAT', price = 100},
-			{name = 'WEAPON_PISTOL', price = 100},
-			{name = 'WEAPON_PUMPSHOTGUN',price = 100},
-			{name = 'WEAPON_SMOKEGRENADE',price = 100},
-			{name = 'WEAPON_FIREEXTINGUISHER',price = 100},
-			{name = 'WEAPON_CROWBAR',price = 100},
-			{name = 'WEAPON_BZGAS',price = 100},
+			{name = 'WEAPON_FLASHLIGHT', price = 1000},
+			{name = 'WEAPON_KNIFE', price = 1000},
+			{name = 'WEAPON_BAT', price = 1000},
+			{name = 'WEAPON_PISTOL', price = 10000},
+			{name = 'WEAPON_PUMPSHOTGUN',price = 10000},
+			{name = 'WEAPON_SMOKEGRENADE',price = 1000},
+			{name = 'WEAPON_FIREEXTINGUISHER',price = 1000},
+			{name = 'WEAPON_CROWBAR',price = 1000},
+			{name = 'WEAPON_BZGAS',price = 1000},
 			{name = 'ammunition_pistol',price = 100},
-			{name = 'ammunition_pistol_large',price = 100},
+			{name = 'ammunition_pistol_large',price = 200},
 			{name = 'ammunition_shotgun',price = 100},
-			{name = 'ammunition_shotgun_large',price = 100},
+			{name = 'ammunition_shotgun_large',price = 200},
 			{name = 'ammunition_smg',price = 100},
-			{name = 'ammunition_smg_large',price = 100},
+			{name = 'ammunition_smg_large',price = 200},
 			{name = 'ammunition_rifle',price = 100},
-			{name = 'ammunition_rifle_large',price = 100},
+			{name = 'ammunition_rifle_large',price = 200},
 			{name = 'ammunition_snp',price = 100},
-			{name = 'ammunition_snp_large',price = 100},
+			{name = 'ammunition_snp_large',price = 200},
 			{name = 'ammunition_fireextinguisher',price = 100},
 			{name = 'bulletproof',price = 1000},
-			{name = 'binoculars',price = 50},
+			--{name = 'binoculars',price = 50},
 			{name = 'flashlight',price = 100}
 		}
 	},
@@ -584,7 +587,8 @@ Config.Ammo = {
 			'WEAPON_MACHINEPISTOL',
 			'WEAPON_MARKSMANPISTOL',
 			'WEAPON_PISTOL50',
-			'WEAPON_VINTAGEPISTOL'
+			'WEAPON_VINTAGEPISTOL',
+			'WEAPON_REVOLVER'
 		},
 		count = 30
 	},
@@ -599,7 +603,8 @@ Config.Ammo = {
 			'WEAPON_MACHINEPISTOL',
 			'WEAPON_MARKSMANPISTOL',
 			'WEAPON_PISTOL50',
-			'WEAPON_VINTAGEPISTOL'
+			'WEAPON_VINTAGEPISTOL',
+			'WEAPON_REVOLVER'
 		},
 		count = 60
 	},
@@ -706,61 +711,92 @@ Config.Vault = {
 		coords = vector3(-544.61, -197.39, 37.22),
 		heading = 298.73,
 		needItemLicense = 'apple', --'licence_vault' -- If you don't want to use items Allow you to leave it blank or needItemLicense = nil
-		InfiniteLicense = true -- Should one License last forever?
+		InfiniteLicense = true, -- Should one License last forever?
+		show=true,
 	},
 	police = { -- blokkenpark kantoor
 		coords = vector3(452.99, -973.48, 29.69),
 		heading = 270.00,
 		needItemLicense = false,
+		show=true,
 	},
 	ambulance = {
 		coords = vector3(337.54, -584.01, 27.9),
 		heading = 74.52,
 		needItemLicense = false,
+		show=true,
 	},
 	mechanic = {
 		coords = vector3(-201.79, -1314.48, 30.09),
 		heading = 358.01,
 		needItemLicense = false,
+		show=true,
 	},
-	nachtclub = {
+	nightclub = {
 		coords = vector3(-1496.15, 124.61, 55.67),
 		heading = 229.74,
 		needItemLicense = false,
+		show=true,
 	},
 	bahamas = {
 		coords = vector3(-1382.2, -610.09, 29.82),
 		heading = 344.18,
 		needItemLicense = false,
+		show=true,
 	},
 	taxi = {
 		coords = vector3(891.57, -173.07, 73.67),
 		heading = 57.67,
 		needItemLicense = false,
+		show=true,
 	},
 	pizza = {
 		coords = vector3(447.25, 140.5, 99.2),
 		heading = 160.61,
 		needItemLicense = false,
+		show=true,
 	},
 	cardealer = {
 		coords = vector3(-12.53, -1663.25, 32.04),
 		heading = 169.96,
 		needItemLicense = false,
+		show=true,
 	},
 	starbucks = {
 		coords = vector3(-632.35, 226.28, 80.88),
 		heading = 86.65,
 		needItemLicense = false,
+		show=true,
 	},
 	gemeente = {
 		coords = vector3(-549.06, -199.27, 69.98),
 		heading = 212.86,
 		needItemLicense = false,
+		show=true,
 	},
 	pilot = {
 		coords = vector3(-931.34, -2933.14, 12.95),
 		heading = 327.39,
 		needItemLicense = false,
+		show=true,
+	},
+	peaky = {
+		coords = vector3(1391.55,1158.81,114.33),
+		heading = 270.52,
+		needItemLicense = false,
+		show=false,
+	},
+	diablo = {
+		coords = vector3(-96.3,817.32,235.72),
+		heading = 192.25,
+		needItemLicense = false,
+		show=false,
+	},
+	pericolo = {
+		coords = vector3(-1798.63,451.42,127.29),
+		heading = 0.55,
+		needItemLicense = false,
+		show=true,
+	
 	}
 }

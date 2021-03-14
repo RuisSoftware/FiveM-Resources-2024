@@ -88,7 +88,7 @@ RegisterNUICallback("PutIntoGlovebox", function(data, cb)
 		end
 		TriggerServerEvent("DP_Inventory_glovebox:putItem", gloveboxData.plate, data.item.type, data.item.name, count, gloveboxData.max, gloveboxData.myVeh, data.item.label)
 	end
-	Wait(500)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -97,7 +97,7 @@ RegisterNUICallback("TakeFromGlovebox", function(data, cb)
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
 		TriggerServerEvent("DP_Inventory_glovebox:getItem", gloveboxData.plate, data.item.type, data.item.name, tonumber(data.number), gloveboxData.max, gloveboxData.myVeh)
 	end
-	Wait(500)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)

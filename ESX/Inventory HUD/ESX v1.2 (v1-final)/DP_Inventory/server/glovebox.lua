@@ -280,12 +280,10 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				if blackAccount ~= 0 then
 					blackMoney = blackAccount[1].amount
 				end
-						
 				local cashAccount = (store.get("money")) or 0
 				if cashAccount ~= 0 then
 					cashMoney = cashAccount[1].amount
 				end
-
 				local coffres = (store.get("coffres") or {})
 				for i = 1, #coffres, 1 do
 					table.insert(items, {name = coffres[i].name, count = coffres[i].count, label = ESX.GetItemLabel(coffres[i].name)})
@@ -380,7 +378,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 						count = count
 					})
 				end
-				if (getTotalInventoryWeightGlovebox(plate) + (getItemWeight(item) * count)) > max then
+				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					store.set("coffres", coffres)
@@ -414,7 +412,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					table.insert(blackMoney, {amount = count})
 				end
 
-				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
+				if (getTotalInventoryWeightGlovebox(plate) + blackMoney[1].amount / 10) > max then
 					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
 				else
 					xPlayer.removeAccountMoney(item, count)

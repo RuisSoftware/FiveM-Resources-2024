@@ -348,6 +348,21 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 	end
 end)
 
+ESX.RegisterServerCallback('DP_Inventory:heeftSupermarkt', function(source, cb)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(source)
+	MySQL.Async.fetchAll('SELECT * FROM eigen_supermarkten WHERE identifier = @owner', {
+		['@owner'] =  xPlayer.identifier,
+		['@slot'] = 5
+	},function(results5)
+		if #results5 == 0 then
+			cb(true)
+		else
+			cb(false)
+		end
+	end)
+end)
+
 ESX.RegisterServerCallback('DP_Inventory:buyLicense', function(source, cb)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(source)

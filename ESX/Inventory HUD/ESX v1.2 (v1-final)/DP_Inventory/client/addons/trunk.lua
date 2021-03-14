@@ -88,7 +88,7 @@ RegisterNUICallback("PutIntoTrunk", function(data, cb)
 		end
 		TriggerServerEvent("DP_Inventory_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
 	end
-	Wait(500)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -97,7 +97,7 @@ RegisterNUICallback("TakeFromTrunk", function(data, cb)
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
 		TriggerServerEvent("DP_Inventory_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
 	end
-	Wait(500)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)

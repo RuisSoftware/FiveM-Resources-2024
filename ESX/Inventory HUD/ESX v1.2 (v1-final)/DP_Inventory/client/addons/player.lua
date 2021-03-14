@@ -167,7 +167,7 @@ RegisterNUICallback("PutIntoPlayer", function(data, cb)
 		end
 		TriggerServerEvent("DP_Inventory:tradePlayerItem", GetPlayerServerId(PlayerId()), targetPlayer, data.item.type, data.item.name, count)
 	end
-	Wait(250)
+	Wait(0)
 	refreshPlayerInventory()
 	loadPlayerInventory()
 	cb("ok")
@@ -184,7 +184,7 @@ RegisterNUICallback("TakeFromPlayer", function(data, cb)
 		end
 		TriggerServerEvent("DP_Inventory:tradePlayerItem", targetPlayer, GetPlayerServerId(PlayerId()), data.item.type, data.item.name, count)
 	end
-	Wait(250)
+	Wait(0)
 	refreshPlayerInventory()
 	loadPlayerInventory()
 	cb("ok")

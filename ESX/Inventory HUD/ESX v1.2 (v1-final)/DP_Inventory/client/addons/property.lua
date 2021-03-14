@@ -109,9 +109,9 @@ RegisterNUICallback("PutIntoProperty", function(data, cb)
 			end
 		end
 	end
-	Wait(150)
+	Wait(0)
 	refreshPropertyInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -131,9 +131,9 @@ RegisterNUICallback("TakeFromProperty", function(data, cb)
 			end
 		end
 	end
-	Wait(150)
+	Wait(0)
 	refreshPropertyInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)

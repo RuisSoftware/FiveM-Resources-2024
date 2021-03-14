@@ -28,22 +28,28 @@ function getItemyWeight(item)
 end
 
 function VehicleInFront()
-	local pos = GetEntityCoords(GetPlayerPed(-1))
-	local entityWorld = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 0.1, 0.0)
-	local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, GetPlayerPed(-1), 0)
+	local pos = GetEntityCoords(PlayerPedId())
+	local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.1, 0.0)
+	local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, PlayerPedId(), 0)
 	local a, b, c, d, result = GetRaycastResult(rayHandle)
 	return result
 end
 
+
+RegisterNetEvent("DP_Inventory_glovebox:openGlovebox")
+AddEventHandler("DP_Inventory_glovebox:openGlovebox", function()
+	openGlovebox()
+end)
+
 function openGlovebox()
-	local playerPed = GetPlayerPed(-1)
+	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
 	local vehicle = VehicleInFront()
 	globalplate = GetVehicleNumberPlateText(vehicle)
 
 	if IsPedInAnyVehicle(playerPed) then
 		myVeh = false
-		local thisVeh = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+		local thisVeh = GetVehiclePedIsIn(PlayerPedId(), false)
 		PlayerData = ESX.GetPlayerData()
 
 		for i = 1, #vehiclePlate do
@@ -68,9 +74,9 @@ function openGlovebox()
 		if not Config.CheckOwnership or (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.CheckOwnership and myVeh) then
 			if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 				CloseToVehicle = true
-				local vehFront = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-				local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-				local closecar = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+				local vehFront = GetVehiclePedIsIn(PlayerPedId(), false)
+				local x, y, z = table.unpack(GetEntityCoords(PlayerPedId(), true))
+				local closecar = GetVehiclePedIsIn(PlayerPedId(), false)
 
 				if vehFront > 0 and closecar ~= nil then
 					lastVehicle = vehFront
@@ -125,7 +131,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Wait(0)
-		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local pos = GetEntityCoords(PlayerPedId())
 		if CloseToVehicle then
 			local vehicle = GetClosestVehicle(pos["x"], pos["y"], pos["z"], 2.0, 0, 70)
 			if DoesEntityExist(vehicle) then

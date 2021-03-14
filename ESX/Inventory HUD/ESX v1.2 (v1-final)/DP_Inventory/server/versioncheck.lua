@@ -3,7 +3,7 @@ local error =
 
 ^4=================================
 ^1❤️ ESX Inventory HUD for ESX 1.2 ❤️
-^1 Version check failed
+^1 Your version is ^6%s
 ^4=================================
 ^7
 ]]

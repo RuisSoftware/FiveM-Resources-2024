@@ -19,7 +19,6 @@ Citizen.CreateThread(function()
 	while ESX == nil do TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) Citizen.Wait(0) end
 	while ESX.GetPlayerData().job == nil do Citizen.Wait(10) end
 	PlayerData = ESX.GetPlayerData()
-	loadPlayerInventory()
 	Citizen.Wait(3000)
 end)
 
@@ -70,7 +69,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citizen.CreateThread(function()
+--[[Citizen.CreateThread(function()
 	while ESX == nil do Citizen.Wait(10) end
 	while true do
 		Citizen.Wait(7)
@@ -83,27 +82,27 @@ Citizen.CreateThread(function()
 			elseif  IsDisabledControlJustReleased(1, 157) and canFire then
 				if fastWeapons[1] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[1])
-					if not string.find(fastWeapons[1], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U("item_used"), 1, false) end
+					TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 158) and canFire then
 				if fastWeapons[2] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[2])
-					if not string.find(fastWeapons[2], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U("item_used"), 1, false) end
+					TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 160) and canFire then
 				if fastWeapons[3] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[3])
-					if not string.find(fastWeapons[3], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U("item_used"), 1, false) end
+					TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 164) and canFire then
 				if fastWeapons[4] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[4])
-					if not string.find(fastWeapons[4], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U("item_used"), 1, false) end
+					TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U("item_used"), 1, false)
 				end
-			elseif IsDisabledControlJustReleased(4, 165) and canFire then
+			elseif IsDisabledControlJustReleased(1, 165) and canFire then
 				if fastWeapons[5] ~= nil then
 					TriggerServerEvent("esx:useItem", fastWeapons[5])
-					if not string.find(fastWeapons[5], "WEAPON_", 1) then TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U("item_used"), 1, false) end
+					TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U("item_used"), 1, false)
 				end
 			elseif IsDisabledControlJustReleased(1, 37) then
 				HudForceWeaponWheel(false)
@@ -111,6 +110,70 @@ Citizen.CreateThread(function()
 			end
 		else
 			Citizen.Wait(1000)
+		end
+	end
+end)]]
+
+RegisterKey('keyboard', 'F2', 
+	function()
+	end,
+	-- on release
+	function()
+	if not IsPlayerDead(PlayerId()) then
+		if IsInputDisabled(0) then
+			openInventory()
+		end
+	end
+end)
+
+RegisterKey('keyboard', 'TAB', function()
+	if not IsPlayerDead(PlayerId()) then
+		HudForceWeaponWheel(false)
+		showHotbar()
+	end
+end)
+
+RegisterKey('keyboard', '1', function()
+	if not IsPlayerDead(PlayerId()) and canFire then
+		if fastWeapons[1] ~= nil then
+			TriggerServerEvent('esx:useItem', fastWeapons[1])
+			TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U('item_used'), 1, false)
+		end
+	end
+end)
+
+RegisterKey('keyboard', '2', function()
+	if not IsPlayerDead(PlayerId()) and canFire then
+		if fastWeapons[2] ~= nil then
+			TriggerServerEvent('esx:useItem', fastWeapons[2])
+			TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U('item_used'), 1, false)
+		end
+	end
+end)
+
+RegisterKey('keyboard', '3', function()
+	if not IsPlayerDead(PlayerId()) and canFire then
+		if fastWeapons[3] ~= nil then
+			TriggerServerEvent('esx:useItem', fastWeapons[3])
+			TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U('item_used'), 1, false)
+		end
+	end
+end)
+
+RegisterKey('keyboard', '4', function()
+	if not IsPlayerDead(PlayerId()) and canFire then
+		if fastWeapons[4] ~= nil then
+			TriggerServerEvent('esx:useItem', fastWeapons[4])
+			TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U('item_used'), 1, false)
+		end
+	end
+end)
+
+RegisterKey('keyboard', '5', function()
+	if not IsPlayerDead(PlayerId()) and canFire then
+		if fastWeapons[5] ~= nil then
+			TriggerServerEvent('esx:useItem', fastWeapons[5])
+			TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U('item_used'), 1, false)
 		end
 	end
 end)
@@ -333,6 +396,7 @@ function openInventory()
 		type = "normal",
 		weight = weight
 	})
+	TransitionToBlurred(1000)
 end
 
 function closeInventory()
@@ -342,6 +406,7 @@ function closeInventory()
 	SendNUIMessage({
 		action = "hide"
 	})
+	TransitionFromBlurred(1000)
 	SetNuiFocus(false, false)
 	TriggerEvent('trew_hud_ui:toggleAan')
 end
@@ -438,15 +503,15 @@ RegisterNUICallback("DropItem",function(data, cb)
 				end)
 			end
 			if data.item.name == 'idcard' then
-				local coords = GetEntityCoords(GetPlayerPed(-1))
-				local forward = GetEntityForwardVector(GetPlayerPed(-1))
+				local coords = GetEntityCoords(PlayerPedId())
+				local forward = GetEntityForwardVector(PlayerPedId())
 				coords = coords + forward*1.0
 				TriggerServerEvent('license_menu:idCardLocation', coords)
 			end
 			TriggerServerEvent("esx:removeInventoryItem", data.item.type, data.item.name, data.number)
 		end
 	end
-	Wait(0)
+			Wait(100)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -457,10 +522,10 @@ RegisterNUICallback("UseItem", function(data, cb)
 	if shouldCloseInventory(data.item.name) then
 		closeInventory()
 	else
-		Citizen.Wait(0)
+			Wait(100)
 		loadPlayerInventory()
 	end
-	print("Made with love in the Netherlands for " .. Config.ServerName)
+	--print("Made with love in the Netherlands for " .. Config.ServerName)
 	cb("ok")
 end)
 
@@ -513,7 +578,7 @@ RegisterNUICallback("GiveItem", function(data, cb)
 			end
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 		end
-		Wait(0)
+			Wait(100)
 		loadPlayerInventory()
 	end
 	cb("ok")
@@ -525,6 +590,7 @@ RegisterNUICallback("PutIntoFast", function(data, cb)
 	end
 	TriggerServerEvent('DP_Inventory:putInToSlot', data.item.name, data.slot)
 	fastWeapons[data.slot] = data.item.name
+	Wait(100)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -536,6 +602,7 @@ RegisterNUICallback("TakeFromFast", function(data, cb)
 		TriggerEvent('DP_Inventory:closeinventory', source)
 		RemoveWeapon(data.item.name)
 	end
+	Wait(100)
 	loadPlayerInventory()
 	cb("ok")
 end)

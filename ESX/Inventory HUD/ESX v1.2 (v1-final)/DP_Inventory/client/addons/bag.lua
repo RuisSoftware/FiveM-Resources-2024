@@ -96,9 +96,9 @@ RegisterNUICallback("PutIntoBag", function(data, cb)
 			TriggerServerEvent("DP_Inventory_bag:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
 		end
 	end
-	Wait(150)
+	Wait(0)
 	refreshPropertyBagInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -110,9 +110,9 @@ RegisterNUICallback("TakeFromBag", function(data, cb)
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
 		TriggerServerEvent("DP_Inventory_bag:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
 	end
-	Wait(150)
+	Wait(0)
 	refreshPropertyBagInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)

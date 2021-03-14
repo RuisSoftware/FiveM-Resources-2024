@@ -53,12 +53,11 @@ AddEventHandler('DP_Inventory:stopRentingLocker', function(lockerId, lockerName)
 	end)
 end)
 
-oldESX = false -- dont touch
 function PayLockerRent(d, h, m)
 	MySQL.Async.fetchAll('SELECT * FROM inventory_lockers', {}, function(result)
 		for i=1, #result, 1 do
 			owner = result[i].owner
-			local xPlayer = DP.GetPlayerFromIdentifier(result[i].owner)
+			local xPlayer = ESX.GetPlayerFromIdentifier(result[i].owner)
 			if xPlayer then
 				xPlayer.removeAccountMoney('bank', Config.DailyLockerRentPrice)
 				TriggerClientEvent('mythic_notify:client:SendAlert', xPlayer.source, { type = 'inform', text = 'Je betaalde €'..Config.DailyLockerRentPrice..' voor de verhuur van kluisjes.', length = 8000 })
@@ -118,41 +117,30 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 		end)
 
 	elseif type == 'item_account' then
+		if item == 'black_money' then
+			TriggerEvent('esx_addonaccount:getAccount', 'locker_black', xPlayerOwner.identifier, function(account)
+				local roomAccountMoney = account.money
 
-		TriggerEvent('esx_addonaccount:getAccount', 'locker_cash', xPlayerOwner.identifier, function(account)
-			local roomAccountMoney = account.money
-
-			if roomAccountMoney >= count then
-				account.removeMoney(count)
-				xPlayer.addAccountMoney(item, count)
-			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
-			end
-		end)
-
-	elseif type == 'item_weapon' then
-
-		TriggerEvent('esx_datastore:getDataStore', 'locker', xPlayerOwner.identifier, function(store)
-			local storeWeapons = store.get('weapons') or {}
-			local weaponName   = nil
-			local ammo         = nil
-
-			for i=1, #storeWeapons, 1 do
-				if storeWeapons[i].name == item then
-					weaponName = storeWeapons[i].name
-					ammo       = storeWeapons[i].ammo
-
-					table.remove(storeWeapons, i)
-					break
+				if roomAccountMoney >= count then
+					account.removeMoney(count)
+					xPlayer.addAccountMoney(item, count)
+				else
+					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
 				end
-			end
+			end)
+		else
+			TriggerEvent('esx_addonaccount:getAccount', 'locker_cash', xPlayerOwner.identifier, function(account)
+				local roomAccountMoney = account.money
 
-			store.set('weapons', storeWeapons)
-			xPlayer.addWeapon(weaponName, ammo)
-		end)
-
+				if roomAccountMoney >= count then
+					account.removeMoney(count)
+					xPlayer.addAccountMoney(item, count)
+				else
+					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+				end
+			end)
+		end
 	end
-
 end)
 
 RegisterServerEvent('DP_Inventory:putLockerItems')
@@ -160,7 +148,6 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 	local _source      = source
 	local xPlayer      = ESX.GetPlayerFromId(_source)
 	local xPlayerOwner = ESX.GetPlayerFromIdentifier(owner)
-
 	if type == 'item_standard' then
 
 		local playerItemCount = xPlayer.getInventoryItem(item).count
@@ -175,22 +162,33 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
 		end
 
-	elseif type == 'item_account' then
+	elseif type == 'item_account' or type == 'item_money' then
+		if item == 'black_money' then
+			local playerAccountMoney = xPlayer.getAccount(item).money
 
-		local playerAccountMoney = xPlayer.getAccount(item).money
+			if playerAccountMoney >= count and count > 0 then
+				xPlayer.removeAccountMoney(item, count)
 
-		if playerAccountMoney >= count and count > 0 then
-			xPlayer.removeAccountMoney(item, count)
-
-			TriggerEvent('esx_addonaccount:getAccount', 'locker_cash', xPlayerOwner.identifier, function(account)
-				account.addMoney(count)
-			end)
+				TriggerEvent('esx_addonaccount:getAccount', 'locker_black', xPlayerOwner.identifier, function(account)
+					account.addMoney(count)
+				end)
+			else
+				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+			local playerAccountMoney = xPlayer.getAccount('money').money
+
+			if playerAccountMoney >= count and count > 0 then
+				xPlayer.removeAccountMoney(item, count)
+
+				TriggerEvent('esx_addonaccount:getAccount', 'locker_cash', xPlayerOwner.identifier, function(account)
+					account.addMoney(count)
+				end)
+			else
+				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+			end
 		end
-
 	elseif type == 'item_weapon' then
-
 		TriggerEvent('esx_datastore:getDataStore', 'locker', xPlayerOwner.identifier, function(store)
 			local storeWeapons = store.get('weapons') or {}
 
@@ -202,9 +200,7 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 			store.set('weapons', storeWeapons)
 			xPlayer.removeWeapon(item)
 		end)
-
 	end
-
 end)
 
 ESX.RegisterServerCallback('DP_Inventory:getLockerInventory', function(source, cb, owner, lockerName)
@@ -214,8 +210,8 @@ ESX.RegisterServerCallback('DP_Inventory:getLockerInventory', function(source, c
 	local items      = {}
 	local weapons    = {}
 	
-	TriggerEvent('esx_addonaccount:getAccount', 'locker_cash', xPlayer.identifier, function(account2)
-		money = account2.money
+	TriggerEvent('esx_addonaccount:getAccount', 'locker_cash', xPlayer.identifier, function(account)
+		money = account.money
 	end)
 
 	TriggerEvent('esx_addonaccount:getAccount', 'locker_black', xPlayer.identifier, function(account)

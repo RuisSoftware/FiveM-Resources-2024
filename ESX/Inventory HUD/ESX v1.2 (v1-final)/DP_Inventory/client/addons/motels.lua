@@ -95,9 +95,9 @@ RegisterNUICallback("PutIntoMotel", function(data, cb)
 			TriggerServerEvent("DP_Motels:putItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, count)
 		end
 	end
-	Wait(150)
+	Wait(0)
 	refreshPropertyMotelInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)
@@ -109,9 +109,9 @@ RegisterNUICallback("TakeFromMotel", function(data, cb)
 	if type(data.number) == "number" and math.floor(data.number) == data.number then
 		TriggerServerEvent("DP_Motels:getItem", ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number))
 	end
-	Wait(150)
+	Wait(0)
 	refreshPropertyMotelInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb("ok")
 end)

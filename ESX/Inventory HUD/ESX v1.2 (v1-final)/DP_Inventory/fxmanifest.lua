@@ -3,13 +3,14 @@ game 'gta5'
 
 name 'DP_Inventory'
 author 'Dutch Players'
-description 'Inventory for ESX 1.2 inspired by esx_inventoryhud from Trsak'
-version '1.2.7'
+description 'Inventory for DP 1.2 inspired by esx_inventoryhud from Trsak'
+version '1.2.8'
 url 'https://github.com/dutchplayers/FiveM-Resources'
 
 ui_page 'html/ui.html'
 
 client_scripts {
+	'@pmc-keybinds/import.lua',
 	'@es_extended/locale.lua',
 	'config.lua',
 	'locales/*.lua',
@@ -76,6 +77,7 @@ exports {
 
 dependencies {
 	'es_extended',
+	'pmc-keybinds',
 	'mythic_notify', -- DEPRECATED
 	'b1g_notify', -- DEPRECATED
 	't-notify', -- new notify

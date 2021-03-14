@@ -1,14 +1,14 @@
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		local currentWeapon = GetSelectedPedWeapon(GetPlayerPed(-1))
+		local currentWeapon = GetSelectedPedWeapon(PlayerPedId())
 		DisplayAmmoThisFrame(currentWeapon)
 	end
 end)
 
 RegisterNetEvent('ammunition:useAmmoItem')
 AddEventHandler('ammunition:useAmmoItem', function(ammo)
-	local playerPed = GetPlayerPed(-1)
+	local playerPed = PlayerPedId()
 	local weapon
 	local found, currentWeapon = GetCurrentPedWeapon(playerPed, true)
 	if found then

@@ -25,12 +25,11 @@ function setPropertyLockerData(data)
     local blackMoney = data.blackMoney
     local propertyItems = data.items
     local propertyWeapons = data.weapons
-
 	if money > 0 then
 		accountData = {
 			label = _U('cash'),
 			count = money,
-			type = 'item_money',
+			type = 'item_account',
 			name = 'cash',
 			usable = false,
 			rare = false,
@@ -125,9 +124,9 @@ RegisterNUICallback('PutIntoLocker', function(data, cb)
 		TriggerServerEvent('DP_Inventory:putLockerItems', ESX.GetPlayerData().identifier, data.item.type, data.item.name, count, currentLocker)
 	end
 
-	Wait(150)
+	Wait(0)
 	refreshPropertyLockerInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 
 	cb('ok')
@@ -142,9 +141,9 @@ RegisterNUICallback('TakeFromLocker',function(data, cb)
 		TriggerServerEvent('DP_Inventory:getLockerItems', ESX.GetPlayerData().identifier, data.item.type, data.item.name, tonumber(data.number), currentLocker)
 	end
 
-	Wait(150)
+	Wait(0)
 	refreshPropertyLockerInventory()
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 
 	cb('ok')

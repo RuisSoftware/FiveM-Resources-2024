@@ -64,14 +64,14 @@ end)
 -- 	owner = PlayerData.identifier
 --     while true do
 --         Wait(5)
---         if IsControlJustReleased(0, Config.BagControl) and not IsPedInAnyVehicle(GetPlayerPed(-1), true) and not IsEntityInAir(PlayerPedId()) then
+--         if IsControlJustReleased(0, Config.BagControl) and not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) then
 -- 			OpenBagInventoryMenu('bag', owner)
 --         end
 --     end
 -- end)
 
 RegisterCommand('showBagInventory', function()
-	if not IsPedInAnyVehicle(GetPlayerPed(-1), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
+	if not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
 		OpenBagInventoryMenu('bag', PlayerData.identifier)
 	end
 end, false)

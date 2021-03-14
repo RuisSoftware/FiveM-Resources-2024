@@ -1,6 +1,6 @@
 local shopData = nil
 
---[[RegisterKey('keyboard', 'E', 
+RegisterKey('keyboard', 'E', 
 	function()
 	end,
 	-- on release
@@ -27,8 +27,8 @@ local shopData = nil
 				
 				if Config.useAdvancedShop == true then
 					if IsInGroothandelSupermarktZone(coords) then
-						ESX.TriggerServerCallback('DP_Inventory:heeftSupermarkt', function(hasWeaponLicense)
-							if hasWeaponLicense then
+						ESX.TriggerServerCallback('DP_Inventory:heeftSupermarkt', function(ja)
+							if ja then
 								OpenShopInv('groothandel_supermarkt')
 							else
 								exports['mythic_notify']:DoHudText('error', 'Je beheert geen eigen winkel')
@@ -90,10 +90,10 @@ local shopData = nil
 			end
 		end
 	end
-)]]
+)
 
 
-Citizen.CreateThread(function()
+--[[Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
 		player = PlayerPedId()
@@ -202,7 +202,7 @@ Citizen.CreateThread(function()
 			Citizen.Wait(1500)
 		end
 	end
-end)
+end)]]
 
 function OpenShopInv(shoptype)
 	text = _('store')
@@ -265,7 +265,7 @@ RegisterNUICallback('TakeFromShop', function(data, cb)
 	if type(data.number) == 'number' and math.floor(data.number) == data.number then
 		TriggerServerEvent('DP_Inventory:SellItemToPlayer', GetPlayerServerId(PlayerId()), data.item.type, data.item.name, tonumber(data.number))
 	end
-	Wait(150)
+	Wait(0)
 	loadPlayerInventory()
 	cb('ok')
 end)
@@ -474,9 +474,11 @@ Citizen.CreateThread(function()
 			for k, v in pairs(Config.Shops.RegularShop.Locations) do
 				local distance = GetDistanceBetweenCoords(coords, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, true)
 				if distance < 10 then
-					DrawMarker(27, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
-					if distance < 3.0 then
-						DrawText3Ds(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z + 1, _U('open_shop'))
+					--ESX.ShowFloatingHelpNotification(_U('open_shop'), vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z+1.0))
+					--DrawMarker(27, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
+					if distance < 4.0 then
+						ESX.ShowFloatingHelpNotification(_U('open_shop'), vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z+1.0))
+						--DrawText3Ds(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z + 1, _U('open_shop'))
 						near = true
 						break
 					end
@@ -621,7 +623,7 @@ if Config.UseLicense then
 		while true do
 			Citizen.Wait(0)
 			LicenseShop = Config.Shops.LicenseShop.Locations
-			player = GetPlayerPed(-1)
+			player = PlayerPedId()
 			coords = GetEntityCoords(player)
 			for i = 1, #LicenseShop, 1 do
 				if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 2.0 then
