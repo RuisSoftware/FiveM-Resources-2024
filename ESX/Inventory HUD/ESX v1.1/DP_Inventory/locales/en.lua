@@ -21,8 +21,8 @@ Locales["en"] = {
 	["weapon_exist_give"] = "The person already own this weapon.",
 	["reloaded"] = "Reloaded",
 	["max_ammo"] = "Max Ammo",
-	["weapon_used"] = "Wapen gebruikt",
-	["item_used"] = "Item gebruikt",
+	["weapon_used"] = "Weapon Used",
+	["item_used"] = "Item Used",
 	["no_weapon"] = "You do not own the weapon for this ammo type!",
 	["invalid_quantity"] = "Invalid quantity.",
 	["item_added"] = "Added:",
@@ -85,4 +85,10 @@ Locales["en"] = {
 	['not_enough_in_vault'] = 'there is not enough space for this item in the safe!',
 	['player_cannot_hold'] = 'you dont have enough space in your inventory!',
 	['amount_invalid'] = 'invalid number',
+		-- Lockers
+	['locker_blip'] = 'Locker',
+	['enter_lockerroom'] = 'Enter Locker room',
+	['exit_lockerroom'] = 'Enter Locker room',
+	['open_locker'] = 'Open Locker',
+	['cancel_lockerrent'] = 'Cancel Rent on Locker',
 }
