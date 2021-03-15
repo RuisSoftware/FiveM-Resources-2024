@@ -29,7 +29,7 @@ supersede_radio "RADIO_20_THELAB" { url = "https://streaming.slam.nl/web11_mp3",
 supersede_radio "RADIO_21_DLC_XM17" { url = "https://ice.cr2.streamzilla.xlcdn.com:8000/sz=efteling=hdstream", volume = 0.2, name = "Efteling Radio" }
 supersede_radio "RADIO_22_DLC_BATTLE_MIX1_RADIO" { url = "https://securestream2.digipal.nl:1813/;type=mp3", volume = 0.2, name = "Geheime Zender - GigantFM" }
 supersede_radio "RADIO_34_DLC_HEI4_KULT" { url = "https://23543.live.streamtheworld.com/SRGSTR10.mp3", volume = 0.2, name = "Veronica" }
-supersede_radio "RADIO_35_DLC_HEI4_MLR" { url = "http://17873.live.streamtheworld.com/RADIO10.mp3", volume = 0.2, name = "Radio 10" }
+supersede_radio "RADIO_35_DLC_HEI4_MLR" { url = "https://17873.live.streamtheworld.com/RADIO10.mp3", volume = 0.2, name = "Radio 10" }
 
 this_is_a_map 'yes'
 

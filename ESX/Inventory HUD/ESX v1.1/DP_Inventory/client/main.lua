@@ -160,7 +160,7 @@ function lockinv()
 end
 
 function getPlayerWeight()
-	Citizen.CreateThread(function()
+	--[[Citizen.CreateThread(function()
 		if maxWeight == nil then
 			ESX.TriggerServerCallback("DP_Inventory:getMaxInventoryWeight", function(cb)
 				maxWeight = cb
@@ -178,7 +178,13 @@ function getPlayerWeight()
 			end
 			WeightLoaded = true
 		end)
-	end)
+	end)]]
+	SendNUIMessage({
+		action = "setWeightText",
+		text =  ""
+	})
+	weight = 0
+	WeightLoaded = true
 end
 
 function loadItems()
