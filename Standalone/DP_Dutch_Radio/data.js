@@ -8,6 +8,7 @@ const availableRadios = [
     "RADIO_07_DANCE_01",                // Soulwax FM
     "RADIO_08_MEXICAN",                 // East Los FM
     "RADIO_09_HIPHOP_OLD",              // West Coast Classics
+    "RADIO_11_TALK_02",                 // Blaine County Radio
     "RADIO_12_REGGAE",                  // Blue Ark
     "RADIO_13_JAZZ",                    // Worldwide FM
     "RADIO_14_DANCE_02",                // FlyLo FM
@@ -17,9 +18,8 @@ const availableRadios = [
     "RADIO_18_90S_ROCK",                // Vinewood Boulevard Radio
     "RADIO_19_USER",                    // Self Radio
     "RADIO_20_THELAB",                  // The Lab
-    "RADIO_11_TALK_02",                 // Blaine County Radio
     "RADIO_21_DLC_XM17",                // Blonded Los Santos 97.8 FM
-    "RADIO_22_DLC_BATTLE_MIX1_RADIO",   // Los Santos Underground Radio
-    "RADIO_34_DLC_HEI4_KULT",           // Kult FM
-    "RADIO_35_DLC_HEI4_MLR"             // The Music Locker
+    "RADIO_22_DLC_BATTLE_MIX1_RADIO",    // Los Santos Underground Radio
+    "RADIO_34_DLC_HEI4_KULT",                // Blonded Los Santos 97.8 FM
+    "RADIO_35_DLC_HEI4_MLR"    // Los Santos Underground Radio
 ];

@@ -4,8 +4,8 @@ let index = -1;
 let volume = GetProfileSetting(306) / 10;
 let previousVolume = volume;
 
-for (let i = 0, length = GetNumResourceMetadata("radio", "supersede_radio"); i < length; i++) {
-    const radio = GetResourceMetadata("radio", "supersede_radio", i);
+for (let i = 0, length = GetNumResourceMetadata("DP_Dutch_Radio", "supersede_radio"); i < length; i++) {
+    const radio = GetResourceMetadata("DP_Dutch_Radio", "supersede_radio", i);
 
     if (!availableRadios.includes(radio)) {
         console.error(`radio: ${radio} is an invalid radio.`);
@@ -13,7 +13,7 @@ for (let i = 0, length = GetNumResourceMetadata("radio", "supersede_radio"); i <
     }
 
     try {
-        const data = JSON.parse(GetResourceMetadata("radio", "supersede_radio_extra", i));
+        const data = JSON.parse(GetResourceMetadata("DP_Dutch_Radio", "supersede_radio_extra", i));
         if (data !== null) {
             customRadios.push({
                 "isPlaying": false,

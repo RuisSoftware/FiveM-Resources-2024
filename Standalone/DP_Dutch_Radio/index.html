@@ -37,7 +37,7 @@
                     sound = station.howl = new Howl({
                         src: station.data.url,
                         html5: true, // A live stream can only be played through HTML5 Audio.
-                        format: ['opus', 'ogg', 'mp3'],
+                        format: ['opus', 'ogg'],
                         volume: (station.data.volume || 1.0) * self.volume || 0.1
                     });
                 }
@@ -84,7 +84,7 @@
         };
 
         document.addEventListener("DOMContentLoaded", () => {
-            fetch("http://DP_Radio/radio:ready", { "method": "POST", "body": "{}" });
+            fetch("https://DP_Dutch_Radio/radio:ready", { "method": "POST", "body": "{}" });
 
             window.addEventListener("message", (event) => {
                 let item = event.data;
@@ -110,7 +110,7 @@
                                 customRadios.play(index);
                             }
                         } else {
-                            fetch("http://DP_Radio/radio:ready", { "method": "POST", "body": "{}" });
+                            fetch("https://DP_Dutch_Radio/radio:ready", { "method": "POST", "body": "{}" });
                         }
                         break;
                     case "stop":
