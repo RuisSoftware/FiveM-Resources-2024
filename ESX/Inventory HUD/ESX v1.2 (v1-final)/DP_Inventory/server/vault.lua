@@ -232,7 +232,7 @@ ESX.RegisterServerCallback('DP_Inventory:getVaultInventory', function(source, cb
 		else
 			blackMoney = 0
 		end
-		if item.job == 'police' or item.job == 'nightclub' or then
+		if item.job == 'police' or item.job == 'nightclub' then
 			TriggerEvent('esx_addonaccount:getSharedAccount', typeVault..'_money', function(account)
 				money = account.money
 			end)

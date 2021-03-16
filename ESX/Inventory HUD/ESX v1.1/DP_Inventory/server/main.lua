@@ -60,7 +60,7 @@ ESX.RegisterServerCallback("DP_Inventory:getPlayerInventory", function(source, c
 	end
 end)
 
-ESX.RegisterServerCallback("DP_Inventory:getPlayerInventoryWeight", function(source,cb)
+--[[ESX.RegisterServerCallback("DP_Inventory:getPlayerInventoryWeight", function(source,cb)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local playerweight = xPlayer.getWeight()
@@ -72,7 +72,7 @@ ESX.RegisterServerCallback("DP_Inventory:getMaxInventoryWeight", function(source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local maxWeight = xPlayer.getMaxWeight()
 	cb(maxWeight)
-end)
+end)]]
 
 RegisterNetEvent("DP_Inventory:clearweapons")
 AddEventHandler("DP_Inventory:clearweapons", function(target)
