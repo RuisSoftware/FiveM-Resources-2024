@@ -2,7 +2,7 @@
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Here are some free resources that you might like :)
 
-If you don't want to install a full ESX server on your own, then checkout [Ribosay](https://discord.gg/EseZSvDYha)
+If you don't want to install a full ESX server on your own, then checkout [RibSosay](https://discord.gg/EseZSvDYha)
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
 The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
