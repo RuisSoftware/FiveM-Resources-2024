@@ -24,13 +24,83 @@ Config.Zones = {
         Rooms = {
             Room1 = {
                 number = 1,
-                instancename = "Paleto1",
+                instancename = "boven1",
                 entry = {x = -103.12, y = 6331.01, z = 31.58},
 			},
             Room2 = {
                 number = 2,
-                instancename = "Paleto2",
+                instancename = "boven2",
                 entry = {x = -106.52, y = 6334.06, z = 31.58},
+			},
+			Room3 = {
+                number = 3,
+                instancename = "boven3",
+                entry = {x = -107.60, y = 6339.79, z = 31.58},
+			},
+			Room4 = {
+                number = 4,
+                instancename = "boven4",
+                entry = {x = -102.11, y = 6345.33, z = 31.58},
+			},
+			Room5 = {
+                number = 5,
+                instancename = "boven5",
+                entry = {x = -98.84, y = 63348.62, z = 31.58},
+			},
+			Room6 = {
+                number = 6,
+                instancename = "boven6",
+                entry = {x = -93.57, y = 6353.87, z = 31.58},
+			},
+			Room7 = {
+                number = 7,
+                instancename = "boven7",
+                entry = {x = -90.18, y = 6357.25, z = 31.58},
+			},
+			Room8 = {
+                number = 8,
+                instancename = "boven8",
+                entry = {x = -84.71, y = 6362.75, z = 31.58},
+			},
+			Room9 = {
+                number = 9,
+                instancename = "boven9",
+                entry = {x = -84.95, y = 6362.48, z = 35.50},
+			},
+			Room10 = {
+                number = 10,
+                instancename = "boven10",
+                entry = {x = -90.27, y = 6357.12, z = 35.50},
+			},
+			Room11 = {
+                number = 11,
+                instancename = "boven11",
+                entry = {x = -93.57, y = 6353.89, z = 35.50},
+			},
+			Room12 = {
+                number = 12,
+                instancename = "boven12",
+                entry = {x = -98.82, y = 6348.52, z = 35.50},
+			},
+			Room13 = {
+                number = 13,
+                instancename = "boven13",
+                entry = {x = -102.26, y = 6345.13, z = 35.50},
+			},
+			Room14 = {
+                number = 14,
+                instancename = "boven14",
+                entry = {x = -107.59, y = 63339.74, z = 35.50},
+			},
+			Room15 = {
+                number = 15,
+                instancename = "boven15",
+                entry = {x = -106.52, y = 6334.06, z = 35.50},
+			},
+			Room16 = {
+                number = 16,
+                instancename = "boven16",
+                entry = {x = -103.37, y = 6330.73, z = 35.50},
 			},
 		}
 	},
