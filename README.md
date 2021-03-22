@@ -1,6 +1,6 @@
 # Dutch Players FiveM Resources
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
-Everybody needs an inventory, right? Have some fun with it and leave a star if you like it!
+Here are some free resources that you might like :)
 
 If you don't want to install a full ESX server on your own, then checkout [Ribosay](https://discord.gg/EseZSvDYha)
 
