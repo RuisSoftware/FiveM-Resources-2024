@@ -1,4 +1,6 @@
-# Dutch Players Inventory // ESX 1.2 ONLY
+# Dutch Players Inventory
+Everybody needs an inventory, right? Have some fun with it and leave a star if you like it!
+
 # Important
  Go to you es_extended/server/main.lua line 423 the event name is esx:onPickup and add after line 430 this code
  ```lua
