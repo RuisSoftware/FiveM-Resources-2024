@@ -1,5 +1,6 @@
 # Dutch Players FiveM Resources
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
+Dear Ribosay, if you read this: STOP SELLING THIS INVENTORY!
 
 ![bugs](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/sendpr.png)
 The latest MySQL plugin could break this resource! Only use: https://github.com/dutchplayers/MySQL-for-ESX-Inventory-HUD
