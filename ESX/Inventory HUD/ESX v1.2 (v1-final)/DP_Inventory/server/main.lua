@@ -70,7 +70,7 @@ end)
 ESX.RegisterServerCallback("DP_Inventory:getMaxInventoryWeight", function(source,cb)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-	local maxWeight = xPlayer.getMaxWeight()
+	local maxWeight = Config.Weight
 	cb(maxWeight)
 end)
 
