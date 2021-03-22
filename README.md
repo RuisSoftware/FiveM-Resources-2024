@@ -14,6 +14,6 @@ We currently support multiple languages, but we don't have all. Spread some ‚ù§Ô
 ![screenshots](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/screenshots.png)
 
 ![support](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/support.png)
-We drink a lot of coffee while making updates. If you like to buy me a coffee then donate on [PayPal](https://www.paypal.com/paypalme/dutchplayers)
+We drink a lot of coffee while making updates. If you like to buy us a coffee then donate on [PayPal](https://www.paypal.com/paypalme/dutchplayers)
 - We can give you support in our [International Discord Server](https://www.dutch-players.nl/joindiscord)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
