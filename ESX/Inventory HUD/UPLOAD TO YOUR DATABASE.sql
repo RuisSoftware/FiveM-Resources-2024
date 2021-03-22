@@ -43,8 +43,11 @@ INSERT INTO `addon_account` (`name`, `label`, `shared`) VALUES
 	('bag_money', 'Bag Money ', 0),
 	('society_police_black_money', 'Police black money ', 1),
 	('society_police_money', 'Police money ', 1),
-	('locker',	'Locker',	0)
+	('locker',	'Locker',	0),
+	('locker_black', 'Locker Zwart geld', 0),
+	('locker_cash', 'Locker Contant geld', 0)
 ;
+
 ALTER TABLE addon_account_data
 MODIFY owner VARCHAR(60);
 ALTER TABLE addon_inventory_items
