@@ -73,11 +73,12 @@ files {
 
 exports {
 	'GenerateWeapon',
+	'openInventory'
 }
 
 dependencies {
 	'es_extended',
 	'pmc-keybinds',
-	't-notify', -- new notify
+	't-notify',
 	'mythic_progbar'
 }
