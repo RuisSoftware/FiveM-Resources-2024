@@ -372,7 +372,12 @@ ESX.RegisterServerCallback('DP_Inventory:buyLicense', function(source, cb)
 			cb(true)
 		end)
 	else
-		TriggerClientEvent('b1g_notify:client:Notify', source, { type = 'false', text = _U('no_money')})
+		TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			style  =  'success',
+			duration  =  5500,
+			message = _U("no_money"),
+			sound  =  true
+		})
 		cb(false)
 	end
 end)

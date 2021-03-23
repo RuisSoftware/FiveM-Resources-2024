@@ -79,7 +79,6 @@ dependencies {
 	'es_extended',
 	'pmc-keybinds',
 	'mythic_notify', -- DEPRECATED
-	'b1g_notify', -- DEPRECATED
 	't-notify', -- new notify
 	'mythic_progbar'
 }

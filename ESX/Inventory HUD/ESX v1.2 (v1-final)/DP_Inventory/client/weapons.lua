@@ -153,10 +153,10 @@ AddEventHandler('DP_Inventory:useAttach', function(attach)
                 end
             end, attach)
         else
-            exports['b1g_notify']:Notify('error', _U("not_compatible"))
+			exports['t-notify']:SendTextAlert('info', _U("not_compatible"), 5500, false)
         end
     else
-        exports['b1g_notify']:Notify('error', _U("no_weapon_selected"))
+		exports['t-notify']:SendTextAlert('info', _U("no_weapon_selected"), 5500, false)
     end
 end)
 
@@ -195,7 +195,7 @@ Citizen.CreateThread(function()
                     end
                 end
             else
-                exports['b1g_notify']:Notify('error', _U("no_gun_in_hand"))
+				exports['t-notify']:SendTextAlert('info', _U("no_gun_in_hand"), 5500, false)
             end
 		end
 	end
