@@ -99,6 +99,15 @@ Locales['nl'] = {
 	['locker_blip'] = 'Kluizenverhuur',
 	['exit_lockerroom'] = '[E] Kluisverhuur verlaten',
 	['enter_lockerroom'] = '[E] Kluisverhuur bezoeken',
+	['not_found'] = 'Niets gevonden',
+	['no_key'] = 'Je hebt geen kluissleutel',
+	['no_money_locker'] = 'Je hebt niet genoeg contant geld om de initiële huurprijs te betalen.',
+	['already_locker'] = 'Je hebt al een kluisje.',
+	['canceled_locker'] = 'Je hebt het huren van dit kluisje geannuleerd.',
+	['dont_own_locker'] = 'Je bezit deze kluis niet.',
+	['you_took'] = 'Je pakte ',
+	['you_put'] = 'Succesvol opgeslagen: ',
+	['not_in_locker'] = 'Je hebt niet meer van dit item in de voorraad.',
 
 
 }

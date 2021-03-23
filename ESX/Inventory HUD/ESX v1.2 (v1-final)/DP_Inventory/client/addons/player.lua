@@ -45,10 +45,10 @@ Citizen.CreateThread(function()
 								end
 							end)
 						else
-							exports['mythic_notify']:DoHudText('error', _U('player_not_dead'))
+							exports['t-notify']:SendTextAlert('info', _U('player_not_dead'), 5500, false)
 						end
 					else
-						exports['mythic_notify']:DoHudText('error', _U('no_permissions'))
+						exports['t-notify']:SendTextAlert('info', _U('no_permissions'), 5500, false)
 					end
 				else
 					local searchPlayerPed = GetPlayerPed(closestPlayer)
@@ -68,7 +68,7 @@ Citizen.CreateThread(function()
 							end
 						end)  
 					else
-						exports['mythic_notify']:DoHudText('error', _U('player_not_dead'))
+						exports['t-notify']:SendTextAlert('info', _U('player_not_dead'), 5500, false)
 					end
 				end
             end

@@ -20,7 +20,7 @@ RegisterKey('keyboard', 'E',
 						if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 							OpenShopInv('ilegal')
 						else
-							exports['mythic_notify']:DoHudText('error', _U('no_acces'))
+							exports['t-notify']:SendTextAlert('info', _U('no_acces'), 5500, false)
 						end
 					end
 				end
@@ -31,7 +31,8 @@ RegisterKey('keyboard', 'E',
 							if ja then
 								OpenShopInv('groothandel_supermarkt')
 							else
-								exports['mythic_notify']:DoHudText('error', 'Je beheert geen eigen winkel')
+								--exports['mythic_notify']:DoHudText('error', 'Je beheert geen eigen winkel')
+								exports['t-notify']:SendTextAlert('info', _U('no_acces'), 5500, false)
 							end
 						end, GetPlayerServerId(PlayerId()))
 					end
@@ -61,7 +62,7 @@ RegisterKey('keyboard', 'E',
 							if hasWeaponLicense then
 								OpenShopInv('weaponshop')
 							else
-								exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+								exports['t-notify']:SendTextAlert('info', _U('license_check_fail'), 5500, false)
 							end
 						end, GetPlayerServerId(PlayerId()), Config.License.Weapon)
 					else
@@ -633,7 +634,7 @@ if Config.UseLicense then
 							if IsControlJustReleased(0, 38) then
 								ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 								if hasWeaponLicense then
-									exports['mythic_notify']:DoHudText('error', _U('license_shop_check'))
+									exports['t-notify']:SendTextAlert('info', _U('license_shop_check'), 5500, false)
 								else
 									OpenBuyLicenseMenu()
 									Citizen.Wait(2000)

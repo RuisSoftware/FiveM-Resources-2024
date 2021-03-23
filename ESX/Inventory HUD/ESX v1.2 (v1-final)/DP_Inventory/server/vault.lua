@@ -11,14 +11,29 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 				local inventoryItem = inventory.getItem(item)
 				if count > 0 and inventoryItem.count >= count then
 					if not xPlayer.canCarryItem(item, count) then
-						TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('player_cannot_hold'), length = 5500})
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'error',
+							duration  =  5500,
+							message = _U('player_cannot_hold'),
+							sound  =  true
+						})
 					else
 						inventory.removeItem(item, count)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'success', text = _U('have_withdrawn', count, inventoryItem.label), length = 7500})
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'success',
+							duration  =  7500,
+							message = _U('have_withdrawn', count, inventoryItem.label),
+							sound  =  true
+						})
 					end
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('not_enough_in_vault'), length = 5500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('not_enough_in_vault'),
+						sound  =  true
+					})
 				end
 			end)
 		--[[elseif xPlayer.club.name == job then
@@ -41,14 +56,29 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 				local inventoryItem = inventory.getItem(item)
 				if count > 0 and inventoryItem.count >= count then
 					if not xPlayer.canCarryItem(item, count) then
-						TriggerClientEvent('mythic_notify:client:SendAlert', _source,  {type = 'error', text = _U('player_cannot_hold'), length = 5500})
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'error',
+							duration  =  5500,
+							message = _U('player_cannot_hold'),
+							sound  =  true
+						})
 					else
 						inventory.removeItem(item, count)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'success', text = _U('have_withdrawn', count, inventoryItem.label), length = 8500})
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'success',
+							duration  =  8500,
+							message = _U('have_withdrawn', count, inventoryItem.label),
+							sound  =  true
+						})
 					end
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('not_enough_in_vault'), length = 5500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('not_enough_in_vault'),
+						sound  =  true
+					})
 				end
 			end)
 		end
@@ -62,7 +92,12 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('amount_invalid'),
+						sound  =  true
+					})
 				end
 			end)
 		elseif xPlayer.job.name == job then
@@ -72,7 +107,12 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('amount_invalid'),
+						sound  =  true
+					})
 				end
 			end)
 		--[[elseif xPlayer.club.name == job then
@@ -92,11 +132,21 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('amount_invalid'),
+						sound  =  true
+					})
 				end
 			end)
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = "Je hebt hier geen permissie voor.", length = 5500})
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('no_permissions'),
+				sound  =  true
+			})
 		end
 	end
 
@@ -115,7 +165,12 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				TriggerEvent('esx_addoninventory:getSharedInventory', 'society_'..job, function(inventory)
 					xPlayer.removeInventoryItem(item, count)
 					inventory.addItem(item, count)
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'success', text = _U('have_deposited', count, inventory.getItem(item).label), length = 7500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'success',
+						duration  =  7500,
+						message = _U('have_deposited', count, inventory.getItem(item).label),
+						sound  =  true
+					})
 				end)
 			--[[elseif xPlayer.club.name == job then
 				TriggerEvent('esx_addoninventory:getSharedInventory', 'society_'.. job, function(inventory)
@@ -127,13 +182,28 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				TriggerEvent('esx_addoninventory:getInventory', 'vault', xPlayerOwner.identifier, function(inventory)
 					xPlayer.removeInventoryItem(item, count)
 					inventory.addItem(item, count)
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'success', text = _U('have_deposited', count, inventory.getItem(item).label), length = 7500})
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'success',
+						duration  =  7500,
+						message = _U('have_deposited', count, inventory.getItem(item).label),
+						sound  =  true
+					})
 				end)
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = "error", text = 'Je hebt hier geen permissies voor!', length = 5500})
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('no_permissions'),
+					sound  =  true
+				})
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = "error", text = _U('invalid_quantity'), length = 5500})
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('invalid_quantity'),
+				sound  =  true
+			})
 		end
 
 	elseif type == 'item_account' then
@@ -158,10 +228,20 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				end)
 			else
 				xPlayer.addAccountMoney(item, count)
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = 'This job not allow for black money', length = 5500})
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('no_permissions'),
+					sound  =  true
+				})
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('amount_invalid'),
+				sound  =  true
+			})
 		end
 	elseif type == 'item_money' then
 		local playerAccountMoney = xPlayer.getMoney()
@@ -169,7 +249,6 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 			xPlayer.removeMoney(count)
 			if xPlayer.job.name == job and job == 'police' then
 				TriggerEvent('esx_addonaccount:getSharedAccount', 'society_'..job..'_money', function(account)
-					print('account',account)
 					account.addMoney(count)
 				end)
 			elseif xPlayer.job.name == job and job == 'nightclub' then
@@ -186,10 +265,20 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				end)
 			else
 				xPlayer.addAccountMoney(item, count)
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = 'This job not allow for black money', length = 5500})
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('no_permissions'),
+					sound  =  true
+				})
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, {type = 'error', text = _U('amount_invalid'), length = 5500})
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('amount_invalid'),
+				sound  =  true
+			})
 		end
 	end
 end)

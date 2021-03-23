@@ -21,17 +21,32 @@ RegisterCommand("openinventory", function(source, args, rawCommand) -- ADMIN WAT
 		if targetXPlayer ~= nil then
 			TriggerClientEvent("DP_Inventory:openPlayerInventory", source, target, targetXPlayer.name)
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_player') })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('no_player'),
+				sound  =  true
+			})
 		end
 	else
 		if Config.JobOnlyInventory then
 			if (Config.AllowPolice and xPlayer.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and xPlayer.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and xPlayer.job.name == Config.InventoryJob.Mafia) or (Config.AllowMafia and xPlayer.job.name == Config.InventoryJob.Ambulance) then
 				TriggerClientEvent("DP_Inventory:openPlayerInventory", source, target, targetXPlayer.name)
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('no_permissions'),
+					sound  =  true
+				})
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = _U('no_permissions') })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('no_permissions'),
+				sound  =  true
+			})
 		end
 	end
 end)
@@ -118,7 +133,12 @@ AddEventHandler("DP_Inventory:tradePlayerItem", function(from, target, type, ite
 				sourceXPlayer.removeInventoryItem(itemName, itemCount)
 				targetXPlayer.addInventoryItem(itemName, itemCount)
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source , { type = 'error', text = _U('player_inv_no_space') })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('player_inv_no_space'),
+					sound  =  true
+				})
 			end
 		end
 	elseif type == "item_money" then

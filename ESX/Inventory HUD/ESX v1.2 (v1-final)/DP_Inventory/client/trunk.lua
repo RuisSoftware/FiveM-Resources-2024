@@ -86,7 +86,7 @@ function openTrunk()
 				vehHash = GetEntityModel(vehFront)
 				checkVehicle = vehStorage[vehHash]
 				if checkVehicle == 1 then open, vehBone = 4, GetEntityBoneIndexByName(vehFront, 'bonnet')
-				elseif checkVehicle == nil then open, vehBone = 5, GetEntityBoneIndexByName(vehFront, 'boot') elseif checkVehicle == 2 then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') else exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby')) return end
+				elseif checkVehicle == nil then open, vehBone = 5, GetEntityBoneIndexByName(vehFront, 'boot') elseif checkVehicle == 2 then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') else exports['t-notify']:SendTextAlert('info', _U('no_veh_nearby'), 5500, false) return end
 				local vehiclePos = GetWorldPositionOfEntityBone(vehFront, vehBone)
 		
 				local pedDistance = GetDistanceBetweenCoords(vehiclePos, coords, 1)
@@ -124,23 +124,23 @@ function openTrunk()
 												loadCamera(0, 3)
 											end
 										else
-											exports['mythic_notify']:SendAlert('error', _U('trunk_closed'))
+											exports['t-notify']:SendTextAlert('error', _U('trunk_closed'), 5500, false)
 										end
 									end
 								end)
 							end
 						else
-							exports['mythic_notify']:SendAlert('error', _U('trunk_closed'))
+							exports['t-notify']:SendTextAlert('error', _U('trunk_closed'), 5500, false)
 						end
 					end
 				else
-					exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby'))
+					exports['t-notify']:SendTextAlert('error', _U('no_veh_nearby'), 5500, false)
 				end
 				lastOpen = true
 				GUI.Time = GetGameTimer()
 			end
 		else
-			exports['mythic_notify']:SendAlert('error', _U('nacho_veh'))
+			exports['t-notify']:SendTextAlert('error', _U('nacho_veh'), 5500, false)
 		end
 	end
 end

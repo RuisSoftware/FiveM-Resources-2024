@@ -105,13 +105,13 @@ function openGlovebox()
 						end)
 					end
 				else
-					exports['mythic_notify']:SendAlert('error', _U('no_veh_nearby'))
+					exports['t-notify']:SendTextAlert('info', _U('no_veh_nearby'), 5500, false)
 				end
 				lastOpen = true
 				GUI.Time = GetGameTimer()
 			end
-		else
-			exports['mythic_notify']:SendAlert('success', _U('nacho_veh'))
+		else)
+			exports['t-notify']:SendTextAlert('info', _U('nacho_veh'), 5500, false)
 		end
 	end
 end

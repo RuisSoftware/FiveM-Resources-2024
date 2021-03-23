@@ -3,8 +3,8 @@ ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
 ESX.RegisterServerCallback('DP_Inventory:checkLocker', function(source, cb, lockerId)
-	local pyrp = source
-	local xPlayer = ESX.GetPlayerFromId(pyrp)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	MySQL.Async.fetchAll('SELECT * FROM inventory_lockers WHERE lockerName = @lockerId AND owner = @identifier', { ['@lockerId'] = lockerId, ['@identifier'] = xPlayer.identifier }, function(result) 
 		if result[1] ~= nil then
 			cb(true)
@@ -16,8 +16,8 @@ end)
 
 RegisterServerEvent('DP_Inventory:startRentingLocker')
 AddEventHandler('DP_Inventory:startRentingLocker', function(lockerId, lockerName) 
-	local pyrp = source
-	local xPlayer = ESX.GetPlayerFromId(pyrp)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	MySQL.Async.fetchAll('SELECT * FROM inventory_lockers WHERE owner = @identifier', { ['@identifier'] = xPlayer.identifier }, function(result)
 		if result[1] == nil then
 			if xPlayer.getMoney() >= Config.InitialLockerRentPrice then
@@ -26,29 +26,54 @@ AddEventHandler('DP_Inventory:startRentingLocker', function(lockerId, lockerName
 					['@lockerId'] = lockerId
 				})
 				xPlayer.removeMoney(Config.InitialLockerRentPrice)
-				TriggerClientEvent('mythic_notify:client:SendAlert', pyrp, { type = 'success', text = 'Je huurt nu kluis ' ..lockerName.. '. Dat kost dan €'..Config.DailyRentPrice..' dagelijks (IRL)', length = 5000 })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'success',
+					duration  =  5500,
+					message = 'Je huurt nu kluis ' ..lockerName.. '. Dat kost dan €'..Config.DailyRentPrice..' dagelijks (IRL)',
+					sound  =  true
+				})
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', pyrp, { type = 'error', text = 'Je hebt niet genoeg contant geld om de initiële huurprijs te betalen.', length = 5000 })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('no_money_locker'),
+					sound  =  true
+				})
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', pyrp, { type = 'error', text = 'Je hebt al een kluisje.', length = 5000 })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('already_locker'),
+				sound  =  true
+			})
 		end
 	end)
 end)
 
 RegisterServerEvent('DP_Inventory:stopRentingLocker')
 AddEventHandler('DP_Inventory:stopRentingLocker', function(lockerId, lockerName) 
-	local pyrp = source
-	local xPlayer = ESX.GetPlayerFromId(pyrp)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
 	MySQL.Async.fetchAll('SELECT * FROM inventory_lockers WHERE lockerName = @lockerId AND owner = @identifier', { ['@lockerId'] = lockerId, ['@identifier'] = xPlayer.identifier }, function(result)
 		if result[1] ~= nil then
 			MySQL.Async.execute('DELETE from inventory_lockers WHERE lockerName = @lockerId AND owner = @identifier', {
 				['@lockerId'] = lockerId,
 				['@identifier'] = xPlayer.identifier
 			})
-			TriggerClientEvent('mythic_notify:client:SendAlert', pyrp, { type = 'inform', text = 'Je hebt het huren van dit kluisje geannuleerd.', length = 5000 })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'succes',
+				duration  =  5500,
+				message = _U('canceled_locker'),
+				sound  =  true
+			})
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', pyrp, { type = 'error', text = 'Je bezit deze locker-maat niet.', length = 5000 })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('dont_own_locker'),
+				sound  =  true
+			})
 		end
 	end)
 end)
@@ -105,14 +130,29 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 			
 				-- can the player carry the said amount of x item?
 				if not xPlayer.canCarryItem(sourceItem.name, sourceItem.count + count) then
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Je kunt niet meer van dit item vasthouden.', length = 5000 })
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('insufficient_space'),
+						sound  =  true
+					})
 				else
 					inventory.removeItem(item, count)
 					xPlayer.addInventoryItem(item, count)
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'Je pakte '..count..'x '..inventoryItem.label..'', length = 5000 })
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('you_took') ..count..'x '..inventoryItem.label..'',
+						sound  =  true
+					})
 				end
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Je hebt niet meer van dit item in de voorraad.', length = 5000 })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('not_in_locker'),
+					sound  =  true
+				})
 			end
 		end)
 
@@ -125,7 +165,12 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('invalid_quantity'),
+						sound  =  true
+					})
 				end
 			end)
 		else
@@ -136,7 +181,12 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('invalid_quantity'),
+						sound  =  true
+					})
 				end
 			end)
 		end
@@ -156,10 +206,20 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 			TriggerEvent('esx_addoninventory:getInventory', 'locker', xPlayerOwner.identifier, function(inventory)
 				xPlayer.removeInventoryItem(item, count)
 				inventory.addItem(item, count)
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'inform', text = 'Je sloeg '..count..'x '..inventory.getItem(item).label..' op.', length = 5000 })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'inform',
+					duration  =  5500,
+					message = _U('you_put')..count..'x '..inventory.getItem(item).label..'',
+					sound  =  true
+				})
 			end)
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('invalid_quantity'),
+				sound  =  true
+			})
 		end
 
 	elseif type == 'item_account' or type == 'item_money' then
@@ -173,7 +233,12 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 					account.addMoney(count)
 				end)
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('invalid_quantity'),
+					sound  =  true
+				})
 			end
 		else
 			local playerAccountMoney = xPlayer.getAccount('money').money
@@ -185,7 +250,12 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 					account.addMoney(count)
 				end)
 			else
-				TriggerClientEvent('mythic_notify:client:SendAlert', _source, { type = 'error', text = 'Ongeldig aantal.', length = 5000 })
+				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					style  =  'error',
+					duration  =  5500,
+					message = _U('invalid_quantity'),
+					sound  =  true
+				})
 			end
 		end
 	elseif type == 'item_weapon' then

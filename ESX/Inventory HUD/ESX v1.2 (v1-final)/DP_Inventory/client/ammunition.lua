@@ -55,9 +55,9 @@ AddEventHandler('ammunition:useAmmoItem', function(ammo)
 				SetPedAmmo(playerPed, weapon, newAmmo)
 				TriggerServerEvent('ammunition:removeAmmoItem', ammo)
 				TaskReloadWeapon(playerPed)
-				exports['mythic_notify']:SendAlert('success', _U('reloaded'))
+				exports['t-notify']:SendTextAlert('info', _U('reloaded'), 5500, false)
 			else
-				exports['mythic_notify']:SendAlert('error', _U('max_ammo'))
+				exports['t-notify']:SendTextAlert('error', _U('max_ammo'), 5500, false)
 			end
 		end
 	end

@@ -29,14 +29,14 @@ function OpenVaultInventoryMenu(data)
 		vaultType = data
 		ESX.TriggerServerCallback("DP_Inventory:getVaultInventory", function(inventory)
 			if not inventory then
-				exports['mythic_notify']:SendAlert('error', 'Niets gevonden')
+				exports['t-notify']:SendTextAlert('error', _U('not_found'), 5500, false)
 			else
 				TriggerEvent("DP_Inventory:openVaultInventory", inventory)
 			end
 		end,
 		data)
 	else
-		exports['mythic_notify']:SendAlert('error', "Je hebt geen kluissleutel", 5500)
+		exports['t-notify']:SendTextAlert('error', _U('no_key'), 5500, false)
 		Citizen.Wait(0)
 	end
 end

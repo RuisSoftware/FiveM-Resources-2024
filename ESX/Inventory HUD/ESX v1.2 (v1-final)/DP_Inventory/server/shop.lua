@@ -294,14 +294,29 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = _U('item_added')..count.." "..list[i].label })
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'success',
+							duration  =  5500,
+							message = _U('item_added')..count.." "..list[i].label,
+							sound  =  true
+						})
 					else
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('no_money') })
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'error',
+							duration  =  5500,
+							message = _U('no_money'),
+							sound  =  true
+						})
 					end
 				end
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('insufficient_space') })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('insufficient_space'),
+				sound  =  true
+			})
 		end
 	end
 	if type == "item_weapon" then
@@ -313,14 +328,29 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = _U('item_added')..count.." "..list[i].label })
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'success',
+							duration  =  5500,
+							message = _U('item_added')..count.." "..list[i].label,
+							sound  =  true
+						})
 					else
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('no_money') })
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'error',
+							duration  =  5500,
+							message = _U('no_money'),
+							sound  =  true
+						})
 					end
 				end
 			end
 		else
-			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('insufficient_space') })
+			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				style  =  'error',
+				duration  =  5500,
+				message = _U('insufficient_space'),
+				sound  =  true
+			})
 		end
 	end
 
@@ -336,12 +366,27 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						TriggerClientEvent("DP_Inventory:AddAmmoToWeapon", source, list[i].weaponhash, ammo)
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = _U('item_added')..count.." "..list[i].label })
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'succes',
+							duration  =  5500,
+							message = _U('item_added')..count.." "..list[i].label,
+							sound  =  true
+						})
 					else
-						TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('no_money') })
+						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							style  =  'error',
+							duration  =  5500,
+							message = _U('no_money'),
+							sound  =  true
+						})
 					end
 				else
-					TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = _U('insufficient_space') })
+					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						style  =  'error',
+						duration  =  5500,
+						message = _U('insufficient_space'),
+						sound  =  true
+					})
 				end
 			end
 		end

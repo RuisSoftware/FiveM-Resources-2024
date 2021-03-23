@@ -4,7 +4,7 @@ game 'gta5'
 name 'DP_Inventory'
 author 'Dutch Players'
 description 'Inventory for DP 1.2 inspired by esx_inventoryhud from Trsak'
-version '1.2.9'
+version '1.3'
 url 'https://github.com/dutchplayers/FiveM-Resources'
 
 ui_page 'html/ui.html'
@@ -78,7 +78,6 @@ exports {
 dependencies {
 	'es_extended',
 	'pmc-keybinds',
-	'mythic_notify', -- DEPRECATED
 	't-notify', -- new notify
 	'mythic_progbar'
 }
