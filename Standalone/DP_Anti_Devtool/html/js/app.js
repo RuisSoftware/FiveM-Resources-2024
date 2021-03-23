@@ -1,6 +1,6 @@
 var element = new Image;
 element.__defineGetter__("id", function() {
-    fetch("https://DP_Framework/devtoolOpening", {
+    fetch("https://DP_Anti_Devtool/devtoolOpening", {
         method: "post"
     })
 });
