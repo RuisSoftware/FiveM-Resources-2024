@@ -2,6 +2,7 @@
 ![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Now included:
 - Weapon recoil with drugs influence. 
+- Developer tools blocker (see: https://forum.cfx.re/t/how-hackers-can-exploit-your-servers-and-what-to-do-about-it/702213)
 
 Inspired by the paid resource: https://forum.cfx.re/t/esx-drug-recoil-system-paid-resource/1871214/22
 
