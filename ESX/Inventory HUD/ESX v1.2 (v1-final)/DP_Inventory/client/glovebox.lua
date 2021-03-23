@@ -110,7 +110,7 @@ function openGlovebox()
 				lastOpen = true
 				GUI.Time = GetGameTimer()
 			end
-		else)
+		else
 			exports['t-notify']:SendTextAlert('info', _U('nacho_veh'), 5500, false)
 		end
 	end
