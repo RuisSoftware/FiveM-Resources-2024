@@ -160,10 +160,11 @@ AddEventHandler('DP_Inventory:useAttach', function(attach)
     end
 end)
 
-Citizen.CreateThread(function()
-	while true do
-        Citizen.Wait(0)
-        if IsControlJustPressed(0, 172) and not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) and not removingAttach then
+RegisterKey('keyboard',"BACKSLASH",
+	function()
+	end,
+	function()
+        if not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) and not removingAttach then
             if currentWeapon ~= nil then
                 removingAttach = true
                 local playerPed = PlayerPedId()
@@ -186,7 +187,7 @@ Citizen.CreateThread(function()
                             }, function(status)
                                 if not status then
                                     RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
-                                    ESX.TriggerServerCallback('DP_Inventory:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
+                                    DP.TriggerServerCallback('DP_Inventaris:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
                                     table.remove(currentWepAttachs, i)
                                     removingAttach = false
                                 end
@@ -199,7 +200,7 @@ Citizen.CreateThread(function()
             end
 		end
 	end
-end)
+)
 
 function RemoveWeapon(weapon)
     local checkh = Config.Throwables
