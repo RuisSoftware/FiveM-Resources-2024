@@ -37,7 +37,7 @@
                     sound = station.howl = new Howl({
                         src: station.data.url,
                         html5: true, // A live stream can only be played through HTML5 Audio.
-                        format: ['opus', 'ogg'],
+                        format: ['opus', 'ogg', 'mp3'],
                         volume: (station.data.volume || 1.0) * self.volume || 0.1
                     });
                 }
