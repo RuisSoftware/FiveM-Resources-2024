@@ -4,7 +4,7 @@ game 'gta5'
 name 'DP_Inventory'
 author 'Dutch Players'
 description 'Inventory for DP 1.2 inspired by esx_inventoryhud from Trsak'
-version '1.3.1'
+version '1.3.2'
 url 'https://github.com/dutchplayers/FiveM-Resources'
 
 ui_page 'html/ui.html'
