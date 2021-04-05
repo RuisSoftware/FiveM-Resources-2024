@@ -95,7 +95,7 @@ AddEventHandler("DP_Inventory_glovebox:GetSharedDataStoreGlovebox", function(pla
 	cb(GetSharedDataStoreGlovebox(plate))
 end)
 
-RegisterServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
+--[[RegisterServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
 AddEventHandler("DP_Inventory_glovebox:getOwnedVehicle", function()
 	local vehicules = {}
 	local _source = source
@@ -112,6 +112,21 @@ AddEventHandler("DP_Inventory_glovebox:getOwnedVehicle", function()
 		end
 		TriggerClientEvent("DP_Inventory_glovebox:setOwnedVehicle", _source, vehicules)
 	end)
+end)]]
+
+RegisterServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
+AddEventHandler("DP_Inventory_glovebox:getOwnedVehicle", function()
+	local vehicules = {}
+	local _source = source
+	local result = MySQL.Sync.fetchAll("SELECT * FROM owned_vehicles")
+	
+	if #result ~= 0 then
+		for i = 1, #result, 1 do
+			local plate1 = result[i].plate
+			table.insert(vehicules, {plate = plate1})
+		end
+	end
+	TriggerClientEvent("DP_Inventory_glovebox:setOwnedVehicule", _source, vehicules)
 end)
 
 function getItemWeight(item)
