@@ -11,7 +11,8 @@ local listPlate = Config.VehiclePlate
 
 TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
 
-AddEventHandler("onMySQLReady", function()
+--AddEventHandler("onMySQLReady", function()
+MySQL.ready(function()
 	local result = MySQL.Sync.fetchAll("SELECT * FROM inventory_trunk")
 	local data = nil
 	if #result ~= 0 then
@@ -75,7 +76,7 @@ function MakeDataStoreTrunk(plate)
 	local owned = getOwnedVehicle(plate)
 	local dataStore = CreateDataStoreTrunk(plate, owned, data)
 	SharedDataStores[plate] = dataStore
-	MySQL.Async.execute("INSERT INTO inventory_trunk(plate,data,owned) VALUES (@plate,'{}',@owned) ON DUPLICATE KEY UPDATE plate = @plate, data = '{}', owned = @owned", {
+	MySQL.Async.execute("INSERT INTO inventory_trunk(plate,data,owned) VALUES (@plate,'{}',@owned)", {
 		["@plate"] = plate,
 		["@owned"] = owned
 	})
