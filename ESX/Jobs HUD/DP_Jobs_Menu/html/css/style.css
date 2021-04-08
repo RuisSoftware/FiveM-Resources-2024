@@ -1,29 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Roboto');
 body {
-	top:50px;
-	text-align: center;
-	position: relative;
 	overflow: hidden;
 	margin: auto;
-	width:1700px;
+	width:100%;
+	height:100%;
+	text-align: center;
 }
 
 .background-image {
 	background-repeat: no-repeat;
 	position: absolute;
-	left: 0;
-	right: 0;
+	height: 700px;
+	width:900px; 
 	z-index: -1;
-	background-image: linear-gradient(90deg,#3C97FF 0%, #34CAFF 39%, #30E9FF 100%);
-	
+	background-color: rgba(57,62,65,0.6);
+	border:3px solid #2274A5;
 	opacity: 0.9;
-	height: 850px;
-	width:1700px;
-	-webkit-filter: blur(5px);
-	filter: blur(5px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #tekst{
@@ -39,6 +35,7 @@ img {
 	margin-right: auto;
 	margin-top: 20%;
 	font-size: 10px;
+	text-align:center;
 }
 
 .tittle {
@@ -46,7 +43,7 @@ img {
 	left: 0;
 	top: 0;
 	background: white;
-	color: #3C97FF;
+	color: #2274A5;
 	border: 0;
 	padding: 1%;
 	width: 100%;
@@ -57,7 +54,7 @@ img {
 	left: 0;
 	top: 0;
 	background: white;
-	color: #3C97FF;
+	color: #2274A5;
 	border: 0;
 	padding: 1%;
 	width: 100%;
@@ -71,14 +68,14 @@ img {
 	width: 100%;
 	padding: 4%;
 	border: 0;
-	color: #3C97FF;
+	color: #2274A5;
 	background-color: white;
 	font-family: 'Raleway', sans-serif;
 }
 
 .interview:hover {
 	border: 0;
-	background-color: #3C97FF;
+	background-color: #2274A5;
 	color: #fff;
 	cursor: pointer;
 }
@@ -92,14 +89,14 @@ img {
 	padding: 4%;
 	border: 0;
 	color: #fff;
-	background-color: #ff0096;
+	background-color: #FE5059;
 	font-family: 'Raleway', sans-serif;
 }
 
 .interview2:hover {
 	border: 0;
 	background-color: #fff;
-	color: #1f1096;
+	color: #FE5059;
 	cursor: pointer;
 }
 
@@ -111,14 +108,14 @@ img {
 	padding: 4%;
 	border: 0;
 	color: #fff;
-	background-color: #ff4b00;
+	background-color: #32936F;
 	font-family: 'Raleway', sans-serif;
 }
 
 .interview3:hover {
 	border: 0;
 	background-color: #fff;
-	color: #f15b00;
+	color: #32936F;
 	cursor: pointer;
 }
 
@@ -126,8 +123,8 @@ img {
 	position: relative;
 	white-space: nowrap;
 	overflow-x: hidden;
-	height: 20em;
-	width: 100%;
+	height: 600px;
+	width: 500px;
 	top: 30vh;
 	margin: auto;
 	-webkit-transform: translateY(-7.2em);
@@ -137,8 +134,8 @@ img {
 	position: relative;
 	white-space: nowrap;
 	overflow-x: hidden;
-	height: 20em;
-	width: 100%;
+	height: 600px;
+	width: 500px;
 	top: 30vh;
 	margin: auto;
 	-webkit-transform: translateY(-7.2em);
@@ -153,6 +150,9 @@ img {
 }
 
 .inner2 {
+	height: 600px;
+	width:900px;  
+	overflow-y:scroll;
 	position: absolute;
 	transition: -webkit-transform 0.3s ease;
 	transition: transform 0.3s ease;
