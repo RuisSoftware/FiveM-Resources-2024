@@ -231,3 +231,23 @@ img {
 	transform: scale(1.2);
 	z-index:999;
 }
+
+
+.inner2::-webkit-scrollbar {
+  margin-right: 10px;
+width: 3.46px;
+height: 2.16px;
+
+}
+
+.inner2::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.inner2::-webkit-scrollbar-thumb {
+  margin-right: 10px;
+  width: 10px;
+  background: rgb(34,116,165);
+}
