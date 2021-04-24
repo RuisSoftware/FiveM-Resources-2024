@@ -17,5 +17,6 @@ client_scripts {
 
 dependencies {
 	'xsound',
+	--'pxrp_vip', -- if you want to use the radio for VIP only.
 	'pmc-keybinds'
 }
