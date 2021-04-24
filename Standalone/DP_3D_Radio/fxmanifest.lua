@@ -10,13 +10,11 @@ server_scripts {
 }
 
 client_scripts {
-	'@pmc-keybinds/import.lua',
 	'config.lua',
 	'client/*.lua'
 }
 
 dependencies {
 	'xsound',
-	--'pxrp_vip', -- if you want to use the radio for VIP only.
-	'pmc-keybinds'
+	--'pxrp_vip' -- if you want to use the radio for VIP only.
 }
