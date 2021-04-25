@@ -100,14 +100,23 @@ end)
 RegisterNetEvent('DP_Radio:volume')
 AddEventHandler('DP_Radio:volume', function(volume)
 	--if xSound.soundExists(youtubeId) then
-	if youtubeId ~= nil then
-		xSound:setVolume(youtubeId, volume/100)
-		print('YouTube volume ingesteld op: ' .. volume)
-	end
-	if MP3Id ~= nil then
-	--if xSound.soundExists(MP3Id) then
-		xSound:setVolume(MP3Id, volume/100)
-		print('MP3 volume ingesteld op: ' .. volume)
+	
+	if volume < 0 or volume > 100 then
+		print('Volume minimal 1 and maximum 100!')
+	else
+		if youtubeId ~= nil then
+			xSound:setVolume(youtubeId, volume/100)
+			print('New YouTube volume: ' .. volume)
+		else
+			print('No YouTube playing.')
+		end
+		if MP3Id ~= nil then
+		--if xSound.soundExists(MP3Id) then
+			xSound:setVolume(MP3Id, volume/100)
+			print('New MP3 volume: ' .. volume)
+		else
+			print('No MP3 playing.')
+		end
 	end
 end)
 

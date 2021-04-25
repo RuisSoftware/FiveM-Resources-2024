@@ -95,19 +95,11 @@ end)
 RegisterCommand('volume', function(source, args, rawCommand)
 	local _source = source
 	local volume = tonumber(args[1])
-	if volume < 0 or volume > 100 then
-		print('Volume minimaal 1 en maximaal 100!')
-	else
-		TriggerClientEvent('DP_Radio:volume', _source, volume)
-	end
+	TriggerClientEvent('DP_Radio:volume', _source, volume)
 end)
 
 RegisterCommand('v', function(source, args, rawCommand)
 	local _source = source
 	local volume = tonumber(args[1])
-	if volume < 0 or volume > 100 then
-		print('Volume minimaal 1 en maximaal 100!')
-	else
-		TriggerClientEvent('DP_Radio:volume', _source, volume)
-	end
+	TriggerClientEvent('DP_Radio:volume', _source, volume)
 end)
