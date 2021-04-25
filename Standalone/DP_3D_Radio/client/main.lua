@@ -12,7 +12,7 @@ xSound = exports.xsound
 RegisterNetEvent('DP_Radio:speelYoutube')
 AddEventHandler('DP_Radio:speelYoutube', function(url, pocketRadio, carRadio)
 	if isVIP() then
-		if IsPedInAnyVehicle(pedId) and carRadio then
+		if (IsPedInAnyVehicle(pedId) and AlwaysNeedItem and carRadio) or (IsPedInAnyVehicle(pedId) and not AlwaysNeedItem) then
 			local vehId = GetVehiclePedIsIn(pedId, false)
 			youtubeId = "youtube-"..vehId
 			xSound:PlayUrlPos(youtubeId ,"https://www.youtube.com/watch?v=" .. url, 1, GetEntityCoords(vehId))
@@ -56,7 +56,7 @@ end)
 RegisterNetEvent('DP_Radio:speelMP3')
 AddEventHandler('DP_Radio:speelMP3', function(url, pocketRadio, carRadio)
 	if isVIP() then
-		if IsPedInAnyVehicle(pedId) and carRadio then
+		if (IsPedInAnyVehicle(pedId) and AlwaysNeedItem and carRadio) or (IsPedInAnyVehicle(pedId) and not AlwaysNeedItem) then
 			local vehId = GetVehiclePedIsIn(pedId, false)
 			MP3Id = "MP3-"..vehId
 			xSound:PlayUrlPos(MP3Id , url, 1, GetEntityCoords(vehId))
