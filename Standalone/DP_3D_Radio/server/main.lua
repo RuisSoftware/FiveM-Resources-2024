@@ -7,14 +7,17 @@ RegisterCommand('youtube', function(source, args, rawCommand)
 	local _source = source
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-		local item = xPlayer.getInventoryItem('hifi').count
-		if item > 0 then
-			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
-		else
-			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], false)
+		local pocketRadio = xPlayer.getInventoryItem(Config.PocketItem).count
+		local carRadio = xPlayer.getInventoryItem(Config.CarItem).count
+		if pocketRadio > 0 then
+			pocketRadio = true
 		end
+		if carRadio > 0 then
+			carRadio = true
+		end
+		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], pocketRadio, carRadio)
 	else
-		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
+		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true, true)
 	end
 end)
 
@@ -22,14 +25,17 @@ RegisterCommand('yt', function(source, args, rawCommand)
 	local _source = source
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-		local item = xPlayer.getInventoryItem('hifi').count
-		if item > 0 then
-			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
-		else
-			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], false)
+		local pocketRadio = xPlayer.getInventoryItem(Config.PocketItem).count
+		local carRadio = xPlayer.getInventoryItem(Config.CarItem).count
+		if pocketRadio > 0 then
+			pocketRadio = true
 		end
+		if carRadio > 0 then
+			carRadio = true
+		end
+		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], pocketRadio, carRadio)
 	else
-		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
+		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true, true)
 	end
 end)
 
@@ -37,19 +43,22 @@ RegisterCommand('mp3', function(source, args, rawCommand)
 	local _source = source
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-		local item = xPlayer.getInventoryItem('hifi').count
+		local pocketRadio = xPlayer.getInventoryItem(Config.PocketItem).count
+		local carRadio = xPlayer.getInventoryItem(Config.CarItem).count
+		if pocketRadio > 0 then
+			pocketRadio = true
+		end
+		if carRadio > 0 then
+			carRadio = true
+		end
 		if string.match(rawCommand, 'mp3 ') then
 			local url = string.sub(rawCommand, 4)
-			if item > 0 then
-				TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
-			else
-				TriggerClientEvent('DP_Radio:speelMP3', _source, url, false)
-			end
+			TriggerClientEvent('DP_Radio:speelMP3', _source, url, pocketRadio, carRadio)
 		end
 	else
 		if string.match(rawCommand, 'mp3 ') then
 			local url = string.sub(rawCommand, 4)
-			TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
+			TriggerClientEvent('DP_Radio:speelMP3', _source, url, true, true)
 		end
 	end
 end)
@@ -58,19 +67,22 @@ RegisterCommand('mp4', function(source, args, rawCommand)
 	local _source = source
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-		local item = xPlayer.getInventoryItem('hifi').count
+		local pocketRadio = xPlayer.getInventoryItem(Config.PocketItem).count
+		local carRadio = xPlayer.getInventoryItem(Config.CarItem).count
+		if pocketRadio > 0 then
+			pocketRadio = true
+		end
+		if carRadio > 0 then
+			carRadio = true
+		end
 		if string.match(rawCommand, 'mp4 ') then
 			local url = string.sub(rawCommand, 4)
-			if item > 0 then
-				TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
-			else
-				TriggerClientEvent('DP_Radio:speelMP3', _source, url, false)
-			end
+			TriggerClientEvent('DP_Radio:speelMP3', _source, url, pocketRadio, carRadio)
 		end
 	else
 		if string.match(rawCommand, 'mp4 ') then
 			local url = string.sub(rawCommand, 4)
-			TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
+			TriggerClientEvent('DP_Radio:speelMP3', _source, url, true, true)
 		end
 	end
 end)
