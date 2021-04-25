@@ -8,13 +8,13 @@ RegisterCommand('youtube', function(source, args, rawCommand)
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
 		local item = xPlayer.getInventoryItem('hifi').count
+		if item > 0 then
+			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
+		else
+			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], false)
+		end
 	else
-		local item = 1
-	end
-	if item > 0 then
 		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
-	else
-		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], false)
 	end
 end)
 
@@ -23,13 +23,13 @@ RegisterCommand('yt', function(source, args, rawCommand)
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
 		local item = xPlayer.getInventoryItem('hifi').count
+		if item > 0 then
+			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
+		else
+			TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], false)
+		end
 	else
-		local item = 1
-	end
-	if item > 0 then
 		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], true)
-	else
-		TriggerClientEvent('DP_Radio:speelYoutube', _source, args[1], false)
 	end
 end)
 
@@ -38,15 +38,18 @@ RegisterCommand('mp3', function(source, args, rawCommand)
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
 		local item = xPlayer.getInventoryItem('hifi').count
+		if string.match(rawCommand, 'mp3 ') then
+			local url = string.sub(rawCommand, 4)
+			if item > 0 then
+				TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
+			else
+				TriggerClientEvent('DP_Radio:speelMP3', _source, url, false)
+			end
+		end
 	else
-		local item = 1
-	end
-	if string.match(rawCommand, 'mp3 ') then
-		local url = string.sub(rawCommand, 4)
-		if item > 0 then
+		if string.match(rawCommand, 'mp3 ') then
+			local url = string.sub(rawCommand, 4)
 			TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
-		else
-			TriggerClientEvent('DP_Radio:speelMP3', _source, url, false)
 		end
 	end
 end)
@@ -56,15 +59,18 @@ RegisterCommand('mp4', function(source, args, rawCommand)
 	if Config.UseESX then
 		local xPlayer = ESX.GetPlayerFromId(_source)
 		local item = xPlayer.getInventoryItem('hifi').count
+		if string.match(rawCommand, 'mp4 ') then
+			local url = string.sub(rawCommand, 4)
+			if item > 0 then
+				TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
+			else
+				TriggerClientEvent('DP_Radio:speelMP3', _source, url, false)
+			end
+		end
 	else
-		local item = 1
-	end
-	if string.match(rawCommand, 'mp4 ') then
-		local url = string.sub(rawCommand, 4)
-		if item > 0 then
+		if string.match(rawCommand, 'mp4 ') then
+			local url = string.sub(rawCommand, 4)
 			TriggerClientEvent('DP_Radio:speelMP3', _source, url, true)
-		else
-			TriggerClientEvent('DP_Radio:speelMP3', _source, url, false)
 		end
 	end
 end)
