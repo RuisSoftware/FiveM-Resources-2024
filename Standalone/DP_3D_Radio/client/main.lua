@@ -19,7 +19,7 @@ AddEventHandler('DP_Radio:speelYoutube', function(url, pocketRadio, carRadio)
 			xSound:onPlayStart(youtubeId, function()
 				CreateThread(function()
 					while true do
-						Wait(200)
+						Wait(Config.CarMovementInverval)
 						if youtubeId == nil then
 							break
 						else
@@ -29,13 +29,13 @@ AddEventHandler('DP_Radio:speelYoutube', function(url, pocketRadio, carRadio)
 				end)
 			end)
 		else
-			if (Config.usePocketRadio and pocketRadio) or (not Config.usePocketRadio) then
+			if (Config.UsePocketRadio and pocketRadio) or (not Config.UsePocketRadio) then
 				youtubeId = "youtube-"..pedId
 				xSound:PlayUrlPos(youtubeId ,"https://www.youtube.com/watch?v=" .. url, 1, GetEntityCoords(pedId))
 				xSound:onPlayStart(youtubeId, function()
 					CreateThread(function()
 						while true do
-							Wait(200)
+							Wait(Config.PocketMovementInverval)
 							if youtubeId == nil then
 								break
 							else
@@ -63,7 +63,7 @@ AddEventHandler('DP_Radio:speelMP3', function(url, pocketRadio, carRadio)
 			xSound:onPlayStart(MP3Id, function()
 				CreateThread(function()
 					while true do
-						Wait(200)
+						Wait(Config.CarMovementInverval)
 						if MP3Id == nil then
 							break
 						else
@@ -73,13 +73,13 @@ AddEventHandler('DP_Radio:speelMP3', function(url, pocketRadio, carRadio)
 				end)
 			end)
 		else
-			if (Config.usePocketRadio and pocketRadio) or (not Config.usePocketRadio) then
+			if (Config.UsePocketRadio and pocketRadio) or (not Config.UsePocketRadio) then
 				MP3Id = "MP3-"..pedId
 				xSound:PlayUrlPos(MP3Id , url, 1, GetEntityCoords(pedId))
 				xSound:onPlayStart(MP3Id, function()
 					CreateThread(function()
 						while true do
-							Wait(200)
+							Wait(Config.PocketMovementInverval)
 							if MP3Id == nil then
 								break
 							else
@@ -142,5 +142,6 @@ function isVIP()
 	while statusVIP == nil do
 		Wait(0)
 	end
+	print('VIP: ' .. statusVIP)
 	return statusVIP
 end
