@@ -7,4 +7,4 @@ Config.UsePocketRadio = true -- Config.UseESX must set to true if you want to us
 Config.PocketItem = 'hifi'
 Config.CarItem = 'carradio'
 Config.CarMovementInverval = 50 -- ms between potition sync in car
-Config.PocketMovementInverval = 500 -- ms between potition sync in car
+Config.PocketMovementInverval = 500 -- ms between potition sync not in car
