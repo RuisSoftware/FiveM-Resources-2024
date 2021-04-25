@@ -142,6 +142,5 @@ function isVIP()
 	while statusVIP == nil do
 		Wait(0)
 	end
-	print('VIP: ' .. statusVIP)
 	return statusVIP
 end
