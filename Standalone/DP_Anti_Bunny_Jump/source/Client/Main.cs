@@ -33,7 +33,7 @@ namespace DP_Anti_Bunny_Jump.Client
             await Delay(0);
             if (gesprongen)
             {
-                API.DisableControlAction(0, 22, true);
+                Game.DisableControlThisFrame(0, CitizenFX.Core.Control.Jump);
             }
         }
     }
