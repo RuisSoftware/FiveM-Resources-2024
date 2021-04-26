@@ -24,7 +24,7 @@ namespace DP_Anti_Bunny_Jump.Client
             if (API.IsPedJumping(API.GetPlayerPed(-1)))
             {
                 gesprongen = true;
-                await Delay(55000);
+                await Delay(2500);
                 gesprongen = false;
             }
         }
