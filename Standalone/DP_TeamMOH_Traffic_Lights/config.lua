@@ -1,6 +1,6 @@
 Config = {}
 Config.WaitingTime = 500 -- The interval for checking if near objects. The lower you set it, the slower the resource will be.
-Config.FreezeDistance = 5 -- Default 5. The higher you set this, the slower the resource will be.
+Config.MaxSpeed = 80
 Config.UseExtendedPropList = false -- Default list includes 26 props and the extended list includes 241 props. Setting true will make the resource slower.
 
 Config.Props = {

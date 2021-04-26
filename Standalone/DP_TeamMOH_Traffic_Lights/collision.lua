@@ -14,9 +14,9 @@ Citizen.CreateThread(function()
 		end
 		for id = 1, #freezeList do
 			local pos = GetEntityCoords(PlayerPedId(), false)
-			local gate = GetClosestObjectOfType(pos.x, pos.y, pos.z, 100.0, GetHashKey(freezeList[id]), 0, 0, 0)
-			if gate ~= 0 and IsPedWalking(PlayerPedId()) or IsPedRunning(PlayerPedId()) or GetEntitySpeed(PlayerPedId()) >= Config.FreezeDistance then
-				FreezeEntityPosition(gate, true)
+			local object = GetClosestObjectOfType(pos.x, pos.y, pos.z, 100.0, GetHashKey(freezeList[id]), 0, 0, 0)
+			if (object ~= 0 and IsPedWalking(PlayerPedId())) or (object ~= 0 and IsPedRunning(PlayerPedId())) or (object ~= 0 and IsPedInAnyVehicle(PlayerPedId(), false) and GetEntitySpeed(PlayerPedId())) <= Config.MaxSpeed then
+				FreezeEntityPosition(object, true)
 			end
 		end
 		Citizen.Wait(Config.WaitingTime)
