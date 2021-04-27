@@ -16,7 +16,7 @@ server_scripts {
 }
 
 client_scripts {
-  '@pmc-keybinds/import.lua',
+  '@pmc-keybinds/import.lua', -- https://github.com/pitermcflebor/pmc-keybinds
   'client/main*.lua'
 }
 
