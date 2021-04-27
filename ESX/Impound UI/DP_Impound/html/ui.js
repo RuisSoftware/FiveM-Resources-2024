@@ -27,7 +27,7 @@ $(document).ready(function(){
 		
       } else if (event.data.action == 'add') {
                 
-        AddCar(event.data.plate, event.data.label);        
+        AddCar(event.data.plate, event.data.label, event.data.price);        
 
       } else {
         $('.container').css('display', 'none');
@@ -67,7 +67,7 @@ $(document).ready(function(){
       toggle = true;
     }); 
 
-    function AddCar(plate, label) {
+    function AddCar(plate, label, price) {
       $("#vehicle-list").append
       (`
       
@@ -76,6 +76,7 @@ $(document).ready(function(){
             <img class="inner-icon" src="car.png">
             <p class="inner-label-knz">` + plate + `</p>
             <p class="inner-label-knz2">` + label + `</p>
+            <p class="inner-label-knz3">€` + price + `,-</p>
         </div>
       </div>
 
