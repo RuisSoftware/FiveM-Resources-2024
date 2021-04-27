@@ -7,6 +7,6 @@ author "Dutch Players"
 version "1.0"
 url ""
 
-client_script "client/DP_Object_Freezer.Client.net.dll"
-server_script "server/DP_Object_Freezer.Server.net.dll"
+client_script "client/DP_Object_Freezer.Client.net.dll" -- C# version
+--client_scripts {"client/client.lua", "config.lua"} -- LUA version
 
