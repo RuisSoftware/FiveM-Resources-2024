@@ -16,7 +16,7 @@ server_scripts {
 }
 
 client_scripts {
-  '@DP_Framework/import.lua',
+  '@pmc-keybinds/import.lua',
   'client/main*.lua'
 }
 
