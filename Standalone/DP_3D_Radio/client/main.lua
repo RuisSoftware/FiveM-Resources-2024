@@ -2,141 +2,238 @@ if Config.UseVIP then -- gebruik ESX indien VIP = true.
 	ESX = nil
 	TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 end
-
-youtubeId = nil
-MP3Id = nil
-pedId = GetPlayerPed(-1)
+pedId = PlayerPedId()
 statusVIP = nil
 xSound = exports.xsound
+local musicId
+local playing = false
+local janee = false
 
-RegisterNetEvent('DP_Radio:speelYoutube')
-AddEventHandler('DP_Radio:speelYoutube', function(url, pocketRadio, carRadio)
+Citizen.CreateThread(function()
+    Citizen.Wait(1000)
+    musicId = "player" .. pedId
+    local pos
+    while true do
+        Citizen.Wait(100)
+        if xSound:soundExists(musicId) and playing then
+            if xSound:isPlaying(musicId) then
+                pos = GetEntityCoords(pedId)
+                TriggerServerEvent("DP_Radio:soundStatus", "position", musicId, { position = pos })
+            else
+                Citizen.Wait(Config.PositionSyncInterval)
+            end
+        else
+            Citizen.Wait(Config.PositionSyncInterval)
+        end
+    end
+end)
+
+RegisterCommand(Config.Commands.MP3, function(source, args, rawCommand)
 	if isVIP() then
-		if (IsPedInAnyVehicle(pedId) and Config.AlwaysNeedItem and carRadio) or (IsPedInAnyVehicle(pedId) and not Config.AlwaysNeedItem) then
+		if IsPedInAnyVehicle(pedId) then
 			local vehId = GetVehiclePedIsIn(pedId, false)
-			youtubeId = "youtube-"..vehId
-			xSound:PlayUrlPos(youtubeId ,"https://www.youtube.com/watch?v=" .. url, 1, GetEntityCoords(vehId))
-			xSound:onPlayStart(youtubeId, function()
-				CreateThread(function()
-					while true do
-						Wait(Config.CarMovementInverval)
-						if youtubeId == nil then
-							break
-						else
-							xSound:Position(youtubeId, GetEntityCoords(vehId))
-						end
-					end
-				end)
-			end)
-		else
-			if (Config.UsePocketRadio and pocketRadio) or (not Config.UsePocketRadio) then
-				youtubeId = "youtube-"..pedId
-				xSound:PlayUrlPos(youtubeId ,"https://www.youtube.com/watch?v=" .. url, 1, GetEntityCoords(pedId))
-				xSound:onPlayStart(youtubeId, function()
-					CreateThread(function()
-						while true do
-							Wait(Config.PocketMovementInverval)
-							if youtubeId == nil then
-								break
-							else
-								xSound:Position(youtubeId, GetEntityCoords(pedId))
-							end
-						end
-					end)
-				end)
+			musicId = "vehicle"..vehId
+			if heeftItem('vehicle') then
+				if string.match(rawCommand, 'mp3 ') then
+					local url = string.sub(rawCommand, 4)
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Ongeldige URL')
+				end
 			else
-				exports['t-notify']:SendTextAlert('error', "Om buiten een voertuig radio te beluisteren heb je een radio item nodig.", 5500, true)
+				print('Geen item HIFI')
+			end
+		else
+			musicId = "player" .. pedId
+			if heeftItem('pocket') then
+				if string.match(rawCommand, 'mp3 ') then
+					local url = string.sub(rawCommand, 4)
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Ongeldige URL')
+				end
+			else
+				print('Geen item HIFI')
 			end
 		end
 	else
-		exports['t-notify']:SendTextAlert('error', "Je bent geen VIP bewoner. Bezoek onze Discord voor meer informatie.", 5500, true)
+		print('Je bent geen VIP')
 	end
-end)
+end, false)
 
-RegisterNetEvent('DP_Radio:speelMP3')
-AddEventHandler('DP_Radio:speelMP3', function(url, pocketRadio, carRadio)
+RegisterCommand(Config.Commands.MP4, function(source, args, rawCommand)
 	if isVIP() then
-		if (IsPedInAnyVehicle(pedId) and Config.AlwaysNeedItem and carRadio) or (IsPedInAnyVehicle(pedId) and not Config.AlwaysNeedItem) then
+		if IsPedInAnyVehicle(pedId) then
 			local vehId = GetVehiclePedIsIn(pedId, false)
-			MP3Id = "MP3-"..vehId
-			xSound:PlayUrlPos(MP3Id , url, 1, GetEntityCoords(vehId))
-			xSound:onPlayStart(MP3Id, function()
-				CreateThread(function()
-					while true do
-						Wait(Config.CarMovementInverval)
-						if MP3Id == nil then
-							break
-						else
-							xSound:Position(MP3Id, GetEntityCoords(vehId))
-						end
-					end
-				end)
-			end)
-		else
-			if (Config.UsePocketRadio and pocketRadio) or (not Config.UsePocketRadio) then
-				MP3Id = "MP3-"..pedId
-				xSound:PlayUrlPos(MP3Id , url, 1, GetEntityCoords(pedId))
-				xSound:onPlayStart(MP3Id, function()
-					CreateThread(function()
-						while true do
-							Wait(Config.PocketMovementInverval)
-							if MP3Id == nil then
-								break
-							else
-								xSound:Position(MP3Id, GetEntityCoords(pedId))
-							end
-						end
-					end)
-				end)
+			musicId = "vehicle"..vehId
+			if heeftItem('vehicle') then
+				if string.match(rawCommand, 'mp4 ') then
+					local url = string.sub(rawCommand, 4)
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Ongeldige URL')
+				end
 			else
-				exports['t-notify']:SendTextAlert('error', "Om buiten een voertuig radio te beluisteren heb je een radio item nodig.", 5500, true)
+				print('Geen item HIFI')
+			end
+		else
+			musicId = "player" .. pedId
+			if heeftItem('pocket') then
+				if string.match(rawCommand, 'mp4 ') then
+					local url = string.sub(rawCommand, 4)
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Ongeldige URL')
+				end
+			else
+				print('Geen item HIFI')
 			end
 		end
 	else
-		exports['t-notify']:SendTextAlert('error', "Je bent geen VIP bewoner. Bezoek onze Discord voor meer informatie.", 5500, true)
+		print('Je bent geen VIP')
 	end
+end, false)
+
+RegisterCommand(Config.Commands.YoutubeLong, function(source, args, rawCommand)
+	if args[1] then
+		if isVIP() then
+			if IsPedInAnyVehicle(pedId) then
+				local vehId = GetVehiclePedIsIn(pedId, false)
+				musicId = "vehicle"..vehId
+				if heeftItem('vehicle') then
+					local url = "https://www.youtube.com/watch?v=" .. args[1]
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Geen item HIFI')
+				end
+			else
+				musicId = "player" .. pedId
+				if heeftItem('pocket') then
+					local url = "https://www.youtube.com/watch?v=" .. args[1]
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Geen item HIFI')
+				end
+			end
+		else
+			print('Je bent geen VIP')
+		end
+	else
+		print('Ongeldig ID')
+	end
+end, false)
+
+RegisterCommand(Config.Commands.YoutubeShort, function(source, args, rawCommand)
+	if args[1] then
+		if isVIP() then
+			if IsPedInAnyVehicle(pedId) then
+				local vehId = GetVehiclePedIsIn(pedId, false)
+				musicId = "vehicle"..vehId
+				if heeftItem('vehicle') then
+					local url = "https://www.youtube.com/watch?v=" .. args[1]
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Geen item HIFI')
+				end
+			else
+				musicId = "player" .. pedId
+				if heeftItem('pocket') then
+					local url = "https://www.youtube.com/watch?v=" .. args[1]
+					local pos = GetEntityCoords(pedId)
+					playing = true
+					TriggerServerEvent("DP_Radio:soundStatus", "play", musicId, { position = pos, link = url })
+				else
+					print('Geen item HIFI')
+				end
+			end
+		else
+			print('Je bent geen VIP')
+		end
+	else
+		print('Ongeldig ID')
+	end
+end, false)
+
+RegisterCommand(Config.Commands.StopRadioLong, function(source, args, rawCommand)
+	TriggerServerEvent("DP_Radio:soundStatus", "stop", musicId)
 end)
 
-RegisterNetEvent('DP_Radio:volume')
-AddEventHandler('DP_Radio:volume', function(volume)
-	--if xSound.soundExists(youtubeId) then
-	
+RegisterCommand(Config.Commands.StopRadioShort, function(source, args, rawCommand)
+	TriggerServerEvent("DP_Radio:soundStatus", "stop", musicId)
+end)
+
+RegisterCommand(Config.Commands.VolumeLong, function(source, args, rawCommand)
+	local _source = source
+	local volume = tonumber(args[1])
 	if volume < 0 or volume > 100 then
-		print('Volume minimal 1 and maximum 100!')
+		print('Volume minimaal 1 en maximaal 100!')
 	else
-		if youtubeId ~= nil then
-			xSound:setVolume(youtubeId, volume/100)
-			print('New YouTube volume: ' .. volume)
-		else
-			print('No YouTube playing.')
-		end
-		if MP3Id ~= nil then
-		--if xSound.soundExists(MP3Id) then
-			xSound:setVolume(MP3Id, volume/100)
-			print('New MP3 volume: ' .. volume)
-		else
-			print('No MP3 playing.')
-		end
+		TriggerServerEvent("DP_Radio:soundStatus", "volume", musicId, volume)
 	end
 end)
 
-RegisterNetEvent('DP_Radio:stop')
-AddEventHandler('DP_Radio:stop', function()
-	--if xSound.soundExists(youtubeId) then
-	if youtubeId ~= nil then
-		xSound:Destroy(youtubeId)
-		print('Radio gestopt: '..youtubeId)
-		youtubeId = nil
+RegisterCommand(Config.Commands.VolumeShort, function(source, args, rawCommand)
+	local _source = source
+	local volume = tonumber(args[1])
+	if volume < 0 or volume > 100 then
+		print('Volume minimaal 1 en maximaal 100!')
+	else
+		TriggerServerEvent("DP_Radio:soundStatus", "volume", musicId, volume)
 	end
-	if MP3Id ~= nil then
-		xSound:Destroy(MP3Id)
-		print('Radio gestopt: '..MP3Id)
-		MP3Id = nil
-	end
-	--end
 end)
 
-function isVIP()
+RegisterNetEvent("DP_Radio:soundStatus")
+AddEventHandler("DP_Radio:soundStatus", function(type, musicId, data)
+    if type == "position" then
+        if xSound:soundExists(musicId) then
+            xSound:Position(musicId, data.position)
+        end
+    end
+
+    if type == "play" then
+        xSound:PlayUrlPos(musicId, data.link, 1, data.position)
+        xSound:Distance(musicId, 20)
+    end
+
+    if type == "stop" then
+		xSound:Destroy(musicId)
+    end
+
+    if type == "volume" then
+		xSound:setVolume(musicId, data/100)
+    end
+end)
+
+function heeftItem(type) -- check for item count. Without ESX, always true.
+	if Config.UseESX then
+		ESX.TriggerServerCallback('DP_Radio:heeftItem', function(data)
+			if data then
+				janee = true
+			else
+				janee = false
+			end
+		end, GetPlayerServerId(pedId), type)
+	else
+		janee = true
+	end
+	return janee
+end
+
+function isVIP() -- check for VIP status. Without pxrp_vip, always true.
 	if Config.UseVIP then
 		ESX.TriggerServerCallback('pxrp_vip:getVIPStatus', function(isVIP)
 			if isVIP then

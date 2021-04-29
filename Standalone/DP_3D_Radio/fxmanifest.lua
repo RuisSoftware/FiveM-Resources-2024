@@ -16,5 +16,6 @@ client_scripts {
 
 dependencies {
 	'xsound',
+	'es_extended', -- if you want to use ESX
 	--'pxrp_vip' -- if you want to use the radio for VIP only.
 }
