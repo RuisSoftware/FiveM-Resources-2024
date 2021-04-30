@@ -1,4 +1,4 @@
-if Config.UseVIP then -- gebruik ESX indien VIP = true.
+if Config.UseESX then -- gebruik ESX indien VIP = true.
 	ESX = nil
 	TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 end
