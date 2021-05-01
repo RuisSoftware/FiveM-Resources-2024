@@ -5,19 +5,20 @@ name "impound-ui"
 description "Impound UI"
 author "german-admiral-man"
 contributor "Dutch Players"
-version "1.0.1"
+version "1.0.2"
 url "https://github.com/german-admiral-man/Impound-UI"
 ui_page 'html/ui.html'
 
 server_scripts {
   '@async/async.lua',
   '@mysql-async/lib/MySQL.lua',
-  'server/main*.lua'
+  'config.lua',
+  'server/*.lua'
 }
 
 client_scripts {
   '@pmc-keybinds/import.lua', -- https://github.com/pitermcflebor/pmc-keybinds
-  'client/main*.lua'
+  'client/*.lua'
 }
 
 files {

@@ -17,3 +17,4 @@ Config.Items = {
 	Pocket = 'hifi'
 }
 Config.PositionSyncInterval = 500
+Config.versionCheckDelay = 10 -- In minutes

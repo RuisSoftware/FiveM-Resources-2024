@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 games { 'gta5' }
 
-version '1.2.0'
+version '1.2.1'
 description 'Dutch Players 3D Audio'
 
 server_scripts {
