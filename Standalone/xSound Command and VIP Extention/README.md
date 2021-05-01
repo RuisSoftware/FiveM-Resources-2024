@@ -13,8 +13,8 @@ If you set UseVIP to true in the config.lua then you need [PXRP_VIP](https://git
 
 We used [xSound](https://forum.cfx.re/t/release-xsound-audio-library-for-fivem/1190605/) and PXRP_VIP as dependency.
 
-![afbeelding|690x338](upload://uOoun2Q09Pl9txAnUfOouHTZddK.jpeg)
+![afbeelding|690x338](https://forum.cfx.re/uploads/default/optimized/4X/d/7/f/d7f3906a2540739d63527e1ff6f85367d0cf7530_2_690x338.jpeg)
 
-![afbeelding|624x378](upload://1g2YdCSPCIiGA0w7isgnFBEpmES.png)
+![afbeelding|624x378](https://forum.cfx.re/uploads/default/original/4X/0/8/d/08d292cd3c484e8236b8250d5616389b8ab62716.png)
 
 Greets from the Netherlands!
