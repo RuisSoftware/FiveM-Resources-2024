@@ -30,7 +30,7 @@ local mismatch =
 
 CreateThread(function()
 	while not Config.disableVersionCheck do
-		PerformHttpRequest('https://raw.githubusercontent.com/dutchplayers/FiveM-Resources/master/ESX/Impound%20UI/version', function(err,body)
+		PerformHttpRequest('https://raw.githubusercontent.com/dutchplayers/FiveM-Resources/master/Standalone/xSound%20Command%20and%20VIP%20Extention/version', function(err,body)
 			if err == 200 then
 				local version = GetResourceMetadata(GetCurrentResourceName(), 'version')
 				if version == tostring(body) then
