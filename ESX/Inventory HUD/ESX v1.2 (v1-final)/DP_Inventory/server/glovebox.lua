@@ -445,7 +445,12 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 
 				if (getTotalInventoryWeightGlovebox(plate) + blackMoney[1].amount / 10) > max then
-					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style 		=  'error',
+						duration  	=  5500,
+						message 	= _U("insufficient_space"),
+						sound  		=  true
+					})
 				else
 					xPlayer.removeAccountMoney(item, count)
 					store.set("black_money", blackMoney)
