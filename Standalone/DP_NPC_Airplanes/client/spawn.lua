@@ -47,14 +47,20 @@ function CreatePlane(x, y, z, heading, startZone, destination)
 		TaskPlaneMission(pilot, AirPlane, 0, 0, 3526.92,-3951.51,117.74, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 10.0, 40.0)
 	elseif startZone == "DESRT" and destination == "AIRP" then -- goed
 		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, 1403.0020751953, 2995.9179, 40.5507, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
-		Wait(5000)
+		Wait(15000)
 		TaskPlaneMission(pilot, AirPlane, 0, 0, -1571.5589, -556.7288, 114.4482, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 5.0, 40.0)
 	elseif startZone == "DESRT" and destination == "ISHEIST" then
 		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, 1403.0020751953, 2995.9179, 40.5507, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
-		Wait(5000)
+		Wait(15000)
 		TaskPlaneMission(pilot, AirPlane, 0, 0, 3526.92,-3951.51,117.74, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 5.0, 40.0)
-		
-		
+	elseif startZone == "ISHEIST" and destination == "DESRT" then
+		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, 4101.35,-4636.82,4.18, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
+		Wait(15000)
+		TaskPlaneMission(pilot, AirPlane, 0, 0, -107.2212, 2717.5534, 61.9673, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 5.0, 40.0)
+	elseif startZone == "ISHEIST" and destination == "AIRP" then
+		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, 4101.35,-4636.82,4.18, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
+		Wait(15000)
+		TaskPlaneMission(pilot, AirPlane, 0, 0, -1571.5589, -556.7288, 114.4482, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 5.0, 40.0)
 	end
 end
 
