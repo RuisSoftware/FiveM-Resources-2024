@@ -368,12 +368,10 @@ AddEventHandler("DP_Inventory_trunk:getItem", function(plate, type, item, count,
 				data = {plate = plate, max = max, myVeh = owned, text = text}
 				TriggerClientEvent("DP_Inventory:refreshTrunkInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			else
-				TriggerClientEvent("pNotify:SendNotification", _source, {
-					text = _U("invalid_amount"),
-					type = "error",
-					queue = "trunk",
-					timeout = 3000,
-					layout = "bottomCenter"
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style 		=  'error',
+					duration 	=  5500,
+					message 	= _U("invalid_amount"),
 				})
 			end
 		end)

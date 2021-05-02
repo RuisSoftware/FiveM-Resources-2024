@@ -321,12 +321,10 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				data = {plate = plate, max = max, myVeh = owned, text = text}
 				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
 			else
-				TriggerClientEvent("pNotify:SendNotification", _source, {
-					text = _U("invalid_amount"),
-					type = "error",
-					queue = "glovebox",
-					timeout = 3000,
-					layout = "bottomCenter"
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style 		=  'error',
+					duration 	=  5500,
+					message 	= _U("invalid_amount"),
 				})
 			end
 		end)
@@ -367,12 +365,10 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				data = {plate = plate, max = max, myVeh = owned, text = text}
 				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			else
-				TriggerClientEvent("pNotify:SendNotification", _source, {
-					text = _U("invalid_amount"),
-					type = "error",
-					queue = "glovebox",
-					timeout = 3000,
-					layout = "bottomCenter"
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style 		=  'error',
+					duration 	=  5500,
+					message 	= _U("invalid_amount"),
 				})
 			end
 		end)
