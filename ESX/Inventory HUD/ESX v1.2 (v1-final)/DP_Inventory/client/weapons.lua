@@ -153,10 +153,18 @@ AddEventHandler('DP_Inventory:useAttach', function(attach)
                 end
             end, attach)
         else
-			exports['t-notify']:SendTextAlert('info', _U("not_compatible"), 5500, false)
+            exports['t-notify']:Alert({
+                style  	=  'error',
+                message =  _U("not_compatible"),
+                length 	= 5500
+            })
         end
     else
-		exports['t-notify']:SendTextAlert('info', _U("no_weapon_selected"), 5500, false)
+        exports['t-notify']:Alert({
+            style  	=  'error',
+            message =  _U("no_weapon_selected"),
+            length 	= 5500
+        })
     end
 end)
 
@@ -196,7 +204,11 @@ RegisterKey('keyboard',"BACKSLASH",
                     end
                 end
             else
-				exports['t-notify']:SendTextAlert('info', _U("no_gun_in_hand"), 5500, false)
+                exports['t-notify']:Alert({
+                    style  	=  'error',
+                    message =  _U("no_gun_in_hand"),
+                    length 	= 5500
+                })
             end
 		end
 	end

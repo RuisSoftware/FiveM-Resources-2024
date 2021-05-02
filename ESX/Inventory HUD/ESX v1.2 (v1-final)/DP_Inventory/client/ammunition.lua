@@ -55,9 +55,17 @@ AddEventHandler('ammunition:useAmmoItem', function(ammo)
 				SetPedAmmo(playerPed, weapon, newAmmo)
 				TriggerServerEvent('ammunition:removeAmmoItem', ammo)
 				TaskReloadWeapon(playerPed)
-				exports['t-notify']:SendTextAlert('info', _U('reloaded'), 5500, false)
+				exports['t-notify']:Alert({
+					style  	=  'info',
+					message =  _U('reloaded'),
+					length 	= 5500
+				})
 			else
-				exports['t-notify']:SendTextAlert('error', _U('max_ammo'), 5500, false)
+				exports['t-notify']:Alert({
+					style  	=  'error',
+					message =  _U('max_ammo'),
+					length 	= 5500
+				})
 			end
 		end
 	end

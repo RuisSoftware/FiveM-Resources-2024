@@ -85,8 +85,20 @@ function openTrunk()
 				local vehFront = VehicleInFront()
 				vehHash = GetEntityModel(vehFront)
 				checkVehicle = vehStorage[vehHash]
-				if checkVehicle == 1 then open, vehBone = 4, GetEntityBoneIndexByName(vehFront, 'bonnet')
-				elseif checkVehicle == nil then open, vehBone = 5, GetEntityBoneIndexByName(vehFront, 'boot') elseif checkVehicle == 2 then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') else exports['t-notify']:SendTextAlert('info', _U('no_veh_nearby'), 5500, false) return end
+				if checkVehicle == 1 then 
+					open, vehBone = 4, GetEntityBoneIndexByName(vehFront, 'bonnet')
+				elseif checkVehicle == nil then 
+					open, vehBone = 5, GetEntityBoneIndexByName(vehFront, 'boot') 
+				elseif checkVehicle == 2 then 
+					open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') 
+				else
+					exports['t-notify']:Alert({
+						style  	=  'error',
+						message =  _U('no_veh_nearby'),
+						length 	= 5500
+					})
+					return 
+				end
 				local vehiclePos = GetWorldPositionOfEntityBone(vehFront, vehBone)
 		
 				local pedDistance = GetDistanceBetweenCoords(vehiclePos, coords, 1)
@@ -124,23 +136,39 @@ function openTrunk()
 												loadCamera(0, 3)
 											end
 										else
-											exports['t-notify']:SendTextAlert('error', _U('trunk_closed'), 5500, false)
+											exports['t-notify']:Alert({
+												style  	=  'error',
+												message =  _U('trunk_closed'),
+												length 	= 5500
+											})
 										end
 									end
 								end)
 							end
 						else
-							exports['t-notify']:SendTextAlert('error', _U('trunk_closed'), 5500, false)
+							exports['t-notify']:Alert({
+								style  	=  'error',
+								message =  _U('trunk_closed'),
+								length 	= 5500
+							})
 						end
 					end
 				else
-					exports['t-notify']:SendTextAlert('error', _U('no_veh_nearby'), 5500, false)
+					exports['t-notify']:Alert({
+						style  	=  'error',
+						message =  _U('no_veh_nearby'),
+						length 	= 5500
+					})
 				end
 				lastOpen = true
 				GUI.Time = GetGameTimer()
 			end
 		else
-			exports['t-notify']:SendTextAlert('error', _U('nacho_veh'), 5500, false)
+			exports['t-notify']:Alert({
+				style  	=  'error',
+				message =  _U('nacho_veh'),
+				length 	= 5500
+			})
 		end
 	end
 end
