@@ -239,11 +239,11 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 						end
 						break
 						else
-							TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-								style  =  'success',
-								duration  =  5500,
-								message = _U("nacho_veh"),
-								sound  =  true
+							TriggerClientEvent('t-notify:client:Alert', _source, {
+								style  		=  'success',
+								duration  	=  5500,
+								message 	= _U("nacho_veh"),
+								sound  		=  true
 							})
 						end
 					end
@@ -279,11 +279,11 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'success',
-				duration  =  5500,
-				message = _U("player_inv_no_space"),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'success',
+				duration  	=  5500,
+				message 	= _U("player_inv_no_space"),
+				sound  		=  true
 			})
 		end
 	end
@@ -321,12 +321,10 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				data = {plate = plate, max = max, myVeh = owned, text = text}
 				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, items, weapons)
 			else
-				TriggerClientEvent("pNotify:SendNotification", _source, {
-					text = _U("invalid_amount"),
-					type = "error",
-					queue = "glovebox",
-					timeout = 3000,
-					layout = "bottomCenter"
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style 		=  'error',
+					duration 	=  5500,
+					message 	= _U("invalid_amount"),
 				})
 			end
 		end)
@@ -367,12 +365,10 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				data = {plate = plate, max = max, myVeh = owned, text = text}
 				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			else
-				TriggerClientEvent("pNotify:SendNotification", _source, {
-					text = _U("invalid_amount"),
-					type = "error",
-					queue = "glovebox",
-					timeout = 3000,
-					layout = "bottomCenter"
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style 		=  'error',
+					duration 	=  5500,
+					message 	= _U("invalid_amount"),
 				})
 			end
 		end)
@@ -405,11 +401,11 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					})
 				end
 				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-						style  =  'success',
-						duration  =  5500,
-						message = _U("insufficient_space"),
-						sound  =  true
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style  		=  'success',
+						duration  	=  5500,
+						message 	= _U("insufficient_space"),
+						sound  		=  true
 					})
 				else
 					store.set("coffres", coffres)
@@ -427,11 +423,11 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'success',
-				duration  =  5500,
-				message = _U("invalid_quantity"),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style 		=  'success',
+				duration  	=  5500,
+				message 	= _U("invalid_quantity"),
+				sound  		=  true
 			})
 		end
 	end
@@ -449,7 +445,12 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 
 				if (getTotalInventoryWeightGlovebox(plate) + blackMoney[1].amount / 10) > max then
-					TriggerClientEvent('b1g_notify:client:Notify', _source, { type = 'true', text = _U("insufficient_space") })
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style 		=  'error',
+						duration  	=  5500,
+						message 	= _U("insufficient_space"),
+						sound  		=  true
+					})
 				else
 					xPlayer.removeAccountMoney(item, count)
 					store.set("black_money", blackMoney)
@@ -460,11 +461,11 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'success',
-				duration  =  5500,
-				message = _U("invalid_amount"),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'success',
+				duration  	=  5500,
+				message 	= _U("invalid_amount"),
+				sound  		=  true
 			})
 		end
 	end
@@ -481,11 +482,11 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					table.insert(cashMoney, {amount = count})
 				end
 				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-						style  =  'success',
-						duration  =  5500,
-						message = _U("insufficient_space"),
-						sound  =  true
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style  		=  'success',
+						duration  	=  5500,
+						message 	= _U("insufficient_space"),
+						sound  		=  true
 					})
 				else
 					xPlayer.removeMoney(count)
@@ -497,11 +498,11 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'success',
-				duration  =  5500,
-				message = _U("invalid_amount"),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'success',
+				duration  	=  5500,
+				message 	= _U("invalid_amount"),
+				sound  		=  true
 			})
 		end
 	end

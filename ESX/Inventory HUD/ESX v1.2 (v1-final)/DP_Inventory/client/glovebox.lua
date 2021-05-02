@@ -105,13 +105,22 @@ function openGlovebox()
 						end)
 					end
 				else
-					exports['t-notify']:SendTextAlert('info', _U('no_veh_nearby'), 5500, false)
+					exports['t-notify']:Alert({
+						style  	=  'info',
+						message =  _U('no_veh_nearby'),
+						length 	= 5500
+					})
 				end
 				lastOpen = true
 				GUI.Time = GetGameTimer()
 			end
 		else
-			exports['t-notify']:SendTextAlert('info', _U('nacho_veh'), 5500, false)
+			exports['t-notify']:Alert({
+				style  	=  'error',
+				message =  _U('nacho_veh'),
+				length 	= 5500
+			})
+			
 		end
 	end
 end

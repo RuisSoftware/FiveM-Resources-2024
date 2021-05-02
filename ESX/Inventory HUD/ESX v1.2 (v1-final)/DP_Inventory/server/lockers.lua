@@ -26,26 +26,26 @@ AddEventHandler('DP_Inventory:startRentingLocker', function(lockerId, lockerName
 					['@lockerId'] = lockerId
 				})
 				xPlayer.removeMoney(Config.InitialLockerRentPrice)
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-					style  =  'success',
-					duration  =  5500,
-					message = 'Je huurt nu kluis ' ..lockerName.. '. Dat kost dan €'..Config.DailyRentPrice..' dagelijks (IRL)',
-					sound  =  true
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style  		=  'success',
+					duration  	=  5500,
+					message 	= 'Je huurt nu kluis ' ..lockerName.. '. Dat kost dan €'..Config.DailyRentPrice..' dagelijks (IRL)',
+					sound  		=  true
 				})
 			else
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-					style  =  'error',
-					duration  =  5500,
-					message = _U('no_money_locker'),
-					sound  =  true
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style  		=  'error',
+					duration  	=  5500,
+					message 	= _U('no_money_locker'),
+					sound  		=  true
 				})
 			end
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('already_locker'),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('already_locker'),
+				sound  		=  true
 			})
 		end
 	end)
@@ -61,18 +61,18 @@ AddEventHandler('DP_Inventory:stopRentingLocker', function(lockerId, lockerName)
 				['@lockerId'] = lockerId,
 				['@identifier'] = xPlayer.identifier
 			})
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'succes',
-				duration  =  5500,
-				message = _U('canceled_locker'),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'succes',
+				duration  	=  5500,
+				message 	= _U('canceled_locker'),
+				sound  		=  true
 			})
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('dont_own_locker'),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('dont_own_locker'),
+				sound  		=  true
 			})
 		end
 	end)
@@ -85,7 +85,11 @@ function PayLockerRent(d, h, m)
 			local xPlayer = ESX.GetPlayerFromIdentifier(result[i].owner)
 			if xPlayer then
 				xPlayer.removeAccountMoney('bank', Config.DailyLockerRentPrice)
-				TriggerClientEvent('mythic_notify:client:SendAlert', xPlayer.source, { type = 'inform', text = 'Je betaalde €'..Config.DailyLockerRentPrice..' voor de verhuur van kluisjes.', length = 8000 })
+				TriggerClientEvent('t-notify:client:Alert', xPlayer.source, {
+					style  		=  'info',
+					duration  	=  8000,
+					message 	= 'Je betaalde €'..Config.DailyLockerRentPrice..' voor de verhuur van kluisjes.'
+				})
 			else
 				if oldESX then
 					MySQL.Sync.execute('UPDATE users SET bank = bank - @bank WHERE owner = @identifier', { ['@bank'] = Config.DailyLockerRentPrice, ['@identifier'] = owner })
@@ -130,28 +134,28 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 			
 				-- can the player carry the said amount of x item?
 				if not xPlayer.canCarryItem(sourceItem.name, sourceItem.count + count) then
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-						style  =  'error',
-						duration  =  5500,
-						message = _U('insufficient_space'),
-						sound  =  true
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style 	 	=  'error',
+						duration  	=  5500,
+						message 	= _U('insufficient_space'),
+						sound  		=  true
 					})
 				else
 					inventory.removeItem(item, count)
 					xPlayer.addInventoryItem(item, count)
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-						style  =  'error',
-						duration  =  5500,
-						message = _U('you_took') ..count..'x '..inventoryItem.label..'',
-						sound  =  true
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style  		=  'error',
+						duration  	=  5500,
+						message 	= _U('you_took') ..count..'x '..inventoryItem.label..'',
+						sound  		=  true
 					})
 				end
 			else
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-					style  =  'error',
-					duration  =  5500,
-					message = _U('not_in_locker'),
-					sound  =  true
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style  		=  'error',
+					duration  	=  5500,
+					message 	= _U('not_in_locker'),
+					sound  		=  true
 				})
 			end
 		end)
@@ -165,11 +169,11 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-						style  =  'error',
-						duration  =  5500,
-						message = _U('invalid_quantity'),
-						sound  =  true
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style  		=  'error',
+						duration  	=  5500,
+						message 	= _U('invalid_quantity'),
+						sound  		=  true
 					})
 				end
 			end)
@@ -181,11 +185,11 @@ AddEventHandler('DP_Inventory:getLockerItems', function(owner, type, item, count
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-						style  =  'error',
-						duration  =  5500,
-						message = _U('invalid_quantity'),
-						sound  =  true
+					TriggerClientEvent('t-notify:client:Alert', _source, {
+						style  		=  'error',
+						duration  	=  5500,
+						message 	= _U('invalid_quantity'),
+						sound  		=  true
 					})
 				end
 			end)
@@ -206,19 +210,19 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 			TriggerEvent('esx_addoninventory:getInventory', 'locker', xPlayerOwner.identifier, function(inventory)
 				xPlayer.removeInventoryItem(item, count)
 				inventory.addItem(item, count)
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-					style  =  'inform',
-					duration  =  5500,
-					message = _U('you_put')..count..'x '..inventory.getItem(item).label..'',
-					sound  =  true
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style  		=  'inform',
+					duration  	=  5500,
+					message 	= _U('you_put')..count..'x '..inventory.getItem(item).label..'',
+					sound  		=  true
 				})
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('invalid_quantity'),
-				sound  =  true
+			TriggerClientEvent('t-notify:client:Alert', _source, {
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('invalid_quantity'),
+				sound  		=  true
 			})
 		end
 
@@ -233,11 +237,11 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 					account.addMoney(count)
 				end)
 			else
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-					style  =  'error',
-					duration  =  5500,
-					message = _U('invalid_quantity'),
-					sound  =  true
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style  		=  'error',
+					duration  	=  5500,
+					message 	= _U('invalid_quantity'),
+					sound  		=  true
 				})
 			end
 		else
@@ -250,11 +254,11 @@ AddEventHandler('DP_Inventory:putLockerItems', function(owner, type, item, count
 					account.addMoney(count)
 				end)
 			else
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
-					style  =  'error',
-					duration  =  5500,
-					message = _U('invalid_quantity'),
-					sound  =  true
+				TriggerClientEvent('t-notify:client:Alert', _source, {
+					style  		=  'error',
+					duration  	=  5500,
+					message 	= _U('invalid_quantity'),
+					sound  		=  true
 				})
 			end
 		end

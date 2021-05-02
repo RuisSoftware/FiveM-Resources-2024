@@ -29,14 +29,22 @@ function OpenVaultInventoryMenu(data)
 		vaultType = data
 		ESX.TriggerServerCallback("DP_Inventory:getVaultInventory", function(inventory)
 			if not inventory then
-				exports['t-notify']:SendTextAlert('error', _U('not_found'), 5500, false)
+				exports['t-notify']:Alert({
+					style  	=  'error',
+					message =  _U('not_found'),
+					length 	= 5500
+				})
 			else
 				TriggerEvent("DP_Inventory:openVaultInventory", inventory)
 			end
 		end,
 		data)
 	else
-		exports['t-notify']:SendTextAlert('error', _U('no_key'), 5500, false)
+		exports['t-notify']:Alert({
+			style  	=  'error',
+			message =  _U('no_key'),
+			length 	= 5500
+		})
 		Citizen.Wait(0)
 	end
 end

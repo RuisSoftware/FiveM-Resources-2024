@@ -45,10 +45,18 @@ Citizen.CreateThread(function()
 								end
 							end)
 						else
-							exports['t-notify']:SendTextAlert('info', _U('player_not_dead'), 5500, false)
+							exports['t-notify']:Alert({
+								style  	=  'info',
+								message =  _U('player_not_dead'),
+								length 	= 5500
+							})
 						end
 					else
-						exports['t-notify']:SendTextAlert('info', _U('no_permissions'), 5500, false)
+						exports['t-notify']:Alert({
+							style  	=  'info',
+							message =  _U('no_permissions'),
+							length 	= 5500
+						})
 					end
 				else
 					local searchPlayerPed = GetPlayerPed(closestPlayer)
@@ -68,7 +76,11 @@ Citizen.CreateThread(function()
 							end
 						end)  
 					else
-						exports['t-notify']:SendTextAlert('info', _U('player_not_dead'), 5500, false)
+						exports['t-notify']:Alert({
+							style  	=  'info',
+							message =  _U('player_not_dead'),
+							length 	= 5500
+						})
 					end
 				end
             end
