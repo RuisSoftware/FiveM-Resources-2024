@@ -22,10 +22,10 @@ RegisterCommand("openinventory", function(source, args, rawCommand) -- ADMIN WAT
 			TriggerClientEvent("DP_Inventory:openPlayerInventory", source, target, targetXPlayer.name)
 		else
 			TriggerClientEvent('t-notify:client:Alert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('no_player'),
-				sound  =  true
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('no_player'),
+				sound  		=  true
 			})
 		end
 	else
@@ -34,18 +34,18 @@ RegisterCommand("openinventory", function(source, args, rawCommand) -- ADMIN WAT
 				TriggerClientEvent("DP_Inventory:openPlayerInventory", source, target, targetXPlayer.name)
 			else
 				TriggerClientEvent('t-notify:client:Alert', _source, {
-					style  =  'error',
-					duration  =  5500,
-					message = _U('no_permissions'),
-					sound  =  true
+					style  		=  'error',
+					duration  	=  5500,
+					message 	= _U('no_permissions'),
+					sound  		=  true
 				})
 			end
 		else
 			TriggerClientEvent('t-notify:client:Alert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('no_permissions'),
-				sound  =  true
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('no_permissions'),
+				sound 		 =  true
 			})
 		end
 	end
@@ -134,10 +134,10 @@ AddEventHandler("DP_Inventory:tradePlayerItem", function(from, target, type, ite
 				targetXPlayer.addInventoryItem(itemName, itemCount)
 			else
 				TriggerClientEvent('t-notify:client:Alert', _source, {
-					style  =  'error',
-					duration  =  5500,
-					message = _U('player_inv_no_space'),
-					sound  =  true
+					style  		=  'error',
+					duration  	=  5500,
+					message 	= _U('player_inv_no_space'),
+					sound  		=  true
 				})
 			end
 		end

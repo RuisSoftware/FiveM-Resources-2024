@@ -126,8 +126,12 @@ RegisterKey('keyboard', 'E',
 						if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 							OpenShopInv('ilegal')
 							Citizen.Wait(2000)
-						else
-							exports['mythic_notify']:DoHudText('error', _U('no_acces'))
+						else					
+							exports['t-notify']:Alert({
+								style  	=  'error',
+								message =  _U('no_acces'),
+								length 	= 5500
+							})
 						end
 					end
 				end
@@ -138,7 +142,11 @@ RegisterKey('keyboard', 'E',
 						if hasWeaponLicense then
 							OpenShopInv('groothandel_supermarkt')
 						else
-							exports['mythic_notify']:DoHudText('error', 'Je beheert geen eigen winkel')
+							exports['t-notify']:Alert({
+								style  	=  'error',
+								message =  'Je beheert geen eigen winkel',
+								length 	= 5500
+							})
 						end
 					end, GetPlayerServerId(PlayerId()))
 				end
@@ -177,7 +185,11 @@ RegisterKey('keyboard', 'E',
 								OpenShopInv('weaponshop')
 								Citizen.Wait(2000)
 							else
-								exports['mythic_notify']:DoHudText('error', _U('license_check_fail'))
+								exports['t-notify']:Alert({
+									style  	=  'error',
+									message =  _U('license_check_fail'),
+									length 	= 5500
+								})								
 							end
 						end, GetPlayerServerId(PlayerId()), Config.License.Weapon)
 					else

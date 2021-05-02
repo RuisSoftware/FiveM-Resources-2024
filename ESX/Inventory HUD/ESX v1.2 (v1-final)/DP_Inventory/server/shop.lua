@@ -295,27 +295,27 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
 						TriggerClientEvent('t-notify:client:Alert', _source, {
-							style  =  'success',
-							duration  =  5500,
-							message = _U('item_added')..count.." "..list[i].label,
-							sound  =  true
+							style  		=  'success',
+							duration  	=  5500,
+							message 	= _U('item_added')..count.." "..list[i].label,
+							sound  		=  true
 						})
 					else
 						TriggerClientEvent('t-notify:client:Alert', _source, {
-							style  =  'error',
-							duration  =  5500,
-							message = _U('no_money'),
-							sound  =  true
+							style  		=  'error',
+							duration  	=  5500,
+							message 	= _U('no_money'),
+							sound  		=  true
 						})
 					end
 				end
 			end
 		else
 			TriggerClientEvent('t-notify:client:Alert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('insufficient_space'),
-				sound  =  true
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('insufficient_space'),
+				sound  		=  true
 			})
 		end
 	end
@@ -329,27 +329,27 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
 						TriggerClientEvent('t-notify:client:Alert', _source, {
-							style  =  'success',
-							duration  =  5500,
-							message = _U('item_added')..count.." "..list[i].label,
-							sound  =  true
+							style  		=  'success',
+							duration  	=  5500,
+							message 	= _U('item_added')..count.." "..list[i].label,
+							sound  		=  true
 						})
 					else
 						TriggerClientEvent('t-notify:client:Alert', _source, {
-							style  =  'error',
-							duration  =  5500,
-							message = _U('no_money'),
-							sound  =  true
+							style  		=  'error',
+							duration  	=  5500,
+							message 	= _U('no_money'),
+							sound  		=  true
 						})
 					end
 				end
 			end
 		else
 			TriggerClientEvent('t-notify:client:Alert', _source, {
-				style  =  'error',
-				duration  =  5500,
-				message = _U('insufficient_space'),
-				sound  =  true
+				style  		=  'error',
+				duration  	=  5500,
+				message 	= _U('insufficient_space'),
+				sound  		=  true
 			})
 		end
 	end
@@ -367,25 +367,25 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 						xPlayer.removeMoney(totalPrice)
 						TriggerClientEvent("DP_Inventory:AddAmmoToWeapon", source, list[i].weaponhash, ammo)
 						TriggerClientEvent('t-notify:client:Alert', _source, {
-							style  =  'succes',
-							duration  =  5500,
-							message = _U('item_added')..count.." "..list[i].label,
-							sound  =  true
+							style  		=  'succes',
+							duration  	=  5500,
+							message 	= _U('item_added')..count.." "..list[i].label,
+							sound  		=  true
 						})
 					else
 						TriggerClientEvent('t-notify:client:Alert', _source, {
-							style  =  'error',
-							duration  =  5500,
-							message = _U('no_money'),
-							sound  =  true
+							style  		=  'error',
+							duration  	=  5500,
+							message 	= _U('no_money'),
+							sound  		=  true
 						})
 					end
 				else
 					TriggerClientEvent('t-notify:client:Alert', _source, {
-						style  =  'error',
-						duration  =  5500,
-						message = _U('insufficient_space'),
-						sound  =  true
+						style  		=  'error',
+						duration  	=  5500,
+						message 	= _U('insufficient_space'),
+						sound  		=  true
 					})
 				end
 			end
@@ -418,10 +418,10 @@ ESX.RegisterServerCallback('DP_Inventory:buyLicense', function(source, cb)
 		end)
 	else
 		TriggerClientEvent('t-notify:client:Alert', _source, {
-			style  =  'success',
-			duration  =  5500,
-			message = _U("no_money"),
-			sound  =  true
+			style  		=  'success',
+			duration  	=  5500,
+			message 	= _U("no_money"),
+			sound  		=  true
 		})
 		cb(false)
 	end
