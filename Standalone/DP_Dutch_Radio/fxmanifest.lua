@@ -16,7 +16,7 @@ supersede_radio "RADIO_06_COUNTRY" { url = "https://playerservices.streamtheworl
 supersede_radio "RADIO_07_DANCE_01" { url = "https://playerservices.streamtheworld.com/api/livestream-redirect/TLPSTR11.mp3", volume = 0.2, name = "Radio 538 Hitzone" }
 supersede_radio "RADIO_08_MEXICAN" { url = "https://stream.100p.nl/100pctnl.mp3", volume = 0.2, name = "100%NL" }
 supersede_radio "RADIO_09_HIPHOP_OLD" { url = "	https://stream.100p.nl/web01_mp3", volume = 0.2, name = "100%NL Feest" }
---supersede_radio "RADIO_11_TALK_02" { url = "	https://stream.100p.nl/web01_mp3", volume = 0.2, name = "Veronica" } ----------------
+supersede_radio "RADIO_11_TALK_02" { url = "	https://stream.100p.nl/web01_mp3", volume = 0.2, name = "Veronica" }
 supersede_radio "RADIO_12_REGGAE" { url = "https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3", volume = 0.2, name = "QMusic" }
 supersede_radio "RADIO_13_JAZZ" { url = "https://stream.slam.nl/slam_mp3", volume = 0.2, name = "Slam!" }
 supersede_radio "RADIO_14_DANCE_02" { url = "https://stream.radiocorp.nl/web10_mp3", volume = 0.2, name = "Slam! Non Stop" }
@@ -24,7 +24,7 @@ supersede_radio "RADIO_15_MOTOWN" { url = "https://stream.radiocorp.nl/web12_mp3
 supersede_radio "RADIO_16_SILVERLAKE" { url = "https://icecast.omroep.nl/funx-bb-mp3", volume = 0.2, name = "FunX NL" }
 supersede_radio "RADIO_17_FUNK" { url = "https://icecast.omroep.nl/funx-arab-bb-mp3", volume = 0.2, name = "FunX Arab" }
 supersede_radio "RADIO_18_90S_ROCK" { url = "https://icecast.omroep.nl/funx-dance-bb-mp3", volume = 0.2, name = "FunX Dance" }
---supersede_radio "RADIO_19_USER" { url = "https://178.19.116.253/stream", volume = 0.2, name = "Geheime Zender - GigantFM 2" } ---------------
+supersede_radio "RADIO_19_USER" { url = "https://178.19.116.253/stream", volume = 0.2, name = "Geheime Zender - GigantFM 2" }
 supersede_radio "RADIO_20_THELAB" { url = "https://streaming.slam.nl/web11_mp3", volume = 0.2, name = "Slam! Hardstyle" }
 supersede_radio "RADIO_21_DLC_XM17" { url = "https://ice.cr2.streamzilla.xlcdn.com:8000/sz=efteling=hdstream", volume = 0.2, name = "Efteling Radio" }
 supersede_radio "RADIO_22_DLC_BATTLE_MIX1_RADIO" { url = "https://securestream2.digipal.nl:1813/;type=mp3", volume = 0.2, name = "Geheime Zender - GigantFM" }
