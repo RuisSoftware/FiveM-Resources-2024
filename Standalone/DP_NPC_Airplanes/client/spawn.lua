@@ -13,7 +13,7 @@ function CreatePlane(x, y, z, heading, startZone, destination)
 	while not HasModelLoaded(pilotModel) do
 		Citizen.Wait(0)
 	end
-
+	SetEntityCoords(PlayerPedId(), x, y, z)
 	if HasModelLoaded(modelHash) and HasModelLoaded(pilotModel) then
 		ClearAreaOfEverything(x, y, z, 1500, false, false, false, false, false)
 
@@ -35,18 +35,17 @@ function CreatePlane(x, y, z, heading, startZone, destination)
 		SetNetworkIdCanMigrate(netPedid, true)
 		NetworkRegisterEntityAsNetworked(pilot)
 
-		totalSeats = GetVehicleModelNumberOfSeats(modelHash)
-		TaskWarpPedIntoVehicle(PlayerPedId(), AirPlane, 2)
+		TaskWarpPedIntoVehicle(PlayerPedId(), AirPlane, -2)
 
 		SetModelAsNoLongerNeeded(modelHash)
 		SetModelAsNoLongerNeeded(pilotModel)
 	end
 
-	if startZone == "AIRP" and destination == "DESRT" then
+	if startZone == "AIRP" and destination == "DESRT" then -- goed
 		TaskPlaneMission(pilot, AirPlane, 0, 0, -107.2212, 2717.5534, 61.9673, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 10.0, 40.0)
-	if startZone == "AIRP" and destination == "ISHEIST" then
+	elseif startZone == "AIRP" and destination == "ISHEIST" then
 		TaskPlaneMission(pilot, AirPlane, 0, 0, 3526.92,-3951.51,117.74, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 10.0, 40.0)
-	elseif startZone == "DESRT" and destination == "AIRP" then
+	elseif startZone == "DESRT" and destination == "AIRP" then -- goed
 		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, 1403.0020751953, 2995.9179, 40.5507, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
 		Wait(5000)
 		TaskPlaneMission(pilot, AirPlane, 0, 0, -1571.5589, -556.7288, 114.4482, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 5.0, 40.0)
@@ -60,9 +59,9 @@ function CreatePlane(x, y, z, heading, startZone, destination)
 end
 
 RegisterNetEvent("airports:departure")
-AddEventHandler("airports:departure",  function(x, y, z, heading, planeDest)
+AddEventHandler("airports:departure",  function(x, y, z, heading, start, planeDest)
 	ClearAllHelpMessages()
-	CreatePlane(x, y, z, heading, planeDest)
+	CreatePlane(x, y, z, heading, start, planeDest)
 end)
 
 RegisterNetEvent("airports:moneyInvalid")

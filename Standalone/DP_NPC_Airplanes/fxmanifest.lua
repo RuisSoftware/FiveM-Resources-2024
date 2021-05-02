@@ -9,12 +9,12 @@ edits 'by Dutch Players'
 
 dependencies {
 	'NativeUI', 
-	'pmc-keybinds',
+	'DP_Framework',
 	--'es_extended'
 }
 
 client_scripts {
-    '@pmc-keybinds/import.lua',
+    '@DP_Framework/import.lua',
 	'@NativeUI/NativeUI.lua',
     'config.lua',
     'client/*.lua',

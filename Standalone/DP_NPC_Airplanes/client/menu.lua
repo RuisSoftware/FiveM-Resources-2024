@@ -27,7 +27,7 @@ function AddAirPortMenu(menu)
     menu:AddItem(CayoButton)
     menu.OnItemSelect = function(sender, item, index)
         if item == DesrtButton then
-        	if not IsEntityInZone(PlayerPedId(), "DESRT") then
+        	if IsEntityInZone(PlayerPedId(), "AIRP") then -- goed
         		startZone = "AIRP"
         		planeDest = "DESRT"
         		if Config.UseESX then
@@ -35,19 +35,19 @@ function AddAirPortMenu(menu)
         		else
         			CreatePlane(-1675.2446, -2798.8835, 14.5409, 327.8560, startZone, planeDest)
         		end
-        	elseif not IsEntityInZone(PlayerPedId(), "ISHEIST") then
+        	elseif IsEntityInZone(PlayerPedId(), "ISHEIST") then
         		startZone = "ISHEIST"
         		planeDest = "DESRT"
         		if Config.UseESX then
-        			TriggerServerEvent('airports:payTicket', -1675.2446, -2798.8835, 14.5409, 327.8560, startZone, planeDest, Config.TicketPrice)
+        			TriggerServerEvent('airports:payTicket', 4404.76,-4526.4,4.18, 106.7817, startZone, planeDest, Config.TicketPrice)
         		else
-        			CreatePlane(-1675.2446, -2798.8835, 14.5409, 327.8560, startZone, planeDest)
+        			CreatePlane(4404.76,-4526.4,4.18, 106.7817, startZone, planeDest)
         		end
         	else
         		ShowNotification(Config.Locale.NoPlane)
         	end
         elseif item == SantonsButton then
-        	if not IsEntityInZone(PlayerPedId(), "AIRP") then
+        	if IsEntityInZone(PlayerPedId(), "DESRT") then -- goed
         		startZone = "DESRT"
         		planeDest = "AIRP"
         		if Config.UseESX then
@@ -55,33 +55,33 @@ function AddAirPortMenu(menu)
         		else
         			CreatePlane(1599.02453, 3231.2016, 40.4115, 105.7817, startZone, planeDest)
         		end
-        	elseif not IsEntityInZone(PlayerPedId(), "ISHEIST") then
+        	elseif IsEntityInZone(PlayerPedId(), "ISHEIST") then
         		startZone = "ISHEIST"
         		planeDest = "AIRP"
         		if Config.UseESX then
-        			TriggerServerEvent('airports:payTicket', 1599.02453, 3231.2016, 40.4115, 105.7817, startZone, planeDest, Config.TicketPrice)
+        			TriggerServerEvent('airports:payTicket', 4404.76,-4526.4,4.18, 106.7817, startZone, planeDest, Config.TicketPrice)
         		else
-        			CreatePlane(1599.02453, 3231.2016, 40.4115, 105.7817, startZone, planeDest)
+        			CreatePlane(4404.76,-4526.4,4.18, 106.7817, startZone, planeDest)
         		end
         	else
         		ShowNotification(Config.Locale.NoPlane)
         	end
         elseif item == CayoButton then
-        	if not IsEntityInZone(PlayerPedId(), "DESRT") then
-        		startZone = "AIRP"
-        		planeDest = "ISHEIST"
-        		if Config.UseESX then
-        			TriggerServerEvent('airports:payTicket', 1599.02453, 3231.2016, 40.4115, 105.7817, startZone, planeDest, Config.TicketPrice)
-        		else
-        			CreatePlane(4328.12,-4555.24,4.18,107.09, planeDest)
-        		end
-        	elseif not IsEntityInZone(PlayerPedId(), "AIRP") then
+        	if IsEntityInZone(PlayerPedId(), "DESRT") then
         		startZone = "DESRT"
         		planeDest = "ISHEIST"
         		if Config.UseESX then
         			TriggerServerEvent('airports:payTicket', 1599.02453, 3231.2016, 40.4115, 105.7817, startZone, planeDest, Config.TicketPrice)
         		else
-        			CreatePlane(4328.12,-4555.24,4.18,107.09, planeDest)
+        			CreatePlane(4328.12,-4555.24,4.18,107.09, startZone, planeDest)
+        		end
+        	elseif IsEntityInZone(PlayerPedId(), "AIRP") then
+        		startZone = "AIRP"
+        		planeDest = "ISHEIST"
+        		if Config.UseESX then
+        			TriggerServerEvent('airports:payTicket', -1675.2446, -2798.8835, 14.5409, 327.8560, startZone, planeDest, Config.TicketPrice)
+        		else
+        			CreatePlane(-1675.2446, -2798.8835, 14.5409, 327.8560, startZone, planeDest)
         		end
         	else
         		ShowNotification(Config.Locale.NoPlane)

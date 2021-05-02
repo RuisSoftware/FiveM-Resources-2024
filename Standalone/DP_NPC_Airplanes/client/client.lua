@@ -16,7 +16,6 @@ Citizen.CreateThread(function()
 			if IsEntityInAir(AirPlane) then
 				SetVehicleLandingGear(AirPlane, 1)
 			end
-
 			if startZone == "AIRP" and planeDest == "DESRT" then
 				if IsEntityInZone(AirPlane, "DESRT") or IsEntityInZone(PlayerPedId(), "GREATC") then
 					TaskPlaneLand(pilot, AirPlane, 881.4462, 3060.4829, 41.1682+10.0001, 1657.07, 3238.21, 40.5669+1.0001)
@@ -68,13 +67,17 @@ Citizen.CreateThread(function()
 						while not IsScreenFadedOut() do
 							Citizen.Wait(0)
 						end
-
+						DeleteVehicle(AirPlane)
+						DeleteEntity(pilot)
 						SetEntityCoords(PlayerPedId(), -1042.0395, -2740.7780, 20.1692)
 						SetEntityHeading(PlayerPedId(), 340.2285)
 						Wait(800)
 						DoScreenFadeIn(500)
 					else
 						TaskLeaveVehicle(PlayerPedId(), AirPlane, 0)
+						Wait(5000)
+						DeleteVehicle(AirPlane)
+						DeleteEntity(pilot)
 					end
 				end
 			end
