@@ -239,7 +239,7 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 						end
 						break
 						else
-							TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+							TriggerClientEvent('t-notify:client:Alert', _source, {
 								style  =  'success',
 								duration  =  5500,
 								message = _U("nacho_veh"),
@@ -279,7 +279,7 @@ AddEventHandler("DP_Inventory_glovebox:getItem", function(plate, type, item, cou
 				TriggerClientEvent("DP_Inventory:refreshGloveboxInventory", _source, data, blackMoney, cashMoney, items, weapons)
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'success',
 				duration  =  5500,
 				message = _U("player_inv_no_space"),
@@ -405,7 +405,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					})
 				end
 				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'success',
 						duration  =  5500,
 						message = _U("insufficient_space"),
@@ -427,7 +427,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'success',
 				duration  =  5500,
 				message = _U("invalid_quantity"),
@@ -460,7 +460,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'success',
 				duration  =  5500,
 				message = _U("invalid_amount"),
@@ -481,7 +481,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 					table.insert(cashMoney, {amount = count})
 				end
 				if (getTotalInventoryWeightGlovebox(plate) + (count / 10)) > max then
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'success',
 						duration  =  5500,
 						message = _U("insufficient_space"),
@@ -497,7 +497,7 @@ AddEventHandler("DP_Inventory_glovebox:putItem", function(plate, type, item, cou
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'success',
 				duration  =  5500,
 				message = _U("invalid_amount"),

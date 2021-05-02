@@ -294,14 +294,14 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'success',
 							duration  =  5500,
 							message = _U('item_added')..count.." "..list[i].label,
 							sound  =  true
 						})
 					else
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'error',
 							duration  =  5500,
 							message = _U('no_money'),
@@ -311,7 +311,7 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 				end
 			end
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'error',
 				duration  =  5500,
 				message = _U('insufficient_space'),
@@ -328,14 +328,14 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'success',
 							duration  =  5500,
 							message = _U('item_added')..count.." "..list[i].label,
 							sound  =  true
 						})
 					else
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'error',
 							duration  =  5500,
 							message = _U('no_money'),
@@ -345,7 +345,7 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 				end
 			end
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'error',
 				duration  =  5500,
 				message = _U('insufficient_space'),
@@ -366,14 +366,14 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 					if xPlayer.getMoney() >= totalPrice then
 						xPlayer.removeMoney(totalPrice)
 						TriggerClientEvent("DP_Inventory:AddAmmoToWeapon", source, list[i].weaponhash, ammo)
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'succes',
 							duration  =  5500,
 							message = _U('item_added')..count.." "..list[i].label,
 							sound  =  true
 						})
 					else
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'error',
 							duration  =  5500,
 							message = _U('no_money'),
@@ -381,7 +381,7 @@ AddEventHandler("DP_Inventory:SellItemToPlayer",function(source, type, item, cou
 						})
 					end
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'error',
 						duration  =  5500,
 						message = _U('insufficient_space'),
@@ -417,7 +417,7 @@ ESX.RegisterServerCallback('DP_Inventory:buyLicense', function(source, cb)
 			cb(true)
 		end)
 	else
-		TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+		TriggerClientEvent('t-notify:client:Alert', _source, {
 			style  =  'success',
 			duration  =  5500,
 			message = _U("no_money"),

@@ -11,7 +11,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 				local inventoryItem = inventory.getItem(item)
 				if count > 0 and inventoryItem.count >= count then
 					if not xPlayer.canCarryItem(item, count) then
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'error',
 							duration  =  5500,
 							message = _U('player_cannot_hold'),
@@ -20,7 +20,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					else
 						inventory.removeItem(item, count)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'success',
 							duration  =  7500,
 							message = _U('have_withdrawn', count, inventoryItem.label),
@@ -28,7 +28,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 						})
 					end
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'error',
 						duration  =  5500,
 						message = _U('not_enough_in_vault'),
@@ -56,7 +56,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 				local inventoryItem = inventory.getItem(item)
 				if count > 0 and inventoryItem.count >= count then
 					if not xPlayer.canCarryItem(item, count) then
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'error',
 							duration  =  5500,
 							message = _U('player_cannot_hold'),
@@ -65,7 +65,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					else
 						inventory.removeItem(item, count)
 						xPlayer.addInventoryItem(item, count)
-						TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+						TriggerClientEvent('t-notify:client:Alert', _source, {
 							style  =  'success',
 							duration  =  8500,
 							message = _U('have_withdrawn', count, inventoryItem.label),
@@ -73,7 +73,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 						})
 					end
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'error',
 						duration  =  5500,
 						message = _U('not_enough_in_vault'),
@@ -92,7 +92,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'error',
 						duration  =  5500,
 						message = _U('amount_invalid'),
@@ -107,7 +107,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'error',
 						duration  =  5500,
 						message = _U('amount_invalid'),
@@ -132,7 +132,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 					account.removeMoney(count)
 					xPlayer.addAccountMoney(item, count)
 				else
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'error',
 						duration  =  5500,
 						message = _U('amount_invalid'),
@@ -141,7 +141,7 @@ AddEventHandler('DP_Inventory:getItem', function(--[[owner,--]] job, type, item,
 				end
 			end)
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'error',
 				duration  =  5500,
 				message = _U('no_permissions'),
@@ -165,7 +165,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				TriggerEvent('esx_addoninventory:getSharedInventory', 'society_'..job, function(inventory)
 					xPlayer.removeInventoryItem(item, count)
 					inventory.addItem(item, count)
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'success',
 						duration  =  7500,
 						message = _U('have_deposited', count, inventory.getItem(item).label),
@@ -182,7 +182,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				TriggerEvent('esx_addoninventory:getInventory', 'vault', xPlayerOwner.identifier, function(inventory)
 					xPlayer.removeInventoryItem(item, count)
 					inventory.addItem(item, count)
-					TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+					TriggerClientEvent('t-notify:client:Alert', _source, {
 						style  =  'success',
 						duration  =  7500,
 						message = _U('have_deposited', count, inventory.getItem(item).label),
@@ -190,7 +190,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 					})
 				end)
 			else
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				TriggerClientEvent('t-notify:client:Alert', _source, {
 					style  =  'error',
 					duration  =  5500,
 					message = _U('no_permissions'),
@@ -198,7 +198,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				})
 			end
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'error',
 				duration  =  5500,
 				message = _U('invalid_quantity'),
@@ -228,7 +228,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				end)
 			else
 				xPlayer.addAccountMoney(item, count)
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				TriggerClientEvent('t-notify:client:Alert', _source, {
 					style  =  'error',
 					duration  =  5500,
 					message = _U('no_permissions'),
@@ -236,7 +236,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				})
 			end
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'error',
 				duration  =  5500,
 				message = _U('amount_invalid'),
@@ -265,7 +265,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				end)
 			else
 				xPlayer.addAccountMoney(item, count)
-				TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+				TriggerClientEvent('t-notify:client:Alert', _source, {
 					style  =  'error',
 					duration  =  5500,
 					message = _U('no_permissions'),
@@ -273,7 +273,7 @@ AddEventHandler('DP_Inventory:putItem', function(--[[owner,--]] job, type, item,
 				})
 			end
 		else
-			TriggerClientEvent('tnotify:client:SendTextAlert', _source, {
+			TriggerClientEvent('t-notify:client:Alert', _source, {
 				style  =  'error',
 				duration  =  5500,
 				message = _U('amount_invalid'),
