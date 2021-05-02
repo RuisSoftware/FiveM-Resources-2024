@@ -14,7 +14,7 @@ dependencies {
 }
 
 client_scripts {
-    '@DP_Framework/import.lua',
+    '@pmc-keybbinds/import.lua',
 	'@NativeUI/NativeUI.lua',
     'config.lua',
     'client/*.lua',
