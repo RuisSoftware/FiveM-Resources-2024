@@ -1,8 +1,11 @@
 function CreatePlane(x, y, z, heading, startZone, destination)
-	mainMenu:Visible(not mainMenu:Visible())
+	if Config.ESXMenu then
+	else
+		mainMenu:Visible(not mainMenu:Visible())
+	end
 
 	modelHash = GetHashKey(Config.PlaneModel)
-	pilotModel = GetHashKey("s_m_m_pilot_01")
+	pilotModel = GetHashKey(Config.PilotModel)
 	
 	RequestModel(modelHash)
 	while not HasModelLoaded(modelHash) do
@@ -42,8 +45,12 @@ function CreatePlane(x, y, z, heading, startZone, destination)
 	end
 
 	if startZone == "AIRP" and destination == "DESRT" then -- goed
+		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, -1461.73,-2426.62,13.94, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
+		Wait(15000)
 		TaskPlaneMission(pilot, AirPlane, 0, 0, -107.2212, 2717.5534, 61.9673, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 10.0, 40.0)
 	elseif startZone == "AIRP" and destination == "ISHEIST" then
+		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, -1461.73,-2426.62,13.94, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
+		Wait(15000)
 		TaskPlaneMission(pilot, AirPlane, 0, 0, 3526.92,-3951.51,117.74, 4, GetVehicleModelMaxSpeed(modelHash), 1.0, 0.0, 10.0, 40.0)
 	elseif startZone == "DESRT" and destination == "AIRP" then -- goed
 		TaskVehicleDriveToCoordLongrange(pilot, AirPlane, 1403.0020751953, 2995.9179, 40.5507, GetVehicleModelMaxSpeed(modelHash), 16777216, 0.0)
@@ -68,12 +75,4 @@ RegisterNetEvent("airports:departure")
 AddEventHandler("airports:departure",  function(x, y, z, heading, start, planeDest)
 	ClearAllHelpMessages()
 	CreatePlane(x, y, z, heading, start, planeDest)
-end)
-
-RegisterNetEvent("airports:moneyInvalid")
-AddEventHandler("airports:moneyInvalid", function()
-	SetNotificationTextEntry("STRING")
-	AddTextComponentSubstringPlayerName(Config.Locale.NoMoney)
-	SetNotificationMessage("CHAR_BLOCKED", "CHAR_BLOCKED", true, 4, Config.Locale.NoMoneyTitle, "", Config.Locale.NoMoney)
-	DrawNotification(false, true)
 end)
