@@ -1,5 +1,5 @@
 # Important notice: "Dutch Players Mods" is now "Ruis Software".
-We've been programming for FiveM for over 3 years and that boosted our LUA skills hugely, but now we are going to create our own game in another programming language. 
+We've been programming FiveM resources for over 3 years and that boosted our LUA skills hugely, but now we are going to create our own game in another programming language. 
 Today our official FiveM LUA scripts and support will stop. We will not make any officialy planned updates on this repo anymore, but we will accept your Pull Requests. 
 
 If you still want to contribute, feel free to send your PR and join our Discord for some support from you fellow LUA dev's.
