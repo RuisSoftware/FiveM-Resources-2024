@@ -10,5 +10,5 @@ Here are some free resources that you might like :)
 Check the wiki: https://github.com/dutchplayers/FiveM-Resources/wiki/01.-Prerequirement
 
 We drink a lot of coffee while making updates. If you like to buy us a coffee then donate on [PayPal](https://www.paypal.com/paypalme/dutchplayers)
-- We can give you support in our [International Discord Server](https://www.dutch-players.nl/joindiscord)
+- We can give you support in our [International Discord Server](https://discord.gg/T7VptEaN64)
 - Or visit our [Dutch Website](https://www.dutch-players.nl/)
