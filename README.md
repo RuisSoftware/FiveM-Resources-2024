@@ -5,7 +5,6 @@ Today our official FiveM LUA scripts and support will stop. We will not make any
 If you still want to contribute, feel free to send your PR and join our Discord for some support from you fellow LUA dev's.
 
 # Dutch Players FiveM Resources
-![welcome](https://www.gemeentenieuwstad.nl/wp-content/uploads/2020/10/welcome.png)
 Here are some free resources that you might like :)
 Check the wiki: https://github.com/dutchplayers/FiveM-Resources/wiki/01.-Prerequirement
 
