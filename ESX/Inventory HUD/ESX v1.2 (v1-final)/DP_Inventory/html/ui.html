@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dutch Players // ESX Inventory</title>
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+</head>
+
+<body>
+    <script src="js/config.js"></script>
+    <script src="locales/nl.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/inventory.js"></script>
+    <script>
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                clickOutside: true
+            });
+        });
+    </script>
+    <div id="notificacao">
+    </div>
+    <div id="playerInventoryHotbar">
+    </div>
+    <div class="ui">
+        <div class="inventory">
+            <p>Mijn persoonlijke inventaris</p>
+            <div class="weight-div"></div>
+            <div id="playerInventory">
+            </div>
+            <div id="statusHud">
+                <p>Sneltoetsen</p>
+                <!--<div id="varHealth" class="bar">
+                    <img class="barIcon" src="img/heart.svg"></img>
+                    <div id="boxSetHealth"></div>
+                </div>
+                <div id="varArmor" class="bar">
+                    <img class="barIcon" src="img/shield.svg"></img>
+                    <div id="boxSetArmour"></div>
+                </div>
+                <div id="varHunger" class="bar">
+                    <img class="barIcon" src="img/burger.svg"></img>
+                    <div id="boxSetHunger"></div>
+                </div>
+                <div id="varThirst" class="bar">
+                    <img class="barIcon" src="img/water.svg"></img>
+                    <div id="boxSetThirst"></div>
+                </div>
+                <div id="varOxygen" class="bar">
+                    <img class="barIcon" src="img/oxy.svg"></img>
+                    <div id="boxSetOxygen"></div>
+                </div>
+                <div id="varStress" class="bar">
+                    <img class="barIcon" src="img/brain.svg"></img>
+                    <div id="boxSetStress"></div> 
+                </div>
+                <div id="varWeight" class="bar">
+                    <img class="barIcon" src="img/weight.svg"></img>
+                    <div id="boxSetWeight"></div> 
+                </div>-->
+            </div>
+            <div id="playerInventoryFastItems">
+            </div>
+            <div id="controls">
+                
+                <div class="controls-div">
+                    <input type="number" class="control" id="count" value="1">
+                    <div class="control" id="use"></div>
+                    <div class="control" id="give"></div>
+                    <div class="control" id="drop"></div>
+                </div>
+            </div>
+        </div>
+            <div class="info-div"></div>
+			<div id="otherInventory"></div>
+            <div id="noSecondInventoryMessage">
+            </div>
+		<div id="dialog">
+			<div id="nearPlayers">
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#use").html(invLocale.useItem);
+        $("#give").html(invLocale.giveItem);
+        $("#drop").html(invLocale.dropItem);
+        $("#noSecondInventoryMessage").html(invLocale.secondInventoryNotAvailable);
+    });
+</script>
+</html>
