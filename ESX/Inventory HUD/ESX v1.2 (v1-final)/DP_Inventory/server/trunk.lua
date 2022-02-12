@@ -43,7 +43,7 @@ function loadInventTrunk(plate)
 	end
 end
 
-function getOwnedVehicle(plate)
+function getOwnedVehicleTrunk(plate)
 	local found = false
 	if listPlate then
 		for k, v in pairs(listPlate) do
@@ -53,27 +53,20 @@ function getOwnedVehicle(plate)
 			end
 		end
 	end
-	if not found then
-		local result = MySQL.Sync.fetchAll("SELECT * FROM owned_vehicles")
-		while result == nil do
-			Wait(5)
-		end
-		if result ~= nil and #result > 0 then
-			for _, v in pairs(result) do
-				local vehicle = json.decode(v.vehicle)
-				if vehicle.plate == plate then
-				found = true
-				break
-				end
-			end
-		end
+
+	if found == true then
+		return found
 	end
-	return found
+
+	local result = MySQL.Sync.fetchAll("SELECT plate FROM owned_vehicles WHERE plate = @plate", {
+		['@plate'] = plate
+	})
+	return #result > 0
 end
 
 function MakeDataStoreTrunk(plate)
 	local data = {}
-	local owned = getOwnedVehicle(plate)
+	local owned = getOwnedVehicleTrunk(plate)
 	local dataStore = CreateDataStoreTrunk(plate, owned, data)
 	SharedDataStores[plate] = dataStore
 	MySQL.Async.execute("INSERT INTO inventory_trunk(plate,data,owned) VALUES (@plate,'{}',@owned)", {
