@@ -168,52 +168,6 @@ AddEventHandler('DP_Inventory:useAttach', function(attach)
     end
 end)
 
-RegisterKey('keyboard',"BACKSLASH",
-	function()
-	end,
-	function()
-        if not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) and not removingAttach then
-            if currentWeapon ~= nil then
-                removingAttach = true
-                local playerPed = PlayerPedId()
-                local hash = GetHashKey(currentWeapon)
-                for i = 1, #currentWepAttachs do
-                    if currentWepAttachs[i] ~= nil then
-                        if string.find(currentWepAttachs[i], 'skin') == nil then
-                            TriggerEvent("mythic_progbar:client:progress", {
-                                name = "washing_gsr",
-                                duration = 1500,
-                                label = _U('waiting_remove'),
-                                useWhileDead = false,
-                                canCancel = false,
-                                controlDisables = {
-                                    disableMovement = false,
-                                    disableCarMovement = false,
-                                    disableMouse = false,
-                                    disableCombat = false,
-                                },
-                            }, function(status)
-                                if not status then
-                                    RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
-                                    DP.TriggerServerCallback('DP_Inventaris:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
-                                    table.remove(currentWepAttachs, i)
-                                    removingAttach = false
-                                end
-                            end)
-                        end
-                    end
-                end
-            else
-                exports['t-notify']:Alert({
-                    style  	=  'error',
-                    message =  _U("no_gun_in_hand"),
-                    length 	= 5500
-                })
-            end
-		end
-	end
-)
-
 function RemoveWeapon(weapon)
     local checkh = Config.Throwables
     local playerPed = PlayerPedId()

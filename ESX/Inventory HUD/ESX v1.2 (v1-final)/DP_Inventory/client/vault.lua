@@ -52,17 +52,3 @@ end
 function getMonsterVaultLicense()
 	return vaultType
 end
-RegisterKey('keyboard', 'E', 
-	function()
-	end,
-	-- on release
-	function()
-		local coords = GetEntityCoords(PlayerPedId())
-		for k,v in pairs(Config.Vault) do
-			local dist = GetDistanceBetweenCoords(coords, v.coords, true)
-			if dist < 1.5 then
-				OpenVaultInventoryMenu({job = k, needItemLicense = v.needItemLicense, InfiniteLicense = v.InfiniteLicense})
-			end
-		end
-	end
-)
