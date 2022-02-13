@@ -1,10 +1,6 @@
-local GUI = {}
-local PlayerData = {}
 local lastVehicle = nil
 local lastOpen = false
-GUI.Time = 0
 local vehiclePlate = {}
-local arrayWeight = Config.localWeight
 local CloseToVehicle = false
 local entityWorld = nil
 local globalplate = nil
@@ -27,24 +23,15 @@ function getItemyWeight(item)
 	return itemWeight
 end
 
-function VehicleInFront()
-	local pos = GetEntityCoords(PlayerPedId())
-	local entityWorld = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.1, 0.0)
-	local rayHandle = CastRayPointToPoint(pos.x, pos.y, pos.z, entityWorld.x, entityWorld.y, entityWorld.z, 10, PlayerPedId(), 0)
-	local a, b, c, d, result = GetRaycastResult(rayHandle)
-	return result
-end
-
-
 RegisterNetEvent("DP_Inventory_glovebox:openGlovebox")
 AddEventHandler("DP_Inventory_glovebox:openGlovebox", function()
-	openGlovebox()
+	OpenGlovebox()
 end)
 
-function openGlovebox()
+function OpenGlovebox()
 	local playerPed = PlayerPedId()
 	local coords = GetEntityCoords(playerPed)
-	local vehicle = VehicleInFront()
+	local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
 	globalplate = GetVehicleNumberPlateText(vehicle)
 
 	if IsPedInAnyVehicle(playerPed) then
@@ -86,7 +73,7 @@ function openGlovebox()
 					if globalplate ~= nil or globalplate ~= "" or globalplate ~= " " then
 						CloseToVehicle = true
 						exports['mythic_progbar']:Progress({
-							name = "openGlovebox",
+							name = "OpenGlovebox",
 							duration = 2000,
 							label = _U('openglovebox'),
 							useWhileDead = false,
@@ -128,7 +115,7 @@ end
 CreateThread(function()
 	while true do
 		Wait(0)
-		local pos = GetEntityCoords(PlayerPedId())
+		local pos = playerCoords
 		if CloseToVehicle then
 			local vehicle = GetClosestVehicle(pos["x"], pos["y"], pos["z"], 2.0, 0, 70)
 			if DoesEntityExist(vehicle) then

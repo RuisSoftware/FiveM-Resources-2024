@@ -5,7 +5,6 @@ local firsttime = true
 local weaponKey = nil
 local NumberCharset = {}
 local Charset = {}
-canFire = true
 
 RegisterNetEvent('DP_Inventory:itemPopUp')
 AddEventHandler('DP_Inventory:itemPopUp', function(weapon)

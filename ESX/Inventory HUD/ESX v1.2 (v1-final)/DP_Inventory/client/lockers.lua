@@ -1,6 +1,4 @@
-local ESX = nil
-
-function Draw3DText(x,y,z, text)
+local function Draw3DText(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
     SetTextScale(0.35, 0.35)
@@ -16,28 +14,7 @@ function Draw3DText(x,y,z, text)
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
 
-CreateThread(function()
-	while ESX == nil do
-		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-		Citizen.Wait(0)
-	end
-	while ESX.GetPlayerData().job == nil do
-		Citizen.Wait(10)
-	end
-	ESX.PlayerData = ESX.GetPlayerData()
-
-
-    playerIdent = ESX.GetPlayerData().identifier
-	
-    CreateBlips()
-end)
-
-RegisterNetEvent('esx:setJob')
-AddEventHandler('esx:setJob', function(job)
-    ESX.PlayerData.job = job
-end)
-
-function CreateBlips()
+function CreateLockerBlips()
 	local blip = AddBlipForCoord(Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z)
 	SetBlipSprite(blip, Config.LockerRentBlipID)
 	SetBlipDisplay(blip, 2)
@@ -52,7 +29,7 @@ end
 CreateThread(function()
     while true do
 		Citizen.Wait(0)
-        local playerCoords = GetEntityCoords(PlayerPedId())
+        local playerCoords = playerCoords
 		local playerPed = PlayerPedId()
         local isClose = false
 		
@@ -86,11 +63,9 @@ CreateThread(function()
         end
 		
 	end
-	
 end)
 
 function LockerMenu(k, hasLocker, lockerName)
-
 	local elements = {}
 	
 	if hasLocker then
@@ -117,7 +92,7 @@ function LockerMenu(k, hasLocker, lockerName)
 			StopLockerRent(k, lockerName)
 			menu.close()
 		elseif data.current.value == 'open_locker' then
-			OpenStash(k, playerIdent, lockerName)
+			OpenStash(k, PlayerData.identifier, lockerName)
 			menu.close()
 		end
 
@@ -128,7 +103,6 @@ function LockerMenu(k, hasLocker, lockerName)
 end
 
 function ConfirmLockerRent(k, lockerName)
-
     local elements = {
         {label = _U('yes'), value = 'buy_yes'},
         {label = _U('no'), value = 'buy_no'}

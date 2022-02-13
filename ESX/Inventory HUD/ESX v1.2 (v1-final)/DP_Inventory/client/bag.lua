@@ -1,17 +1,3 @@
-hasBag = false
-
-RegisterNetEvent('esx:playerLoaded')
-AddEventHandler('esx:playerLoaded', function(xPlayer)
-    PlayerData = xPlayer
-	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
-        if skin.bags_1 ~= 45 then
-			hasBag = false
-		else
-			hasBag = true
-        end
-    end)
-end)
-
 function OpenBagInventoryMenu(inventory, owner)
 	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
         if skin.bags_1 ~= 45 then
@@ -35,6 +21,7 @@ function OpenBagInventoryMenu(inventory, owner)
 		--print('You dont have a bag')
 	end
 end
+
 -- 23 24 45
 RegisterNetEvent('DP_Inventory_bag:toggleBag')
 AddEventHandler('DP_Inventory_bag:toggleBag', function(id)

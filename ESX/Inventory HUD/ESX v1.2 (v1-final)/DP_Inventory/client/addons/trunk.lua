@@ -3,7 +3,7 @@ local trunkData = nil
 RegisterNetEvent("DP_Inventory:openTrunkInventory")
 AddEventHandler("DP_Inventory:openTrunkInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
-	openTrunkInventory()
+	OpenTrunkInventory()
 end)
 
 RegisterNetEvent("DP_Inventory:refreshTrunkInventory")
@@ -70,7 +70,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 	})
 end
 
-function openTrunkInventory()
+function OpenTrunkInventory()
 	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({

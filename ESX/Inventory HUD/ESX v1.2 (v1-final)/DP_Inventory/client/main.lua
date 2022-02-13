@@ -1,14 +1,12 @@
 isInInventory = false
 maxWeight = nil
 ESX = nil
-
-local fastWeapons = {
-	[1] = nil,
-	[2] = nil,
-	[3] = nil,
-	[4] = nil,
-	[5] = nil
-}
+GUI = {}
+GUI.Time = 0
+arrayWeight = Config.localWeight
+fastWeapons = {[1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil}
+hasBag = false
+canFire = true
 
 local canPlayAnim = true
 local fastItemsHotbar = {}
@@ -19,7 +17,15 @@ CreateThread(function()
 	while ESX == nil do TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) Citizen.Wait(0) end
 	while ESX.GetPlayerData().job == nil do Citizen.Wait(10) end
 	PlayerData = ESX.GetPlayerData()
+	
 	Citizen.Wait(3000)
+	
+    CreateLockerBlips()
+end)
+
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+    PlayerData.job = job
 end)
 
 RegisterNetEvent("esx:playerLoaded")
@@ -27,6 +33,13 @@ AddEventHandler("esx:playerLoaded", function(xPlayer)
 	PlayerData = xPlayer
 	TriggerServerEvent("DP_Inventory_trunk:getOwnedVehicle")
 	TriggerServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
+	ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
+        if skin.bags_1 ~= 45 then
+			hasBag = false
+		else
+			hasBag = true
+        end
+    end)
 	lastChecked = GetGameTimer()
 end)
 
@@ -71,7 +84,6 @@ end)
 local function LockInventory()
 	CreateThread(function()
 		while isInInventory do
-	print(isInInventory)
 			Citizen.Wait(3)
 			DisableControlAction(0, 1, true) -- Disable pan
 			DisableControlAction(0, 2, true) -- Disable tilt
@@ -392,7 +404,7 @@ RegisterNUICallback("DropItem",function(data, cb)
 				end)
 			end
 			if data.item.name == 'idcard' then
-				local coords = GetEntityCoords(PlayerPedId())
+				local coords = playerCoords
 				local forward = GetEntityForwardVector(PlayerPedId())
 				coords = coords + forward*1.0
 				TriggerServerEvent('license_menu:idCardLocation', coords)
@@ -519,13 +531,7 @@ end)
 
 RegisterNetEvent('DP_Inventory:clearfastitems')
 AddEventHandler('DP_Inventory:clearfastitems', function()
-	fastWeapons = {
-		[1] = nil,
-		[2] = nil,
-		[3] = nil,
-		[4] = nil,
-		[5] = nil
-	}
+	fastWeapons = {[1] = nil, [2] = nil, [3] = nil, [4] = nil, [5] = nil}
 	RemoveAllPedWeapons(PlayerPedId(), true)
 end)
 

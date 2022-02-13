@@ -31,8 +31,6 @@ Config.License = {Weapon = 'weapon', Police = 'weapon', Nightclub = 'weapon'} --
 
 Config.OpenControl = 'f2' -- F2. player inventory, it is recommend to use the same as CloseControl.
 Config.CloseControl = 'f2' -- F2. player inventory, it is recommend to use the same as OpenControl.
-Config.OpenKeyGlovebox = 'f3' -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
-Config.OpenKeyTrunk = 'f3' -- F3. trunk inventory (behind-car), it is recommend to use the same as OpenKeyGlovebox.
 Config.BagControl = 'f4' -- F4. player bag inventory
 Config.SearchBag = 'n' -- N. Search a bag on the ground
 Config.TakeBag = 'e' -- E

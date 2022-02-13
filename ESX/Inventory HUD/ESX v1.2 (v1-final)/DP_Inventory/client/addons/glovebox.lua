@@ -3,7 +3,7 @@ local gloveboxData = nil
 RegisterNetEvent("DP_Inventory:openGloveboxInventory")
 AddEventHandler("DP_Inventory:openGloveboxInventory", function(data, blackMoney, cashMoney, inventory, weapons)
 	setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapons)
-	openGloveboxInventory()
+	OpenGloveboxInventory()
 end)
 
 RegisterNetEvent("DP_Inventory:refreshGloveboxInventory")
@@ -70,7 +70,7 @@ function setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapon
 	})
 end
 
-function openGloveboxInventory()
+function OpenGloveboxInventory()
 	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({

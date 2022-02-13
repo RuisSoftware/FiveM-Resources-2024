@@ -1,26 +1,20 @@
 RegisterCommand('+openinventory', function()
-	if not IsPlayerDead(PlayerId()) then
-		OpenInventory()
+	if not isPlayerDead then
+		if (vehicleInFront == 0 or vehicleInFront == nil) and isPedOnFoot then
+			OpenInventory()
+			return
+		end
+		if (vehicleInFront ~= nil and vehicleInFront ~= 0) and isPedOnFoot then
+			OpenTrunk()
+			return
+		end
+		OpenGlovebox()
 	end
 end, false)
 RegisterKeyMapping('+openinventory', 'Open Inventory', 'keyboard', Config.OpenControl)
 
-RegisterCommand('+opentrunkinventory', function()
-	if not IsPlayerDead(PlayerId()) then
-		openTrunk()
-	end
-end, false)
-RegisterKeyMapping('+opentrunkinventory', 'Open Trunk Inventory', 'keyboard', Config.OpenKeyTrunk)
-
-RegisterCommand('+opengloveboxinventory', function()
-	if not IsPlayerDead(PlayerId()) then
-		openGlovebox()
-	end
-end, false)
-RegisterKeyMapping('+opengloveboxinventory', 'Open Glovebox Inventory', 'keyboard', Config.OpenKeyGlovebox)
-
 RegisterCommand('+showhotbar', function()
-	if not IsPlayerDead(PlayerId()) then
+	if not isPlayerDead then
 		HudForceWeaponWheel(false)
 		ShowHotbar()
 	end
@@ -28,7 +22,7 @@ end, false)
 RegisterKeyMapping('+showhotbar', 'Show Inventory Hotbar', 'keyboard', Config.ShowHotbar)
 
 RegisterCommand('+usehotbarone', function()
-	if not IsPlayerDead(PlayerId()) and canFire then
+	if not isPlayerDead and canFire then
 		if fastWeapons[1] ~= nil then
 			TriggerServerEvent('esx:useItem', fastWeapons[1])
 			TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U('item_used'), 1, false)
@@ -38,7 +32,7 @@ end, false)
 RegisterKeyMapping('+usehotbarone', 'Use Inventory Hotbar Slot 1', 'keyboard', '1')
 
 RegisterCommand('+usehotbartwo', function()
-	if not IsPlayerDead(PlayerId()) and canFire then
+	if not isPlayerDead and canFire then
 		if fastWeapons[2] ~= nil then
 			TriggerServerEvent('esx:useItem', fastWeapons[2])
 			TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U('item_used'), 1, false)
@@ -48,7 +42,7 @@ end, false)
 RegisterKeyMapping('+usehotbartwo', 'Use Inventory Hotbar Slot 2', 'keyboard', '2')
 
 RegisterCommand('+usehotbarthree', function()
-	if not IsPlayerDead(PlayerId()) and canFire then
+	if not isPlayerDead and canFire then
 		if fastWeapons[3] ~= nil then
 			TriggerServerEvent('esx:useItem', fastWeapons[3])
 			TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U('item_used'), 1, false)
@@ -58,7 +52,7 @@ end, false)
 RegisterKeyMapping('+usehotbarthree', 'Use Inventory Hotbar Slot 3', 'keyboard', '3')
 
 RegisterCommand('+usehotbarfour', function()
-	if not IsPlayerDead(PlayerId()) and canFire then
+	if not isPlayerDead and canFire then
 		if fastWeapons[4] ~= nil then
 			TriggerServerEvent('esx:useItem', fastWeapons[4])
 			TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U('item_used'), 1, false)
@@ -68,7 +62,7 @@ end, false)
 RegisterKeyMapping('+usehotbarfour', 'Use Inventory Hotbar Slot 4', 'keyboard', '4')
 
 RegisterCommand('+usehotbarfive', function()
-	if not IsPlayerDead(PlayerId()) and canFire then
+	if not isPlayerDead and canFire then
 		if fastWeapons[5] ~= nil then
 			TriggerServerEvent('esx:useItem', fastWeapons[5])
 			TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U('item_used'), 1, false)
@@ -78,7 +72,7 @@ end, false)
 RegisterKeyMapping('+usehotbarfive', 'Use Inventory Hotbar Slot 5', 'keyboard', '5')
 
 RegisterCommand('+openinventoryvault', function()
-	local coords = GetEntityCoords(PlayerPedId())
+	local coords = playerCoords
 	for k,v in pairs(Config.Vault) do
 		local dist = GetDistanceBetweenCoords(coords, v.coords, true)
 		if dist < 1.5 then
@@ -89,10 +83,10 @@ end, false)
 RegisterKeyMapping('+openinventoryvault', 'Open Vault Inventory', 'keyboard', Config.GeneralInteraction)
 
 RegisterCommand('+removeattachement', function()
-	if not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) and not removingAttach then
+	if not isPlayerDead and not isPedInAnyVehicle and not removingAttach then
 		if currentWeapon ~= nil then
 			removingAttach = true
-			local playerPed = PlayerPedId()
+			local playerPed = playerPedId
 			local hash = GetHashKey(currentWeapon)
 			for i = 1, #currentWepAttachs do
 				if currentWepAttachs[i] ~= nil then
@@ -233,7 +227,7 @@ RegisterKeyMapping('+openshop', 'Open Regular Shop', 'keyboard', 'E')
 
 if Config.UseLicense then
 	RegisterCommand('+openlicensemenu', function()
-		if not IsPlayerDead(PlayerId()) then
+		if not isPlayerDead then
 			LicenseShop = Config.Shops.LicenseShop.Locations
 			player = PlayerPedId()
 			coords = GetEntityCoords(player)
@@ -260,7 +254,7 @@ end
 
 local holdRobKey = false
 RegisterCommand('+robsomeone1', function()
-	if not IsPlayerDead(PlayerId()) then
+	if not isPlayerDead then
 		holdRobKey = true
 	end
 end, false)
@@ -272,7 +266,7 @@ end, false)
 RegisterKeyMapping('-robsomeone1', 'Primary Key to Rob Someone', 'keyboard', Config.RobKeyPrimary)
 
 RegisterCommand('+robsomeone2', function()
-	if not IsPlayerDead(PlayerId()) then
+	if not isPlayerDead then
         if holdRobKey then
             local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
             if closestPlayer ~= -1 and closestDistance <= 3.0 then
@@ -281,7 +275,7 @@ RegisterCommand('+robsomeone2', function()
 						local searchPlayerPed = GetPlayerPed(closestPlayer)
 						if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
 							exports['mythic_progbar']:Progress({
-								name = "openGlovebox",
+								name = "OpenGlovebox",
 								duration = 3500,
 								label = _U('robbing'),
 								useWhileDead = false,
@@ -312,7 +306,7 @@ RegisterCommand('+robsomeone2', function()
 					local searchPlayerPed = GetPlayerPed(closestPlayer)
 					if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
 						exports['mythic_progbar']:Progress({
-							name = "openGlovebox",
+							name = "OpenGlovebox",
 							duration = 3500,
 							label = _U('robbing'),
 							useWhileDead = false,
@@ -348,7 +342,7 @@ RegisterKeyMapping('+showbaginventory', 'Show Bag Inventory', 'keyboard', Config
 
 RegisterCommand('+showlockerinventory', function()
 	if not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
-        local playerCoords = GetEntityCoords(PlayerPedId())
+        local playerCoords = playerCoords
 		local playerPed = PlayerPedId()
         local isClose = false
 		

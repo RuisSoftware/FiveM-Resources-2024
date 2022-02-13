@@ -438,7 +438,7 @@ CreateThread(function()
 	while true do
 		Player = nil
 		Citizen.Wait(0)
-		local playerCoords = GetEntityCoords(PlayerPedId())
+		local playerCoords = playerCoords
 		local isInMarker, letSleep, currentZone = false, false
 		for k,v in pairs(Config.Shops) do
 			for i = 1, #v.Locations, 1 do
