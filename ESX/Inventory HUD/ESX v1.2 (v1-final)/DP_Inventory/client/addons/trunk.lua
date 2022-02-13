@@ -71,7 +71,7 @@ function setTrunkInventoryData(data, blackMoney, cashMoney, inventory, weapons)
 end
 
 function openTrunkInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -89,7 +89,7 @@ RegisterNUICallback("PutIntoTrunk", function(data, cb)
 		TriggerServerEvent("DP_Inventory_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
 	end
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -98,6 +98,6 @@ RegisterNUICallback("TakeFromTrunk", function(data, cb)
 		TriggerServerEvent("DP_Inventory_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
 	end
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

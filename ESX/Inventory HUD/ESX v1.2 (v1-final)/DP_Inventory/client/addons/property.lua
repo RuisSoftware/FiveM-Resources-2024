@@ -77,7 +77,7 @@ function setPropertyInventoryData(data)
 end
 
 function openPropertyInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -112,7 +112,7 @@ RegisterNUICallback("PutIntoProperty", function(data, cb)
 	Wait(0)
 	refreshPropertyInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -134,6 +134,6 @@ RegisterNUICallback("TakeFromProperty", function(data, cb)
 	Wait(0)
 	refreshPropertyInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

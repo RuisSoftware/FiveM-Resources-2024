@@ -1,6 +1,6 @@
 local vaultType = {}
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while ESX == nil or PlayerData == nil or PlayerData.job == nil do
 		Citizen.Wait(1)
 	end

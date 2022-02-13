@@ -280,7 +280,7 @@ function GiveWeapon(weapon)
 end
 
 function disable()
-	Citizen.CreateThread(function ()
+	CreateThread(function ()
 		while not canFire do
 			Citizen.Wait(10)
 			DisableControlAction(0, 25, true)

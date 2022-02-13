@@ -76,7 +76,7 @@ function setVaultInventoryData(inventory)
 end
 
 function openVaultInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -106,7 +106,7 @@ RegisterNUICallback("PutIntoVault", function(data, cb)
 	Wait(0)
 	refreshVaultInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -126,6 +126,6 @@ RegisterNUICallback("TakeFromVault", function(data, cb)
 	Wait(0)
 	refreshVaultInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

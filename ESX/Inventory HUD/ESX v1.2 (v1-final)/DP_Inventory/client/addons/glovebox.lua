@@ -71,7 +71,7 @@ function setGloveboxInventoryData(data, blackMoney, cashMoney, inventory, weapon
 end
 
 function openGloveboxInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -89,7 +89,7 @@ RegisterNUICallback("PutIntoGlovebox", function(data, cb)
 		TriggerServerEvent("DP_Inventory_glovebox:putItem", gloveboxData.plate, data.item.type, data.item.name, count, gloveboxData.max, gloveboxData.myVeh, data.item.label)
 	end
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -98,6 +98,6 @@ RegisterNUICallback("TakeFromGlovebox", function(data, cb)
 		TriggerServerEvent("DP_Inventory_glovebox:getItem", gloveboxData.plate, data.item.type, data.item.name, tonumber(data.number), gloveboxData.max, gloveboxData.myVeh)
 	end
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

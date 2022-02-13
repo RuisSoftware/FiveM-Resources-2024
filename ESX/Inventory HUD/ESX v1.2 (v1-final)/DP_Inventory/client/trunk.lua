@@ -174,18 +174,7 @@ function openTrunk()
 end
 local count = 0
 
--- Key controls
-Citizen.CreateThread(function()
-	while true do
-		Wait(0)
-		if IsControlJustReleased(0, Config.OpenKeyTrunk) and (GetGameTimer() - GUI.Time) > 1000 then
-			openTrunk()
-			GUI.Time = GetGameTimer()
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 	Wait(50)
 

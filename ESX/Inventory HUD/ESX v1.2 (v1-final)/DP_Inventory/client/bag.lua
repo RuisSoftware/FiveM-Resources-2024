@@ -57,23 +57,3 @@ AddEventHandler('DP_Inventory_bag:toggleBag', function(id)
         end
     end)
 end)
-
--- Citizen.CreateThread(function()
--- 	while ESX == nil do Citizen.Wait(10) end
--- 	while PlayerData == nil do Citizen.Wait(10) end
--- 	owner = PlayerData.identifier
---     while true do
---         Wait(5)
---         if IsControlJustReleased(0, Config.BagControl) and not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) then
--- 			OpenBagInventoryMenu('bag', owner)
---         end
---     end
--- end)
-
-RegisterCommand('showBagInventory', function()
-	if not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
-		OpenBagInventoryMenu('bag', PlayerData.identifier)
-	end
-end, false)
-
-RegisterKeyMapping('showBagInventory', 'Отваряне на вашата чанта/сак', 'keyboard', 'F4')

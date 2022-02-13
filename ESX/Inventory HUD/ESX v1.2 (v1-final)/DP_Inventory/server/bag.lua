@@ -2,7 +2,7 @@
 local arrayWeight = Config.localWeight
 alleItems = nil
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while alleItems == nil do
 		alleItems = MySQL.Sync.fetchAll("SELECT * FROM items")
 		Citizen.Wait(2000)

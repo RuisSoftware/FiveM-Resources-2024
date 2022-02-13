@@ -125,19 +125,7 @@ function openGlovebox()
 	end
 end
 
--- Key controls
-Citizen.CreateThread(
-function()
-	while true do
-		Wait(0)
-		if IsControlJustReleased(0, Config.OpenKeyGlovebox) and (GetGameTimer() - GUI.Time) > 1000 then
-			openGlovebox()
-			GUI.Time = GetGameTimer()
-		end
-	end
-end)
-
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		Wait(0)
 		local pos = GetEntityCoords(PlayerPedId())

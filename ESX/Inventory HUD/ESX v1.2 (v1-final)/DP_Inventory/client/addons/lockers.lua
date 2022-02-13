@@ -96,7 +96,7 @@ function setPropertyLockerData(data)
 end
 
 function openLockerInventory()
-    loadPlayerInventory()
+    LoadPlayerInventory()
     isInInventory = true
 
     SendNUIMessage(
@@ -127,7 +127,7 @@ RegisterNUICallback('PutIntoLocker', function(data, cb)
 	Wait(0)
 	refreshPropertyLockerInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 
 	cb('ok')
 end)
@@ -144,7 +144,7 @@ RegisterNUICallback('TakeFromLocker',function(data, cb)
 	Wait(0)
 	refreshPropertyLockerInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 
 	cb('ok')
 end)

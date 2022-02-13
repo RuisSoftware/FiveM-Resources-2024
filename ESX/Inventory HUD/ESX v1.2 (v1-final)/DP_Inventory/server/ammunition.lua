@@ -1,4 +1,4 @@
-Citizen.CreateThread(function()
+CreateThread(function()
     Citizen.Wait(0)
     for k, v in pairs(Config.Ammo) do
         ESX.RegisterUsableItem(v.name, function(source)

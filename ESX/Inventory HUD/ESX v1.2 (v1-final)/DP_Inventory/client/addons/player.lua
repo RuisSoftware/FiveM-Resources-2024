@@ -1,7 +1,7 @@
 local targetPlayer
 local targetPlayerName
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	TriggerEvent("chat:addSuggestion", "/openinventory", _U("openinv_help"), {{name = _U("openinv_id"), help = _U("openinv_help")}})
 end)
 
@@ -18,74 +18,6 @@ AddEventHandler("DP_Inventory:openPlayerInventory", function(target, playerName)
 	setPlayerInventoryData()
 	openPlayerInventory()
 	TriggerServerEvent('DP_Inventory:disableTargetInv', target)
-end)
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        if IsControlJustReleased(0, Config.RobKeyOne) and IsControlPressed(1, Config.RobKeyTwo) then
-            local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-            if closestPlayer ~= -1 and closestDistance <= 3.0 then
-				if not Config.EverybodyCanRob then
-					if (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Ambulance) then
-						local searchPlayerPed = GetPlayerPed(closestPlayer)
-						if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
-							exports['mythic_progbar']:Progress({
-								name = "openGlovebox",
-								duration = 3500,
-								label = _U('robbing'),
-								useWhileDead = false,
-								canCancel = true,
-								controlDisables = {},
-								animation = {},
-								prop = {},
-							}, function(status)
-								if not status then
-									TriggerEvent("DP_Inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
-								end
-							end)
-						else
-							exports['t-notify']:Alert({
-								style  	=  'info',
-								message =  _U('player_not_dead'),
-								length 	= 5500
-							})
-						end
-					else
-						exports['t-notify']:Alert({
-							style  	=  'info',
-							message =  _U('no_permissions'),
-							length 	= 5500
-						})
-					end
-				else
-					local searchPlayerPed = GetPlayerPed(closestPlayer)
-					if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
-						exports['mythic_progbar']:Progress({
-							name = "openGlovebox",
-							duration = 3500,
-							label = _U('robbing'),
-							useWhileDead = false,
-							canCancel = true,
-							controlDisables = {},
-							animation = {},
-							prop = {},
-						}, function(status)
-							if not status then
-								TriggerEvent("DP_Inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
-							end
-						end)  
-					else
-						exports['t-notify']:Alert({
-							style  	=  'info',
-							message =  _U('player_not_dead'),
-							length 	= 5500
-						})
-					end
-				end
-            end
-        end
-    end
 end)
 
 function refreshPlayerInventory()
@@ -121,7 +53,7 @@ function setPlayerInventoryData()
 
 		if Config.IncludeAccounts and accounts ~= nil then
 			for key, value in pairs(accounts) do
-				if not shouldSkipAccount(accounts[key].name) then
+				if not ShouldSkipAccount(accounts[key].name) then
 					local canDrop = accounts[key].name ~= "bank"
 					if accounts[key].money > 0 then
 						accountData = {
@@ -159,7 +91,7 @@ function setPlayerInventoryData()
 end
 
 function openPlayerInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -181,7 +113,7 @@ RegisterNUICallback("PutIntoPlayer", function(data, cb)
 	end
 	Wait(0)
 	refreshPlayerInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -198,6 +130,6 @@ RegisterNUICallback("TakeFromPlayer", function(data, cb)
 	end
 	Wait(0)
 	refreshPlayerInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

@@ -15,7 +15,7 @@ local fastItemsHotbar = {}
 local itemslist ={}
 local isHotbar = false
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while ESX == nil do TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end) Citizen.Wait(0) end
 	while ESX.GetPlayerData().job == nil do Citizen.Wait(10) end
 	PlayerData = ESX.GetPlayerData()
@@ -40,13 +40,12 @@ AddEventHandler("esx:setJob", function(job)
 end)
 
 AddEventHandler("onResourceStart", function()
-	PlayerData = xPlayer
 	TriggerServerEvent("DP_Inventory_trunk:getOwnedVehicle")
 	TriggerServerEvent("DP_Inventory_glovebox:getOwnedVehicle")
 	lastChecked = GetGameTimer()
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		HudForceWeaponWheel(false)
@@ -69,55 +68,11 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[[Citizen.CreateThread(function()
-	while ESX == nil do Citizen.Wait(10) end
-	while true do
-		Citizen.Wait(7)
-		if not IsPlayerDead(PlayerId()) then
-			DisableControlAction(0, 37, true)
-			if IsControlJustReleased(0, Config.OpenControl) and IsInputDisabled(0) then
-				openInventory()
-			elseif IsControlJustReleased(0, Config.CloseControl) and IsInputDisabled(0) then
-				closeInventory()
-			elseif  IsDisabledControlJustReleased(1, 157) and canFire then
-				if fastWeapons[1] ~= nil then
-					TriggerServerEvent("esx:useItem", fastWeapons[1])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[1], _U("item_used"), 1, false)
-				end
-			elseif IsDisabledControlJustReleased(1, 158) and canFire then
-				if fastWeapons[2] ~= nil then
-					TriggerServerEvent("esx:useItem", fastWeapons[2])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[2], _U("item_used"), 1, false)
-				end
-			elseif IsDisabledControlJustReleased(1, 160) and canFire then
-				if fastWeapons[3] ~= nil then
-					TriggerServerEvent("esx:useItem", fastWeapons[3])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[3], _U("item_used"), 1, false)
-				end
-			elseif IsDisabledControlJustReleased(1, 164) and canFire then
-				if fastWeapons[4] ~= nil then
-					TriggerServerEvent("esx:useItem", fastWeapons[4])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[4], _U("item_used"), 1, false)
-				end
-			elseif IsDisabledControlJustReleased(1, 165) and canFire then
-				if fastWeapons[5] ~= nil then
-					TriggerServerEvent("esx:useItem", fastWeapons[5])
-					TriggerEvent('DP_Inventory:notification', fastWeapons[5], _U("item_used"), 1, false)
-				end
-			elseif IsDisabledControlJustReleased(1, 37) then
-				HudForceWeaponWheel(false)
-				showHotbar()
-			end
-		else
-			Citizen.Wait(1000)
-		end
-	end
-end)]]
-
-function lockinv()
-	Citizen.CreateThread(function()
+local function LockInventory()
+	CreateThread(function()
 		while isInInventory do
-			Citizen.Wait(10)
+	print(isInInventory)
+			Citizen.Wait(3)
 			DisableControlAction(0, 1, true) -- Disable pan
 			DisableControlAction(0, 2, true) -- Disable tilt
 			DisableControlAction(0, 24, true) -- Attack
@@ -158,8 +113,8 @@ function lockinv()
 	end)
 end
 
-function getPlayerWeight()
-	Citizen.CreateThread(function()
+local function GetPlayerWeight()
+	CreateThread(function()
 		if maxWeight == nil then
 			ESX.TriggerServerCallback("DP_Inventory:getMaxInventoryWeight", function(cb)
 				maxWeight = cb
@@ -180,8 +135,8 @@ function getPlayerWeight()
 	end)
 end
 
-function loadItems()
-	Citizen.CreateThread(function()
+local function LoadItems()
+	CreateThread(function()
 		ESX.TriggerServerCallback("DP_Inventory:getPlayerInventory", function(data)
 			items = {}
 			fastItems = {}
@@ -214,7 +169,7 @@ function loadItems()
 
 			if Config.IncludeAccounts and accounts ~= nil then
 				for key, value in pairs(accounts) do
-					if not shouldSkipAccount(accounts[key].name) then
+					if not ShouldSkipAccount(accounts[key].name) then
 						local canDrop = accounts[key].name ~= "bank"
 						if accounts[key].money > 0 then
 							accountData = {
@@ -315,8 +270,7 @@ function loadItems()
 	end)
 end
 
-function openInventory()
-	TriggerEvent('trew_hud_ui:toggleUit')
+function OpenInventory()
 	if Config.CameraAnimationPocket == true then
 		if not IsPedSittingInAnyVehicle(PlayerPedId()) then
 			DeleteSkinCam()
@@ -324,18 +278,18 @@ function openInventory()
 		end
 	end
 	isInInventory = true
-	lockinv()
-	SetNuiFocus(true, true)
-	loadPlayerInventory()
+	LockInventory()
+	LoadPlayerInventory()
 	SendNUIMessage({
 		action = "display",
 		type = "normal",
 		weight = weight
 	})
 	TransitionToBlurred(1000)
+	SetNuiFocus(true, true)
 end
 
-function closeInventory()
+function CloseInventory()
 	DeleteSkinCam()
 	isInInventory = false
 	ClearPedSecondaryTask(PlayerPedId())
@@ -344,10 +298,9 @@ function closeInventory()
 	})
 	TransitionFromBlurred(1000)
 	SetNuiFocus(false, false)
-	TriggerEvent('trew_hud_ui:toggleAan')
 end
 
-function shouldCloseInventory(itemName)
+local function ShouldCloseInventory(itemName)
 	for index, value in ipairs(Config.CloseUiItems) do
 		if value == itemName then
 			return true
@@ -356,7 +309,7 @@ function shouldCloseInventory(itemName)
 	return false
 end
 
-function shouldSkipAccount(accountName)
+function ShouldSkipAccount(accountName)
 	for index, value in ipairs(Config.ExcludeAccountsList) do
 		if value == accountName then
 			return true
@@ -365,21 +318,21 @@ function shouldSkipAccount(accountName)
 	return false
 end
 
-function loadPlayerInventory()
+function LoadPlayerInventory()
 	WeightLoaded = false
-	getPlayerWeight()
+	GetPlayerWeight()
 	ItemsLoaded = false
-	loadItems()
+	LoadItems()
 	while not ItemsLoaded or not WeightLoaded do
 		Citizen.Wait(100)
 	end
 end
 
-function showHotbar()
+function ShowHotbar()
 	if not isHotbar then
 		isHotbar = true
 		SendNUIMessage({
-			action = "showhotbar",
+			action = "ShowHotbar",
 			fastItems = fastItemsHotbar,
 			itemList = itemslist
 		})
@@ -390,7 +343,7 @@ end
 
 RegisterNUICallback("NUIFocusOff", function()
 	if isInInventory then
-		closeInventory()
+		CloseInventory()
 	end
 end)
 
@@ -448,18 +401,18 @@ RegisterNUICallback("DropItem",function(data, cb)
 		end
 	end
 			Wait(100)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
 RegisterNUICallback("UseItem", function(data, cb)
 	TriggerServerEvent("esx:useItem", data.item.name)
     TriggerEvent('DP_Inventory:notification', data.item.name, _U("item_used"), 1, false)
-	if shouldCloseInventory(data.item.name) then
-		closeInventory()
+	if ShouldCloseInventory(data.item.name) then
+		CloseInventory()
 	else
-			Wait(100)
-		loadPlayerInventory()
+		Wait(100)
+		LoadPlayerInventory()
 	end
 	--print("Made with love in the Netherlands for " .. Config.ServerName)
 	cb("ok")
@@ -515,7 +468,7 @@ RegisterNUICallback("GiveItem", function(data, cb)
 			TriggerServerEvent("esx:giveInventoryItem", GetPlayerServerId(closestPlayer), data.item.type, data.item.name, count)
 		end
 			Wait(100)
-		loadPlayerInventory()
+		LoadPlayerInventory()
 	end
 	cb("ok")
 end)
@@ -527,7 +480,7 @@ RegisterNUICallback("PutIntoFast", function(data, cb)
 	TriggerServerEvent('DP_Inventory:putInToSlot', data.item.name, data.slot)
 	fastWeapons[data.slot] = data.item.name
 	Wait(100)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -539,7 +492,7 @@ RegisterNUICallback("TakeFromFast", function(data, cb)
 		RemoveWeapon(data.item.name)
 	end
 	Wait(100)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -561,7 +514,7 @@ end)
 
 RegisterNetEvent('DP_Inventory:closeinventory')
 AddEventHandler('DP_Inventory:closeinventory', function()
-	closeInventory()
+	CloseInventory()
 end)
 
 RegisterNetEvent('DP_Inventory:clearfastitems')
@@ -578,5 +531,5 @@ end)
 
 RegisterNetEvent('DP_Inventory:doClose')
 AddEventHandler('DP_Inventory:doClose', function(...)
-	closeInventory(...);
+	CloseInventory(...);
 end)

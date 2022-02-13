@@ -16,7 +16,7 @@ function Draw3DText(x,y,z, text)
     DrawRect(_x,_y+0.0125, 0.015+ factor, 0.03, 41, 11, 41, 68)
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
 	while ESX == nil do
 		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 		Citizen.Wait(0)
@@ -49,8 +49,7 @@ function CreateBlips()
 	EndTextCommandSetBlipName(blip)
 end
 
-Citizen.CreateThread(function()
-
+CreateThread(function()
     while true do
 		Citizen.Wait(0)
         local playerCoords = GetEntityCoords(PlayerPedId())
@@ -65,11 +64,6 @@ Citizen.CreateThread(function()
 			if locker_dist <= 1.0 then
 				isClose = true
                 Draw3DText(locker_loc.x, locker_loc.y, locker_loc.z, '[E] '.. locker_name)
-				if IsControlJustReleased(0, 38) then
-					ESX.TriggerServerCallback('DP_Inventory:checkLocker', function(checkLocker)
-						LockerMenu(k, checkLocker, locker_name)
-					end, k)
-				end
 			end
 			
 		end
@@ -80,21 +74,11 @@ Citizen.CreateThread(function()
 		if lockerExterior <= 4.0 then
 			isClose = true
 			Draw3DText(Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z, _U('enter_lockerroom'))
-			if IsControlJustReleased(0, 38) then
-				SetEntityCoords(playerPed, Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z)
-				SetEntityHeading(playerPed, 90.0)
-				DoScreenFadeIn(800)       
-			end
 		end
 		
 		if lockerInterior <= 1.0 then
 			isClose = true
 			Draw3DText(Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z, _U('exit_lockerroom'))
-			if IsControlJustReleased(0, 38) then
-				SetEntityCoords(playerPed, Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z)
-				SetEntityHeading(playerPed, 185.0)
-				DoScreenFadeIn(800)       
-			end
 		end
 		
 		if not isClose then

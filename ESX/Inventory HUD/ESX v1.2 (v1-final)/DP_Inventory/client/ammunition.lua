@@ -1,4 +1,4 @@
-Citizen.CreateThread(function()
+CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		local currentWeapon = GetSelectedPedWeapon(PlayerPedId())

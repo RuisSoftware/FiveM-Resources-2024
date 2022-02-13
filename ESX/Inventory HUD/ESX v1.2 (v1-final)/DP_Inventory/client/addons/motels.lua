@@ -71,7 +71,7 @@ function setPropertyMotelData(data)
 end
 
 function openMotelInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -98,7 +98,7 @@ RegisterNUICallback("PutIntoMotel", function(data, cb)
 	Wait(0)
 	refreshPropertyMotelInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -112,6 +112,6 @@ RegisterNUICallback("TakeFromMotel", function(data, cb)
 	Wait(0)
 	refreshPropertyMotelInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

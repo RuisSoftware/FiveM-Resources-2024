@@ -1,19 +1,31 @@
 RegisterCommand('+openinventory', function()
 	if not IsPlayerDead(PlayerId()) then
-		if IsInputDisabled(0) then
-			openInventory()
-		end
+		OpenInventory()
 	end
 end, false)
-RegisterKeyMapping('+openinventory', 'Open Inventory', 'keyboard', 'f2')
+RegisterKeyMapping('+openinventory', 'Open Inventory', 'keyboard', Config.OpenControl)
+
+RegisterCommand('+opentrunkinventory', function()
+	if not IsPlayerDead(PlayerId()) then
+		openTrunk()
+	end
+end, false)
+RegisterKeyMapping('+opentrunkinventory', 'Open Trunk Inventory', 'keyboard', Config.OpenKeyTrunk)
+
+RegisterCommand('+opengloveboxinventory', function()
+	if not IsPlayerDead(PlayerId()) then
+		openGlovebox()
+	end
+end, false)
+RegisterKeyMapping('+opengloveboxinventory', 'Open Glovebox Inventory', 'keyboard', Config.OpenKeyGlovebox)
 
 RegisterCommand('+showhotbar', function()
 	if not IsPlayerDead(PlayerId()) then
 		HudForceWeaponWheel(false)
-		showHotbar()
+		ShowHotbar()
 	end
 end, false)
-RegisterKeyMapping('+showhotbar', 'Show Inventory Hotbar', 'keyboard', 'tab')
+RegisterKeyMapping('+showhotbar', 'Show Inventory Hotbar', 'keyboard', Config.ShowHotbar)
 
 RegisterCommand('+usehotbarone', function()
 	if not IsPlayerDead(PlayerId()) and canFire then
@@ -74,7 +86,7 @@ RegisterCommand('+openinventoryvault', function()
 		end
 	end
 end, false)
-RegisterKeyMapping('+openinventoryvault', 'Use Inventory Vault', 'keyboard', 'E')
+RegisterKeyMapping('+openinventoryvault', 'Open Vault Inventory', 'keyboard', Config.GeneralInteraction)
 
 RegisterCommand('+removeattachement', function()
 	if not IsEntityDead(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId(), true) and not removingAttach then
@@ -117,7 +129,7 @@ RegisterCommand('+removeattachement', function()
 		end
 	end
 end, false)
-RegisterKeyMapping('+removeattachement', 'Remove Attachement from Weapon', 'keyboard', 'BACKSLASH')
+RegisterKeyMapping('+removeattachement', 'Remove Attachement from Weapon', 'keyboard', Config.RemoveAttachementKey)
 
 RegisterCommand('+openshop', function()
 	player = PlayerPedId()
@@ -217,4 +229,160 @@ RegisterCommand('+openshop', function()
 		end
 	end
 end, false)
-RegisterKeyMapping('+openshop', 'Open Shop', 'keyboard', 'E')
+RegisterKeyMapping('+openshop', 'Open Regular Shop', 'keyboard', 'E')
+
+if Config.UseLicense then
+	RegisterCommand('+openlicensemenu', function()
+		if not IsPlayerDead(PlayerId()) then
+			LicenseShop = Config.Shops.LicenseShop.Locations
+			player = PlayerPedId()
+			coords = GetEntityCoords(player)
+			for i = 1, #LicenseShop, 1 do
+				if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 2.0 then
+					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+						if hasWeaponLicense then
+							exports['t-notify']:Alert({
+								style  	=  'error',
+								message =  _U('license_shop_check'),
+								length 	= 5500
+							})
+						else
+							OpenBuyLicenseMenu()
+							Citizen.Wait(2000)
+						end
+					end, GetPlayerServerId(PlayerId()), Config.License.Weapon)
+				end
+			end
+		end
+	end, false)
+	RegisterKeyMapping('+openlicensemenu', 'Open License Shop', 'keyboard', Config.RobKeyPrimary)
+end
+
+local holdRobKey = false
+RegisterCommand('+robsomeone1', function()
+	if not IsPlayerDead(PlayerId()) then
+		holdRobKey = true
+	end
+end, false)
+RegisterKeyMapping('+robsomeone1', 'Primary Key to Rob Someone', 'keyboard', Config.RobKeyPrimary)
+
+RegisterCommand('-robsomeone1', function()
+	holdRobKey = false
+end, false)
+RegisterKeyMapping('-robsomeone1', 'Primary Key to Rob Someone', 'keyboard', Config.RobKeyPrimary)
+
+RegisterCommand('+robsomeone2', function()
+	if not IsPlayerDead(PlayerId()) then
+        if holdRobKey then
+            local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+            if closestPlayer ~= -1 and closestDistance <= 3.0 then
+				if not Config.EverybodyCanRob then
+					if (Config.AllowPolice and PlayerData.job.name == Config.InventoryJob.Police) or (Config.AllowNightclub and PlayerData.job.name == Config.InventoryJob.Nightclub) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Mafia) or (Config.AllowMafia and PlayerData.job.name == Config.InventoryJob.Ambulance) then
+						local searchPlayerPed = GetPlayerPed(closestPlayer)
+						if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
+							exports['mythic_progbar']:Progress({
+								name = "openGlovebox",
+								duration = 3500,
+								label = _U('robbing'),
+								useWhileDead = false,
+								canCancel = true,
+								controlDisables = {},
+								animation = {},
+								prop = {},
+							}, function(status)
+								if not status then
+									TriggerEvent("DP_Inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
+								end
+							end)
+						else
+							exports['t-notify']:Alert({
+								style  	=  'info',
+								message =  _U('player_not_dead'),
+								length 	= 5500
+							})
+						end
+					else
+						exports['t-notify']:Alert({
+							style  	=  'info',
+							message =  _U('no_permissions'),
+							length 	= 5500
+						})
+					end
+				else
+					local searchPlayerPed = GetPlayerPed(closestPlayer)
+					if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'missminuteman_1ig_2', 'handsup_base', 3) or IsEntityDead(searchPlayerPed) or GetEntityHealth(searchPlayerPed) <= 0 or IsEntityPlayingAnim(searchPlayerPed, "mp_arresting", "idle", 3) or IsEntityPlayingAnim(searchPlayerPed, "mp_arrest_paired", "crook_p2_back_right", 3) then
+						exports['mythic_progbar']:Progress({
+							name = "openGlovebox",
+							duration = 3500,
+							label = _U('robbing'),
+							useWhileDead = false,
+							canCancel = true,
+							controlDisables = {},
+							animation = {},
+							prop = {},
+						}, function(status)
+							if not status then
+								TriggerEvent("DP_Inventory:openPlayerInventory", GetPlayerServerId(closestPlayer), GetPlayerName(closestPlayer))
+							end
+						end)  
+					else
+						exports['t-notify']:Alert({
+							style  	=  'info',
+							message =  _U('player_not_dead'),
+							length 	= 5500
+						})
+					end
+				end
+            end
+        end
+	end
+end, false)
+RegisterKeyMapping('+robsomeone2', 'Secondary key to rob someone', 'keyboard', Config.RobKeyPrimary)
+
+RegisterCommand('+showbaginventory', function()
+	if not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
+		OpenBagInventoryMenu('bag', PlayerData.identifier)
+	end
+end, false)
+RegisterKeyMapping('+showbaginventory', 'Show Bag Inventory', 'keyboard', Config.BagControl)
+
+RegisterCommand('+showlockerinventory', function()
+	if not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
+        local playerCoords = GetEntityCoords(PlayerPedId())
+		local playerPed = PlayerPedId()
+        local isClose = false
+		
+		for k, v in pairs (Config.Lockers) do
+			local locker_name = v.locker_name
+            local locker_loc = v.location
+			local locker_dist = GetDistanceBetweenCoords(playerCoords, locker_loc.x, locker_loc.y, locker_loc.z, 1)
+			
+			if locker_dist <= 1.0 then
+				isClose = true
+				ESX.TriggerServerCallback('DP_Inventory:checkLocker', function(checkLocker)
+					LockerMenu(k, checkLocker, locker_name)
+					return
+				end, k)
+			end
+		end
+		
+		local lockerExterior = GetDistanceBetweenCoords(playerCoords, Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z, 1)
+		if lockerExterior <= 4.0 then
+			isClose = true
+			SetEntityCoords(playerPed, Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z)
+			SetEntityHeading(playerPed, 90.0)
+			DoScreenFadeIn(800)
+			return
+		end
+		
+		local lockerInterior = GetDistanceBetweenCoords(playerCoords, Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z, 1)
+		if lockerInterior <= 1.0 then
+			isClose = true
+			SetEntityCoords(playerPed, Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z)
+			SetEntityHeading(playerPed, 185.0)
+			DoScreenFadeIn(800)
+			return
+		end
+	end
+end, false)
+RegisterKeyMapping('+showlockerinventory', 'Show Locker Inventory', 'keyboard', Config.GeneralInteraction)

@@ -71,7 +71,7 @@ function setPropertyBagData(data)
 end
 
 function openBagInventory()
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	isInInventory = true
 	SendNUIMessage({
 		action = "display",
@@ -99,7 +99,7 @@ RegisterNUICallback("PutIntoBag", function(data, cb)
 	Wait(0)
 	refreshPropertyBagInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)
 
@@ -113,6 +113,6 @@ RegisterNUICallback("TakeFromBag", function(data, cb)
 	Wait(0)
 	refreshPropertyBagInventory()
 	Wait(0)
-	loadPlayerInventory()
+	LoadPlayerInventory()
 	cb("ok")
 end)

@@ -189,7 +189,6 @@ function sendNotification(item, itemlabel, count, remove){
 function closeInventory() {
     $(".ui").fadeOut();
     $.post("https://DP_Inventory/NUIFocusOff", JSON.stringify({}));
-  
 }
 
 function inventorySetup(items, fastItems) {

@@ -72,7 +72,7 @@ files {
 
 exports {
 	'GenerateWeapon',
-	'openInventory'
+	'OpenInventory'
 }
 
 dependencies {

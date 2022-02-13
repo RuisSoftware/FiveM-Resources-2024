@@ -1,5 +1,5 @@
 Config = {}
-Config.ServerName = 'Zeestad'
+Config.ServerName = 'Your City Name'
 Config.Locale = 'nl' -- Currently supported: nl, en, tr, fr, br, de, fa, pt, es. Your translation file is really appreciated. Send it to our Github repo or Discord server.
 Config.ExcludeAccountsList = {'bank', 'money'} -- DO NOT TOUCH!
 
@@ -29,15 +29,18 @@ Config.InventoryJob = {Police = 'police', Nightclub = 'nightclub', Mafia = 'mafi
 Config.CloseUiItems = {'phone', 'weed_seed', 'tunerchip', 'fixkit', 'medikit', 'firstaid', 'vicodin', 'adrenaline', 'vuurwerk', 'vuurwerk2', 'vuurwerk3', 'vuurwerk4', 'armbrace', 'neckbrace', 'bodybandage', 'legbrace', 'bandage', 'billet'} -- List of item names that will close ui when used.
 Config.License = {Weapon = 'weapon', Police = 'weapon', Nightclub = 'weapon'} -- What license is needed for this shop?
 
-Config.OpenControl = 289 -- F2. player inventory, it is recommend to use the same as CloseControl.
-Config.CloseControl = 289 -- F2. player inventory, it is recommend to use the same as OpenControl.
-Config.BagControl = 288 -- F4. player bag inventory
-Config.SearchBag = 249 -- N. Search a bag on the ground
-Config.TakeBag = 38 -- E. Take bag on the ground
-Config.OpenKeyGlovebox = 170 -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
-Config.OpenKeyTrunk = 170 -- F3. trunk inventory (behind-car), it is recommend to use the same as OpenKeyGlovebox.
-Config.RobKeyOne = 38 -- E
-Config.RobKeyTwo = 60 -- CTRL
+Config.OpenControl = 'f2' -- F2. player inventory, it is recommend to use the same as CloseControl.
+Config.CloseControl = 'f2' -- F2. player inventory, it is recommend to use the same as OpenControl.
+Config.OpenKeyGlovebox = 'f3' -- F3. glovebox inventory (in-car), it is recommend to use the same as OpenKeyTrunk.
+Config.OpenKeyTrunk = 'f3' -- F3. trunk inventory (behind-car), it is recommend to use the same as OpenKeyGlovebox.
+Config.BagControl = 'f4' -- F4. player bag inventory
+Config.SearchBag = 'n' -- N. Search a bag on the ground
+Config.TakeBag = 'e' -- E
+Config.RobKeyPrimary = 'e' -- E
+Config.RobKeySecondary = 'LCONTROL' -- CTRL
+Config.ShowHotbar = 'LMENU' -- LEFT ALT
+Config.GeneralInteraction = 'e' -- E
+Config.RemoveAttachementKey = 'BACKSLASH' -- \
 
 Config.ReloadTime = 2000 -- in miliseconds for reloading your ammunition.
 
