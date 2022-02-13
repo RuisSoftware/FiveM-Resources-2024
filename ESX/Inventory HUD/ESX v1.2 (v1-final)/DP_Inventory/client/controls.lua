@@ -86,7 +86,6 @@ RegisterCommand('+removeattachement', function()
 	if not isPlayerDead and not isPedInAnyVehicle and not removingAttach then
 		if currentWeapon ~= nil then
 			removingAttach = true
-			local playerPed = playerPedId
 			local hash = GetHashKey(currentWeapon)
 			for i = 1, #currentWepAttachs do
 				if currentWepAttachs[i] ~= nil then
@@ -105,7 +104,7 @@ RegisterCommand('+removeattachement', function()
 							},
 						}, function(status)
 							if not status then
-								RemoveWeaponComponentFromPed(playerPed, hash, weapons[tostring(hash)][currentWepAttachs[i]])
+								RemoveWeaponComponentFromPed(playerPedId, hash, weapons[tostring(hash)][currentWepAttachs[i]])
 								DP.TriggerServerCallback('DP_Inventaris:addPlayerItem', function(cb)end, currentWepAttachs[i], 1)
 								table.remove(currentWepAttachs, i)
 								removingAttach = false
@@ -126,15 +125,14 @@ end, false)
 RegisterKeyMapping('+removeattachement', 'Remove Attachement from Weapon', 'keyboard', Config.RemoveAttachementKey)
 
 RegisterCommand('+openshop', function()
-	player = PlayerPedId()
-	coords = GetEntityCoords(player)
-	if not IsPlayerDead(player) then
-		if IsInRegularShopZone(coords) or IsInRobsLiquorZone(coords) or IsInDrugShopZone(coords) or IsInIlegalShopZone(coords) or IsInYouToolZone(coords) or IsInPrisonShopZone(coords) or IsInWeaponShopZone(coords) or IsInBlackMarketZone(coords) or IsInShopNightclubZone(coords) or IsInPoliceShopZone(coords) or IsInGroothandelSupermarktZone(coords) then
-			if IsInRegularShopZone(coords) then
+	if not IsPlayerDead(playerPedId) then
+		if IsInRegularShopZone(playerCoords) or IsInRobsLiquorZone(playerCoords) or IsInDrugShopZone(playerCoords) or IsInIlegalShopZone(playerCoords) or IsInYouToolZone(playerCoords) or IsInPrisonShopZone(playerCoords) or IsInWeaponShopZone(playerCoords) or IsInBlackMarketZone(playerCoords) or IsInShopNightclubZone(playerCoords) or IsInPoliceShopZone(playerCoords) or IsInGroothandelSupermarktZone(playerCoords) then
+			if IsInRegularShopZone(playerCoords) then
 				OpenShopInv('regular')
+				return
 			end
 			
-			if IsInIlegalShopZone(coords) then
+			if IsInIlegalShopZone(playerCoords) then
 				if Config.IllegalshopOpen == true then
 					OpenShopInv('ilegal')
 				else
@@ -148,10 +146,11 @@ RegisterCommand('+openshop', function()
 						})
 					end
 				end
+				return
 			end
 			
 			if Config.useAdvancedShop == true then
-				if IsInGroothandelSupermarktZone(coords) then
+				if IsInGroothandelSupermarktZone(playerCoords) then
 					ESX.TriggerServerCallback('DP_Inventory:heeftSupermarkt', function(ja)
 						if ja then
 							OpenShopInv('groothandel_supermarkt')
@@ -163,28 +162,33 @@ RegisterCommand('+openshop', function()
 							})
 						end
 					end, GetPlayerServerId(PlayerId()))
+					return
 				end
 			end
 			
-			if IsInRobsLiquorZone(coords) then
+			if IsInRobsLiquorZone(playerCoords) then
 				OpenShopInv('robsliquor')
+				return
 			end
 			
-			if IsInYouToolZone(coords) then
+			if IsInYouToolZone(playerCoords) then
 				OpenShopInv('youtool')
+				return
 			end
 			
-			if IsInPrisonShopZone(coords) then
+			if IsInPrisonShopZone(playerCoords) then
 				if ESX.GetPlayerData().job.name == Config.InventoryJob.Police then
 					OpenShopInv('prison')
 				end
+				return
 			end
 			
-			if IsInDrugShopZone(coords) then
+			if IsInDrugShopZone(playerCoords) then
 				OpenShopInv('drugs')
+				return
 			end
 			
-			if IsInWeaponShopZone(coords) then
+			if IsInWeaponShopZone(playerCoords) then
 				if Config.UseLicense == true then
 					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 						if hasWeaponLicense then
@@ -200,24 +204,28 @@ RegisterCommand('+openshop', function()
 				else
 					OpenShopInv('weaponshop')
 				end
+				return
 			end
 			
-			if IsInPoliceShopZone(coords) then
+			if IsInPoliceShopZone(playerCoords) then
 				if ESX.GetPlayerData().job.name == Config.InventoryJob.Police and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradePolice then
 					OpenShopInv('policeshop')
 				end
+				return
 			end
 			
-			if IsInShopNightclubZone(coords) then
+			if IsInShopNightclubZone(playerCoords) then
 				if ESX.GetPlayerData().job.name == Config.InventoryJob.Nightclub and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeNightclub then
 					OpenShopInv('nightclubshop')
 				end
+				return
 			end
 			
-			if IsInBlackMarketZone(coords) then
+			if IsInBlackMarketZone(playerCoords) then
 				if ESX.GetPlayerData().job.name == Config.InventoryJob.Mafia and ESX.GetPlayerData().job.grade >= Config.ShopMinimumGradeMafia then
 					OpenShopInv('blackmarket')
 				end
+				return
 			end
 			
 		end
@@ -229,10 +237,8 @@ if Config.UseLicense then
 	RegisterCommand('+openlicensemenu', function()
 		if not isPlayerDead then
 			LicenseShop = Config.Shops.LicenseShop.Locations
-			player = PlayerPedId()
-			coords = GetEntityCoords(player)
 			for i = 1, #LicenseShop, 1 do
-				if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 2.0 then
+				if GetDistanceBetweenCoords(playerCoords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 2.0 then
 					ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
 						if hasWeaponLicense then
 							exports['t-notify']:Alert({
@@ -341,9 +347,7 @@ end, false)
 RegisterKeyMapping('+showbaginventory', 'Show Bag Inventory', 'keyboard', Config.BagControl)
 
 RegisterCommand('+showlockerinventory', function()
-	if not IsPedInAnyVehicle(PlayerPedId(), true) and not IsEntityInAir(PlayerPedId()) and hasBag then
-        local playerCoords = playerCoords
-		local playerPed = PlayerPedId()
+	if not isPedInAnyVehicle and isPedOnFoot and hasBag then
         local isClose = false
 		
 		for k, v in pairs (Config.Lockers) do
@@ -363,8 +367,8 @@ RegisterCommand('+showlockerinventory', function()
 		local lockerExterior = GetDistanceBetweenCoords(playerCoords, Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z, 1)
 		if lockerExterior <= 4.0 then
 			isClose = true
-			SetEntityCoords(playerPed, Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z)
-			SetEntityHeading(playerPed, 90.0)
+			SetEntityCoords(playerPedId, Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z)
+			SetEntityHeading(playerPedId, 90.0)
 			DoScreenFadeIn(800)
 			return
 		end
@@ -372,8 +376,8 @@ RegisterCommand('+showlockerinventory', function()
 		local lockerInterior = GetDistanceBetweenCoords(playerCoords, Config.LockerInterior.x, Config.LockerInterior.y, Config.LockerInterior.z, 1)
 		if lockerInterior <= 1.0 then
 			isClose = true
-			SetEntityCoords(playerPed, Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z)
-			SetEntityHeading(playerPed, 185.0)
+			SetEntityCoords(playerPedId, Config.LockerExterior.x, Config.LockerExterior.y, Config.LockerExterior.z)
+			SetEntityHeading(playerPedId, 185.0)
 			DoScreenFadeIn(800)
 			return
 		end

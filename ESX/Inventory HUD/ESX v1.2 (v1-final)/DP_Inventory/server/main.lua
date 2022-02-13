@@ -158,3 +158,16 @@ ESX.RegisterServerCallback('GetCharacterNameServer', function(source, cb, target
 	local xTarget = ESX.GetPlayerFromId(target)
 	cb(xTarget.getName())
 end)
+
+CreateThread(function()
+    while true do
+		Wait((1000 * 60) * 10)
+		local _currentGarabge = math.floor(collectgarbage("count")+0.5)
+        if _currentGarabge > 5000 then 
+			collectgarbage("collect")
+			local _newGarbage = math.floor(collectgarbage("count")+0.5)
+			local _foundGarbage = math.floor(_currentGarabge - _newGarbage+0.5)
+			print("^Garbage Collection: ^1" .. _foundGarbage .. "Kb ^7Garbage found. Old Memory Usage: ^3" .. _currentGarabge .. "Kb^7. New Memory Usage: ^2" .. _newGarbage .. "Kb^7. Around ^5" ..math.floor(_currentGarabge/_newGarbage+0.5) .. "%^7 Collectend and Removed.")
+		end
+    end 
+end)

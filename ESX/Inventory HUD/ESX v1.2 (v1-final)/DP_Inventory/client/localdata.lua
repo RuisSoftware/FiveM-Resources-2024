@@ -12,19 +12,12 @@ CreateThread(function()
 	while true do
 		playerPedId = PlayerPedId()
 		isPlayerDead = IsPlayerDead(playerPedId)
-		
-		if isPlayerDead then Wait(100) return end
-		
 		playerCoords = GetEntityCoords(playerPedId)
 		isPedOnFoot = IsPedOnFoot(playerPedId)
-		
-		if not isPedOnFoot then
-			isPedInAnyVehicle = IsPedInAnyVehicle(playerPedId)
-		else
-			vehicleInFront = VehicleInFront()
-			if vehicleInFront ~= nil and vehicleInFront ~= 0 then
-				vehicleInFrontPlate = GetVehicleNumberPlateText(vehicleInFront)
-			end
+		isPedInAnyVehicle = IsPedInAnyVehicle(playerPedId)
+		vehicleInFront = VehicleInFront()
+		if vehicleInFront ~= nil and vehicleInFront ~= 0 then
+			vehicleInFrontPlate = GetVehicleNumberPlateText(vehicleInFront)
 		end
 		Wait(100)
 	end

@@ -21,7 +21,7 @@ Config.UseLicense = false -- You must have esx_license working on your server.
 Config.useAdvancedShop = false -- es_extended shop system. Not shared, sorry. Just set to false and use the in-build custom shop.
 Config.disableVersionCheck = false
 Config.disableVersionMessage = false
-Config.versionCheckDelay = 10 -- In minutes
+Config.versionCheckDelay = 60 -- In minutes
 
 Config.Command = {Steal = 'steal', CloseInv = 'closeinventory', Unequip = 'unequip'} -- NOT YET SUPPORTED, CHANGE IN /server/main.lua/.
 Config.Attachments = {'flashlight', 'mag', 'drummag', 'suppressor', 'scope', 'grip', 'skin', 'skin1', 'skin2', 'skin3', 'skin4', 'skin5', 'skin6','skin7'} -- SUPPORTED.
@@ -29,9 +29,8 @@ Config.InventoryJob = {Police = 'police', Nightclub = 'nightclub', Mafia = 'mafi
 Config.CloseUiItems = {'phone', 'weed_seed', 'tunerchip', 'fixkit', 'medikit', 'firstaid', 'vicodin', 'adrenaline', 'vuurwerk', 'vuurwerk2', 'vuurwerk3', 'vuurwerk4', 'armbrace', 'neckbrace', 'bodybandage', 'legbrace', 'bandage', 'billet'} -- List of item names that will close ui when used.
 Config.License = {Weapon = 'weapon', Police = 'weapon', Nightclub = 'weapon'} -- What license is needed for this shop?
 
-Config.OpenControl = 'f2' -- F2. player inventory, it is recommend to use the same as CloseControl.
-Config.CloseControl = 'f2' -- F2. player inventory, it is recommend to use the same as OpenControl.
-Config.BagControl = 'f4' -- F4. player bag inventory
+Config.OpenControl = 'f2' -- F2. Open your player inventory.
+Config.BagControl = 'f3' -- F3. Open player bag inventory.
 Config.SearchBag = 'n' -- N. Search a bag on the ground
 Config.TakeBag = 'e' -- E
 Config.RobKeyPrimary = 'e' -- E
