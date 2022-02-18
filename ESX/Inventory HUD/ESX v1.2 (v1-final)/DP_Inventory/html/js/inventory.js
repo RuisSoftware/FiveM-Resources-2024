@@ -446,11 +446,12 @@ $(document).ready(function () {
 
         itemInventory = $(this).data("inventory");
 
-        if (itemInventory == undefined || itemInventory == "second") {
-            return;
-        }
+        //if (itemInventory == undefined || itemInventory == "second") {
+        //    return;
+        //}
 
-        if (type === "normal" && itemInventory === "main" && itemData.usable) {
+        //if (type === "normal" && itemInventory === "main" && itemData.usable) {
+        if (itemData.usable) {
             if (itemData.name.includes("WEAPON_")) {
                 if (itemInventory === "fast") 
                 {
@@ -639,11 +640,12 @@ $(document).ready(function () {
 
             itemInventory = ui.draggable.data("inventory");
 
-            if (itemInventory == undefined || itemInventory == "second") {
-                return;
-            }
+            // if (itemInventory == undefined || itemInventory == "second") {
+                // return;
+            // }
 
-            if (type === "normal" && itemInventory === "main" && itemData.usable) {
+            //if (type === "normal" && itemInventory === "main" && itemData.usable) {
+            if (itemData.usable) {
                 if (itemData.name.includes("WEAPON_")) {
                     if (itemInventory === "fast") 
                     {

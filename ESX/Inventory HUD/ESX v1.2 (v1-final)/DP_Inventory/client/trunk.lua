@@ -8,14 +8,11 @@ local lastChecked = 0
 local vehStorage = {}
 
 function setVehicleTable()
-	local vehicleTable = {['adder']=1, ['osiris']=0, ['pfister811']=0, ['penetrator']=0, ['autarch']=0, ['bullet']=0, ['cheetah']=0, ['cyclone']=0, ['voltic']=0, ['reaper']=1, ['entityxf']=0, ['t20']=0, ['taipan']=0, ['tempesta']=2, ['tezeract']=0, ['torero']=1, ['turismor']=0, ['fmj']=0, ['gp1']=2, ['infernus ']=0, ['italigtb']=1, ['italigtb2']=1, ['nero']=2, ['nero2']=0, ['vacca']=1, ['vagner']=0, ['visione']=0, ['prototipo']=0, ['xa21']=2, ['zentorno']=0}
-	--[[
-		0 = vehicle has no storage
-		1 = vehicle storage is in bonnet
-	]]
+	local vehicleTable = {['adder']=1, ['osiris']=0, ['pfister811']=0, ['penetrator']=0, ['autarch']=0, ['bullet']=0, ['cheetah']=0, ['cyclone']=0, ['voltic']=0, ['reaper']=1, ['entityxf']=0, ['t20']=0, ['taipan']=0, ['tempesta']=2, ['tezeract']=0, ['torero']=1, ['turismor']=0, ['fmj']=0, ['gp1']=2, ['infernus ']=0, ['italigtb']=1, ['italigtb2']=1, ['nero']=2, ['nero2']=0, ['vacca']=1, ['vagner']=0, ['visione']=0, ['prototipo']=0, ['xa21']=2, ['zentorno']=0, ['pounder']=3}
+
 	for k, v in pairs(vehicleTable) do
-	getHash = GetHashKey(k)
-	vehStorage[getHash] = v
+		getHash = GetHashKey(k)
+		vehStorage[getHash] = v
 	end
 end
 
@@ -168,21 +165,39 @@ local count = 0
 
 CreateThread(function()
 	while true do
-	Wait(50)
+		Wait(50)
+		if CloseToVehicle then
+			local playerPed = GetPlayerPed(-1)
+			local coords = GetEntityCoords(playerPed)
+			local vehicle = vehicleInFront
+			
+			if checkVehicle == 1 then 
+				open, vehBone = 4, GetEntityBoneIndexByName(vehicle, 'bonnet')
+			elseif checkVehicle == nil then 
+				open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') 
+			elseif checkVehicle == 2 then 
+				open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') 
+			else 
+				return 
+			end
+			
+			local vehiclePos = GetWorldPositionOfEntityBone(vehicle, vehBone)
+			local pedDistance = GetDistanceBetweenCoords(vehiclePos, coords, 1)
 
-	if CloseToVehicle then
-		local playerPed = GetPlayerPed(-1)
-		local coords = GetEntityCoords(playerPed)
-		local vehicle = vehicleInFront
-		
-		if checkVehicle == 1 then open, vehBone = 4, GetEntityBoneIndexByName(vehicle, 'bonnet')
-		elseif checkVehicle == nil then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') elseif checkVehicle == 2 then open, vehBone = 5, GetEntityBoneIndexByName(vehicle, 'boot') else return end
-		
-		local vehiclePos = GetWorldPositionOfEntityBone(vehicle, vehBone)
-		local pedDistance = GetDistanceBetweenCoords(vehiclePos, coords, 1)
-
-		local isClose = false
-		if (open == 5 and checkVehicle == nil) then if pedDistance < 3.0 then isClose = true end elseif (open == 5 and checkVehicle == 2) then if pedDistance < 3.0 then isClose = true end elseif open == 4 then if pedDistance < 3.0 then isClose = true end end
+			local isClose = false
+			if (open == 5 and checkVehicle == nil) then 
+				if pedDistance < 3.0 then 
+					isClose = true 
+				end 
+			elseif (open == 5 and checkVehicle == 2) then 
+				if pedDistance < 3.0 then 
+					isClose = true 
+				end 
+			elseif open == 4 then 
+				if pedDistance < 3.0 then 
+					isClose = true 
+				end 
+			end
 			if DoesEntityExist(vehicle) and isClose then
 				CloseToVehicle = true
 			else
@@ -194,7 +209,7 @@ CreateThread(function()
 			end
 		end
 	end
-  end)
+end)
 
 RegisterNetEvent("esx:playerLoaded")
 AddEventHandler("esx:playerLoaded",function(xPlayer)

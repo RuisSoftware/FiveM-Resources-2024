@@ -15,6 +15,8 @@ CreateThread(function()
 		playerCoords = GetEntityCoords(playerPedId)
 		isPedOnFoot = IsPedOnFoot(playerPedId)
 		isPedInAnyVehicle = IsPedInAnyVehicle(playerPedId)
+		isPedInAnyHeli = IsPedInAnyHeli(playerPedId)
+		isPedInAnyPlane = IsPedInAnyPlane(playerPedId)
 		vehicleInFront = VehicleInFront()
 		if vehicleInFront ~= nil and vehicleInFront ~= 0 then
 			vehicleInFrontPlate = GetVehicleNumberPlateText(vehicleInFront)
