@@ -1,3 +1,5 @@
+Do not use the master branch, yet.
+
 # My open-source FiveM resources
 Feel free to use my resources on your servers. It is not allowed to sell my resources. I try to support ESX, QB and standalone.
 
