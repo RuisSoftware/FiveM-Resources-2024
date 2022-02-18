@@ -418,6 +418,7 @@ RegisterNUICallback("DropItem",function(data, cb)
 end)
 
 RegisterNUICallback("UseItem", function(data, cb)
+print("used item")
 	TriggerServerEvent("esx:useItem", data.item.name)
     TriggerEvent('DP_Inventory:notification', data.item.name, _U("item_used"), 1, false)
 	if ShouldCloseInventory(data.item.name) then
@@ -426,7 +427,6 @@ RegisterNUICallback("UseItem", function(data, cb)
 		Wait(100)
 		LoadPlayerInventory()
 	end
-	--print("Made with love in the Netherlands for " .. Config.ServerName)
 	cb("ok")
 end)
 

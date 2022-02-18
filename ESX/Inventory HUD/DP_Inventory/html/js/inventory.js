@@ -17,13 +17,14 @@ window.addEventListener("message", function (event) {
     if (event.data.action == "display") {
         type = event.data.type
         disabled = false;
+		$("#noSecondInventoryMessage").hide();
 
         if (type === "normal") {
             $(".weight-div").show();
             $(".info-div").hide();
-			$("#noSecondInventoryMessage").hide();
             $("#otherInventory").hide();
             $("#boxSetWeight").css("width", event.data.weight + "%");
+			//$("#noSecondInventoryMessage").show();
         } else if (type === "trunk") {
             $(".info-div").show();
 			$("#otherInventory").show();
@@ -244,7 +245,8 @@ function makeDraggables(){ // Fast items by Condo, merged to the original DP Inv
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
-            if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
+            // if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
+            if (type === "normal" || itemInventory === "fast") {
                 $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 1,
@@ -257,7 +259,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original DP Inv
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
 
-            if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
+            if (type === "normal" || itemInventory === "fast") {
                 $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
 
                     item: itemData,
@@ -271,7 +273,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original DP Inv
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
 
-            if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
+            if (type === "normal" || itemInventory === "fast") {
                $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 3
@@ -284,7 +286,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original DP Inv
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
 
-            if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
+            if (type === "normal" || itemInventory === "fast") {
                 $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 4
@@ -297,7 +299,7 @@ function makeDraggables(){ // Fast items by Condo, merged to the original DP Inv
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
 
-            if (type === "normal" && (itemInventory === "main" || itemInventory === "fast")) {
+            if (type === "normal" || itemInventory === "fast") {
                 $.post("https://DP_Inventory/PutIntoFast", JSON.stringify({
                     item: itemData,
                     slot : 5
@@ -704,25 +706,27 @@ $(document).ready(function () {
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
 
-                   if (itemData == undefined || itemData.canRemove == undefined) {
-                       return;
-                   }
+			if (itemData == undefined || itemData.canRemove == undefined) {
+				return;
+			}
 
             itemInventory = ui.draggable.data("inventory");
 
-                   if (itemInventory == undefined || itemInventory == "second") {
-                        return;
-                  }
-            if (itemInventory === "fast") {
-                return;}
-             if (itemData.canRemove) {
-            $.post("https://DP_Inventory/DropItem", JSON.stringify({
+			//if (itemInventory == undefined || itemInventory == "second") {
+			if (itemInventory == undefined) {
+				return;
+			}
+            // if (itemInventory === "fast") {
+                // return;
+			// }
+            if (itemData.canRemove) {
+				$.post("https://DP_Inventory/DropItem", JSON.stringify({
 
-                item: itemData,
-                number: parseInt($("#count").val())
-            }));
-                }
-            }
+					item: itemData,
+					number: parseInt($("#count").val())
+				}));
+			}
+		}
 
     });
 

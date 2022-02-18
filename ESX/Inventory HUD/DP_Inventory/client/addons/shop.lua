@@ -264,11 +264,10 @@ CreateThread(function()
 	local sleep = 7
 	while true do
 		Citizen.Wait(sleep)
-		player = PlayerPedId()
-		coords = GetEntityCoords(player)
-		if IsPedOnFoot(player) then
+		near = false
+		if isPedOnFoot then
 			for k, v in pairs(Config.Shops.RegularShop.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, true)
 				if distance < 10 then
 					--ESX.ShowFloatingHelpNotification(_U('open_shop'), vector3(Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z+1.0))
 					DrawMarker(27, Config.Shops.RegularShop.Locations[k].x, Config.Shops.RegularShop.Locations[k].y, Config.Shops.RegularShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
@@ -283,7 +282,7 @@ CreateThread(function()
 			end
 			if Config.useAdvancedShop == true then
 				for k, v in pairs(Config.Shops.GroothandelSupermarkt.Locations) do
-					local distance = GetDistanceBetweenCoords(coords, Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z, true)
+					local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z, true)
 					if distance < 10 then
 						DrawMarker(27, Config.Shops.GroothandelSupermarkt.Locations[k].x, Config.Shops.GroothandelSupermarkt.Locations[k].y, Config.Shops.GroothandelSupermarkt.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 						if distance < 3.0 then
@@ -296,7 +295,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.IlegalShop.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.IlegalShop.Locations[k].x, Config.Shops.IlegalShop.Locations[k].y, Config.Shops.IlegalShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -308,7 +307,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.RobsLiquor.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.RobsLiquor.Locations[k].x, Config.Shops.RobsLiquor.Locations[k].y, Config.Shops.RobsLiquor.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -320,7 +319,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.YouTool.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.YouTool.Locations[k].x, Config.Shops.YouTool.Locations[k].y, Config.Shops.YouTool.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -332,7 +331,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.PrisonShop.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.PrisonShop.Locations[k].x, Config.Shops.PrisonShop.Locations[k].y, Config.Shops.PrisonShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -344,7 +343,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.WeaponShop.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.WeaponShop.Locations[k].x, Config.Shops.WeaponShop.Locations[k].y, Config.Shops.WeaponShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -356,7 +355,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.PoliceShop.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.PoliceShop.Locations[k].x, Config.Shops.PoliceShop.Locations[k].y, Config.Shops.PoliceShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -368,7 +367,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.ShopNightclub.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.ShopNightclub.Locations[k].x, Config.Shops.ShopNightclub.Locations[k].y, Config.Shops.ShopNightclub.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -380,7 +379,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.BlackMarket.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.BlackMarket.Locations[k].x, Config.Shops.BlackMarket.Locations[k].y, Config.Shops.BlackMarket.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -392,7 +391,7 @@ CreateThread(function()
 				end
 			end
 			for k, v in pairs(Config.Shops.DrugShop.Locations) do
-				local distance = GetDistanceBetweenCoords(coords, Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z, true)
+				local distance = GetDistanceBetweenCoords(playerCoords, Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z, true)
 				if distance < 10 then
 					DrawMarker(27, Config.Shops.DrugShop.Locations[k].x, Config.Shops.DrugShop.Locations[k].y, Config.Shops.DrugShop.Locations[k].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 1.0, 1, 157, 0, 155, false, false, 2, false, false, false, false)
 					if distance < 3.0 then
@@ -408,7 +407,6 @@ CreateThread(function()
 			else
 				sleep = 7
 			end
-			near = false
 		else
 			Citizen.Wait(1500)
 		end
@@ -420,10 +418,8 @@ if Config.UseLicense then
 		while true do
 			Citizen.Wait(0)
 			LicenseShop = Config.Shops.LicenseShop.Locations
-			player = PlayerPedId()
-			coords = GetEntityCoords(player)
 			for i = 1, #LicenseShop, 1 do
-				if GetDistanceBetweenCoords(coords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 2.0 then
+				if GetDistanceBetweenCoords(playerCoords, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z, true) < 2.0 then
 					DrawMarker(25, LicenseShop[i].x, LicenseShop[i].y, LicenseShop[i].z - 0.99, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.MarkerSize.x, Config.MarkerSize.y, Config.MarkerSize.z, Config.MarkerColor.r, Config.MarkerColor.g, Config.MarkerColor.b, 100, false, true, 2, false, nil, nil, false)
 					if currentAction then
 						ESX.ShowHelpNotification(_U('license_shop_help'))
@@ -438,7 +434,6 @@ CreateThread(function()
 	while true do
 		Player = nil
 		Citizen.Wait(0)
-		local playerCoords = playerCoords
 		local isInMarker, letSleep, currentZone = false, false
 		for k,v in pairs(Config.Shops) do
 			for i = 1, #v.Locations, 1 do

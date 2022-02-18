@@ -5,7 +5,7 @@ name 'DP_Inventory'
 author 'Dutch Players'
 credits 'Once based on esx_inventoryhud from Trsak'
 description 'Inventory for ESX legacy.'
-version '1.3.7'
+version '1.3.8'
 url 'https://github.com/dutchplayers/FiveM-Resources'
 
 ui_page 'html/ui.html'
