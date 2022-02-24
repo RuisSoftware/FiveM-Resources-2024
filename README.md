@@ -1,3 +1,6 @@
+# FREE UKRAINE. DONT MAKE WAR!
+
+
 Do not use the master branch, yet.
 
 # My open-source FiveM resources
